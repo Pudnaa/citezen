@@ -2,7 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    // "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,24 +21,50 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@utils/*": ["utils/*"],
-      "@config/*": ["config/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@commerce": ["framework/commerce"],
-      "@commerce/*": ["framework/commerce/*"],
-      "@framework": ["framework/local"],
-      "@framework/*": ["framework/local/*"]
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@util/*": [
+        "util/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@service": [
+        "service/*"
+      ],
+      "@config": [
+        "config/*"
+      ],
+      "@cloud/*": [
+        "components/cloud/*"
+      ],
+      "@atom/*": [
+        "components/common/Atom/*"
+      ],
+      "@constants/*": [
+        "middleware/constants/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx,"
+  ],
   "exclude": [
-    "node_modules",
-    "./framework/bigcommerce",
-    "./framework/shopify",
-    "./framework/swell",
-    "./framework/vendure",
-    "./framework/saleor"
-  ]
+    "node_modules"
+  ],
+  "noImplicitAny": false,
+  "suppressImplicitAnyIndexErrors": true,
+  "allowSyntheticDefaultImports": true
 }

@@ -1,35 +1,41 @@
-import type { GetStaticPropsContext } from 'next'
-import commerce from '@lib/api/commerce'
-import { Layout } from '@components/common'
-import { Text } from '@components/ui'
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Button } from "antd";
 
-export async function getStaticProps({
-  preview,
-  locale,
-  locales,
-}: GetStaticPropsContext) {
-  const config = { locale, locales }
-  const { pages } = await commerce.getAllPages({ config, preview })
-  const { categories, brands } = await commerce.getSiteInfo({ config, preview })
-  return {
-    props: {
-      pages,
-      categories,
-      brands,
-    },
-    revalidate: 200,
-  }
-}
+export default function My404() {
+  const router = useRouter();
 
-export default function NotFound() {
   return (
-    <div className="max-w-2xl mx-8 sm:mx-auto py-20 flex flex-col items-center justify-center fit">
-      <Text variant="heading">Not Found</Text>
-      <Text className="">
-        The requested page doesn't exist or you don't have access to it.
-      </Text>
+    <div
+      className="w-screen h-screen bg-center bg-no-repeat bg-cover flex items-center"
+      style={{
+        backgroundImage: `url(https://pbs.twimg.com/media/BUxylabCcAAdLMg.jpg:large)`,
+      }}
+    >
+      <div className="w-2/5 mx-auto text-white text-2xl text-center font-normal">
+        <div className="text-4xl font-bold mb-8">404</div>
+        Уучлаарай, таны хүссэн хуудас олдсонгүй.
+        <div className="grid grid-cols-2 gap-4 mt-10">
+          <div className="w-full">
+            <Link href="/">
+              <a>
+                <Button type="primary" className="w-full">
+                  Нүүр
+                </Button>
+              </a>
+            </Link>
+          </div>
+          <div className="w-full">
+            <Button
+              type="ghost"
+              className="w-full"
+              onClick={() => router.back()}
+            >
+              Буцах
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
-
-NotFound.Layout = Layout

@@ -1093,13 +1093,13 @@ export function parentidToChildren(
     mappedArr[item[idfield]] = { ...item, children: [], isLeaf: true };
   });
 
-  console.log("mappedArr", mappedArr);
+  // console.log("mappedArr", mappedArr);
 
   for (let x in mappedArr) {
     if (mappedArr.hasOwnProperty(x)) {
       mappedElem = mappedArr[x];
       // If the element is not at the root level, add it to its parent array of children.
-      console.log("mappedElem", mappedElem);
+      // console.log("mappedElem", mappedElem);
       if (
         mappedElem[parentidfield] &&
         mappedElem[parentidfield] !== "null" &&
@@ -1141,7 +1141,7 @@ export function listToTree(data, options) {
     childrenOf[id] = childrenOf[id] || [];
     // init its children
     item[CHILDREN_KEY] = childrenOf[id];
-    if (parentId != 0) {
+    if (parentId != 0 && parentId !== "null" && !_.isEmpty(parentId)) {
       // init its parent's children object
       childrenOf[parentId] = childrenOf[parentId] || [];
       // push it into its parent's children object
@@ -1231,17 +1231,26 @@ export const getAtomValue = (
   processConfig,
   rowIndex
 ) => {
-  let atomValue = formDataInitData[config.paramrealpath];
+  try {
+    let atomValue = formDataInitData[config.paramrealpath];
 
-  const getGroup = config.paramrealpath.split(".");
-  if (getGroup.length == 2) {
-    if (processConfig["__groupPath"][getGroup[0]][0]["recordtype"] === "rows") {
-      atomValue =
-        formDataInitData[getGroup[0]][rowIndex][config.paramname.toLowerCase()];
-    } else {
-      atomValue = formDataInitData[getGroup[0]][config.paramname.toLowerCase()];
+    const getGroup = config.paramrealpath.split(".");
+    if (getGroup.length == 2) {
+      if (
+        processConfig["__groupPath"][getGroup[0]][0]["recordtype"] === "rows"
+      ) {
+        atomValue =
+          formDataInitData[getGroup[0]][rowIndex][
+            config.paramname.toLowerCase()
+          ];
+      } else {
+        atomValue =
+          formDataInitData[getGroup[0]][config.paramname.toLowerCase()];
+      }
     }
-  }
 
-  return atomValue;
+    return atomValue;
+  } catch (ex) {
+    console.log("getAtomValue " + ex);
+  }
 };

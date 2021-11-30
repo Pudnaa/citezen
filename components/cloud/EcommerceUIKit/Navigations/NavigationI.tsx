@@ -1,187 +1,270 @@
 import { useState, useContext } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { isEmpty } from "lodash";
-import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-} from "util/helper";
-import {
-  AtomList,
-  AtomTitle,
-  AtomText,
-  AtomCurrency,
-  AtomIcon,
-  AtomButton,
-  AtomTag,
-  AtomImage,
-} from "@components/common/Atom";
+import { useUser } from "hooks/use-user";
+import { AtomIcon, AtomImage, AtomInput } from "@components/common/Atom";
+import RenderAtom from "@components/common/Atom/RenderAtom";
+import AtomAvatar from "@components/common/Atom/AtomAvatar";
 
 export default function NavigationI() {
   const {
     config,
     datasrc,
+    readyDatasrc,
     otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   // console.log("NavigationI config", config);
   // console.log("NavigationI datasrc", datasrc);
   // console.log("NavigationI otherattr", otherattr);
   // console.log("NavigationI positionConfig", positionConfig);
-  
+  //console.log("Navigation1 readysata - ", readyDatasrc);
+
   const [searchInput, setSearchInput] = useState(true);
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
-  if (isEmpty(datasrc)) return null;
+  const userContext = useUser();
+  const img =
+    "https://skyresort.mn/wp-content/uploads/2020/01/skyresort_smalllogo2.png";
 
+  const img1 =
+    "https://www.skiresort.info/uploads/tx_mgskiresort/variationen1_01.jpg";
+  //border-bottom-left-radius:3.5rem;border-bottom-right-radius:3.5rem
   return (
     <div className="dark:bg-gray-900">
-      <div>
-        <div className="relative">
-          {/* For md screen size */}
-          <div
-            id="md-searchbar"
-            className={`${
-              mdOptionsToggle ? "hidden" : "flex"
-            } bg-white dark:bg-gray-900 lg:hidden py-5 px-6 items-center justify-between`}
-          >
-            <div className="flex items-center space-x-3 text-gray-800 dark:text-white">
-              <div>
-                <AtomIcon item="far fa-search" customClassName="text-lg" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search for products"
-                className="text-sm leading-none dark:text-gray-300 dark:bg-gray-900 text-gray-600 focus:outline-none"
-              />
-            </div>
-            <div className="space-x-6">
-              <button
-                aria-label="view favourites"
-                className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-              >
-                <AtomIcon item="far fa-heart" customClassName="text-lg" />
-              </button>
-              <button
-                aria-label="go to cart"
-                className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-              >
-                <AtomIcon
-                  item="far fa-shopping-bag"
-                  customClassName="text-lg"
-                />
-              </button>
-            </div>
-          </div>
-          {/* For md screen size */}
-          {/* For large screens */}
-          <div className="dark:bg-gray-900 bg-gray-50 px-6 py-4">
-            <div className="container mx-auto flex items-center justify-between">
-              <div
-                className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white"
-                aria-label="the Crib."
-              >
-                <AtomImage
-                  item="https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_prvdqa.png"
-                  customClassName="w-12 h-12"
-                />
-              </div>
-              <ul className="hidden w-8/12 md:flex items-center justify-center space-x-8">
-                {menuList.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <a
-                        href="javascript:void(0)"
-                        className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                      >
-                        <AtomText
-                          item={item.title}
-                          link="#"
-                          color={widgetDefault.color}
-                        />
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="md:w-2/12 justify-end flex items-center space-x-4 xl:space-x-8">
-                <div className="hidden lg:flex items-center">
-                  <button
-                    onClick={() => setSearchInput(!searchInput)}
-                    aria-label="search items"
-                    className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-                  >
-                    <AtomIcon
-                      item="far fa-search"
-                      customClassName="text-xl"
-                      color={widgetDefault.color}
-                    />
-                  </button>
-                  <input
-                    id="searchInput"
+      <div className="">
+        <div className="relative  h-36 bg-transparent">
+          {/*top one search wallet, cart*/}
+          <RenderAtom
+            item={{
+              value: img1,
+            }}
+            defaultAtom="image"
+            customClassName="absolute w-full h-full object-cover z-0 rounded-b-3xl"
+          />
+          <div className="absolute w-full h-full rounded-xl">
+            <div id="md-searchbar" className="w-full h-24">
+              <div className="py-2  px-5 lg:px-20 items-center flex justify-between w-full h-full border-b border-gray-300">
+                <div className="flex space-x-14 items-center">
+                  <RenderAtom
+                    item={{
+                      value: img,
+                    }}
+                    defaultAtom="image"
+                    customClassName="w-auto hidden sm:flex h-auto z-10"
+                  />
+                  <AtomInput
+                    item=""
+                    icon="far fa-search"
+                    value={undefined}
+                    placeholder="Хайх үйлчилгээний нэрээ оруулна уу..."
                     type="text"
-                    placeholder="search"
-                    className={` ${
-                      searchInput ? "hidden" : ""
-                    } text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`}
+                    customClassName="w-96 hidden lg:flex"
                   />
                 </div>
-                <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
-                  <button
-                    aria-label="view favourites"
-                    className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-                  >
-                    <AtomIcon
-                      item="far fa-heart"
-                      customClassName="text-xl"
-                      color={widgetDefault.color}
-                    />
-                  </button>
-                  <button
-                    aria-label="go to cart"
-                    className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-                  >
-                    <AtomIcon
-                      item="far fa-shopping-bag"
-                      customClassName="text-xl"
-                      color={widgetDefault.color}
-                    />
-                  </button>
+                <div className="flex flex-row z-10">
+                  <div className="border-r border-gray-300 pr-5">
+                    <div className="bg-yellow-200 flex flex-col items-center py-2 px-5 rounded-lg">
+                      <i className="far fa-wallet text-lg"></i>
+                      <RenderAtom
+                        item={{
+                          value: "Хэтэвч",
+                        }}
+                        defaultAtom="text"
+                        customClassName="text-xs font-semibold"
+                      />
+                    </div>
+                  </div>
+                  <div className="pl-5 border-l border-gray-300">
+                    <div className="flex">
+                      <div className="bg-skyresort relative text-center rounded-l-lg  py-2 px-6 ">
+                        <i className="far fa-shopping-bag text-2xl mx-auto"></i>
+                        <div className="absolute w-5 h-5 rounded-full bg-green-500 top-1 right-4 text-center">
+                          <RenderAtom
+                            item={{
+                              value: "10",
+                            }}
+                            defaultAtom="text"
+                            customClassName=" text-white font-bold text-xs"
+                          />
+                        </div>
+                        <RenderAtom
+                          item={{
+                            value: "Сагс",
+                          }}
+                          defaultAtom="text"
+                          customClassName=" text-xs font-semibold"
+                        />
+                      </div>
+                      <div className="bg-white text-center rounded-r-lg  pt-2 pb-1 px-3">
+                        <RenderAtom
+                          item={{
+                            value: "Нийт дүн",
+                          }}
+                          defaultAtom="text"
+                          customClassName=" text-xs text-gray-500"
+                        />
+                        <RenderAtom
+                          item={{
+                            value: "10,500,000₮",
+                          }}
+                          defaultAtom="text"
+                          customClassName=" font-bold text-lg text-gray-800 pt-1"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex lg:hidden">
-                  <button
-                    aria-label="show options"
-                    onClick={() => setMdOptionsToggle(!mdOptionsToggle)}
-                    className="text-black hidden md:flex rounded"
-                  >
-                    <AtomIcon
-                      item="far fa-stream"
-                      customClassName="text-xl"
-                      color={widgetDefault.color}
+              </div>
+            </div>
+            {/* For md screen size */}
+            {/* bottom one*/}
+            <div className="dark:bg-gray-900 z-10 px-5 lg:px-20 h-12 text-white rounded-lg py-2">
+              <div className="flex items-center justify-between items-center h-full">
+                <div className="flex">
+                  {/* <div className="flex items-center text-center bg-skyresort rounded-2xl px-3 py-1 text-black space-x-2">
+                    <i className="far fa-bars mt-1 "></i>
+                    <RenderAtom
+                      item={{
+                        value: "Ангилал",
+                      }}
+                      defaultAtom="text"
+                      customProps={{
+                        color: widgetAllaround.color,
+                      }}
+                      customClassName="text-sm font-bold uppercase"
                     />
-                  </button>
-                  <button
-                    aria-label="open menu"
-                    onClick={() => setShowMenu(true)}
-                    className="text-black dark:text-white dark:hover:text-gray-300 md:hidden focus:outline-none focus:ring-2 rounded focus:ring-gray-600"
-                  >
-                    <AtomIcon
-                      item="far fa-stream"
+                  </div> */}
+                  <div className="lg:hidden" onClick={() => setShowMenu(true)}>
+                    <i className="cursor-pointer text-2xl fa">&#xf0c9;</i>
+                  </div>
+                  <ul className="hidden lg:flex items-center justify-center space-x-7">
+                    {menuList.map((item, index) => {
+                      return (
+                        <li key={index} className="">
+                          <RenderAtom
+                            item={{
+                              value: item.title,
+                            }}
+                            defaultAtom="text"
+                            customProps={{
+                              color: widgetAllaround.color,
+                            }}
+                            customClassName=" uppercase text-xs sm:text-sm font-normal"
+                          />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="h-full sm:hidden">
+                  <RenderAtom
+                    item={{
+                      value: img,
+                    }}
+                    defaultAtom="image"
+                    customClassName="w-full h-full z-10"
+                  />
+                </div>
+
+                <div className="flex items-center space-x-6 font-medium text-xl sm:text-sm">
+                  <div className="flex space-x-2">
+                    <i className="far fa-user"></i>
+                    <p className="hidden sm:inline-block">Нэвтрэх</p>
+                  </div>
+                  <div className="flex space-x-2">
+                    <i className="far fa-lock"></i>
+                    <p className="hidden sm:inline-block">Бүртгүүлэх</p>
+                  </div>
+                  {/* <div className="hidden lg:flex items-center">
+                    {/* <AtomButton
+                    onClick={() => setSearchInput(!searchInput)}
+                    item=""
+                    icon="far fa-search"
+                    type="icon"
+                    customClassName="text-xl"
+                    color={widgetAllaround.color}
+                  />
+                    <RenderAtom
+                      item={{
+                        value: "",
+                      }}
+                      defaultAtom="button"
                       customClassName="text-xl"
-                      color={widgetDefault.color}
+                      customProps={{
+                        icon: "far fa-search",
+                        type: "icon",
+                        color: widgetAllaround.color,
+                        onClick: () => setSearchInput(!searchInput),
+                      }}
                     />
-                  </button>
+                    <input
+                      id="searchInput"
+                      type="text"
+                      placeholder="search"
+                      className={` ${
+                        searchInput ? "hidden" : ""
+                      } text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`}
+                    />
+                  </div>
+                  <div className="hidden lg:flex items-center space-x-4 xl:space-x-2">
+                    <RenderAtom
+                      item={{ value: null }}
+                      defaultAtom="button"
+                      customClassName="text-xl"
+                      customProps={{
+                        icon: "far fa-heart",
+                        type: "icon",
+                        color: widgetAllaround.color,
+                      }}
+                    />
+                    <RenderAtom
+                      item={{ value: null }}
+                      defaultAtom="button"
+                      customClassName="text-xl"
+                      customProps={{
+                        icon: "far fa-shopping-bag",
+                        type: "icon",
+                        color: widgetAllaround.color,
+                      }}
+                    />
+                  </div>
+                  <div className="flex lg:hidden">
+                     Энд User байрлана. 
+                    <AtomAvatar />
+                    <RenderAtom
+                      item={{ value: null }}
+                      defaultAtom="button"
+                      customClassName="text-xl hidden md:flex rounded"
+                      customProps={{
+                        icon: "far fa-stream",
+                        type: "icon",
+                        color: widgetAllaround.color,
+                        onClick: () => setMdOptionsToggle(!mdOptionsToggle),
+                      }}
+                    />
+                    <RenderAtom
+                      item={{ value: null }}
+                      defaultAtom="button"
+                      customClassName="text-xl md:hidden"
+                      customProps={{
+                        icon: "far fa-stream",
+                        type: "icon",
+                        color: widgetAllaround.color,
+                        onClick: () => setShowMenu(true),
+                      }}
+                    />
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
+
           {/* For small screen */}
           <div
             id="mobile-menu"
@@ -190,54 +273,53 @@ export default function NavigationI() {
             } absolute dark:bg-gray-900 z-10 inset-0 md:hidden bg-white flex-col h-screen w-full`}
           >
             <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 p-4">
-              <div className="flex items-center space-x-3">
-                <div>
-                  <AtomIcon
-                    item="far fa-search"
-                    customClassName="text-lg"
-                    color={widgetDefault.color}
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search for products"
-                  className="text-sm dark:bg-gray-900 text-gray-600 placeholder-gray-600 dark:placeholder-gray-300 focus:outline-none"
-                />
-              </div>
-              <button
-                onClick={() => setShowMenu(false)}
-                aria-label="close menu"
-                className="focus:outline-none focus:ring-2 rounded focus:ring-gray-600"
-              >
-                <AtomIcon
-                  item="fal fa-close"
-                  customClassName="text-lg"
-                  color={widgetDefault.color}
-                />
-              </button>
+              <AtomInput
+                item=""
+                icon="far fa-search"
+                value={undefined}
+                placeholder="Үйлчилгээ хайх"
+                type="text"
+                customClassName="w-auto"
+              />
+              <RenderAtom
+                item={{
+                  value: null,
+                }}
+                defaultAtom="button"
+                customClassName="text-lg"
+                customProps={{
+                  icon: "far fa-close",
+                  type: "icon",
+                  color: widgetAllaround.color,
+                  onClick: () => setShowMenu(false),
+                }}
+              />
             </div>
             <div className="mt-6 p-4">
               <ul className="flex flex-col space-y-6">
                 {menuList.map((item, index) => {
                   return (
-                    <li key={index}>
-                      <a
-                        href="javascript:void(0)"
-                        className="dark:text-white flex items-center justify-between hover:underline text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800"
-                      >
-                        <AtomText
-                          item={item.title}
-                          link="#"
-                          color={widgetDefault.color}
-                        />
-                        <div>
-                          <AtomIcon
-                            item="fal fa-chevron-right"
-                            customClassName="text-sm"
-                            color={widgetDefault.color}
-                          />
-                        </div>
-                      </a>
+                    <li key={index} className="flex flex-row justify-between">
+                      <RenderAtom
+                        item={{
+                          value: item.title,
+                        }}
+                        defaultAtom="text"
+                        customProps={{
+                          color: widgetAllaround.color,
+                        }}
+                      />
+
+                      <RenderAtom
+                        item={{
+                          value: "fal fa-chevron-right",
+                        }}
+                        defaultAtom="icon"
+                        customClassName="text-sm"
+                        customProps={{
+                          color: widgetAllaround.color,
+                        }}
+                      />
                     </li>
                   );
                 })}
@@ -245,38 +327,43 @@ export default function NavigationI() {
             </div>
             <div className="h-full flex items-end">
               <ul className="flex flex-col space-y-8 bg-gray-50 w-full py-10 p-4 dark:bg-gray-800">
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <div>
-                      <AtomIcon
-                        item="fal fa-shopping-bag"
-                        customClassName="text-2xl"
-                        color={widgetDefault.color}
-                      />
-                    </div>
-                    <AtomText item="Сагс" customClassName="text-base" />
-                  </a>
+                <li className="flex flex-row items-center space-x-4 ">
+                  <RenderAtom
+                    item={{
+                      value: "fal fa-shopping-bag",
+                    }}
+                    defaultAtom="icon"
+                    customClassName="text-2xl"
+                    customProps={{
+                      color: widgetAllaround.color,
+                    }}
+                  />
+                  <RenderAtom
+                    item={{
+                      value: "Сагс",
+                    }}
+                    defaultAtom="text"
+                    customClassName="text-base"
+                  />
                 </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
-                    <div>
-                      <AtomIcon
-                        item="fal fa-heart"
-                        customClassName="text-2xl"
-                        color={widgetDefault.color}
-                      />
-                    </div>
-                    <AtomText
-                      item="Хүслийн жагсаалт"
-                      customClassName="text-base"
-                    />
-                  </a>
+                <li className="flex flex-row items-center space-x-4 ">
+                  <RenderAtom
+                    item={{
+                      value: "fal fa-heart",
+                    }}
+                    defaultAtom="icon"
+                    customClassName="text-2xl"
+                    customProps={{
+                      color: widgetAllaround.color,
+                    }}
+                  />
+                  <RenderAtom
+                    item={{
+                      value: "Хүслийн жагсаалт",
+                    }}
+                    defaultAtom="text"
+                    customClassName="text-base"
+                  />
                 </li>
               </ul>
             </div>
@@ -288,8 +375,9 @@ export default function NavigationI() {
 }
 
 const menuList = [
-  { title: "Нүүр" },
-  { title: "Цана" },
-  { title: "Боард" },
+  { title: "Yйлчилгээ" },
   { title: "Сургалт" },
+  { title: "Хөнгөлөлт" },
+  { title: "Цагийн хуваарь" },
+  { title: "Эрхийн бичиг" },
 ];

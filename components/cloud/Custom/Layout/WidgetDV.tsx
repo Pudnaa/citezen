@@ -15,12 +15,12 @@ type WidgetDVPropsType = {
 };
 
 const WidgetDV: FC<WidgetDVPropsType> = ({ listConfig }) => {
-const router = useRouter();
+  const router = useRouter();
 
   // if (_.isEmpty(listConfig)) return null;
 
-//jagaa - url-д layout=raw гэсэн байвал бүх widget-ийг хэвлэхгүй
-const layoutRaw = router?.query?.layout || "";
+  //jagaa - url-д layout=raw гэсэн байвал бүх widget-ийг хэвлэхгүй
+  const layoutRaw = router?.query?.layout || "";
 
   let { data, error } = useSWR(`/api/get-data?metaid=${listConfig.metadataid}`);
   const parameters = `&parameters=${JSON.stringify({
@@ -67,8 +67,6 @@ const layoutRaw = router?.query?.layout || "";
     }
   );
 
-  
-
   if (layoutRaw === "raw") {
     return (
       <WidgetRaw
@@ -82,7 +80,7 @@ const layoutRaw = router?.query?.layout || "";
     return (
       <WidgetWrapperStore
         config={killerObj}
-        otherattr={killerObj.otherattr}
+        widgetnemgoo={killerObj.otherattr}
         datasrc={data}
       >
         <RenderComponent />

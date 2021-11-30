@@ -21,7 +21,7 @@ const RowsItem: FC<PropsType> = ({
         return (
           <td
             key={index}
-            className={`border border-gray-300 ${
+            className={`border overflow-hidden border-gray-300 ${
               item["datatype"] == "group" ? "text-center" : ""
             } ${
               item.isshow == "0"

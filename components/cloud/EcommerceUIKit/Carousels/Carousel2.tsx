@@ -20,7 +20,7 @@ export default function Carousel2() {
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   // console.log("Carousel2 config", config);
   // console.log("Carousel2 datasrc", datasrc);
@@ -33,10 +33,10 @@ export default function Carousel2() {
           <div className="flex flex-col items-center justify-center mr-5">
             <div className="w-32 h-32 rounded-full border border-gray-100 overflow-hidden shadow-md flex items-center justify-center bg-white">
               <i
-                className={`fal fa-${item.icon} text-5xl text-${widgetDefault.color}`}
+                className={`fal fa-${item.icon} text-5xl text-${widgetAllaround.color}`}
               />
             </div>
-            <div className="flex items-center justify-center text-center mt-4 text-gray-900">
+            <div className="flex items-center justify-center text-center mt-4 uppercase font-semibold  text-gray-900">
               {item.title}
             </div>
           </div>

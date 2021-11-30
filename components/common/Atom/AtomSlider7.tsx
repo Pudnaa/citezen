@@ -39,13 +39,13 @@ const AtomSlider7: FC<PropsType> = ({
 
   var settings = {
     dots: true,
+    // fade: true,
     infinite: true,
-    centerMode: false,
-    // centerPadding: "2px",
-    swipeToSlide: true,
-    variableWidth: true,
-    arrows: false,
-    // slidesToShow: 1,
+    speed: 500,
+    slidesToShow: 1,
+    // arrows: true,
+    slidesToScroll: 1,
+    // className: "slides",
     // initialSlide: 0, //2-р слайдаас эхэлнэ.
     appendDots: (dots: any) => (
       <div
@@ -60,10 +60,7 @@ const AtomSlider7: FC<PropsType> = ({
   };
 
   return (
-    <Slider
-      {...settings}
-      className={`relative w-full h-auto ${customClassName}`}
-    >
+    <Slider {...settings} className={`relative h-screen ${customClassName}`}>
       {children}
     </Slider>
   );

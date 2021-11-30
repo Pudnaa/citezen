@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Tree } from "antd";
 import {
   positionToPath,
@@ -6,6 +6,7 @@ import {
   jsonParse,
   renderPositionType,
   toBoolean,
+  prepareIsOpen,
 } from "util/helper";
 import _ from "lodash";
 import {
@@ -18,43 +19,68 @@ import {
 
 type PropsType = {
   config: any;
-  datasrc: any;
+  rawDatasrc: any;
   otherattr: any;
   color?: string;
   customClassName?: string;
   customStyle?: any;
-  selectedId: number;
-  setSelectedId: any;
+  defaultSelectedId?: any;
   indent?: number;
   onClickItem?: any;
 };
 
 const TreeMain: FC<PropsType> = ({
   config,
-  datasrc,
+  rawDatasrc,
   otherattr,
   color,
   customClassName,
   customStyle,
-  selectedId,
-  setSelectedId,
+  defaultSelectedId,
   indent,
   onClickItem = () => null,
 }) => {
-  if (_.isEmpty(datasrc)) return null;
+  if (_.isEmpty(rawDatasrc)) return null;
   const positionConfig = positionToPath(config.bpsectiondtl);
   // console.log("TreeMain config", config);
-  // console.log("TreeMain datasrc", datasrc);
+  // console.log("TreeMain rawDatasrc", rawDatasrc);
   // console.log("TreeMain otherattr", otherattr);
+
+  const [selectedId, setSelectedId] = useState<any>(defaultSelectedId);
+  const [datasrc, setDatasrc] = useState<any>(
+    prepareIsOpen(rawDatasrc, selectedId, positionConfig)[0] || [],
+  );
+
+  useEffect(() => {
+    setDatasrc(prepareIsOpen(rawDatasrc, selectedId, positionConfig)[0] || []);
+  }, [selectedId]);
+
+  // console.log("🚀 ~ selectedId", selectedId);
+  //Business process → 16115866996021
+
+  const toggleIsOpen = (item: any, itemIndex: number) => {
+    const tempArray = [...datasrc];
+    tempArray[itemIndex] = { ...item, isOpen: !item.isOpen };
+
+    setDatasrc([...tempArray]);
+
+    return null;
+  };
 
   return (
     <ul className={` ${customClassName} `} style={{ ...customStyle }}>
       {datasrc.map((item: any, index: number) => {
         const selected =
           selectedId === renderPositionType(item, "position0", positionConfig);
-
         return (
-          <span key={index}>
+          <li key={index} className={`relative ${item.icon ? "pl-1" : `pl-2`}`}>
+            {/* {item.icon && (
+              <AtomIcon
+                item={`fas ${item.icon} text-gray-700`}
+                color='weekly'
+                customClassName='absolute left-0'
+              />
+            )} */}
             <TreeItem
               key={index}
               item={item}
@@ -62,26 +88,29 @@ const TreeMain: FC<PropsType> = ({
               color={color}
               customClassName={`mb-4 ${selected ? "" : `text-${color}`}`}
               selected={selected}
+              itemIndex={index}
               onClickItem={(e: any) => {
                 onClickItem(e);
               }}
+              onArrowClickItem={(item: any, itemIndex: number) => {
+                toggleIsOpen(item, itemIndex);
+              }}
             />
             {!_.isEmpty(item?.children) && datasrc[index].isOpen && (
-              <>
+              <span className="submenu">
                 <TreeMain
                   config={config}
                   color={color}
-                  datasrc={_.orderBy(item?.children, "ordernumber")}
+                  rawDatasrc={_.orderBy(item?.children, "ordernumber")}
                   otherattr={otherattr}
                   customClassName={`ml-${indent}`}
-                  selectedId={selectedId}
-                  setSelectedId={setSelectedId}
+                  defaultSelectedId={selectedId}
                   indent={indent}
                   onClickItem={onClickItem}
                 />
-              </>
+              </span>
             )}
-          </span>
+          </li>
         );
       })}
     </ul>
@@ -90,6 +119,12 @@ const TreeMain: FC<PropsType> = ({
 
 export default TreeMain;
 
+//  ##### #####  ###### ###### # ##### ###### #    #
+//    #   #    # #      #      #   #   #      ##  ##
+//    #   #    # #####  #####  #   #   #####  # ## #
+//    #   #####  #      #      #   #   #      #    #
+//    #   #   #  #      #      #   #   #      #    #
+//    #   #    # ###### ###### #   #   ###### #    #
 type PropsTypeItem = {
   item: any;
   positionConfig: any;
@@ -97,6 +132,8 @@ type PropsTypeItem = {
   customClassName?: string;
   selected: boolean;
   onClickItem?: any;
+  onArrowClickItem?: any;
+  itemIndex: number;
 };
 
 const TreeItem: FC<PropsTypeItem> = ({
@@ -106,6 +143,8 @@ const TreeItem: FC<PropsTypeItem> = ({
   customClassName,
   selected,
   onClickItem,
+  onArrowClickItem,
+  itemIndex,
 }) => {
   // console.log("item", item);
   // console.log("positionConfig", positionConfig);
@@ -115,12 +154,20 @@ const TreeItem: FC<PropsTypeItem> = ({
   // );
   const withChildren = !_.isEmpty(item?.children);
 
+  const handlerChangeEvent = (e: any, i: any) => {
+    if (withChildren) {
+      onArrowClickItem(item, itemIndex);
+    } else {
+      onClickItem(item);
+    }
+  };
+
   return (
-    <li
+    <div
       className={`flex w-full justify-between text-gray-800  leading-none cursor-pointer items-center relative ${customClassName}`}
+      onClick={(e) => handlerChangeEvent(e, item)}
     >
       <div
-        // className="ml-2"
         onClick={(e) => {
           e.preventDefault();
           onClickItem(item);
@@ -144,8 +191,12 @@ const TreeItem: FC<PropsTypeItem> = ({
           item={`far fa-chevron-${
             item.isOpen ? "down" : "right"
           } text-gray-700`}
+          color="weekly"
+          onClick={() => {
+            onArrowClickItem(item, itemIndex);
+          }}
         />
       )}
-    </li>
+    </div>
   );
 };

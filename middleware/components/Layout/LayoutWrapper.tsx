@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { jsonParse } from "util/helper";
 import _ from "lodash";
-import SectionWidget from "./SectionWidget";
-
+import { overrideTailwindClasses } from "tailwind-override";
 import LayoutSection from "./LayoutSection";
 
 type PropsType = {
@@ -20,20 +19,24 @@ const LayoutWrapper: FC<PropsType> = ({
   if (_.isEmpty(readyMergedLayoutConfig)) {
     return <>Layout тохиргоо олдсонгүй</>;
   }
-  const otherattr = jsonParse(readyMergedLayoutConfig["otherattr"]);
-
+  const layoutnemgoo = jsonParse(readyMergedLayoutConfig["layoutnemgoo"]);
+  // console.log("🚀 ~ layoutnemgoo", layoutnemgoo);
   // console.log("🚀 ~ readyMergedLayoutConfig,", readyMergedLayoutConfig);
   // console.log("🚀 ~ meta_bp_layout_section,", meta_bp_layout_section);
   // console.log("🚀 ~ mergedLayout,", mergedLayout);
 
   return (
     <main
-      className={`h-full w-full ${otherattr?.className || ""}`}
-      style={{ ...otherattr?.style }}
+      // className={`h-full w-full ${layoutnemgoo?.className || ""}`}
+      className={overrideTailwindClasses(
+        `h-full w-full ${layoutnemgoo?.className || ""}`
+      )}
+      style={{ ...layoutnemgoo?.style }}
     >
       <LayoutSection
         mergedLayout={mergedLayout}
         meta_bp_layout_section={meta_bp_layout_section}
+        customClassName="mb-0"
       />
     </main>
   );

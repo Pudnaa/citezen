@@ -10,16 +10,18 @@ type PropsType = {
   hoverSolid?: boolean;
   customClassName?: string;
   customStyle?: any;
+  onClick?: any;
 };
 
 const AtomIcon: FC<PropsType> = ({
   item,
   link,
   checked = false,
-  color = "sso",
+  color = "citizen",
   hoverSolid = true,
   customClassName = "",
   customStyle,
+  onClick,
 }) => {
   if (isEmpty(item)) return null;
 
@@ -36,6 +38,7 @@ const AtomIcon: FC<PropsType> = ({
           checked && `text-${color}`
         } hover:text-${color} `}
         style={{ ...customStyle }}
+        onClick={onClick}
       />
     </AtomLink>
   );

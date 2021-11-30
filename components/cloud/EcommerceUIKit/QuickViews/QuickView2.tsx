@@ -18,14 +18,14 @@ import {
   AtomFade,
   AtomImage,
 } from "@components/common/Atom";
-// import {
-//   CarouselProvider,
-//   Slider,
-//   Slide,
-//   ButtonBack,
-//   ButtonNext,
-// } from "pure-react-carousel";
-// import "pure-react-carousel/dist/react-carousel.es.css";
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 /* Install pure-react-carousel using -> npm i pure-react-carousel */
 
@@ -45,6 +45,8 @@ export default function QuickView2() {
   // console.log("QuickView2 datasrc", datasrc);
   // console.log("QuickView2 otherattr", otherattr);
   // console.log("QuickView2 positionConfig", positionConfig);
+  const item = datasrc[0];
+  const images = renderPositionType(item, "position31", positionConfig);
   return (
     <div className="bg-gray-800">
       <div className="2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6 py-9 px-4">
@@ -78,10 +80,11 @@ export default function QuickView2() {
             </button>
           </div>
           <div className="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-stretch justify-center lg:space-x-8">
-            {/* <CarouselProvider
+            <CarouselProvider
+              naturalSlideHeight={250}
               naturalSlideWidth={100}
               isIntrinsicHeight={true}
-              totalSlides={3}
+              totalSlides={images.length}
               className="lg:w-1/2 flex justify-between items-strech bg-gray-50 px-2 py-20 md:py-6 md:px-6 lg:py-24"
             >
               <div className="flex items-center">
@@ -109,33 +112,28 @@ export default function QuickView2() {
               <div className="slider">
                 <div className="slide-ana lg:relative">
                   <Slider>
-                    <Slide index={0}>
-                      <div className="flex">
-                        <img
-                          src="https://i.ibb.co/fMGD6ZC/eugene-chystiakov-3ne-Swyntb-Q8-unsplash-1-removebg-preview-3-1.png"
-                          alt="A black chair with wooden legs"
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </Slide>
-                    <Slide index={1}>
-                      <div className="flex">
-                        <img
-                          src="https://i.ibb.co/fMGD6ZC/eugene-chystiakov-3ne-Swyntb-Q8-unsplash-1-removebg-preview-3-1.png"
-                          alt="A black chair with wooden legs"
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </Slide>
-                    <Slide index={2}>
-                      <div className="flex">
-                        <img
-                          src="https://i.ibb.co/fMGD6ZC/eugene-chystiakov-3ne-Swyntb-Q8-unsplash-1-removebg-preview-3-1.png"
-                          alt="A black chair with wooden legs"
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </Slide>
+                    {images &&
+                      images.map((item1: any, index1: number) => {
+                        return (
+                          <Slide index={index1}>
+                            <div className="flex">
+                              <AtomImage
+                                item={renderPositionType(
+                                  item1,
+                                  "position2",
+                                  positionConfig
+                                )}
+                                customClassName="w-auto"
+                                alt={renderPositionType(
+                                  item,
+                                  "position1",
+                                  positionConfig
+                                )}
+                              />
+                            </div>
+                          </Slide>
+                        );
+                      })}
                   </Slider>
                 </div>
               </div>
@@ -161,23 +159,24 @@ export default function QuickView2() {
                   </svg>
                 </ButtonNext>
               </div>
-            </CarouselProvider> */}
+            </CarouselProvider>
             <div className="lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
-              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">
-                Bar Stool
-              </h1>
-              <p className="text-base leading-normal text-gray-600 mt-2">
-                You don_t just want to be comfortable sitting in a bar stool—you
-                want to be comfortable shimmying it up to the bar, closer to
-                your lover, or back slightly to include a third person in the
-                conversation.
-              </p>
-              <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">
-                $790
-              </p>
+              <AtomTitle
+                item={renderPositionType(item, "position1", positionConfig)}
+                customClassName="text-3xl lg:text-4xl font-semibold text-gray-800"
+              />
+              <AtomText
+                item={renderPositionType(item, "position3", positionConfig)}
+                customClassName="text-base leading-normal text-gray-600 mt-2"
+              />
+              <AtomCurrency
+                type="mnt"
+                item={renderPositionType(item, "position4", positionConfig)}
+                customClassName="text-3xl font-medium text-gray-600 mt-8 md:mt-10"
+              />
               <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
                 <button className="w-full md:w-3/5 border border-gray-800 text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800">
-                  Add to Cart
+                  Сагсанд нэмэх
                 </button>
                 <button className="w-full md:w-2/5 border border-gray-800 text-base font-medium leading-none text-gray-800 uppercase py-6 bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-800 hover:text-white">
                   View Details
@@ -185,7 +184,7 @@ export default function QuickView2() {
               </div>
               <div className="mt-6">
                 <button className="text-xl underline text-gray-800 capitalize hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
-                  add to wishlist
+                  Хүслийн жагсаалтанд нэмэх
                 </button>
               </div>
             </div>

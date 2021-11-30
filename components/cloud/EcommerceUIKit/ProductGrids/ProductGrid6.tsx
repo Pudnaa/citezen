@@ -49,6 +49,11 @@ export default function ProductGrid6() {
           </div>
         ))}
       </AtomSlider5>
+      <div className="flex justify-center items-center w-full mt-10 pb-20">
+    <button className="bg-white text-red-500 font-semibold uppercase py-2 px-4 border-2 border-red-500 rounded-full center">
+      Бүгдийг харах
+    </button>
+    </div>
     </>
   );
 }

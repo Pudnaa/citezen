@@ -3,11 +3,7 @@
     "baseUrl": ".",
     "target": "esnext",
     // "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,36 +17,17 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@util/*": [
-        "util/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@service": [
-        "service/*"
-      ],
-      "@config": [
-        "config/*"
-      ],
-      "@cloud/*": [
-        "components/cloud/*"
-      ],
-      "@atom/*": [
-        "components/common/Atom/*"
-      ],
-      "@constants/*": [
-        "middleware/constants/*"
-      ]
+      "@lib/*": ["lib/*"],
+      "@util/*": ["util/*"],
+      "@config/*": ["config/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@service": ["service/*"],
+      "@config": ["config/*"],
+      "@cloud/*": ["components/cloud/*"],
+      "@atom/*": ["components/common/Atom/*"],
+      "@constants/*": ["middleware/constants/*"],
+      "@middleware/*": ["middleware/*"]
     }
   },
   "include": [
@@ -60,11 +37,11 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx,"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "noImplicitAny": false,
+, "pages/old_index.tsxold", "pages/old_app.tsxold"  ],
+  "exclude": ["node_modules"],
+  "noImplicitAny": true,
   "suppressImplicitAnyIndexErrors": true,
+  "strictNullChecks": false,
+  "strictPropertyInitialization": false,
   "allowSyntheticDefaultImports": true
 }

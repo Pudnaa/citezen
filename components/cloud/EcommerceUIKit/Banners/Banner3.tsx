@@ -38,35 +38,34 @@ export default function Banner3() {
   //console.log("Banner3 positionConfig", positionConfig);
 
   return (
-    <div>
-      {datasrc.map((item: any, index: number) => {
-        return (
-          <div key={index} className="flex items-center justify-center py-12">
-            <div className="w-full items-center justify-center relative ">
+    <>
+      {datasrc &&
+        datasrc.map((item: any, index: number) => {
+          return (
+            <div key={index} className="relative">
               <AtomImage
-                item={renderPositionType(item, "position52", positionConfig)}
-                customClassName="w-full h-full absolute inset-0 object-cover object-center"
+                item={item.mainimage}
+                customClassName="hidden md:block object-center object-fill w-full h-48 md:h-full rounded-lg"
+                alt="background-img"
               />
-              <AtomFade />
-              <div className="relative z-10 w-full">
-                <div className="flex flex-row justify-center items-center py-12 px-6">
-                  <AtomTitle
-                    item={renderPositionType(item, "position1", positionConfig)}
-                    link=""
-                    customStyle={{}}
-                    customClassName="md:text-4xl text-2xl text-center font-bold text-white pb-4 md:pb-8"
-                    truncateRow={2}
-                  />
-                  <AtomImage
-                    item={renderPositionType(item, "position2", positionConfig)}
-                    customClassName="w-20 h-12 rounded-r-3xl rounded-l-3xl ml-20 mb-5"
-                  />
-                </div>
+              <AtomImage
+                item={item.logo}
+                customClassName="md:hidden object-center object-fill w-full h-48 md:h-full"
+                alt="background-img"
+              />
+              <div className="absolute w-full flex flex-col justify-center h-full inset-0 px-4 md:px-10 lg:px-24">
+                <AtomTitle
+                  item={item.title}
+                  customClassName="text-xl md:text-3xl lg:text-4xl leading-5 md:leading-7 lg:leading-9 font-semibold text-white"
+                />
+                <AtomText
+                  item={item.description}
+                  customClassName="w-11/12 text-base md:text-xl lg:text-2xl leading-6 md:leading-5 font-normal lg:leading-6 text-white mt-2"
+                />
               </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+    </>
   );
 }

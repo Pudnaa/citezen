@@ -42,10 +42,11 @@ export default function Card115() {
       </p>
       {datasrc.map((item: any, index: number) => {
         return (
-          <div
-            key={index}
-            className="flex items-start justify-between mt-6 w-full"
-          >
+          <div key={index} className="mt-2 w-full">
+            <AtomText
+              item={renderPositionType(item, "position40", positionConfig)}
+              customClassName="text-sm font-medium py-4 text-gray-500"
+            />
             <div className="flex items-center">
               <div className="w-8 h-8 rounded">
                 <img
@@ -54,15 +55,11 @@ export default function Card115() {
                 />
               </div>
               <div className="pl-3">
-                <AtomText
-                  item={renderPositionType(item, "position40", positionConfig)}
-                  customClassName="text-sm leading-5 font-semibold py-4 text-gray-500"
-                />
                 <AtomTitle
                   item={renderPositionType(item, "position1", positionConfig)}
                   link=""
                   customStyle={{}}
-                  customClassName="text-sm font-semibold leading-normal text-gray-800"
+                  customClassName="text-sm font-medium text-gray-700"
                   truncateRow={2}
                 />
               </div>

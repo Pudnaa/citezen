@@ -43,7 +43,7 @@ const Checkouts1 = () => {
     setMenu(false);
     setCountry(e.target.textContent);
   };
-
+  const item = datasrc[0];
   return (
     <div className="flex justify-center items-center">
       <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container">
@@ -86,24 +86,31 @@ const Checkouts1 = () => {
               Checkout
             </p>
             <p className="text-base leading-normal sm:leading-4 text-gray-600">
-              Home {">"} Electronics {">"} Headphones {">"} Cart {">"} Checkout
+              Home {">"}{" "}
+              {renderPositionType(item, "position45", positionConfig)} {">"}
+              {renderPositionType(item, "position46", positionConfig)}
+              {">"} Cart {">"} Checkout
             </p>
           </div>
 
           <div className="flex flex-col xl:flex-row justify-center xl:justify-between space-y-6 xl:space-y-0 xl:space-x-6 w-full">
             <div className="xl:w-3/5 flex flex-col sm:flex-row xl:flex-col justify-center items-center bg-gray-100 py-7 sm:py-0 xl:py-10 px-10 ">
               <div className="flex flex-col justify-start items-start w-full space-y-4">
-                <p className="text-xl md:text-2xl leading-normal text-gray-800">
-                  Logitech K251
-                </p>
-                <p className="text-base font-semibold leading-none text-gray-600">
-                  $520.00
-                </p>
+                <AtomTitle
+                  item={renderPositionType(item, "position1", positionConfig)}
+                  customClassName="text-xl md:text-2xl leading-normal text-gray-800"
+                />
+                <AtomCurrency
+                  type="usd"
+                  item={renderPositionType(item, "position4", positionConfig)}
+                  customClassName="text-base font-semibold leading-none text-gray-600"
+                />
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
-                <img
-                  src="https://i.ibb.co/0GFzTP4/Rectangle-131.png"
-                  alt="headphones"
+                <AtomImage
+                  item={renderPositionType(item, "position2", positionConfig)}
+                  customClassName="w-auto"
+                  alt={renderPositionType(item, "position1", positionConfig)}
                 />
               </div>
             </div>
@@ -197,7 +204,7 @@ const Checkouts1 = () => {
                     {country}
                   </button>
                   <svg
-                    onClick={() => setMenu(!menu)}
+                    onClick={() => setMenu(!menu)}  
                     className={
                       "transform  cursor-pointer absolute top-4 right-4 " +
                       (menu ? "rotate-180" : "")
@@ -241,7 +248,17 @@ const Checkouts1 = () => {
 
               <button className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
                 <div>
-                  <p className="text-base leading-4">Pay $54652</p>
+                  <p className="text-base leading-4">
+                    Pay{" "}
+                    <AtomCurrency
+                      type="usd"
+                      item={renderPositionType(
+                        item,
+                        "position4",
+                        positionConfig
+                      )}
+                    />
+                  </p>
                 </div>
               </button>
             </div>

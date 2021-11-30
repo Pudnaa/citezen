@@ -23,16 +23,16 @@ const AtomText: FC<PropsType> = ({
 
   return (
     <AtomLink item={link} color={color}>
-      <span
+      <div
         className={`${
-          !customClassName.includes("text-") && "text-sm lg:text-base"
+          !customClassName.includes("text-") ? "text-sm lg:text-base" : ""
         }  ${customClassName}`}
         style={{
           ...customStyle,
         }}
       >
         <span className={`line-clamp-${truncateRow}`}>{item}</span>
-      </span>
+      </div>
     </AtomLink>
   );
 };

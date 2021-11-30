@@ -60,7 +60,7 @@ const TreeMainCategory: FC<PropsType> = ({
               positionConfig={positionConfig}
               customClassName={`rounded-2xl bg-white py-3 px-5  mb-4 ${
                 selected
-                  ? "bg-gradient-to-br from-sso to-sso-gradientfinish border-0"
+                  ? "bg-gradient-to-br from-citizen to-citizen-gradientfinish border-0"
                   : "border border-gray-300"
               } animate-fade-in-down`}
               selected={selected}
@@ -86,7 +86,7 @@ const TreeMainCategory: FC<PropsType> = ({
                   setSelectedId={setSelectedId}
                   indent={indent}
                 />
-                {/* bg-gradient-to-br from-sso to-sso-gradientfinish  text-pink-800 ml-3; */}
+                {/* bg-gradient-to-br from-citizen to-citizen-gradientfinish  text-pink-800 ml-3; */}
               </>
             )}
           </span>

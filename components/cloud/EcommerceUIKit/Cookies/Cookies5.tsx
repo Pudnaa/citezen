@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
@@ -34,18 +34,24 @@ export default function Cookies5() {
   // console.log("Cookies5 datasrc", datasrc);
   // console.log("Cookies5 otherattr", otherattr);
   // console.log("Cookies5 positionConfig", positionConfig);
+
+  const [menu, showMenu] = useState(false);
   return (
     <div>
       <div className="relative flex justify-center items-center ">
         <button
-          // onclick="showMenu(true)"
-          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none absolute z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
+          onClick={() => showMenu(true)}
+          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none  z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
         >
           Open
         </button>
         <div
           id="menu"
-          className=" w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0"
+          className={
+            menu
+              ? "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10"
+              : "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10 hidden"
+          }
         >
           <div className=" absolute bottom-0 w-full  flex justify-center items-center  ">
             <div className=" w-full relative flex flex-col justify-center items-center bg-white py-7 px-4 md:px-6 lg:px-20">
@@ -66,7 +72,7 @@ export default function Cookies5() {
                   </button>
                   <div className="md:space-x-4 space-y-4 md:space-y-0 w-full md:w-auto mt-4 md:mt-0 flex justify-center flex-col md:flex-row items-center">
                     <button
-                      //   onclick="showMenu(true)"
+                      onClick={() => showMenu(false)}
                       className="w-72 md:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-4 px-7 border border-gray-800  text-center text-base leading-4   hover:bg-gray-300 text-gray-800"
                     >
                       Refuse

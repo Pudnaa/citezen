@@ -1,11 +1,15 @@
 import { FC } from "react";
 import _ from "lodash";
-import { jsonParse } from "util/helper";
+import { overrideTailwindClasses } from "tailwind-override";
+import { jsonParse, toBoolean } from "util/helper";
 import WidgetStandart from "../WidgetStandart/WidgetStandart";
 import WidgetNoMeta from "../WidgetStandart/WidgetNoMeta";
+import WidgetViewProcess from "../WidgetStandardProcess/WidgetViewProcess";
+import WidgetGetProcess from "../WidgetStandardProcess/WidgetGetProcess";
 import RenderWidgetProcess from "../WidgetForm/RenderWidgetProcess";
 import RenderWidgetProcessField from "../WidgetForm/RenderWidgetProcessField";
-import * as Constants from "@constants/metaConstants";
+// import * as Constants from "@constants/metaConstants";
+import { metaConfig } from "config/metaConfig";
 import LayoutWrapper from "./LayoutWrapper";
 
 type PropsType = {
@@ -32,13 +36,18 @@ const SectionWidget: FC<PropsType> = ({
 
   const temp = sectionList.length > 1 && { gridGap: "2%" };
 
+  const itemClassName = item?.className || "";
+
   return (
     <section
       {...dataAttrs}
       // className={`w-full h-full ${item?.className || ""}`}
-      className={`${!item?.className.includes("mb-") ? "mb-6" : ""} ${
-        item?.className || "w-full h-full"
-      }`}
+      // className={`${!itemClassName.includes("mb-") ? "mb-6" : ""} ${
+      //   _.isEmpty(itemClassName) ? "w-full h-full" : itemClassName
+      // }`}
+      className={overrideTailwindClasses(
+        `mb-6 ${_.isEmpty(itemClassName) ? "w-full h-full" : itemClassName}`
+      )}
       style={{ ...item?.style }}
     >
       <div
@@ -53,10 +62,6 @@ const SectionWidget: FC<PropsType> = ({
         }}
       >
         {sectionList.map((sectionItem: any, index: number) => {
-          // {[].map((sectionItem: any, index: number) => {
-          const widgetOtherAttr = jsonParse(sectionItem.otherattr, true);
-          // console.log("DDDDDDDDDD", sectionItem);
-
           if (sectionItem?.thisislayout) {
             const readyMergedLayoutConfig = sectionItem.children;
             const otherattr = jsonParse(readyMergedLayoutConfig["otherattr"]);
@@ -83,20 +88,57 @@ const SectionWidget: FC<PropsType> = ({
             );
           }
 
+          const widgetnemgoo = jsonParse(sectionItem.widgetnemgoo, true);
+
+          if (toBoolean(widgetnemgoo.isHide)) return null; //widgetNemgoo дотор isHide → true байвал уг Widget-ийг харуулахгүй
+          // console.log("🚀 ~  sectionItem", sectionItem);
+
           switch (sectionItem.metatypeid) {
-            case Constants.METATYPE_METAGROUP: //MetaGroup гэсэн төрөлтэй
+            case metaConfig.METATYPE_METAGROUP: //MetaGroup гэсэн төрөлтэй
               return <WidgetStandart key={index} listConfig={sectionItem} />;
-            case Constants.METATYPE_BUSINESSPROCESS: //BusinessProcess гэсэн төрөлтэй
-              return (
-                <div
-                  key={index}
-                  className={`w-full h-full ${
-                    widgetOtherAttr?.className || ""
-                  }`}
-                >
-                  <RenderWidgetProcess key={index} listConfig={sectionItem} />
-                </div>
-              );
+            case metaConfig.METATYPE_BUSINESSPROCESS: //BusinessProcess гэсэн төрөлтэй
+              switch (sectionItem.actiontype) {
+                // case "insert":
+                //   return null;
+                // case "create":
+                //   return null;
+                // case "exist":
+                //   return null;
+                // case "console":
+                //   return null;
+                // case "update":
+                //   return null;
+                case "get":
+                  return (
+                    <WidgetGetProcess key={index} listConfig={sectionItem} />
+                  );
+                // case "consolidate":
+                //   return null;
+                // case "view":
+                //   return (
+                //     <WidgetViewProcess key={index} listConfig={sectionItem} />
+                //   );
+                // case "list":
+                //   return null;
+                // case "delete":
+                //   return null;
+
+                default:
+                  return (
+                    <div
+                      key={index}
+                      className={`w-full h-full ${
+                        widgetnemgoo?.className || ""
+                      }`}
+                    >
+                      <RenderWidgetProcess
+                        key={index}
+                        listConfig={sectionItem}
+                      />
+                    </div>
+                  );
+              }
+
             default:
               //metatypeid байхгүй буюу Meta холбоогүй үед..
               return <WidgetNoMeta key={index} listConfig={sectionItem} />;

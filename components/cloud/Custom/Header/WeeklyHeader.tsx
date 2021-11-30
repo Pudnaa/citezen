@@ -20,7 +20,7 @@ export default function WeeklyHeader() {
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   return (

@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import JSONPretty from "react-json-pretty";
-import "react-json-pretty/themes/monikai.css";
+// import "react-json-pretty/themes/monikai.css";
 
 const GraphWithControls = () => {
   const {

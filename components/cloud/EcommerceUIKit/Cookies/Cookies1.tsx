@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
@@ -29,6 +29,7 @@ export default function Cookies1() {
     pathConfig,
     Title,
   } = useContext(WidgetWrapperContext);
+  const [menu, showMenu] = useState(false);
   if (isEmpty(datasrc)) return null;
   // console.log("Cookies1 config", config);
   // console.log("Cookies1 datasrc", datasrc);
@@ -38,14 +39,18 @@ export default function Cookies1() {
     <div>
       <div className="relative flex justify-center items-center ">
         <button
-          // onclick="showMenu(true)"
-          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none absolute z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
+          onClick={() => showMenu(true)}
+          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
         >
           Open
         </button>
         <div
           id="menu"
-          className=" w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0"
+          className={
+            menu
+              ? "w-full h-auto bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10"
+              : "w-full h-auto bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10 hidden"
+          }
         >
           <div className="2xl:container 2xl:mx-auto py-48 px-4 md:px-28 flex justify-center items-center  ">
             <div className="w-96 md:w-auto relative flex flex-col justify-center items-center bg-white py-16 px-4 md:px-24 xl:py-24 xl:px-36">
@@ -205,7 +210,7 @@ export default function Cookies1() {
                 Nope.. I am on a diet
               </a>
               <button
-                // onclick="showMenu(true)"
+                onClick={() => showMenu(false)}
                 className=" absolute top-8 right-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                 aria-label="close"
               >

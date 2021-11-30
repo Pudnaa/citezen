@@ -43,11 +43,11 @@ const AtomSlider5: FC<PropsType> = ({
     const { className, style, onClick } = props;
     return (
       <div
-        className={`${arrowClass} left-10`}
+        className={`${arrowClass} left-10 prev-button`}
         onClick={onClick}
         style={{ ...customArrowStyle }}
       >
-        <i className="far fa-chevron-left text-xl"></i>
+        <i className='far fa-chevron-left text-xl'></i>
       </div>
     );
   };
@@ -56,11 +56,11 @@ const AtomSlider5: FC<PropsType> = ({
     const { className, style, onClick } = props;
     return (
       <div
-        className={`${arrowClass} right-10`}
+        className={`${arrowClass} right-10 next-button`}
         onClick={onClick}
         style={{ ...customArrowStyle }}
       >
-        <i className="far fa-chevron-right text-xl"></i>
+        <i className='far fa-chevron-right text-xl'></i>
       </div>
     );
   };
@@ -70,18 +70,17 @@ const AtomSlider5: FC<PropsType> = ({
     infinite: false,
     centerMode: false,
     centerPadding: "2px",
+    speed: 500,
+    slidesToShow: 5,
     swipeToSlide: true,
-    variableWidth: true,
+    // variableWidth: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     arrows: true,
   };
 
   return (
-    <Slider
-      {...settings}
-      className={`relative w-screen h-auto px-32 ${customClassName}`}
-    >
+    <Slider {...settings} className={`relative  h-auto  ${customClassName}`}>
       {children}
     </Slider>
   );

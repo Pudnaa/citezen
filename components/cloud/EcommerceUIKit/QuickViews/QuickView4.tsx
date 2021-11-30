@@ -51,12 +51,86 @@ const QuickView4 = () => {
     setSize(value);
   };
 
+  const item = datasrc[0];
+  const list = renderPositionType(item, "position31", positionConfig);
+  const images = renderPositionType(list[0], "position31", positionConfig);
+  const colors = renderPositionType(list[1], "position31", positionConfig);
+  const sizes = renderPositionType(list[2], "position31", positionConfig);
+  const star = parseInt(renderPositionType(item, "position51", positionConfig));
+
+  const starContainer = (classname: any, num: number) => {
+    return (
+      <div className={`cursor-pointer flex space-x-2 ${classname}`}>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 1 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 2 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 3 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 4 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 5 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center">
         <button
           onClick={() => setMenu(true)}
-          className="hover:bg-black top-20 absolute z-0 w-40 py-4 bg-gray-800 text-white rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer"
+          className="hover:bg-black top-20 z-0 w-40 py-4 bg-gray-800 text-white rounded focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer"
         >
           Show Modal
         </button>
@@ -78,20 +152,18 @@ const QuickView4 = () => {
                         (slide ? "translate-x-0" : "-translate-x-full")
                       }
                     >
-                      <img
-                        className=" lg:block hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/wBknrzK/pexels-monstera-6311641-1-2.png"
-                        alt="A girl posing front"
-                      />
-                      <img
-                        className=" hidden md:block lg:hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/JqhZhhp/pexels-monstera-6311641-1-3.png"
-                        alt="A girl posing front"
-                      />
-                      <img
-                        className=" block md:hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/FXb2RfJ/pexels-dominika-roseclay-5462562-1.png"
-                        alt="A girl posing front"
+                      <AtomImage
+                        item={renderPositionType(
+                          images[0],
+                          "position2",
+                          positionConfig
+                        )}
+                        customClassName="w-auto object-center object-cover"
+                        alt={renderPositionType(
+                          item,
+                          "position1",
+                          positionConfig
+                        )}
                       />
                     </div>
                     <div
@@ -100,20 +172,18 @@ const QuickView4 = () => {
                         (slide ? "translate-x-full" : "translate-x-0")
                       }
                     >
-                      <img
-                        className=" lg:block hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/FwRy0WL/pexels-monstera-6311575-2-1.png"
-                        alt="A girl posing Back"
-                      />
-                      <img
-                        className=" hidden md:block lg:hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/k0bJRQk/pexels-monstera-6311575-3-1.png"
-                        alt="A girl posing Back"
-                      />
-                      <img
-                        className=" block md:hidden w-full h-full object-center object-cover"
-                        src="https://i.ibb.co/0f1gRTt/pexels-monstera-6311575-4.png"
-                        alt="A girl posing Back"
+                      <AtomImage
+                        item={renderPositionType(
+                          images[1],
+                          "position2",
+                          positionConfig
+                        )}
+                        customClassName="w-auto object-center object-cover"
+                        alt={renderPositionType(
+                          item,
+                          "position1",
+                          positionConfig
+                        )}
                       />
                     </div>
                   </div>
@@ -169,119 +239,24 @@ const QuickView4 = () => {
               </div>
             </div>
             <div className="mt-6 md:mt-8 lg:mt-0 flex justify-start items-start w-full flex-col space-y-6">
-              <h2 className=" lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 font-semibold">
-                Plain White Tshirt
-              </h2>
+              <AtomTitle
+                item={renderPositionType(item, "position1", positionConfig)}
+                customClassName="lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 font-semibold"
+              />
               <div className=" flex justify-start items-center mt-4">
-                <p className="font-normal text-lg leading-6 text-gray-600 mr-4">
-                  $190
-                </p>
-                <div className="cursor-pointer flex space-x-2 mr-3">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g>
-                      <path
-                        d="M16.0972 19.25C15.9506 19.2506 15.806 19.216 15.6755 19.1492L11.0005 16.7017L6.32551 19.1492C6.17371 19.229 6.00255 19.2647 5.8315 19.252C5.66045 19.2394 5.49637 19.1791 5.35791 19.0779C5.21945 18.9767 5.11216 18.8386 5.04824 18.6795C4.98433 18.5203 4.96635 18.3464 4.99635 18.1775L5.91301 13.0167L2.13635 9.35003C2.01852 9.23244 1.93493 9.08499 1.89456 8.9235C1.85418 8.762 1.85855 8.59256 1.90718 8.43336C1.96031 8.27044 2.05804 8.12568 2.18929 8.0155C2.32053 7.90532 2.48003 7.83414 2.64968 7.81003L7.87468 7.04919L10.1755 2.34669C10.2506 2.19171 10.3678 2.061 10.5137 1.96955C10.6596 1.8781 10.8283 1.82959 11.0005 1.82959C11.1727 1.82959 11.3414 1.8781 11.4873 1.96955C11.6333 2.061 11.7505 2.19171 11.8255 2.34669L14.1538 7.04003L19.3788 7.80086C19.5485 7.82497 19.708 7.89616 19.8392 8.00634C19.9705 8.11652 20.0682 8.26128 20.1213 8.42419C20.17 8.58339 20.1743 8.75283 20.134 8.91433C20.0936 9.07582 20.01 9.22327 19.8922 9.34086L16.1155 13.0075L17.0322 18.1684C17.0649 18.3402 17.0478 18.5178 16.9828 18.6803C16.9178 18.8427 16.8077 18.9832 16.6655 19.085C16.4995 19.2014 16.2997 19.2594 16.0972 19.25Z"
-                        fill="#1F2937"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0">
-                        <rect width="22" height="22" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g>
-                      <path
-                        d="M16.0972 19.25C15.9506 19.2506 15.806 19.216 15.6755 19.1492L11.0005 16.7017L6.32551 19.1492C6.17371 19.229 6.00255 19.2647 5.8315 19.252C5.66045 19.2394 5.49637 19.1791 5.35791 19.0779C5.21945 18.9767 5.11216 18.8386 5.04824 18.6795C4.98433 18.5203 4.96635 18.3464 4.99635 18.1775L5.91301 13.0167L2.13635 9.35003C2.01852 9.23244 1.93493 9.08499 1.89456 8.9235C1.85418 8.762 1.85855 8.59256 1.90718 8.43336C1.96031 8.27044 2.05804 8.12568 2.18929 8.0155C2.32053 7.90532 2.48003 7.83414 2.64968 7.81003L7.87468 7.04919L10.1755 2.34669C10.2506 2.19171 10.3678 2.061 10.5137 1.96955C10.6596 1.8781 10.8283 1.82959 11.0005 1.82959C11.1727 1.82959 11.3414 1.8781 11.4873 1.96955C11.6333 2.061 11.7505 2.19171 11.8255 2.34669L14.1538 7.04003L19.3788 7.80086C19.5485 7.82497 19.708 7.89616 19.8392 8.00634C19.9705 8.11652 20.0682 8.26128 20.1213 8.42419C20.17 8.58339 20.1743 8.75283 20.134 8.91433C20.0936 9.07582 20.01 9.22327 19.8922 9.34086L16.1155 13.0075L17.0322 18.1684C17.0649 18.3402 17.0478 18.5178 16.9828 18.6803C16.9178 18.8427 16.8077 18.9832 16.6655 19.085C16.4995 19.2014 16.2997 19.2594 16.0972 19.25Z"
-                        fill="#1F2937"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0">
-                        <rect width="22" height="22" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g>
-                      <path
-                        d="M16.0972 19.25C15.9506 19.2506 15.806 19.216 15.6755 19.1492L11.0005 16.7017L6.32551 19.1492C6.17371 19.229 6.00255 19.2647 5.8315 19.252C5.66045 19.2394 5.49637 19.1791 5.35791 19.0779C5.21945 18.9767 5.11216 18.8386 5.04824 18.6795C4.98433 18.5203 4.96635 18.3464 4.99635 18.1775L5.91301 13.0167L2.13635 9.35003C2.01852 9.23244 1.93493 9.08499 1.89456 8.9235C1.85418 8.762 1.85855 8.59256 1.90718 8.43336C1.96031 8.27044 2.05804 8.12568 2.18929 8.0155C2.32053 7.90532 2.48003 7.83414 2.64968 7.81003L7.87468 7.04919L10.1755 2.34669C10.2506 2.19171 10.3678 2.061 10.5137 1.96955C10.6596 1.8781 10.8283 1.82959 11.0005 1.82959C11.1727 1.82959 11.3414 1.8781 11.4873 1.96955C11.6333 2.061 11.7505 2.19171 11.8255 2.34669L14.1538 7.04003L19.3788 7.80086C19.5485 7.82497 19.708 7.89616 19.8392 8.00634C19.9705 8.11652 20.0682 8.26128 20.1213 8.42419C20.17 8.58339 20.1743 8.75283 20.134 8.91433C20.0936 9.07582 20.01 9.22327 19.8922 9.34086L16.1155 13.0075L17.0322 18.1684C17.0649 18.3402 17.0478 18.5178 16.9828 18.6803C16.9178 18.8427 16.8077 18.9832 16.6655 19.085C16.4995 19.2014 16.2997 19.2594 16.0972 19.25Z"
-                        fill="#1F2937"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0">
-                        <rect width="22" height="22" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g>
-                      <path
-                        d="M16.0972 19.25C15.9506 19.2506 15.806 19.216 15.6755 19.1492L11.0005 16.7017L6.32551 19.1492C6.17371 19.229 6.00255 19.2647 5.8315 19.252C5.66045 19.2394 5.49637 19.1791 5.35791 19.0779C5.21945 18.9767 5.11216 18.8386 5.04824 18.6795C4.98433 18.5203 4.96635 18.3464 4.99635 18.1775L5.91301 13.0167L2.13635 9.35003C2.01852 9.23244 1.93493 9.08499 1.89456 8.9235C1.85418 8.762 1.85855 8.59256 1.90718 8.43336C1.96031 8.27044 2.05804 8.12568 2.18929 8.0155C2.32053 7.90532 2.48003 7.83414 2.64968 7.81003L7.87468 7.04919L10.1755 2.34669C10.2506 2.19171 10.3678 2.061 10.5137 1.96955C10.6596 1.8781 10.8283 1.82959 11.0005 1.82959C11.1727 1.82959 11.3414 1.8781 11.4873 1.96955C11.6333 2.061 11.7505 2.19171 11.8255 2.34669L14.1538 7.04003L19.3788 7.80086C19.5485 7.82497 19.708 7.89616 19.8392 8.00634C19.9705 8.11652 20.0682 8.26128 20.1213 8.42419C20.17 8.58339 20.1743 8.75283 20.134 8.91433C20.0936 9.07582 20.01 9.22327 19.8922 9.34086L16.1155 13.0075L17.0322 18.1684C17.0649 18.3402 17.0478 18.5178 16.9828 18.6803C16.9178 18.8427 16.8077 18.9832 16.6655 19.085C16.4995 19.2014 16.2997 19.2594 16.0972 19.25Z"
-                        fill="#1F2937"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0">
-                        <rect width="22" height="22" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="23"
-                    height="22"
-                    viewBox="0 0 23 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0)">
-                      <path
-                        d="M2.76556 8.70194L2.76068 8.70696L2.75719 8.71056L2.75246 8.70902L1.90718 8.43336L2.75837 8.69339M2.76556 8.70194L2.75837 8.69339M2.76556 8.70194L2.77032 8.69704L2.76556 8.70194ZM2.76556 8.70194L2.75837 8.69339M15.1929 13.1714L16.1062 18.313L16.0985 18.313L11.4351 15.8716L11.0005 15.6441L10.5659 15.8716L5.92615 18.3006L6.83558 13.1806L6.92255 12.6909L6.56571 12.3444L2.84177 8.72894L8.0097 7.97641L8.49902 7.90516L8.71634 7.461L11.0006 2.79232L13.3145 7.45644L13.5328 7.89647L14.0188 7.96725L19.1868 8.71977L15.4628 12.3352L15.106 12.6817L15.1929 13.1714Z"
-                        stroke="#1F2937"
-                        strokeWidth="1.874"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0">
-                        <rect
-                          width="22"
-                          height="22"
-                          fill="white"
-                          transform="translate(0.363281)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <p className=" font-normal text-sm leading-3 hover:text-gray-700 duration-100 cursor-pointer text-gray-500 underline">
-                  18 reviews
-                </p>
+                <AtomCurrency
+                  type="mnt"
+                  item={renderPositionType(item, "position4", positionConfig)}
+                  customClassName=""
+                />
+                {starContainer("mt-4", star)}
+                <AtomText
+                  item={
+                    renderPositionType(item, "position47", positionConfig) +
+                    " reviews"
+                  }
+                  customClassName="font-normal text-sm leading-3 hover:text-gray-700 duration-100 cursor-pointer text-gray-500 underline"
+                />
               </div>
               <div className="  mt-10">
                 <p
@@ -291,93 +266,86 @@ const QuickView4 = () => {
                   {color}
                 </p>
                 <div className=" flex space-x-2 mt-4">
-                  <div
-                    tabIndex={0}
-                    onClick={() => getColor("White")}
-                    className="focus:outline-none ring-1 ring-offset-2 ring-gray-800 rounded-full cursor-pointer w-8 h-8 bg-gray-50"
-                  ></div>
-                  <div
-                    tabIndex={1}
-                    onClick={() => getColor("Red")}
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-800 rounded-full cursor-pointer w-8 h-8 bg-red-700"
-                  ></div>
-                  <div
-                    tabIndex={2}
-                    onClick={() => getColor("Yellow")}
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-800 rounded-full cursor-pointer w-8 h-8 bg-yellow-300"
-                  ></div>
+                  {colors &&
+                    colors.map((item1: any, index1: number) => {
+                      return (
+                        <div
+                          key={index1}
+                          tabIndex={index1}
+                          onClick={() =>
+                            getColor(
+                              renderPositionType(
+                                item1,
+                                "position1",
+                                positionConfig
+                              ).substr(
+                                0,
+                                renderPositionType(
+                                  item1,
+                                  "position1",
+                                  positionConfig
+                                ).indexOf("-")
+                              )
+                            )
+                          }
+                          className={`focus:outline-none ring-1 ring-offset-2 ring-gray-800 rounded-full cursor-pointer w-8 h-8 bg-${renderPositionType(
+                            item1,
+                            "position1",
+                            positionConfig
+                          )}`}
+                        ></div>
+                      );
+                    })}
                 </div>
               </div>
               <div className=" mt-10 w-full">
                 <div className=" flex justify-between">
                   <p className="font-semibold text-base leading-4 text-gray-800">
-                    Size
+                    Хэмжээ
                   </p>
                   <p className="cursor-pointer hover:text-gray-800 font-medium text-base leading-4 text-gray-500 underline">
                     Size guide
                   </p>
                 </div>
                 <div className=" grid grid-cols-3 gap-10 sm:flex sm:flex-wrap md:gap-4 sm:justify-between lg:justify-start mt-4">
-                  <div
-                    onClick={() => getSize("XSS")}
-                    id="XSS"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
-                      (size === "XSS" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    XXS
-                  </div>
-                  <div
-                    onClick={() => getSize("XS")}
-                    id="XS"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border  py-3 w-20 text-center cursor-pointer " +
-                      (size === "XS" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    XS
-                  </div>
-                  <div
-                    onClick={() => getSize("S")}
-                    id="S"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
-                      (size === "S" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    S
-                  </div>
-                  <div
-                    onClick={() => getSize("M")}
-                    id="M"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
-                      (size === "M" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    M
-                  </div>
-                  <div
-                    onClick={() => getSize("L")}
-                    id="L"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
-                      (size === "L" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    L
-                  </div>
-                  <div
-                    onClick={() => getSize("XL")}
-                    id="XL"
-                    className={
-                      "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
-                      (size === "XL" ? "border-gray-500" : "border-gray-200")
-                    }
-                  >
-                    XL
-                  </div>
+                  {sizes &&
+                    sizes.map((item1: any, index1: number) => {
+                      return (
+                        <div
+                          onClick={() =>
+                            getSize(
+                              renderPositionType(
+                                item1,
+                                "position1",
+                                positionConfig
+                              )
+                            )
+                          }
+                          id={renderPositionType(
+                            item,
+                            "position1",
+                            positionConfig
+                          )}
+                          className={
+                            "font-medium text-base leading-4 text-gray-800 border py-3 w-20 text-center cursor-pointer " +
+                            (size ===
+                            renderPositionType(
+                              item1,
+                              "position1",
+                              positionConfig
+                            )
+                              ? "border-gray-500"
+                              : "border-gray-200")
+                          }
+                        >
+                          {renderPositionType(
+                            item1,
+                            "position1",
+                            positionConfig
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
               <p className=" mt-4 font-normal text-sm leading-3 text-gray-500 hover:text-gray-600 duration-100 underline cursor-pointer">
@@ -386,10 +354,10 @@ const QuickView4 = () => {
 
               <div className="flex flex-col w-full space-y-4 mt-10">
                 <button className="border border-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 md:w-96 w-full hover:bg-black text-base font-medium leading-4 bg-gray-800 py-4 text-white">
-                  Add to Bag
+                  Сагсруу хийх
                 </button>
                 <button className="border border-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 md:w-96 w-full hover:bg-gray-300 text-base font-medium leading-4 text-gray-800 py-4 bg-white">
-                  Add to Wishlist
+                  Таалагдсан
                 </button>
               </div>
             </div>

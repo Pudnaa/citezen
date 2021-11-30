@@ -18,6 +18,7 @@ import ChangeEventInput from "util/ChangeEventInput";
 type PropsContextType = {
   formDataInitData?: any;
   setFormDataData?: any;
+  setFormExternalData?: any;
   processConfig?: any;
   handleChangeContext?: any;
   handleClickContext?: any;
@@ -26,6 +27,7 @@ type PropsContextType = {
   lookUpData?: any;
   handleLookUpData?: any;
   processExpression?: any;
+  handleChangeContextTest?: any;
 };
 
 const FormMetaContext = createContext<PropsContextType>({});
@@ -47,23 +49,40 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   const [processExpression, setProcessExpression] = useState(formExpression);
   const [validData, setValidData] = useState({});
   const [lookUpData, setLookUpData] = useState({});
+  const [checkContext, setCheckContext] = useState(false);
+
+  // console.log(
+  //   `processExpression`,
+  //   processExpression.seelistfunction.toString()
+  // );
+
+  useEffect(() => {
+    if (checkContext) setFormDataInitData(checkContext);
+  }, [checkContext]);
 
   /**
    * Expression events
    * @param payload
    */
+
   const handleChangeContext = (payload: any) => {
     const { name, value, rowIndex } = payload;
-    let formDataInitDataClone = { ...formDataInitData },
-      processExpressionClone = { ...processExpression };
+    let formDataInitDataClone = { ...formDataInitData };
+    let processExpressionClone = { ...processExpression };
 
     if (name.split(".").length == 2) {
       let nameArr = name.split(".");
 
       if (processConfig["__groupPath"][nameArr[0]][0]["recordtype"] === "row") {
-        formDataInitDataClone[nameArr[0]][nameArr[1]] = value;
+        formDataInitDataClone[nameArr[0]] = {
+          ...formDataInitDataClone[nameArr[0]],
+          [nameArr[1]]: value,
+        };
       } else {
-        formDataInitDataClone[nameArr[0]][rowIndex][nameArr[1]] = value;
+        formDataInitDataClone[nameArr[0]][rowIndex] = {
+          ...formDataInitDataClone[nameArr[0]][rowIndex],
+          [nameArr[1]]: value,
+        };
       }
     } else {
       formDataInitDataClone[name] = value;
@@ -76,7 +95,8 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       formDataInitDataClone,
       processConfig,
       processExpressionClone,
-      setProcessExpression
+      setProcessExpression,
+      setFormExternalData,
     );
 
     setFormDataInitData(formDataInitDataClone);
@@ -97,6 +117,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     let formDataInitDataClone = { ...formDataInitData },
       processExpressionClone = { ...processExpression };
 
+    // console.log(setFormDataInitData.toString());
     ChangeEventInput(
       name,
       {},
@@ -104,7 +125,8 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       formDataInitDataClone,
       processConfig,
       processExpressionClone,
-      setProcessExpression
+      setProcessExpression,
+      setFormExternalData,
     );
 
     setFormDataInitData(formDataInitDataClone);
@@ -134,11 +156,15 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     }
   };
 
+  const handleChangeContextTest = async (e: any) => {
+    e.preventDefault();
+    console.log(`formSubmitData`, e);
+  };
   const handleLookUpData = async (payload: any) => {
     let data = await fetchJson(
       `/api/get-data?metaid=${
         payload.lookupmetadataid
-      }&pagingwithoutaggregate=1&criteria=${JSON.stringify(payload.criteria)}`
+      }&pagingwithoutaggregate=1&criteria=${JSON.stringify(payload.criteria)}`,
     );
     delete data.aggregatecolumns;
     delete data.paging;
@@ -154,9 +180,14 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     setFormDataInitData(payload);
   };
 
+  const setFormExternalData = async (payload: any) => {
+    setCheckContext(payload);
+  };
+
   const contextValues = {
     formDataInitData,
     setFormDataData,
+    setFormExternalData,
     processConfig,
     handleChangeContext,
     handleClickContext,
@@ -165,6 +196,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     lookUpData,
     handleLookUpData,
     processExpression,
+    handleChangeContextTest,
   };
 
   return (

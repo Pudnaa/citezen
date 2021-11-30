@@ -27,17 +27,17 @@ const C8ColListingCardWithActionButton: FC<PropsType> = ({
     >
       <AtomTitle
         item={otherattr.name || "Title "}
-        link=""
+        link=''
         customStyle={otherattr.style}
         customClassName={otherattr.className}
         truncateRow={35}
       />
-      <div className="flex flex-row flex-nowrap items-stretch mt-1">
+      <div className='flex flex-row flex-nowrap items-stretch mt-1'>
         {datasrc &&
           datasrc.map((item: any, index: any) => {
             return otherattr.url && otherattr.url.type == "link" ? (
               <Link key={index} href={otherattr.url.action}>
-                <a className="text-black">
+                <a className='text-black'>
                   <ItemBlock
                     key={index}
                     item={item}
@@ -70,14 +70,14 @@ const ItemBlock: FC<PropsTypeItem> = ({ item, positionConfig, otherattr }) => {
   const link = otherattr?.url?.action || "";
 
   return (
-    <div className="bg-white rounded-lg px-1 py-5 mr-3 w-24 h-auto flex flex-col items-center justify-baseline text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-sso hover:to-sso-gradientfinish">
-      <div className="mb-3">
+    <div className='bg-white rounded-lg px-1 py-5 mr-3 w-24 h-auto flex flex-col items-center justify-baseline text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-citizen hover:to-citizen-gradientfinish'>
+      <div className='mb-3'>
         <MainImage
           item={renderPositionType(item, "position2", positionConfig)}
           otherAttr={jsonParse(positionConfig["position2"]["otherattr"])}
         />
       </div>
-      <div className="font-semibold text-center">
+      <div className='font-semibold text-center'>
         {renderPositionType(item, "position1", positionConfig)}
       </div>
     </div>

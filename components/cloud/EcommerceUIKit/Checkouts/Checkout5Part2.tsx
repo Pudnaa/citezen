@@ -43,7 +43,7 @@ export default function Checkout5Part2() {
     setChangeText1(e);
     setDropdown1(false);
   };
-
+  const item = datasrc[0];
   return (
     <div className="overflow-y-hidden">
       <div className="flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44 ">
@@ -305,15 +305,17 @@ export default function Checkout5Part2() {
             <div className="flex mt-7 flex-col items-end w-full space-y-6">
               <div className="flex justify-between w-full items-center">
                 <p className="text-lg leading-4 text-gray-600">Total items</p>
-                <p className="text-lg font-semibold leading-4 text-gray-600">
-                  20
-                </p>
+                <AtomText
+                  item={renderPositionType(item, "position4", positionConfig)}
+                  customClassName="text-lg font-semibold leading-4 text-gray-600"
+                />
               </div>
               <div className="flex justify-between w-full items-center">
                 <p className="text-lg leading-4 text-gray-600">Total Charges</p>
-                <p className="text-lg font-semibold leading-4 text-gray-600">
-                  $2790
-                </p>
+                <AtomText
+                  item={renderPositionType(item, "position3", positionConfig)}
+                  customClassName="text-lg font-semibold leading-4 text-gray-600"
+                />
               </div>
               <div className="flex justify-between w-full items-center">
                 <p className="text-lg leading-4 text-gray-600">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "antd";
 
-export default function My404() {
+export default function notfound() {
   const router = useRouter();
 
   return (

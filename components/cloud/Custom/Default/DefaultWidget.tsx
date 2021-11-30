@@ -1,19 +1,22 @@
-import { useState,FC } from "react";
+import { useState, FC } from "react";
 import { Modal } from "antd";
-
 
 type PropsType = {
   listConfig: any;
   config: any;
-  otherattr: any;
+  widgetnemgoo: any;
   datasrc: any;
 };
 
-const DefaultWidget: FC<PropsType> = ({listConfig, config, otherattr,datasrc}) => {
-  
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    return (
-      <div className="bg-gray-50 w-full h-auto block border-2 border-gray-300 text-center rounded-xl p-5 m-4 relative overflow-y-auto">
+const DefaultWidget: FC<PropsType> = ({
+  listConfig,
+  config,
+  widgetnemgoo,
+  datasrc,
+}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  return (
+    <div className="bg-gray-50 w-full h-auto block border-2 border-gray-300 text-center rounded-xl p-5 m-4 relative overflow-y-auto">
       <div>
         <span className="text-xs mr-2">componentpath:</span>
         {listConfig.componentpath}
@@ -31,29 +34,29 @@ const DefaultWidget: FC<PropsType> = ({listConfig, config, otherattr,datasrc}) =
         }}
       >
         listConfig
-        <Modal
-          title={listConfig.widgetcode}
-          visible={isModalVisible}
-          onOk={() => {
-            setIsModalVisible(false);
-          }}
-          onCancel={() => {
-            setIsModalVisible(false);
-          }}
-          width={700}
-          footer={null}
-        >
-          <div className="grid grid-cols-2">
-            <div className="overflow-y-auto h-96">
-              <pre>{JSON.stringify(listConfig, null, 2)}</pre>
-            </div>
-            <div className="overflow-y-auto h-96">
-              <pre>{JSON.stringify(datasrc, null, 2)}</pre>
-            </div>
-          </div>
-        </Modal>
       </div>
+      <Modal
+        title={listConfig.widgetcode}
+        visible={isModalVisible}
+        onOk={() => {
+          setIsModalVisible(false);
+        }}
+        onCancel={() => {
+          setIsModalVisible(false);
+        }}
+        width={700}
+        footer={null}
+      >
+        <div className="grid grid-cols-2">
+          <div className="overflow-y-auto h-96">
+            <pre>{JSON.stringify(listConfig, null, 2)}</pre>
+          </div>
+          <div className="overflow-y-auto h-96">
+            <pre>{JSON.stringify(datasrc, null, 2)}</pre>
+          </div>
+        </div>
+      </Modal>
     </div>
-    );
-}
-export default DefaultWidget
+  );
+};
+export default DefaultWidget;

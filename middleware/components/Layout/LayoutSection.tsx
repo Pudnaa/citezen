@@ -1,7 +1,7 @@
 import { FC } from "react";
-import LayoutWrapper from "./LayoutWrapper";
-import SectionWidget from "./SectionWidget";
 import _ from "lodash";
+import { overrideTailwindClasses } from "tailwind-override";
+import SectionWidget from "./SectionWidget";
 
 type PropsType = {
   mergedLayout: [];
@@ -14,20 +14,29 @@ type PropsType = {
 const LayoutSection: FC<PropsType> = ({
   mergedLayout = [],
   meta_bp_layout_section,
-  customClassName,
+  customClassName = "",
   customStyle,
   processSection,
 }) => {
-  // console.log("LayoutSection layout", layout);
+  // console.log("LayoutSection mergedLayout", mergedLayout);
   // console.log("LayoutSection meta_bp_layout_section", meta_bp_layout_section);
   // console.log("LayoutSection customClassName", customClassName);
   // console.log("LayoutSection customStyle", customStyle);
 
   return (
     <section
-      className={`mb-6 ${
-        customClassName || "grid grid-cols-12 w-full h-full gap-x-6"
-      }`}
+      // className={`${!customClassName.includes("mb-") ? "mb-6" : ""} ${
+      //   _.isEmpty(customClassName)
+      //     ? "grid grid-cols-12 w-full h-full gap-x-6"
+      //     : customClassName
+      // }`}
+      className={overrideTailwindClasses(
+        `mb-6 ${
+          _.isEmpty(customClassName)
+            ? "grid grid-cols-12 w-full h-full gap-x-6"
+            : customClassName
+        }`
+      )}
       style={{ ...customStyle }}
     >
       {mergedLayout.map((item: any, index: number) => {
@@ -35,8 +44,6 @@ const LayoutSection: FC<PropsType> = ({
         const sectionList = _.filter(meta_bp_layout_section, {
           code: sectionCode,
         });
-        // console.log("BBBBBBB", item);
-        // console.log("DDDDDD", sectionList);
 
         if (item.children) {
           // console.log("CCCCCCC", sectionList);

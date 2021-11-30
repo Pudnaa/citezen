@@ -35,20 +35,20 @@ const Checkouts4 = () => {
 
   if (isEmpty(datasrc)) return null;
   // console.log("Checkouts4 config", config);
-  // console.log("Checkouts4 datasrc", datasrc);
+  console.log("Checkouts4 datasrc", datasrc);
   // console.log("Checkouts4 otherattr", otherattr);
-  // console.log("Checkouts4 positionConfig", positionConfig);
+  console.log("Checkouts4 positionConfig", positionConfig);
 
   const changeText = (e: any) => {
     setMenu(false);
     setCountry(e.target.textContent);
   };
   return (
-    <div className="overflow-y-hidden">
-      <div className="hidden md:block absolute w-full h-full bg-black bg-opacity-60"></div>
-      <div className="relative left-0 right-0 lg:h-auto h-screen flex md:justify-end lg:flex-row flex-col md:w-11/12 lg:w-full md:ml-auto">
+    <div className="">
+      <div className="hidden absolute w-full h-full bg-black bg-opacity-60"></div>
+      <div className="relative left-0 right-0 lg:h-auto h-auto flex md:justify-end lg:flex-row flex-col md:w-11/12 lg:w-full md:ml-auto">
         <div className="lg:w-7/12 lg:h-full md:h-auto h-auto">
-          <div className="bg-white h-auto lg:h-screen lg:px-10 p-6 lg:py-12">
+          <div className="bg-white h-auto  lg:px-10 p-6 lg:py-12">
             <p>
               <svg
                 className="inline"
@@ -244,28 +244,36 @@ const Checkouts4 = () => {
                 </h5>
               </div>
 
-              <div className="mt-7 flex flex-1 text-gray-800 text-lg font-normal">
-                <p className="leading-4">North wolf bag</p>
-                <p className="flex-auto leading-4 text-right pr-4 md:pr-5 lg:pr-4">
-                  1x
-                </p>
-                <p className="leading-4">$9,000</p>
-              </div>
-
-              <div className="mt-5 flex flex-1 text-gray-800 text-lg font-normal">
-                <p className="leading-4">LW Sneakers</p>
-                <p className="flex-auto leading-4 text-right pr-7 md:pr-9 lg:pr-7">
-                  1x
-                </p>
-                <p className="leading-4">$740</p>
-              </div>
-
-              <div className="mt-5 flex flex-1 text-gray-800 text-lg font-normal">
-                <p className="leading-4">Luxe card holder</p>
-                <p className="flex-auto leading-4 text-right pr-7 md:pr-9 lg:pr-7">
-                  1x
-                </p>
-                <p className="leading-4">$500</p>
+              <div className="mt-2">
+                {datasrc &&
+                  datasrc.map((item: any, index: number) => {
+                    return (
+                      <div className="mt-5 flex flex-1 text-gray-800 text-lg font-normal">
+                        <AtomTitle
+                          item={renderPositionType(
+                            item,
+                            "position1",
+                            positionConfig
+                          )}
+                          customClassName="leading-4"
+                        />
+                        <p className="flex-auto leading-4 text-right pr-4 md:pr-5 lg:pr-4">
+                          1x
+                        </p>
+                        <AtomText
+                          item={
+                            "$" +
+                            renderPositionType(
+                              item,
+                              "position4",
+                              positionConfig
+                            )
+                          }
+                          customClassName="leading-4"
+                        />
+                      </div>
+                    );
+                  })}
               </div>
             </div>
             <div className="bg-gray-100 w-full text-lg font-medium text-gray-800 mt-20 md:mt-0">

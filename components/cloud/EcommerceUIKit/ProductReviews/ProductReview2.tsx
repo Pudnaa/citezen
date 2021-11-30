@@ -19,263 +19,303 @@ import {
 } from "@components/common/Atom";
 
 const ProductReview2 = () => {
-    const {
-        config,
-        datasrc,
-        otherattr,
-        positionConfig,
-        metaConfig,
-        gridJsonConfig,
-        pathConfig,
-        Title,
-      } = useContext(WidgetWrapperContext);
-    const sorts = ["Name", "Date"];
-    const [menu, setMenu] = useState(false);
-    const [sort, setSort] = useState("Sort by");
+  const {
+    config,
+    datasrc,
+    otherattr,
+    positionConfig,
+    metaConfig,
+    gridJsonConfig,
+    pathConfig,
+    Title,
+  } = useContext(WidgetWrapperContext);
+  const sorts = ["Name", "Date"];
+  const [menu, setMenu] = useState(false);
+  const [sort, setSort] = useState("Sort by");
 
-    if (isEmpty(datasrc)) return null;
-    // console.log("ProductReview2 config", config);
-    // console.log("ProductReview2 datasrc", datasrc);
-    // console.log("ProductReview2 otherattr", otherattr);
-    // console.log("ProductReview2 positionConfig", positionConfig);
+  if (isEmpty(datasrc)) return null;
+  // console.log("ProductReview2 config", config);
+  // console.log("ProductReview2 datasrc", datasrc);
+  // console.log("ProductReview2 otherattr", otherattr);
+  // console.log("ProductReview2 positionConfig", positionConfig);
 
-    const changeSort = (e:any) => {
-        setMenu(false);
-        setSort(e.target.textContent);
-    };
+  const changeSort = (e: any) => {
+    setMenu(false);
+    setSort(e.target.textContent);
+  };
 
+  const starContainer = (classname: any, num: number) => {
     return (
-        <div className="2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6  px-4 py-9">
-            <div className=" text-center">
-                <h1 className=" text-gray-800 font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7">Reviews</h1>
-                <p className=" text-gray-600 text-base leading-4 mt-2">
-                    Join a conversation{" "}
-                    <a href="/" className="focus:outline-none focus:text-black focus:underline hover:underline text-gray-800 cursor-pointer">
-                        Write a review
-                    </a>
-                </p>
-                <div className=" flex space-x-4 justify-center items-center lg:mt-5 mt-4">
-                    <p className=" text-base leading-7 text-gray-600 font-normal">Overall rating</p>
-                    <div className=" flex space-x-2 justify-center items-center">
-                        <svg className="cursor-pointer" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.0962 18.25C14.9496 18.2506 14.805 18.216 14.6745 18.1492L9.99954 15.7017L5.32454 18.1492C5.17273 18.229 5.00158 18.2647 4.83052 18.252C4.65947 18.2394 4.49539 18.1791 4.35693 18.0779C4.21847 17.9767 4.11118 17.8386 4.04727 17.6795C3.98335 17.5203 3.96537 17.3464 3.99537 17.1775L4.91204 12.0167L1.13537 8.35003C1.01754 8.23244 0.933954 8.08499 0.89358 7.9235C0.853207 7.762 0.857571 7.59256 0.906205 7.43336C0.959335 7.27044 1.05707 7.12568 1.18831 7.0155C1.31955 6.90532 1.47905 6.83414 1.6487 6.81003L6.8737 6.04919L9.17454 1.34669C9.2496 1.19171 9.3668 1.061 9.51271 0.96955C9.65862 0.878095 9.82734 0.82959 9.99954 0.82959C10.1717 0.82959 10.3405 0.878095 10.4864 0.96955C10.6323 1.061 10.7495 1.19171 10.8245 1.34669L13.1529 6.04003L18.3779 6.80086C18.5475 6.82497 18.707 6.89616 18.8383 7.00634C18.9695 7.11652 19.0672 7.26128 19.1204 7.42419C19.169 7.58339 19.1734 7.75283 19.133 7.91433C19.0926 8.07582 19.009 8.22327 18.8912 8.34086L15.1145 12.0075L16.0312 17.1684C16.0639 17.3402 16.0468 17.5178 15.9818 17.6803C15.9169 17.8427 15.8068 17.9832 15.6645 18.085C15.4985 18.2014 15.2987 18.2594 15.0962 18.25Z"
-                                fill="#1F2937"
-                            />
-                        </svg>
-                        <svg className="cursor-pointer" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.0962 18.25C14.9496 18.2506 14.805 18.216 14.6745 18.1492L9.99954 15.7017L5.32454 18.1492C5.17273 18.229 5.00158 18.2647 4.83052 18.252C4.65947 18.2394 4.49539 18.1791 4.35693 18.0779C4.21847 17.9767 4.11118 17.8386 4.04727 17.6795C3.98335 17.5203 3.96537 17.3464 3.99537 17.1775L4.91204 12.0167L1.13537 8.35003C1.01754 8.23244 0.933954 8.08499 0.89358 7.9235C0.853207 7.762 0.857571 7.59256 0.906205 7.43336C0.959335 7.27044 1.05707 7.12568 1.18831 7.0155C1.31955 6.90532 1.47905 6.83414 1.6487 6.81003L6.8737 6.04919L9.17454 1.34669C9.2496 1.19171 9.3668 1.061 9.51271 0.96955C9.65862 0.878095 9.82734 0.82959 9.99954 0.82959C10.1717 0.82959 10.3405 0.878095 10.4864 0.96955C10.6323 1.061 10.7495 1.19171 10.8245 1.34669L13.1529 6.04003L18.3779 6.80086C18.5475 6.82497 18.707 6.89616 18.8383 7.00634C18.9695 7.11652 19.0672 7.26128 19.1204 7.42419C19.169 7.58339 19.1734 7.75283 19.133 7.91433C19.0926 8.07582 19.009 8.22327 18.8912 8.34086L15.1145 12.0075L16.0312 17.1684C16.0639 17.3402 16.0468 17.5178 15.9818 17.6803C15.9169 17.8427 15.8068 17.9832 15.6645 18.085C15.4985 18.2014 15.2987 18.2594 15.0962 18.25Z"
-                                fill="#1F2937"
-                            />
-                        </svg>
-                        <svg className="cursor-pointer" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.0962 18.25C14.9496 18.2506 14.805 18.216 14.6745 18.1492L9.99954 15.7017L5.32454 18.1492C5.17273 18.229 5.00158 18.2647 4.83052 18.252C4.65947 18.2394 4.49539 18.1791 4.35693 18.0779C4.21847 17.9767 4.11118 17.8386 4.04727 17.6795C3.98335 17.5203 3.96537 17.3464 3.99537 17.1775L4.91204 12.0167L1.13537 8.35003C1.01754 8.23244 0.933954 8.08499 0.89358 7.9235C0.853207 7.762 0.857571 7.59256 0.906205 7.43336C0.959335 7.27044 1.05707 7.12568 1.18831 7.0155C1.31955 6.90532 1.47905 6.83414 1.6487 6.81003L6.8737 6.04919L9.17454 1.34669C9.2496 1.19171 9.3668 1.061 9.51271 0.96955C9.65862 0.878095 9.82734 0.82959 9.99954 0.82959C10.1717 0.82959 10.3405 0.878095 10.4864 0.96955C10.6323 1.061 10.7495 1.19171 10.8245 1.34669L13.1529 6.04003L18.3779 6.80086C18.5475 6.82497 18.707 6.89616 18.8383 7.00634C18.9695 7.11652 19.0672 7.26128 19.1204 7.42419C19.169 7.58339 19.1734 7.75283 19.133 7.91433C19.0926 8.07582 19.009 8.22327 18.8912 8.34086L15.1145 12.0075L16.0312 17.1684C16.0639 17.3402 16.0468 17.5178 15.9818 17.6803C15.9169 17.8427 15.8068 17.9832 15.6645 18.085C15.4985 18.2014 15.2987 18.2594 15.0962 18.25Z"
-                                fill="#1F2937"
-                            />
-                        </svg>
-                        <svg className="cursor-pointer" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.0962 18.25C14.9496 18.2506 14.805 18.216 14.6745 18.1492L9.99954 15.7017L5.32454 18.1492C5.17273 18.229 5.00158 18.2647 4.83052 18.252C4.65947 18.2394 4.49539 18.1791 4.35693 18.0779C4.21847 17.9767 4.11118 17.8386 4.04727 17.6795C3.98335 17.5203 3.96537 17.3464 3.99537 17.1775L4.91204 12.0167L1.13537 8.35003C1.01754 8.23244 0.933954 8.08499 0.89358 7.9235C0.853207 7.762 0.857571 7.59256 0.906205 7.43336C0.959335 7.27044 1.05707 7.12568 1.18831 7.0155C1.31955 6.90532 1.47905 6.83414 1.6487 6.81003L6.8737 6.04919L9.17454 1.34669C9.2496 1.19171 9.3668 1.061 9.51271 0.96955C9.65862 0.878095 9.82734 0.82959 9.99954 0.82959C10.1717 0.82959 10.3405 0.878095 10.4864 0.96955C10.6323 1.061 10.7495 1.19171 10.8245 1.34669L13.1529 6.04003L18.3779 6.80086C18.5475 6.82497 18.707 6.89616 18.8383 7.00634C18.9695 7.11652 19.0672 7.26128 19.1204 7.42419C19.169 7.58339 19.1734 7.75283 19.133 7.91433C19.0926 8.07582 19.009 8.22327 18.8912 8.34086L15.1145 12.0075L16.0312 17.1684C16.0639 17.3402 16.0468 17.5178 15.9818 17.6803C15.9169 17.8427 15.8068 17.9832 15.6645 18.085C15.4985 18.2014 15.2987 18.2594 15.0962 18.25Z"
-                                fill="#1F2937"
-                            />
-                        </svg>
-                        <svg className="cursor-pointer" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14.192 12.1714L15.1052 17.313L15.0976 17.313L10.4341 14.8716L9.99954 14.6441L9.56494 14.8716L4.92517 17.3006L5.8346 12.1806L5.92158 11.6909L5.56473 11.3444L1.8408 7.72894L7.00872 6.97641L7.49804 6.90516L7.71536 6.461L9.99964 1.79232L12.3135 6.45644L12.5318 6.89647L13.0179 6.96725L18.1858 7.71977L14.4618 11.3352L14.105 11.6817L14.192 12.1714Z" stroke="#1F2937" strokeWidth="1.874" />
-                        </svg>
-                        <p className=" text-base leading-7 text-gray-600 font-normal">4.5/5</p>
-                    </div>
-                </div>
-            </div>
-            <div className=" flex justify-between lg:mt-12 md:mt-10 mt-12 mb-14">
-                <div className=" flex justify-between items-center border border-gray-400 p-2 w-28 md:w-32 h-10">
-                    <div className="relative w-full">
-                        <p className=" px-2 text-left leading-4 text-base text-gray-600 py-4 w-full">{sort}</p>
-                        <button onClick={() => setMenu(!menu)} className="focus:outline-none focus:ring-2  focus:ring-gray-500 rounded-full cursor-pointer absolute top-4 right-0">
-                            <svg className={"transform " + (menu ? "rotate-180" : "rotate-0")} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2.6665 6.00016L7.99984 11.3335L13.3332 6.00016" stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </button>
-                        <div className={"shadow absolute z-10 bg-white top-8 w-full mt-3 " + (menu ? "block" : "hidden")}>
-                            {/* <div className="flex flex-col w-full">
-                                {sorts.map((sort) => (
-                                    <p key={sort} tabIndex="0" onClick={changeSort} className="focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left  text-base text-gray-600 py-2 w-full">
-                                        {sort}
-                                    </p>
-                                ))}
-                            </div> */}
-                            {/* <div className="flex flex-col w-full">
-								<p
-									tabIndex="0"
-									onClick={changeSort}
-									className="focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left  text-base text-gray-600 py-2 w-full"
-								>
-									Name
-								</p>
-								<p
-									tabIndex="0"
-									onClick={changeSort}
-									className="focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left  text-base text-gray-600 py-2 w-full"
-								>
-									Date
-								</p>
-							</div> */}
-                        </div>
-                    </div>
-                </div>
-                <div className=" ml-2 sm:ml-0 md:py-2 md:px-3 p-2 border border-gray-400 flex justify-start items-center md:justify-center md:items-center md:w-60 lg:w-64 md:h-auto w-10 h-10 space-x-3">
-                    <svg className="cursor-pointer mt-1" width="21" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.4359 10.6826L7.88535 7.13203C8.43633 6.41973 8.73438 5.54883 8.73438 4.63281C8.73438 3.53633 8.30645 2.5082 7.53262 1.73301C6.75879 0.957812 5.72793 0.53125 4.63281 0.53125C3.5377 0.53125 2.50684 0.95918 1.73301 1.73301C0.957812 2.50684 0.53125 3.53633 0.53125 4.63281C0.53125 5.72793 0.95918 6.75879 1.73301 7.53262C2.50684 8.30781 3.53633 8.73438 4.63281 8.73438C5.54883 8.73438 6.41836 8.43633 7.13066 7.88672L10.6813 11.4359C10.6917 11.4464 10.704 11.4546 10.7176 11.4603C10.7312 11.4659 10.7458 11.4688 10.7605 11.4688C10.7753 11.4688 10.7899 11.4659 10.8035 11.4603C10.8171 11.4546 10.8294 11.4464 10.8398 11.4359L11.4359 10.8412C11.4464 10.8308 11.4546 10.8184 11.4603 10.8048C11.4659 10.7912 11.4688 10.7766 11.4688 10.7619C11.4688 10.7472 11.4659 10.7326 11.4603 10.719C11.4546 10.7054 11.4464 10.693 11.4359 10.6826ZM6.79844 6.79844C6.21875 7.37676 5.45039 7.69531 4.63281 7.69531C3.81523 7.69531 3.04688 7.37676 2.46719 6.79844C1.88887 6.21875 1.57031 5.45039 1.57031 4.63281C1.57031 3.81523 1.88887 3.04551 2.46719 2.46719C3.04688 1.88887 3.81523 1.57031 4.63281 1.57031C5.45039 1.57031 6.22012 1.8875 6.79844 2.46719C7.37676 3.04688 7.69531 3.81523 7.69531 4.63281C7.69531 5.45039 7.37676 6.22012 6.79844 6.79844Z"
-                            fill="#4B5563"
-                        />
-                    </svg>
-                    <input className="focus:outline-none text-gray-600 text-base leading-4 hidden w-full md:block md:w-full" type="text" placeholder="Enter Phrase or keywords" />
-                </div>
-            </div>
+      <div className={`cursor-pointer flex space-x-2 ${classname}`}>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 1 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 2 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 3 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 4 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+        <svg
+          width="20"
+          height="19"
+          viewBox="0 0 20 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.0972 18.2495C14.9506 18.2501 14.806 18.2156 14.6755 18.1487L10.0005 15.7012L5.32551 18.1487C5.17371 18.2285 5.00255 18.2642 4.8315 18.2516C4.66045 18.239 4.49637 18.1786 4.35791 18.0774C4.21945 17.9762 4.11216 17.8381 4.04824 17.679C3.98433 17.5198 3.96635 17.3459 3.99635 17.177L4.91301 12.0162L1.13635 8.34954C1.01852 8.23195 0.93493 8.0845 0.894557 7.92301C0.854183 7.76151 0.858548 7.59207 0.907181 7.43287C0.960311 7.26996 1.05804 7.12519 1.18929 7.01502C1.32053 6.90484 1.48003 6.83365 1.64968 6.80954L6.87468 6.0487L9.17551 1.3462C9.25058 1.19122 9.36777 1.06052 9.51368 0.969062C9.65959 0.877607 9.82831 0.829102 10.0005 0.829102C10.1727 0.829102 10.3414 0.877607 10.4873 0.969062C10.6333 1.06052 10.7505 1.19122 10.8255 1.3462L13.1538 6.03954L18.3788 6.80037C18.5485 6.82448 18.708 6.89567 18.8392 7.00585C18.9705 7.11603 19.0682 7.26079 19.1213 7.4237C19.17 7.58291 19.1743 7.75235 19.134 7.91384C19.0936 8.07533 19.01 8.22279 18.8922 8.34037L15.1155 12.007L16.0322 17.1679C16.0649 17.3397 16.0478 17.5174 15.9828 17.6798C15.9178 17.8422 15.8077 17.9827 15.6655 18.0845C15.4995 18.2009 15.2997 18.2589 15.0972 18.2495V18.2495Z"
+            fill={num >= 5 ? "#1F2937" : "#D1D5DB"}
+          />
+        </svg>
+      </div>
+    );
+  };
 
-            <div className=" flex justify-between lg:space-x-28 md:space-x-20">
-                <div className=" flex space-x-2 flex-1">
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                </div>
+  return (
+    <div className="2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6  px-4 py-9">
+      <div className=" text-center">
+        <h1 className=" text-gray-800 font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7">
+          Reviews
+        </h1>
+        <p className=" text-gray-600 text-base leading-4 mt-2">
+          Join a conversation{" "}
+          <a
+            href="/"
+            className="focus:outline-none focus:text-black focus:underline hover:underline text-gray-800 cursor-pointer"
+          >
+            Write a review
+          </a>
+        </p>
+        <div className=" flex space-x-4 justify-center items-center lg:mt-5 mt-4">
+          <p className=" text-base leading-7 text-gray-600 font-normal">
+            Overall rating
+          </p>
+          {starContainer("", 4)}
+          <span className="text-base leading-7 text-gray-600 font-normal">
+            4.5/5
+          </span>
+        </div>
+      </div>
+      <div className=" flex justify-between lg:mt-12 md:mt-10 mt-12 mb-14">
+        <div className=" flex justify-between items-center border border-gray-400 p-2 w-28 md:w-32 h-10">
+          <div className="relative w-full">
+            <p className=" px-2 text-left leading-4 text-base text-gray-600 py-4 w-full">
+              {sort}
+            </p>
+            <button
+              onClick={() => setMenu(!menu)}
+              className="focus:outline-none focus:ring-2  focus:ring-gray-500 rounded-full cursor-pointer absolute top-4 right-0"
+            >
+              <svg
+                className={"transform " + (menu ? "rotate-180" : "rotate-0")}
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.6665 6.00016L7.99984 11.3335L13.3332 6.00016"
+                  stroke="#4B5563"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div
+              className={
+                menu
+                  ? "shadow absolute z-10 bg-white top-8 w-full mt-3"
+                  : "shadow absolute z-10 bg-white top-8 w-full mt-3 hidden"
+              }
+            >
+              <div className="flex flex-col w-full">
+                {sorts.map((sort) => (
+                  <p
+                    key={sort}
+                    onClick={changeSort}
+                    className="focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left  text-base text-gray-600 py-2 w-full"
+                  >
+                    {sort}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className=" ml-2 sm:ml-0 md:py-2 md:px-3 p-2 border border-gray-400 flex justify-start items-center md:justify-center md:items-center md:w-60 lg:w-64 md:h-auto w-10 h-10 space-x-3">
+          <svg
+            className="cursor-pointer mt-1"
+            width="21"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.4359 10.6826L7.88535 7.13203C8.43633 6.41973 8.73438 5.54883 8.73438 4.63281C8.73438 3.53633 8.30645 2.5082 7.53262 1.73301C6.75879 0.957812 5.72793 0.53125 4.63281 0.53125C3.5377 0.53125 2.50684 0.95918 1.73301 1.73301C0.957812 2.50684 0.53125 3.53633 0.53125 4.63281C0.53125 5.72793 0.95918 6.75879 1.73301 7.53262C2.50684 8.30781 3.53633 8.73438 4.63281 8.73438C5.54883 8.73438 6.41836 8.43633 7.13066 7.88672L10.6813 11.4359C10.6917 11.4464 10.704 11.4546 10.7176 11.4603C10.7312 11.4659 10.7458 11.4688 10.7605 11.4688C10.7753 11.4688 10.7899 11.4659 10.8035 11.4603C10.8171 11.4546 10.8294 11.4464 10.8398 11.4359L11.4359 10.8412C11.4464 10.8308 11.4546 10.8184 11.4603 10.8048C11.4659 10.7912 11.4688 10.7766 11.4688 10.7619C11.4688 10.7472 11.4659 10.7326 11.4603 10.719C11.4546 10.7054 11.4464 10.693 11.4359 10.6826ZM6.79844 6.79844C6.21875 7.37676 5.45039 7.69531 4.63281 7.69531C3.81523 7.69531 3.04688 7.37676 2.46719 6.79844C1.88887 6.21875 1.57031 5.45039 1.57031 4.63281C1.57031 3.81523 1.88887 3.04551 2.46719 2.46719C3.04688 1.88887 3.81523 1.57031 4.63281 1.57031C5.45039 1.57031 6.22012 1.8875 6.79844 2.46719C7.37676 3.04688 7.69531 3.81523 7.69531 4.63281C7.69531 5.45039 7.37676 6.22012 6.79844 6.79844Z"
+              fill="#4B5563"
+            />
+          </svg>
+          <input
+            className="focus:border-none outline-none border-none text-gray-600 text-base leading-4 bg-opacity-0 hidden w-full md:block md:w-full"
+            type="text"
+            placeholder="Enter Phrase or keywords"
+          />
+        </div>
+      </div>
+
+      {datasrc &&
+        datasrc.map((item: any, index: number) => {
+          const user = renderPositionType(
+            item,
+            "position43",
+            positionConfig
+          )[0];
+          return (
+            <>
+              <div className=" flex justify-between lg:space-x-28 md:space-x-20">
+                {starContainer(
+                  "",
+                  renderPositionType(item, "position51", positionConfig)
+                )}
                 <div className=" hidden md:block">
-                    <div className=" md:w-10/12 lg:pr-5 ">
-                        <h2 className=" text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4">Beautiful!!!</h2>
-                        <p className=" text-gray-600 text-base leading-6 font-normal mb-8">Besides clothing, ornaments, accessories and make up, it also includes our mannerism and behavior. The way we talk, the words that we use while talking, the voice tone.</p>
-                        <p className=" text-gray-600 text-base leading-4 font-normal mb-4">
-                            Posted by <span className=" text-gray-800 font-medium text-base leading-4">Lendi</span>
-                        </p>
-                        <p className=" text-gray-600 text-base leading-4 font-normal mb-16">
-                            From <span className=" text-gray-800 text-base leading-4 font-semibold">Los Angeles</span>
-                        </p>
+                  <div className=" md:w-10/12 lg:pr-5 ">
+                    <AtomTitle
+                      item={renderPositionType(
+                        item,
+                        "position1",
+                        positionConfig
+                      )}
+                      customClassName="text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4"
+                    />
 
-                        <a href="/" className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer">
-                            Report Inappropriate Content
-                        </a>
-                    </div>
+                    <AtomText
+                      item={renderPositionType(
+                        item,
+                        "position3",
+                        positionConfig
+                      )}
+                      customClassName="text-gray-600 text-base leading-6 font-normal mb-8"
+                    />
+                    <p className=" text-gray-600 text-base leading-4 font-normal mb-4">
+                      Posted by{" "}
+                      <AtomText
+                        item={renderPositionType(
+                          user,
+                          "position1",
+                          positionConfig
+                        )}
+                        customClassName="text-gray-800 font-medium text-base leading-4"
+                      />
+                    </p>
+                    <p className=" text-gray-600 text-base leading-4 font-normal mb-16">
+                      From{" "}
+                      <AtomText
+                        item={renderPositionType(
+                          user,
+                          "position3",
+                          positionConfig
+                        )}
+                        customClassName="text-gray-800 text-base leading-4 font-semibold"
+                      />
+                    </p>
+
+                    <a
+                      href="/"
+                      className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer"
+                    >
+                      Report Inappropriate Content
+                    </a>
+                  </div>
                 </div>
                 <div className=" flex justify-center lg:w-32 ">
-                    <p className=" text-gray-600 text-base leading-4 font-normal w-max block">July 12,2021</p>
+                  <AtomText
+                    item={renderPositionType(item, "position5", positionConfig)}
+                    customClassName="text-gray-600 text-base leading-4 font-normal w-max block"
+                  />
                 </div>
-            </div>
-            <div className=" block md:hidden mt-6">
-                <h2 className=" text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4">Beautiful!!!</h2>
-                <p className=" text-gray-600 text-base leading-6 font-normal mb-8">Besides clothing, ornaments, accessories and make up, it also includes our mannerism and behavior. The way we talk, the words that we use while talking, the voice tone.</p>
-                <p className=" text-gray-600 text-base leading-4 font-normal mb-4">
-                    Posted by <span className=" text-gray-800 font-medium text-base leading-4">Lendi</span>
+              </div>
+              <div className=" block md:hidden mt-6">
+                <AtomTitle
+                  item={renderPositionType(item, "position1", positionConfig)}
+                  customClassName="text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4"
+                />
+                <AtomText
+                  item={renderPositionType(item, "position3", positionConfig)}
+                  customClassName="text-gray-600 text-base leading-6 font-normal mb-8"
+                />
+                <br />
+
+                <p className=" ">
+                  Posted by{" "}
+                  <AtomText
+                    item={renderPositionType(user, "position1", positionConfig)}
+                    customClassName="text-gray-800 font-medium text-base leading-4"
+                  />
                 </p>
                 <p className=" text-gray-600 text-base leading-4 font-normal mb-16">
-                    From <span className=" text-gray-800 text-base leading-4 font-semibold">Los Angeles</span>
+                  From{" "}
+                  <AtomText
+                    item={renderPositionType(user, "position3", positionConfig)}
+                    customClassName="text-gray-800 text-base leading-4 font-semibold"
+                  />
                 </p>
 
-                <a href="/" className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer">
-                    Report Inappropriate Content
+                <a
+                  href="/"
+                  className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer"
+                >
+                  Report Inappropriate Content
                 </a>
-            </div>
+              </div>
 
-            <hr className=" bg-gray-100 text-gray-100 w-full my-12" />
-
-            <div className=" flex justify-between lg:space-x-28 md:space-x-20">
-                <div className=" flex space-x-2 ">
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                    <svg className="cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7065 13C10.5999 13.0004 10.4947 12.9753 10.3998 12.9266L6.99984 11.1466L3.59984 12.9266C3.48944 12.9847 3.36496 13.0106 3.24056 13.0014C3.11616 12.9923 2.99683 12.9484 2.89613 12.8748C2.79543 12.8012 2.7174 12.7008 2.67092 12.585C2.62443 12.4693 2.61136 12.3428 2.63317 12.22L3.29984 8.46664L0.553175 5.79997C0.46748 5.71446 0.406689 5.60722 0.377327 5.48977C0.347964 5.37232 0.351138 5.24909 0.386508 5.13331C0.425148 5.01482 0.496226 4.90954 0.591675 4.82941C0.687124 4.74928 0.803123 4.69751 0.926508 4.67997L4.72651 4.12664L6.39984 0.70664C6.45443 0.593926 6.53967 0.498868 6.64578 0.432356C6.7519 0.365843 6.8746 0.330566 6.99984 0.330566C7.12508 0.330566 7.24778 0.365843 7.3539 0.432356C7.46002 0.498868 7.54525 0.593926 7.59984 0.70664L9.29317 4.11997L13.0932 4.67331C13.2166 4.69085 13.3326 4.74262 13.428 4.82275C13.5235 4.90288 13.5945 5.00816 13.6332 5.12664C13.6685 5.24242 13.6717 5.36565 13.6424 5.4831C13.613 5.60055 13.5522 5.70779 13.4665 5.79331L10.7198 8.45997L11.3865 12.2133C11.4103 12.3383 11.3978 12.4675 11.3506 12.5856C11.3033 12.7037 11.2233 12.8059 11.1198 12.88C10.9991 12.9646 10.8538 13.0068 10.7065 13Z"
-                            fill="#1F2937"
-                        />
-                    </svg>
-                </div>
-                <div className="hidden md:block lg:flex-auto">
-                    <div className=" md:w-10/12 lg:pr-5">
-                        <h2 className=" text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4">Best online product I have ever</h2>
-                        <p className=" text-gray-600 text-base leading-6 font-normal mb-8">Besides clothing, ornaments, accessories and make up, it also includes our mannerism and behavior. The way we talk, the words that we use while talking, the voice tone.</p>
-                        <p className=" text-gray-600 text-base leading-4 font-normal mb-4">
-                            Posted by <span className=" text-gray-800 font-medium text-base leading-4">Lendi</span>
-                        </p>
-                        <p className=" text-gray-600 text-base leading-4 font-normal mb-16">
-                            From <span className=" text-gray-800 text-base leading-4 font-semibold">Los Angeles</span>
-                        </p>
-
-                        <a href="/" className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer">
-                            Report Inappropriate Content
-                        </a>
-                    </div>
-                </div>
-                <div className=" flex justify-center lg:w-32 md:w-44">
-                    <p className=" text-gray-600 text-base leading-4 font-normal w-max block">July 12,2021</p>
-                </div>
-            </div>
-            <div className=" block md:hidden mt-6">
-                <h2 className=" text-gray-800 font-medium lg:text-2xl text-xl lg:leading-6 leading-5 mb-4">Beautiful!!!</h2>
-                <p className=" text-gray-600 text-base leading-6 font-normal mb-8">Besides clothing, ornaments, accessories and make up, it also includes our mannerism and behavior. The way we talk, the words that we use while talking, the voice tone.</p>
-                <p className=" text-gray-600 text-base leading-4 font-normal mb-4">
-                    Posted by <span className=" text-gray-800 font-medium text-base leading-4">Lendi</span>
-                </p>
-                <p className=" text-gray-600 text-base leading-4 font-normal mb-16">
-                    From <span className=" text-gray-800 text-base leading-4 font-semibold">Los Angeles</span>
-                </p>
-
-                <a href="/" className="focus:outline-none focus:text-black focus:underline text-gray-600 text-sm leading-3 hover:underline cursor-pointer">
-                    Report Inappropriate Content
-                </a>
-            </div>
-
-            <hr className=" bg-gray-100 text-gray-100 w-full my-12" />
-        </div>
-    );
+              <hr className=" bg-gray-100 text-gray-100 w-full my-12" />
+            </>
+          );
+        })}
+    </div>
+  );
 };
 
 export default ProductReview2;

@@ -17,19 +17,19 @@ type PropsType = {
 const WidgetNoMeta: FC<PropsType> = ({ listConfig }) => {
   if (_.isEmpty(listConfig)) return null;
 
-  const otherattr = jsonParse(listConfig.otherattr);
+  const widgetnemgoo = jsonParse(listConfig.widgetnemgoo);
   // console.log("🚀 ~ listConfig", listConfig);
-  // console.log("🚀 ~ otherattr", otherattr);
+  // console.log("🚀 ~ widgetnemgoo", widgetnemgoo);
   const { metadataid } = listConfig;
   // console.log("🚀 ~ metadataid", metadataid);
   const router = useRouter();
 
   let rawCriteria = "";
-  if (!toBoolean(otherattr?.ignorecriteria || false)) {
+  if (!toBoolean(widgetnemgoo?.ignorecriteria || false)) {
     rawCriteria = prepareRawUrlQueryToCriteria(router.query);
   }
 
-  const data = otherattr?.data || [];
+  const data = widgetnemgoo?.data || [];
 
   const metaConfig = {
     gridJsonConfig: {},
@@ -39,7 +39,7 @@ const WidgetNoMeta: FC<PropsType> = ({ listConfig }) => {
   const killerObj = {
     ...listConfig,
     metaConfig,
-    otherattr: otherattr,
+    widgetnemgoo: widgetnemgoo,
     bpsectiondtl: _.values(listConfig.bpsectiondtl),
   };
   // console.log("🚀 ~ killerObj", killerObj);
@@ -50,7 +50,7 @@ const WidgetNoMeta: FC<PropsType> = ({ listConfig }) => {
       <DefaultWidget
         listConfig={listConfig}
         config={killerObj}
-        otherattr={killerObj.otherattr}
+        widgetnemgoo={killerObj.widgetnemgoo}
         datasrc={data}
       />
     );
@@ -68,7 +68,7 @@ const WidgetNoMeta: FC<PropsType> = ({ listConfig }) => {
   return (
     <WidgetWrapperStore
       config={killerObj}
-      otherattr={killerObj.otherattr}
+      widgetnemgoo={killerObj.widgetnemgoo}
       datasrc={data}
     >
       <RenderComponent />

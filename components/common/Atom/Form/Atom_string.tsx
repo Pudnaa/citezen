@@ -4,6 +4,7 @@ import _ from "lodash";
 import Atom_label from "./Atom_label";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import { getAtomValue, fieldHideShow, fieldDisableEnable } from "util/helper";
+import { useTranslation } from "next-i18next";
 
 type PropsType = {
   config: any;
@@ -29,6 +30,7 @@ const Atom_string: FC<PropsType> = ({
     processConfig,
     validData,
   } = useContext(FormMetaContext);
+  const { t } = useTranslation("translation");
 
   const handlerChange = (e: any) => {
     handleChangeContext({
@@ -51,24 +53,24 @@ const Atom_string: FC<PropsType> = ({
       }`}
     >
       <Atom_label
-        labelName={config.labelname}
-        labelFor={config.paramrealpath}
+        labelName={t(config.labelname)}
+        labelFor={config.paramname}
         isrequired={config.isrequired}
         styles=""
         className={`${labelClassName}`}
         sectionConfig={sectionConfig}
       />
-      {processConfig.actiontype === "view" ? (
+      {processConfig?.actiontype === "view" ? (
         <div className="self-center">
           {getAtomValue(config, formDataInitData, processConfig, rowIndex)}
         </div>
       ) : (
         <input
           type="text"
-          id={config.paramrealpath}
-          name={config.paramrealpath}
+          id={config.paramname}
+          name={config.paramname}
           className={`${className} rounded border-gray-400 focus:ring-0 self-center focus:border-black${
-            validData[config.paramrealpath] ? ` border-red-500` : ``
+            validData[config.paramname] ? ` border-red-500` : ``
           }`}
           style={{ ...style, width: parseInt(config?.columnwidth, 10) }}
           placeholder={config?.placeholdername}
@@ -76,7 +78,7 @@ const Atom_string: FC<PropsType> = ({
             config,
             formDataInitData,
             processConfig,
-            rowIndex
+            rowIndex,
           )}
           disabled={fieldDisableEnable(config, processExpression)}
           onChange={handlerChange}

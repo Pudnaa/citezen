@@ -13,7 +13,7 @@ const AtomLink: FC<PropsType> = ({
   item = "",
   color = "sso",
   customClassName = "",
-  children,
+  children
 }) => {
   if (isEmpty(item)) {
     return children;
@@ -24,6 +24,6 @@ const AtomLink: FC<PropsType> = ({
       </Link>
     );
   }
-};
+}; 
 
 export default AtomLink;

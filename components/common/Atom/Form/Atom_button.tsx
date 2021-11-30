@@ -56,12 +56,12 @@ const Atom_button: FC<PropsType> = ({
           labelName={config.labelname}
           className={`${labelClassName} block`}
           isrequired={config.isrequired}
-          styles=""
+          styles=''
           sectionConfig={sectionConfig}
         />
 
         <button
-          type="button"
+          type='button'
           name={config.paramrealpath}
           style={{ ...style, width: parseInt(config.columnwidth, 10) }}
           className={`${className} bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2.5 text-sm`}

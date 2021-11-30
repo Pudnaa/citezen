@@ -7,11 +7,13 @@ type PropsType = {
   type?:
     | "primary"
     | "primary-white"
+    | "primary-border"
     | "blank"
     | "dashed"
     | "dotted"
     | "text"
-    | "link";
+    | "link"
+    | "icon";
   icon?: string;
   color?: string;
   checked?: boolean;
@@ -50,6 +52,12 @@ const AtomTitle: FC<PropsType> = ({
       text = `text-${color}`;
       hover = `hover:bg-${color} hover:text-white`;
       break;
+    case "primary-border":
+      bg = `bg-white`;
+      border = `border border-${color}`;
+      text = `text-${color}`;
+      hover = `hover:bg-${color} hover:text-white hover:border-0`;
+      break;
     case "blank":
       bg = `bg-transparent`;
       border = `border border-solid`;
@@ -73,6 +81,12 @@ const AtomTitle: FC<PropsType> = ({
     case "link":
       bg = `bg-transparent`;
       border = `border-0`;
+      hover = `hover:text-${color}`;
+      break;
+    case "icon":
+      bg = `bg-transparent`;
+      border = `border-0`;
+      hover = `hover:text-${color}`;
       break;
     default:
       break;

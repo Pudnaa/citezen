@@ -1,7 +1,16 @@
 import { isEmpty, functionNameReplace, isObject } from "@util/helper";
 import * as ExpressionFuntions from "util/ExpressionFunctions";
+import * as Expression from "util/expression";
+import { expressionConvert } from "util/expression";
 
-const { hidebutton, runprocessvalue } = ExpressionFuntions;
+const {
+  hidebutton,
+  runprocessvalue,
+  getprocessparam,
+  getauthlogin,
+  fillgroupbydata,
+} = ExpressionFuntions;
+const { repeatfunction } = Expression;
 
 const ChangeEventInput = (
   item: any, // field config
@@ -10,7 +19,8 @@ const ChangeEventInput = (
   formDataInitData: any, // formDataInitData
   config: any, // bp config
   processExpression: any,
-  mainContext: any
+  mainContext: any,
+  setFormDataInitData: any
 ) => {
   if (!isEmpty(item) && !isEmpty(item)) {
     var pathArr = item.split(".");
@@ -77,13 +87,32 @@ const ChangeEventInput = (
           "runprocessvalue",
           "await runprocessvalue"
         );
+      }
+      if (functionString.includes("getprocessparam")) {
+        functionString = functionString.replace(
+          "function(){",
+          "async function DrillDownFunction(){"
+        );
+        functionString = functionString.replace(
+          "getprocessparam",
+          "await getprocessparam"
+        );
       } else {
         functionString = functionString.replace(
           "function(){",
           "function DrillDownFunction(){"
         );
       }
-      eval(functionString + "; DrillDownFunction();");
+
+      var varfnc: any = expressionConvert(
+        JSON.stringify(processExpression),
+        config.varfncexpressionstring,
+        "formDataInitData.",
+        JSON.stringify(formDataInitData),
+        "config.meta_process_param_attr_link_mobile"
+      );
+
+      eval(varfnc + functionString + "; DrillDownFunction();");
     }
   }
 };

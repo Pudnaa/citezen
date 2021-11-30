@@ -18,12 +18,11 @@ import {
   AtomFade,
   AtomImage,
 } from "@components/common/Atom";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import SwiperCore, { Navigation } from "swiper/core";
-// import "swiper/swiper.min.css";
-// import "swiper/components/navigation/navigation.min.css";
-
-// SwiperCore.use([Navigation]);
+//import SwiperCore, { Navigation } from "swiper";
+//import { Swiper, SwiperSlide } from "swiper/react";
+//import "swiper/css";
+//import "swiper/css/navigation";
+//SwiperCore.use([Navigation]);
 
 const BestSellers11 = () => {
   const {
@@ -49,9 +48,8 @@ const BestSellers11 = () => {
   const hideText = () => {
     setShow("");
   };
-
-  return (
-    <div className="container mx-auto py-12 w-full md:pl-6 md:px-6 px-4">
+  /*
+<div className="container mx-auto py-12 w-full md:pl-6 md:px-6 px-4">
       <div className="flex items-center flex-col lg:flex-row lg:space-x-12 2xl:space-x-0">
         <div className="lg:w-2/5 2xl:w-3/12">
           <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-10 text-gray-800">
@@ -83,7 +81,7 @@ const BestSellers11 = () => {
         </div>
         <div className="w-full lg:w-9/12 lg:pl-0">
           <div className="mt-8 lg:mt-16">
-            {/* <Swiper
+            <Swiper
               slidesPerView={3}
               breakpoints={{
                 300: {
@@ -103,104 +101,67 @@ const BestSellers11 = () => {
               className="mySwiper"
               speed={500}
             >
-              <SwiperSlide>
-                <div className="carousel-cell">
-                  <div
-                    className="md:w-full h-full relative"
-                    onMouseOver={() => showText("slide1")}
-                    onMouseOut={hideText}
-                  >
-                    <img
-                      src="https://i.ibb.co/hsQWR3P/pesce-huang-mq73c-Wf9-ZAQ-unsplash-1.png"
-                      alt="bag"
-                      className="w-full h-full object-fit object-cover"
-                    />
-                    <div
-                      className={
-                        "items-end mb-6 ml-6 absolute bottom-0 left-0 "
-                      }
-                    >
-                      <div
-                        className={
-                          "p-3 bg-white " +
-                          (show === "slide1" ? "opacity-100" : "opacity-0")
-                        }
-                      >
-                        <p className="text-sm leading-none text-gray-600">
-                          Yves Saint Laurent
-                        </p>
-                        <p className="text-base font-semibold leading-none text-gray-800 mt-2">
-                          $1900
-                        </p>
+              {datasrc &&
+                datasrc.map((item: any, index: number) => {
+                  return (
+                    <SwiperSlide>
+                      <div className="carousel-cell">
+                        <div
+                          className="md:w-full h-full relative"
+                          onMouseOver={() => showText(item.id)}
+                          onMouseOut={hideText}
+                        >
+                          <AtomImage
+                            item={renderPositionType(
+                              item,
+                              "position2",
+                              positionConfig
+                            )}
+                            customClassName="w-full h-full object-fit object-cover"
+                            alt={renderPositionType(
+                              item,
+                              "position1",
+                              positionConfig
+                            )}
+                          />
+                          <div
+                            className={
+                              "items-end mb-6 ml-6 absolute bottom-0 left-0 "
+                            }
+                          >
+                            <div
+                              className={
+                                "p-3 bg-white " +
+                                (show === item.id ? "opacity-100" : "opacity-0")
+                              }
+                            >
+                              <AtomTitle
+                                item={renderPositionType(
+                                  item,
+                                  "position1",
+                                  positionConfig
+                                )}
+                                customClassName="text-sm leading-none text-gray-600"
+                              />
+                              <AtomText
+                                item={
+                                  "$" +
+                                  renderPositionType(
+                                    item,
+                                    "position4",
+                                    positionConfig
+                                  )
+                                }
+                                customClassName="text-base font-semibold leading-none text-gray-800 mt-2"
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="carousel-cell">
-                  <div
-                    className="md:w-full h-full relative"
-                    onMouseOver={() => showText("slide2")}
-                    onMouseOut={hideText}
-                  >
-                    <img
-                      src="https://i.ibb.co/h9Yx6C5/fernando-andrade-pot-CPE-Cw8-A-unsplash-1.png"
-                      alt="shoes"
-                      className="w-full h-full object-fit object-cover"
-                    />
-                    <div className="mb-6 ml-6 absolute bottom-0 left-0">
-                      <div
-                        className={
-                          "p-3 bg-white " +
-                          (show === "slide2" ? "opacity-100" : "opacity-0")
-                        }
-                      >
-                        <p className="text-sm leading-none text-gray-600">
-                          Yves Saint Laurent
-                        </p>
-                        <p className="text-base font-semibold leading-none text-gray-800 mt-2">
-                          $1900
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="carousel-cell">
-                  <div
-                    className="md:w-full h-full relative"
-                    onMouseOver={() => showText("slide3")}
-                    onMouseOut={hideText}
-                  >
-                    <img
-                      src="https://i.ibb.co/BqYC2nT/austin-wilcox-iik-Gw-Bbx-Qhs-unsplash-1.png"
-                      alt="wallet"
-                      className="w-full h-full object-fit object-cover"
-                    />
-                    <div className="mb-6 ml-6 absolute bottom-0 left-0">
-                      <div
-                        className={
-                          "p-3 bg-white " +
-                          (show === "slide3" ? "opacity-100" : "opacity-0")
-                        }
-                      >
-                        <p className="text-sm leading-none text-gray-600">
-                          Yves Saint Laurent
-                        </p>
-                        <p className="text-base font-semibold leading-none text-gray-800 mt-2">
-                          $1900
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="carousel-cell"></div>
-              </SwiperSlide>
-            </Swiper> */}
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
           </div>
         </div>
         <style>
@@ -269,8 +230,8 @@ const BestSellers11 = () => {
 			`}
         </style>
       </div>
-    </div>
-  );
+    </div> */
+  return <div>hi</div>;
 };
 
 export default BestSellers11;

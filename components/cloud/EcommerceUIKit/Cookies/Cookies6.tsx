@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
@@ -34,18 +34,24 @@ export default function Cookies6() {
   // console.log("Cookies6 datasrc", datasrc);
   // console.log("Cookies6 otherattr", otherattr);
   // console.log("Cookies6 positionConfig", positionConfig);
+
+  const [menu, showMenu] = useState(false);
   return (
     <div>
       <div className="relative flex justify-center items-center ">
         <button
-          // onclick="showMenu(true)"
-          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none absolute z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
+          onClick={() => showMenu(true)}
+          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none  z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
         >
           Open
         </button>
         <div
           id="menu"
-          className=" w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0"
+          className={
+            menu
+              ? "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10"
+              : "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10 hidden"
+          }
         >
           <div className=" absolute bottom-0 w-full  flex justify-center items-center  ">
             <div className=" w-full relative flex flex-col justify-center items-center bg-white py-8 md:py-14 px-4 md:px-6 xl:px-20">
@@ -153,7 +159,7 @@ export default function Cookies6() {
                   <div className="xl:space-x-10 space-y-4 text-center flex-col-reverse flex justify-center items-center xl:flex-row w-full sm:w-96 md:w-6/12 xl:w-auto mt-4 md:mt-0">
                     <a
                       href="javascript:void(0)"
-                      //   onclick="showMenu(true)"
+                      onClick={() => showMenu(false)}
                       className="mt-6 text-base leading-none focus:outline-none hover:underline focus:underline text-center text-gray-800"
                     >
                       Nope.. I am on a diet

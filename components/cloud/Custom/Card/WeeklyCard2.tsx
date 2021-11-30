@@ -38,7 +38,7 @@ const WeeklyCard2: FC<PropsType> = ({ item, customClassName }) => {
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   return (
@@ -91,7 +91,7 @@ const WeeklyCard2: FC<PropsType> = ({ item, customClassName }) => {
               <AtomButton
                 item="Дэлгэрэнгүй"
                 type="primary"
-                color={widgetDefault.color}
+                color={widgetAllaround.color}
                 customClassName="rounded-full"
               />
             </div>

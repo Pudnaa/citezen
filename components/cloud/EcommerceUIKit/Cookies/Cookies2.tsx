@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
@@ -29,6 +29,9 @@ export default function Cookies2() {
     pathConfig,
     Title,
   } = useContext(WidgetWrapperContext);
+
+  const [menu, showMenu] = useState(false);
+
   if (isEmpty(datasrc)) return null;
   // console.log("Cookies2 config", config);
   // console.log("Cookies2 datasrc", datasrc);
@@ -38,19 +41,23 @@ export default function Cookies2() {
     <div>
       <div className="relative flex justify-center items-center ">
         <button
-          // onclick="showMenu(true)"
-          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none absolute z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
+          onClick={() => showMenu(true)}
+          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
         >
           Open
         </button>
         <div
           id="menu"
-          className=" w-full h-full bg-black bg-opacity-20 top-0  fixed sticky-0"
+          className={
+            menu
+              ? " w-full h-full bg-black bg-opacity-20 top-0  fixed sticky-0 z-10"
+              : " w-full h-full bg-black bg-opacity-20 top-0  fixed sticky-0 z-10 hidden"
+          }
         >
-          <div className="2xl:container 2xl:mx-auto py-48 px-4 md:px-28 flex justify-center items-center  ">
+          <div className="2xl:container 2xl:mx-auto py-48 px-4 md:px-28 flex justify-center items-center   ">
             <div className="blur w-96 md:w-8/12 lg:w-5/12 xl:w-auto relative flex flex-col justify-center items-center bg-white py-16 px-4 md:px-6  xl:p-20">
               <div role="banner">
-                {/* <svg
+                <svg
                   width="80"
                   height="80"
                   viewBox="0 0 80 80"
@@ -160,7 +167,7 @@ export default function Cookies2() {
                       <rect width="80" height="80" fill="white" />
                     </clipPath>
                   </defs>
-                </svg> */}
+                </svg>
               </div>
               <div className="mt">
                 <p className="mt-6 w-48 md:w-54 lg:w-64 text-base leading-7 text-center text-gray-600">
@@ -178,11 +185,11 @@ export default function Cookies2() {
                 Learn More
               </a>
               <button
-                // onclick="showMenu(true)"
+                onClick={() => showMenu(false)}
                 className=" absolute top-8 right-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                 aria-label="close"
               >
-                {/* <svg
+                <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -203,7 +210,7 @@ export default function Cookies2() {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
-                </svg> */}
+                </svg>
               </button>
             </div>
           </div>

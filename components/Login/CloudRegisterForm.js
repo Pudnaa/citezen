@@ -125,17 +125,17 @@ export default function CloudRegisterForm() {
             icon={item.icon}
             value={item.value}
             placeholder={item.placeholder}
-            type="text"
-            customClassName="mt-4 w-full"
+            type='text'
+            customClassName='mt-4 w-full'
             onChange={(e) => onChange(e, index)}
           />
         );
       })}
       <AtomButton
-        item="Бүртгүүлэх"
-        type="primary"
-        color="sso"
-        customClassName="rounded-full mt-7 w-full h-12 bg-sso text-white font-semibold hover:bg-sso-dark"
+        item='Бүртгүүлэх'
+        type='primary'
+        color='sso'
+        customClassName='rounded-full mt-7 w-full h-12 bg-citizen text-white font-semibold hover:bg-citizen-dark'
         onClick={(e) => onSubmit(e)}
       />
     </>

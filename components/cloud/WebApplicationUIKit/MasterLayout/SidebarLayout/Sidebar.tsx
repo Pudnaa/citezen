@@ -26,25 +26,25 @@ const Sidebar = () => {
     pathConfig,
     Title,
   } = useContext(WidgetWrapperContext);
-  
+
   console.log("config", config);
   console.log("datasrc", datasrc);
   console.log("otherattr", otherattr);
   console.log("positionConfig", positionConfig);
-  
+
   const readyDatasrc = parentidToChildren(
     datasrc,
     "itemcategoryid",
     "parentcategoryid"
-    );
-    console.log("readyDatasrc", readyDatasrc);
-    
-    const [visibleIndex, setVisibleIndex] = useState(-1);
-    
-    const children = readyDatasrc?.[visibleIndex]?.children || [];
-    
-    console.log("children", children);
-    
+  );
+  console.log("readyDatasrc", readyDatasrc);
+
+  const [visibleIndex, setVisibleIndex] = useState(-1);
+
+  const children = readyDatasrc?.[visibleIndex]?.children || [];
+
+  console.log("children", children);
+
   if (isEmpty(datasrc)) return null;
 
   return (
@@ -107,12 +107,12 @@ const Sidebar = () => {
                   {readyDatasrc?.[visibleIndex]?.title}
                 </div>
                 <TreeMain
-                  datasrc={children}
+                  rawDatasrc={children}
                   config={config}
                   otherattr={otherattr}
                   customClassName=""
-                  selectedId={-1}
-                  setSelectedId={() => null}
+                  defaultSelectedId={-1}
+                  onClickItem={() => null}
                   indent={5}
                 />
               </div>

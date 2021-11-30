@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
@@ -34,18 +34,23 @@ export default function Cookies4() {
   // console.log("Cookies4 datasrc", datasrc);
   // console.log("Cookies4 otherattr", otherattr);
   // console.log("Cookies4 positionConfig", positionConfig);
+  const [menu, showMenu] = useState(false);
   return (
     <div>
       <div className="relative flex justify-center items-center ">
         <button
-          // onclick="showMenu(true)"
-          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none absolute z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
+          onClick={() => showMenu(true)}
+          className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:outline-none z-0 top-48 py-2 px-7 bg-gray-800 text-white rounded text-base hover:bg-black"
         >
           Open
         </button>
         <div
           id="menu"
-          className=" w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0"
+          className={
+            menu
+              ? "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10"
+              : "w-full h-full bg-gray-900 bg-opacity-80 top-0  fixed sticky-0 z-10 hidden"
+          }
         >
           <div className=" bottom-0 absolute flex justify-center items-center w-full  ">
             <div className="w-full relative flex flex-col justify-center items-center bg-white lg:py-3  px-4 py-6 md:p-6 lg:px-20">
@@ -146,7 +151,7 @@ export default function Cookies4() {
                 </div>
                 <div className="mt-4 md:mt-0 flex  flex-col-reverse sm:flex-row justify-center  md:justify-end items-center w-full sm:space-x-4 ">
                   <button
-                    // onclick="showMenu(true)"
+                    onClick={() => showMenu(false)}
                     className="mt-3 sm:mt-0 w-72 md:w-auto   text-base leading-4 text-center text-gray-800 border-gray-300 border py-4 px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-white hover:bg-gray-300 "
                   >
                     Decline

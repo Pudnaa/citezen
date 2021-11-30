@@ -31,11 +31,13 @@ export default function QuickView1() {
   } = useContext(WidgetWrapperContext);
   const [show, setshow] = useState(true);
   if (isEmpty(datasrc)) return null;
-    // console.log("QuickView1 config", config);
+  // console.log("QuickView1 config", config);
   // console.log("QuickView1 datasrc", datasrc);
   // console.log("QuickView1 otherattr", otherattr);
   // console.log("QuickView1 positionConfig", positionConfig);
-
+  const item = datasrc[0];
+  const colors = renderPositionType(item, "position31", positionConfig);
+  const sizes = renderPositionType(item, "position32", positionConfig);
   return (
     <div className="bg-gray-800">
       <div
@@ -90,75 +92,73 @@ export default function QuickView1() {
                   </svg>
                 </button>
               </div>
-              <img
-                className="w-full h-full object-cover object-center"
-                src="https://i.ibb.co/LYMXRz2/pexels-ray-piedra-1464625-3.png"
-                alt="shoes"
-                role="img"
+              <AtomImage
+                item={renderPositionType(item, "position2", positionConfig)}
+                customClassName="w-full h-full object-cover object-center"
+                alt={renderPositionType(item, "position1", positionConfig)}
               />
             </div>
             <div className="lg:mt-0 w-full lg:w-1/2 mt-4 md:mt-0">
               <div className="w-64 md:w-full">
-                <p className="text-sm text-gray-500 leading-3">
-                  WTC402078-10267084
-                </p>
-                <h1 className="text-2xl font-semibold text-gray-800 mt-2 leading-6">
-                  White running shoes
-                </h1>
-                <p className="mt-6 md:mt-4 text-xl md:text-2xl leading-5 md:leading-6 text-gray-800">
-                  $170
-                </p>
+                <AtomTitle
+                  item={renderPositionType(item, "position3", positionConfig)}
+                  customClassName="text-sm text-gray-500 leading-3"
+                />
+                <AtomTitle
+                  item={renderPositionType(item, "position1", positionConfig)}
+                  customClassName="text-2xl font-semibold text-gray-800 mt-2 leading-6"
+                />
+                <AtomCurrency
+                  type="mnt"
+                  item={renderPositionType(item, "position4", positionConfig)}
+                  customClassName="mt-6 md:mt-4 text-xl md:text-2xl leading-5 md:leading-6 text-gray-800"
+                />
                 <p className="mt-10 text-base leading-none text-gray-500">
-                  Colour
+                  Өнгө
                 </p>
                 <div className="flex flex-row justify-start space-x-2 mt-2">
-                  <button
-                    aria-label="light gray"
-                    role="button"
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-4 h-4 bg-gray-300 rounded-full"
-                  />
-                  <button
-                    aria-label="dark gray"
-                    role="button"
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-4 h-4 bg-gray-800 rounded-full"
-                  />
-                  <button
-                    aria-label="Yellow"
-                    role="button"
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-4 h-4 bg-yellow-500 rounded-full"
-                  />
-                  <button
-                    aria-label="Blue"
-                    role="button"
-                    className="focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-4 h-4 bg-blue-500 rounded-full"
-                  />
+                  {colors &&
+                    colors.map((item1: any, index1: number) => {
+                      return (
+                        <AtomButton
+                          item=""
+                          color=""
+                          customClassName={`focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-4 h-4 bg-${renderPositionType(
+                            item1,
+                            "position1",
+                            positionConfig
+                          )} rounded-full`}
+                        />
+                      );
+                    })}
                 </div>
                 <p className="mt-6 text-base leading-none text-gray-500">
-                  Select a size
+                  Хэмжээ
                 </p>
                 <div className="flex justify-start items-start flex-row space-x-2 mt-2">
-                  <button className="w-7 h-7 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs">
-                    40
-                  </button>
-                  <button className="w-7 h-7 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs">
-                    41
-                  </button>
-                  <button className="w-7 h-7 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs">
-                    42
-                  </button>
-                  <button className="w-7 h-7 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs">
-                    43
-                  </button>
-                  <button className="w-7 h-7 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs">
-                    44
-                  </button>
+                  {sizes &&
+                    sizes.map((item1: any, index1: number) => {
+                      return (
+                        <AtomButton
+                          item={renderPositionType(
+                            item1,
+                            "position4",
+                            positionConfig
+                          )}
+                          color=""
+                          customClassName="w-7 h-7 focus:outline-none text-black focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 hover:text-white focus:bg-gray-800 focus:text-white border-gray-300 border rounded-full text-xs"
+                        />
+                      );
+                    })}
                 </div>
               </div>
               <div className="flex flex-row justify-center items-center mt-6 space-x-2">
                 <div className="w-full">
-                  <button className="bg-gray-900 hover:bg-gray-800 text-base font-medium text-white text-center h-12 w-60 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-                    Add to cart
-                  </button>
+                  <AtomButton
+                    item="Сагсанд нэмэх"
+                    color=""
+                    customClassName="bg-gray-900 hover:bg-gray-800 text-base font-medium text-white text-center h-12 w-60 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                  />
                 </div>
                 <div className="w-full">
                   <button

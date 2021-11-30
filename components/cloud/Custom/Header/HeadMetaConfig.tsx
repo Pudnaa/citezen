@@ -9,17 +9,17 @@ const HeadMetaConfig = () => {
     config,
     datasrc,
     otherattr,
+    widgetnemgoo,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
-
-  const meta = otherattr?.meta || {};
+  const meta = widgetnemgoo?.meta || {};
+  // console.log("🚀 ~ HeadMetaConfig ~ widgetnemgoo", widgetnemgoo);
   // console.log("🚀 ~ HeadMetaConfig ~ meta", meta);
 
   return (

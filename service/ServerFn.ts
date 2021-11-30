@@ -3,7 +3,7 @@ import _ from "lodash";
 // import { isZip, selectedLanguage } from "../../constants";
 import { listConfigTransform, processConfigTransform } from "@util/Configs";
 import { isEmpty, searchJsonValueGet } from "@util/helper";
-import { meta } from "config/service";
+import { metaConfig } from "@config/metaConfig";
 // import {loginUserInfo} from "../views/Login";
 // import {getLocalStorage, setLocalStorage} from "./LocalBase";
 import { request, serverData } from "./Service";
@@ -73,7 +73,7 @@ export const getLookUpData = (
     json.treegrid = "1";
   }
   // json.criteria = checkDVCriteria(json.criteria);
-  return serverData(meta.serverUrl, meta.dataview, json);
+  return serverData(metaConfig.serverUrl, metaConfig.dataview, json);
 };
 
 // процессийн config авна
@@ -84,7 +84,7 @@ export const getProcessConfig = async (config: any) => {
 
 // процессийн утгуудыг авна
 export const getProcessValue = async (command: any, body: any) => {
-  var res: any = await serverData(meta.serverUrl, command, body);
+  var res: any = await serverData(metaConfig.serverUrl, command, body);
   if (
     !isEmpty(res) &&
     !isEmpty(res.response) &&
@@ -154,7 +154,11 @@ export const getDataViewData = async (
     json.treegrid = "1";
   }
   // json.criteria = checkDVCriteria(json.criteria);
-  const res: any = await serverData(meta.serverUrl, meta.dataview, json);
+  const res: any = await serverData(
+    metaConfig.serverUrl,
+    metaConfig.dataview,
+    json
+  );
   if (
     !isEmpty(res) &&
     res.response.status == "success" &&
@@ -211,7 +215,7 @@ export const getWorkSpaceConfig = async (metadataid: any) => {
   // = await getLocalStorage("WorkSpaceConfig", metadataid);
   if (!WorkSpaceConfig) {
     const workSpace: any = await serverData(
-      meta.serverUrl,
+      metaConfig.serverUrl,
       "META_WORKSPACE_LINK_MOBILE_004",
       body
     );
@@ -238,7 +242,7 @@ export const getWorkSpaceMenuConfig = async (linkId: any) => {
   // = await getLocalStorage("WorkSpaceMenuConfig", linkId);
   if (!WorkSpaceMenuConfig) {
     const workSpaceMenu: any = await serverData(
-      meta.serverUrl,
+      metaConfig.serverUrl,
       "workspace_child_menus",
       body
     );
@@ -291,7 +295,7 @@ export const runprocessvalue = async (
   }
   if (!isEmptyJson) {
     var jsonp = JSON.parse("{" + json.substr(0, json.length - 1) + "}");
-    const result: any = await serverData(meta.serverUrl, command, jsonp);
+    const result: any = await serverData(metaConfig.serverUrl, command, jsonp);
     if (result != null) {
       if (result[0] == "success") {
         if (!isEmpty(get)) {
@@ -330,7 +334,7 @@ export const getprocessparamAjax = async (
     }
   }
   var jsonp = JSON.parse("{" + json.substr(0, json.length - 1) + "}");
-  const result: any = await serverData(meta.serverUrl, command, jsonp);
+  const result: any = await serverData(metaConfig.serverUrl, command, jsonp);
   if (!isEmpty(result) && result[0] == "success") {
     return result[1];
   } else {
@@ -340,11 +344,15 @@ export const getprocessparamAjax = async (
 
 //get Process Meta Data Code
 export const getFunctionMetaDataId = async (metadataid: any) => {
-  const result: any = await serverData(meta.serverUrl, meta.dataview, {
-    systemmetagroupid: "1544082958292969",
-    ignorePermission: "1",
-    metaDataCode: metadataid,
-  });
+  const result: any = await serverData(
+    metaConfig.serverUrl,
+    metaConfig.dataview,
+    {
+      systemmetagroupid: "1544082958292969",
+      ignorePermission: "1",
+      metaDataCode: metadataid,
+    }
+  );
   if (result.response.status == "success") {
     var metaid = result.response.result;
     return metaid[0].id;

@@ -4,7 +4,12 @@ import Atom_label from "./Atom_label";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import Select from "react-select";
 import fetchJson from "lib/fetchJson";
-import { isEmpty, fieldDisableEnable, fieldHideShow } from "util/helper";
+import {
+  isEmpty,
+  fieldDisableEnable,
+  fieldHideShow,
+  getAtomValue,
+} from "util/helper";
 
 type PropsType = {
   config: any;
@@ -47,7 +52,7 @@ const Atom_combo: FC<PropsType> = ({
       let data = await fetchJson(
         `/api/get-data?metaid=${
           config.lookupmetadataid
-        }&pagingwithoutaggregate=1&criteria=${JSON.stringify(criteria)}`
+        }&pagingwithoutaggregate=1&criteria=${JSON.stringify(criteria)}`,
       );
       delete data.aggregatecolumns;
       delete data.paging;
@@ -120,12 +125,13 @@ const Atom_combo: FC<PropsType> = ({
   };
 
   const style2 = {
+    menuPortal: (base: any) => ({ ...base, zIndex: 9999 }),
     control: (base: any) => ({
       ...base,
       ...style,
       borderColor: "rgba(156, 163, 175, 1)",
       height: 42,
-      width: parseInt(config.columnwidth, 10),
+      width: parseInt(config.columnwidth || 350, 10),
       minWidth: 160,
     }),
   };
@@ -156,7 +162,13 @@ const Atom_combo: FC<PropsType> = ({
             {
               options.filter(
                 (option) =>
-                  option["value"] === formDataInitData[config.paramrealpath]
+                  option["value"] ===
+                  getAtomValue(
+                    config,
+                    formDataInitData,
+                    processConfig,
+                    rowIndex,
+                  ),
               )?.[0]?.["label"]
             }
           </>
@@ -172,7 +184,8 @@ const Atom_combo: FC<PropsType> = ({
             styles={style2}
             value={options.filter(
               (option) =>
-                option["value"] === formDataInitData[config.paramrealpath]
+                option["value"] ===
+                getAtomValue(config, formDataInitData, processConfig, rowIndex),
             )}
             menuPortalTarget={document.body}
             isDisabled={fieldDisableEnable(config, processExpression)}

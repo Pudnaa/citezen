@@ -13,14 +13,15 @@ const C4ColStatCards = () => {
     gridJsonConfig,
     pathConfig,
     Title,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   if (isEmpty(datasrc)) return null;
 
-  // console.log("config", config);
-  // console.log("datasrc", datasrc);
-  // console.log("otherattr", otherattr);
+  // console.log("C4ColStatCards config", config);
+  // console.log("C4ColStatCards datasrc", datasrc);
+  // console.log("C4ColStatCards otherattr", otherattr);
+  // console.log("C4ColStatCards positionConfig", positionConfig);
 
   return (
     <div

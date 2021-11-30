@@ -5,14 +5,13 @@ import { useCloud } from "hooks/use-cloud";
 
 export default function Header1({ defaultStyle = {}, defaultClassName = "" }) {
   const [sideBar, setSideBar] = useState();
-  const { widgetDefault } = useCloud().globalConfig;
+  const { widgetAllaround } = useCloud().globalConfig;
 
   return (
     <>
       <div className="h-full w-full z-40">
         <nav
-          role="navigation" 
-          xcvxcvxvx
+          role="navigation"
           className="w-full mx-auto hidden md:block bg-white shadow-md"
         >
           <div className="container bg-white justify-between py-5 flex items-center md:items-stretch mx-auto">
@@ -22,11 +21,11 @@ export default function Header1({ defaultStyle = {}, defaultClassName = "" }) {
             <div className="h-full flex items-center justify-center lg:pr-40 mr-4">
               <CustomInputButton2
                 item={{ value: "" }}
-                color={widgetDefault.color}
+                color={widgetAllaround.color}
               />
             </div>
             <div className="md:flex items-center justify-end hidden">
-              <RightSection1 color={widgetDefault.color} />
+              <RightSection1 color={widgetAllaround.color} />
             </div>
           </div>
 
@@ -34,7 +33,7 @@ export default function Header1({ defaultStyle = {}, defaultClassName = "" }) {
 
           <div className="container py-4 justify-between flex items-center mx-auto">
             <div className="h-full flex items-center">
-              <MegaMenu1 color={widgetDefault.color} />
+              <MegaMenu1 color={widgetAllaround.color} />
               <Menu1 />
             </div>
             <div className="h-full flex items-center">

@@ -54,8 +54,8 @@ export default function CloudLoginForm() {
 
     const loginResult = await axios.get(
       `/api/get-login?processcode=login&parameters=${JSON.stringify(
-        parameters
-      )}`
+        parameters,
+      )}`,
     );
 
     if (loginResult.data.status === "error") {
@@ -65,6 +65,7 @@ export default function CloudLoginForm() {
         duration: 5,
       });
     } else {
+      console.log("Success login " + process.env.NODE_ENV);
       Router.push("/page/16312403374741");
     }
   };
@@ -97,7 +98,7 @@ export default function CloudLoginForm() {
         item="Нэвтрэх"
         type="primary"
         color="sso"
-        customClassName="rounded-full mt-7 w-full h-12 bg-sso text-white font-semibold hover:bg-sso-dark"
+        customClassName="rounded-full mt-7 w-full h-12 bg-citizen text-white font-semibold hover:bg-citizen-dark"
         onClick={(e) => onSubmit(e)}
       />
     </>

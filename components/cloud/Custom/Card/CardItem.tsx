@@ -4,7 +4,18 @@ import {
   otherAttrToObj,
   renderPositionType,
 } from "util/helper";
-
+import RenderAtom from "@components/common/Atom/RenderAtom";
+import {
+  AtomList,
+  AtomTitleV2,
+  AtomText,
+  AtomCurrency,
+  AtomIcon,
+  AtomButton,
+  AtomTag,
+  AtomLink,
+  AtomImageV2,
+} from "@components/common/Atom";
 type PropsType = {
   item: any;
   position: any;
@@ -12,36 +23,73 @@ type PropsType = {
 };
 
 const CartItem: FC<PropsType> = ({ item, position, type }) => {
+  // console.log("Card101", position);
+
   return (
     <div>
-      <div className=" w-full relative rounded shadow bg-white dark:bg-gray-800">
-        <img
-          src={renderPositionType(item, "position2", position)}
-          className="w-full"
-          alt="protest"
+      <div className=" w-full relative rounded bg-white dark:bg-gray-800">
+        <AtomImageV2
+          item={item?.position2}
+          customClassName="h-56 w-full rounded object-cover object-center"
         />
+
         <div className="py-4 px-6">
           {renderPositionType(item, "position40", position) && (
             <p className="sm:text-base text-sm text-gray-500">
               {renderPositionType(item, "position40", position)}
             </p>
           )}
-          {renderPositionType(item, "position1", position) && (
-            <p className="sm:text-xl text-lg font-bold pt-4 leading-10 text-gray-800">
-              {renderPositionType(item, "position1", position)}
-            </p>
-          )}
-          {renderPositionType(item, "position3", position) && (
-            <p className="sm:text-base text-sm leading-5 text-gray-500 pt-3">
-              {renderPositionType(item, "position3", position)}
-            </p>
-          )}
+
+          <RenderAtom
+            item={item?.position1}
+            defaultAtom="title"
+            customClassName="text-base font-semibold leading-6 text-gray-800"
+            customProps={{
+              truncateRow: 2,
+            }}
+          />
+          <RenderAtom
+            item={item?.position3}
+            defaultAtom="text"
+            customClassName="text-xs font-medium leading-5 text-gray-400"
+            customProps={{
+              truncateRow: 5,
+            }}
+          />
         </div>
         <div className="border-t-2 mt-4 border-gray-200">
-          <div className="px-6 py-4 flex items-center justify-between">
-            <p className="text-sm leading-4 text-indigo-700">
-              {renderPositionType(item, "position45", position)}
-            </p>
+          <div className="px-6 py-4 flex">
+            <div className="w-1/2 items-center">
+              <p className="text-sm leading-4 text-green-500 cursor-pointer flex items-center text-center pt-1.5">
+                {renderPositionType(item, "position45", position)}
+              </p>
+            </div>
+            <div className="w-1/2 flex items-center">
+              <div className="w-1/2 flex items-center justify-center">
+                <AtomIcon
+                  // item={item.icon}
+                  item="far fa-commenting"
+                  checked={false}
+                  hoverSolid={true}
+                  customClassName="text-lg"
+                />
+                <p className="text-sm leading-4 text-gray-400 ml-2">
+                  {renderPositionType(item, "position81", position)}
+                </p>
+              </div>
+              <div className="w-1/2 flex items-center justify-center">
+                <AtomIcon
+                  // item={item.icon}
+                  item="far fa-heart"
+                  checked={false}
+                  hoverSolid={true}
+                  customClassName="text-lg"
+                />
+                <p className="text-sm leading-4 text-gray-400 ml-2">
+                  {renderPositionType(item, "position82", position)}
+                </p>
+              </div>
+            </div>
             <div className="flex items-center">
               {/* <div className="flex items-center justify-between">
                                 <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 38 36" fill="none">

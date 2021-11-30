@@ -1,28 +1,30 @@
 import React, { FC } from "react";
 import type { GetServerSideProps } from "next";
-import { withIronSession } from "next-iron-session";
+// import { withIronSession } from "next-iron-session";
+import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
+import { ironSession } from "iron-session/express";
 
 const Logout = () => {
-  return <h1>Redirecting...</h1>
+  return <h1>Redirecting...</h1>;
 };
 
-async function handler(context: any) {
-  context.req.session.destroy();
-  return {
-    redirect: {
-      destination: '/login',
-      permanent: false,
-    }
-  }   
-}
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
+  async function getServerSideProps(context: any) {
+    // context.req.session.destroy();
 
-export const getServerSideProps: GetServerSideProps = withIronSession(handler, {
-  password: "complex_password_at_least_32_characters_long",
-  cookieName: "vrwebapp_cookie",
-  // if your localhost is served on http:// then disable the secure flag
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
+    delete context.req.session.user;
+
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   },
-});
+  {
+    cookieName: "vrwebapp_cookie",
+    password: "e*)xK2H*TEwry9j-Wt~??scn^!iK.VR^w?~yH:fZPJ3",
+  }
+);
 
 export default Logout;

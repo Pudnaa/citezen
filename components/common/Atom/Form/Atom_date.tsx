@@ -5,7 +5,6 @@ import "moment/locale/mn";
 
 import locale from "antd/lib/locale/zh_CN";
 import FormMetaContext from "context/Meta/FormMetaContext";
-import "react-datepicker/dist/react-datepicker.css";
 import Atom_label from "./Atom_label";
 import { fieldDisableEnable, fieldHideShow } from "util/helper";
 type PropsType = {

@@ -6,7 +6,7 @@ import Atom_label from "./Atom_label";
 import { Upload, message, Modal } from "antd";
 import { useUser } from "hooks/use-user";
 import FormMetaContext from "context/Meta/FormMetaContext";
-import { meta } from "../../../../config/service";
+import { metaConfig } from "../../../../config/metaConfig";
 import { fieldDisableEnable, fieldHideShow } from "util/helper";
 
 type PropsType = {
@@ -74,7 +74,7 @@ const Atom_file_attach: FC<PropsType> = ({
     fmData.append("fileName", options.file.name);
 
     try {
-      const res = await axios.post(meta.fileAttach, fmData, config);
+      const res = await axios.post(metaConfig.fileAttach, fmData, config);
       onSuccess("Ok");
       handleChangeContext({
         name: filename,

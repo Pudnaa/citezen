@@ -20,10 +20,12 @@ export default function CenterAlignedWithBackground() {
   const {
     config,
     datasrc,
+    readyDatasrc,
     otherattr,
+    widgetnemgoo,
     positionConfig,
     renderPositionType,
-    widgetDefault,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   if (isEmpty(datasrc)) return null;
@@ -37,11 +39,13 @@ export default function CenterAlignedWithBackground() {
   //   renderPositionType(datasrc[0], "position2", positionConfig)
   // );
 
-  return datasrc.map((item: any, index: number) => {
+  return readyDatasrc.map((item: any, index: number) => {
+    // const widgetClassName = widgetnemgoo?.className;
+    // const widgetStyle = widgetnemgoo?.style;
     return (
       <div
         key={index}
-        className="bg-black py-16 flex flex-col items-center justify-center f-f-l text-white"
+        className={`py-16 flex flex-col items-center justify-center`}
       >
         <AtomImage
           item={renderPositionType(item, "position2", positionConfig)}
@@ -51,18 +55,13 @@ export default function CenterAlignedWithBackground() {
         <div className="flex items-center py-12">
           {item.social.map((socialItem: any, socialIndex: number) => {
             return (
-              <a
+              <AtomIcon
                 key={socialIndex}
-                className="cursor-pointer px-5"
-                href="javascript:void(0)"
-              >
-                <AtomIcon
-                  item={socialItem.icon}
-                  customClassName="text-white text-2xl"
-                  color={widgetDefault.color}
-                  link={socialItem.link}
-                />
-              </a>
+                item={socialItem.icon}
+                customClassName="text-white text-2xl cursor-pointer px-5"
+                color={widgetAllaround.color}
+                link={socialItem.link}
+              />
             );
           })}
         </div>
@@ -77,7 +76,7 @@ export default function CenterAlignedWithBackground() {
                   <AtomText
                     item={menuItem.title}
                     link={menuItem.link}
-                    color={widgetDefault.color}
+                    color={widgetAllaround.color}
                   />
                 </li>
               );

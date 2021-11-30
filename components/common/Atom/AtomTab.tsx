@@ -25,7 +25,7 @@ const AtomTab: FC<PropsType> = ({
   customClassName = "",
 }) => {
   return (
-    <ul className="flex space-x-8">
+    <ul className='flex space-x-8'>
       {data.map((item, index) => {
         return (
           <TabItem
@@ -55,7 +55,7 @@ type TabItemPropsType = {
 const TabItem: FC<TabItemPropsType> = ({ index, pageIndex, item, onClick }) => {
   const defaultClassName =
     pageIndex == index
-      ? "text-sso flex flex-col justify-between border-sso font-semibold"
+      ? "text-citizen flex flex-col justify-between border-citizen font-semibold"
       : "text-gray-600 pb-3  cursor-pointer hover:text-gray-800";
 
   return (
@@ -63,8 +63,8 @@ const TabItem: FC<TabItemPropsType> = ({ index, pageIndex, item, onClick }) => {
       onClick={() => onClick(index)}
       className={`text-sm font-normal ${defaultClassName}`}
     >
-      <span className="mb-3 cursor-pointer px-4">{item.title}</span>
-      {pageIndex == index && <div className="w-full h-0.5 bg-sso" />}
+      <span className='mb-3 cursor-pointer px-4'>{item.title}</span>
+      {pageIndex == index && <div className='w-full h-0.5 bg-citizen' />}
     </li>
   );
 };

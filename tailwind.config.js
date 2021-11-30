@@ -15,6 +15,7 @@ module.exports = {
   //     whitelist: ["h-52", "py-9", "max-w-2xl", "text-white", "h-screen"],
   //   },
   // },
+  purse: false,
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -54,6 +55,24 @@ module.exports = {
           dark: "#B20086",
           darkest: "#98006C",
           gradientfinish: "#9147DC",
+        },
+        citizen: {
+          lightest: "#FE3FD2",
+          light: "#E526B9",
+          DEFAULT: "#7FC155",
+          dark: "# ",
+          darkest: "#98006C",
+          gradientfinish: "#9147DC",
+        },
+        citizenSecond: {
+          lightest: "#776BFD",
+          light: "#5E52E4",
+          DEFAULT: "#585858",
+          dark: "#2B1FB1",
+          darkest: "#110597",
+        },
+        citizenBackground: {
+          DEFAULT: "#F8F9FA",
         },
         ssoSecond: {
           lightest: "#776BFD",
@@ -109,6 +128,7 @@ module.exports = {
         serif: ["Merriweather", "serif"],
         roboto: ["Roboto", "sans-serif"],
         inter: ["Inter", "sans-serif"],
+        robotoslab: ["Roboto Slab", "serif"],
       },
       boxShadow: {
         magical:
@@ -165,6 +185,12 @@ module.exports = {
         "fade-out-down": "fade-out-down 0.5s ease-out",
         "fade-in-up": "fade-in-up 0.5s ease-out",
         "fade-out-up": "fade-out-up 0.5s ease-out",
+      },
+      spacing: {
+        112: "28rem",
+        128: "32rem",
+        144: "36rem",
+        156: "40rem",
       },
     },
     aspectRatio: {

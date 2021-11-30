@@ -1,14 +1,22 @@
 import * as ExpressionFuntions from "./ExpressionFunctions";
-import { isEmpty } from "./helper";
+import * as Helper from "./helper";
 
-const { hidebutton, runprocessvalue } = ExpressionFuntions;
+const { isEmpty, isObject, mergeJsonObjs } = Helper;
+
+const {
+  hidebutton,
+  runprocessvalue,
+  getprocessparam,
+  fillgroupbydata,
+  getauthlogin,
+} = ExpressionFuntions;
 
 // export var experssionFunctions:any={};
 export const runExpression = (
   type: string,
   processExpression: any,
   config: any,
-  formDataInitData: any
+  formDataInitData: any,
 ) => {
   if (type == "all") {
     // experssionFunctions={};
@@ -19,7 +27,7 @@ export const runExpression = (
         config.varfncexpressionstring,
         "formDataInitData.",
         JSON.stringify(formDataInitData),
-        "config.meta_process_param_attr_link_mobile"
+        "config.meta_process_param_attr_link_mobile",
       );
       eval(varfnc);
       var load: any = expressionConvert(
@@ -27,7 +35,7 @@ export const runExpression = (
         config.loadexpressionstring,
         "formDataInitData.",
         JSON.stringify(formDataInitData),
-        "config.meta_process_param_attr_link_mobile"
+        "config.meta_process_param_attr_link_mobile",
       );
       eval(load);
       var event: any = expressionConvert(
@@ -35,7 +43,7 @@ export const runExpression = (
         config.eventexpressionstring,
         "formDataInitData.",
         JSON.stringify(formDataInitData),
-        "config.meta_process_param_attr_link_mobile"
+        "config.meta_process_param_attr_link_mobile",
       );
       eval(event);
       return processExpression;
@@ -49,7 +57,7 @@ export const expressionConvert = (
   strfunctions: any,
   dataField: any,
   json: any,
-  LabelValueName: any
+  LabelValueName: any,
 ) => {
   strfunctions = getFullExpressionArrayConvert(
     strfunctions
@@ -58,9 +66,10 @@ export const expressionConvert = (
       .replaceAll("&quot;", '"')
       .replaceAll("&amp;", "&")
       .replaceAll("&lt;", "<")
-      .replaceAll("&gt;", ">")
+      .replaceAll("&gt;", ">"),
   );
-  var fun = convertToCalcFunctions(strfunctions.toLowerCase());
+  // var fun = convertToCalcFunctions(strfunctions.toLowerCase());
+  var fun = convertToCalcFunctions(strfunctions);
   fun = ExpressionRunprocessConvert(fun, "formDataInitData.", LabelValueName);
   var lastStr = removeCommentsExpression(fun);
   lastStr = checkvariable(lastStr, json, "value");
@@ -135,7 +144,7 @@ function getFullExpressionArrayConvert(str: any) {
             });
             str = str.replace(
               relVariable[index] + "" + sa[0].replace("]", ""),
-              ass.toString().replace(/,/g, "")
+              ass.toString().replace(/,/g, ""),
             );
           }
         }
@@ -163,43 +172,116 @@ function convertToCalcFunctions(str: any) {
   }
   return str;
 }
-//Expressions Run Processes
+// Expressions Run Processes
 function ExpressionRunprocessConvert(str: any, value: any, atterlinks: any) {
-  var runs = str.match(/runprocessvalue(.*?)\)/g);
+  var runs = str.match(/runProcessValue(.*?)\)/g);
   if (
-    str.match(/runprocessvalue(.*?)\)/g) !== undefined &&
+    str.match(/runProcessValue(.*?)\)/g) !== undefined &&
     runs !== null &&
     runs.length > 0
   ) {
     for (var s in runs) {
       var old = runs[s];
       var newVal = runs[s]
-        .replace("runprocessvalue", "runprocessvalue")
+        .replace("runProcessValue", "runprocessvalue")
         .replace(
           ")",
-          "," + value.substr(0, value.length - 1) + "," + atterlinks + ")"
+          "," + value.substr(0, value.length - 1) + "," + atterlinks + ")",
         );
       str = str.replace(old, newVal.toString());
     }
   }
 
-  var getpram = str.match(/getprocessparam(.*?)\)/g);
+  var getpram = str.match(/getProcessParam(.*?)\)/g);
   if (
-    str.match(/getprocessparam(.*?)\)/g) !== undefined &&
+    str.match(/getProcessParam(.*?)\)/g) !== undefined &&
     getpram !== null &&
     getpram.length > 0
   ) {
     for (var s2 in getpram) {
       var old2 = getpram[s2];
       var newVal2 = getpram[s2]
-        .replace("getprocessparam", "getprocessparam")
+        .replace("getProcessParam", "getprocessparam")
         .replace(
           ")",
-          "," + value.substr(0, value.length - 1) + "," + atterlinks + ")"
+          "," + value.substr(0, value.length - 1) + "," + atterlinks + ")",
         );
       str = str.replace(old2, newVal2.toString());
     }
   }
+
+  var getpram = str.match(/getAuthLogin(.*?)\)/g);
+  if (
+    str.match(/getAuthLogin(.*?)\)/g) !== undefined &&
+    getpram !== null &&
+    getpram.length > 0
+  ) {
+    for (var s2 in getpram) {
+      var old2 = getpram[s2];
+      var newVal2 = getpram[s2]
+        .replace("getAuthLogin", "getauthlogin")
+        .replace(
+          ")",
+          "," +
+            value.substr(0, value.length - 1) +
+            "," +
+            atterlinks +
+            "," +
+            "setFormDataInitData" +
+            ")",
+        );
+      str = str.replace(old2, newVal2.toString());
+    }
+  }
+
+  var getpram = str.match(/fillGroupByData(.*?)\)/g);
+  if (
+    str.match(/fillGroupByData(.*?)\)/g) !== undefined &&
+    getpram !== null &&
+    getpram.length > 0
+  ) {
+    for (var s2 in getpram) {
+      var old2 = getpram[s2];
+      var newVal2 = getpram[s2]
+        .replace("fillGroupByData", "fillgroupbydata")
+        .replace(
+          ")",
+          "," +
+            value.substr(0, value.length - 1) +
+            "," +
+            atterlinks +
+            "," +
+            "setFormDataInitData" +
+            ")",
+        );
+      str = str.replace(old2, newVal2.toString());
+    }
+  }
+
+  var getpram = str.match(/repeatFunction(.*?)\)/g);
+  if (
+    str.match(/repeatFunction(.*?)\)/g) !== undefined &&
+    getpram !== null &&
+    getpram.length > 0
+  ) {
+    for (var s2 in getpram) {
+      var old2 = getpram[s2];
+      var newVal2 = getpram[s2]
+        .replace("repeatFunction", "repeatfunction")
+        .replace(
+          ")",
+          "," +
+            value.substr(0, value.length - 1) +
+            "," +
+            atterlinks +
+            ",config" +
+            ",processExpression" +
+            ")",
+        );
+      str = str.replace(old2, newVal2.toString());
+    }
+  }
+
   return str;
 }
 // Expressions Kpi
@@ -211,7 +293,7 @@ function kpiExpressionConvert(arraName: any, str: any, convertExp: any) {
       .replaceAll("&quot;", '"')
       .replaceAll("&amp;", "&")
       .replaceAll("&lt;", "<")
-      .replaceAll("&gt;", ">")
+      .replaceAll("&gt;", ">"),
   );
   var newstr = removeCommentsExpression(str);
   newstr = checkvariable(newstr, convertExp, "");
@@ -221,6 +303,7 @@ function kpiExpressionConvert(arraName: any, str: any, convertExp: any) {
     .replaceAll(".kpichange()", functionName)
     .replaceAll("]", "");
 }
+
 function removeCommentsExpression(str: any) {
   var newstr = str.replace(/\/\*(.*?)\*\//g, "");
   return newstr;
@@ -261,7 +344,7 @@ function checkvariable(str: any, json: any, type: string) {
           // }
           let jsonCheck = json.includes(
             checkPath.replace("[", "").replace("]={};", "").toLowerCase() +
-              '":{'
+              '":{',
           );
           var funcCheck = oldstr.includes(newvariable);
 
@@ -282,7 +365,8 @@ function checkvariable(str: any, json: any, type: string) {
     if (a && b) return a.split(".").length - b.split(".").length;
   });
   var newVariables = subVariableArray.toString().replace(/,/g, ";");
-  return headerVariable + newVariables + str;
+  // return headerVariable + newVariables + str;
+  return headerVariable + str;
 }
 function checkvariableFunction(str: any, json: any) {
   var oldstr = str;
@@ -302,12 +386,12 @@ function checkvariableFunction(str: any, json: any) {
           // var jsonCheck = json.includes(checkPath.replace("[", "").replace("]={};", "").toLowerCase());
           var jsonCheck = checkJsonPath(
             json,
-            newvariable.replace("[", "").replace("]={};", "").toLowerCase()
+            newvariable.replace("[", "").replace("]={};", "").toLowerCase(),
           );
           if (jsonCheck) {
             jsonCheck = json.includes(
               checkPath.replace("[", "").replace("]={};", "").toLowerCase() +
-                '":{'
+                '":{',
             );
           }
           var funcCheck = oldstr.includes(newvariable);
@@ -374,7 +458,7 @@ function convertToControl(strFn: any) {
     str.forEach((event: any) => {
       strFn = strFn.replace(
         event,
-        event.replace(".control(", "style=").replace(")", "")
+        event.replace(".control(", "style=").replace(")", ""),
       );
     });
   }
@@ -382,7 +466,7 @@ function convertToControl(strFn: any) {
     strLabel.forEach((label: any) => {
       strFn = strFn.replace(
         label,
-        label.replace(".label(", "stylelabel=").replace(")", "")
+        label.replace(".label(", "stylelabel=").replace(")", ""),
       );
     });
   }
@@ -391,7 +475,7 @@ function convertToControl(strFn: any) {
 
 function convertEvents(str: any, functionName: string) {
   var event = str.match(
-    /\[[\w.]+\].click\(\)|\[[\w.]+\].change\(\)|\[[\w.]+\].delete\(\)/g
+    /\[[\w.]+\].click\(\)|\[[\w.]+\].change\(\)|\[[\w.]+\].delete\(\)/g,
   );
   event?.forEach((el: any) => {
     var eventName = el.replace("[", functionName);
@@ -416,7 +500,7 @@ function convertHideShow(str: any, expression: string) {
     .replaceAll("=]'nonrequired'", "].nonrequired()");
 
   var event = str.match(
-    /\[[\w.]+\].hide\(\)|\[[\w.]+\].show\(\)|\[[\w.]+\].disable\(\)|\[[\w.]+\].enable\(\)|\[[\w.]+\].required\(\)|\[[\w.]+\].nonrequired\(\)/g
+    /\[[\w.]+\].hide\(\)|\[[\w.]+\].show\(\)|\[[\w.]+\].disable\(\)|\[[\w.]+\].enable\(\)|\[[\w.]+\].required\(\)|\[[\w.]+\].nonrequired\(\)/g,
   );
   event?.forEach((el: any) => {
     var eventName = el.replace("[", expression);
@@ -432,3 +516,127 @@ function convertHideShow(str: any, expression: string) {
   });
   return str;
 }
+
+function getFunctioninString(name: any, str: any) {
+  var functionName = "function " + name;
+  var functionNameAsync = "async function " + name;
+  var indexAsync = str.indexOf(functionNameAsync);
+  if (indexAsync != -1) {
+    functionName = functionNameAsync;
+  }
+  var index = str.indexOf(functionName);
+  var functionBody = "";
+  if (index != -1) {
+    index += functionName.length;
+    functionBody = functionName;
+
+    var charArray = str.split("");
+    var isFoundOpenBracket = 0;
+    var bracketCount = 0;
+    for (let i = index; i < charArray.length; i++) {
+      var char = charArray[i];
+      functionBody += char;
+
+      if (char == "{") {
+        isFoundOpenBracket = 1;
+        bracketCount += 1;
+      } else if (char == "}") {
+        bracketCount -= 1;
+      }
+      if (isFoundOpenBracket == 1 && bracketCount == 0) {
+        break;
+      }
+    }
+    return functionBody;
+  }
+  return null;
+}
+
+export const repeatfunction = (
+  elemName: any,
+  funcName: any,
+  formDataInitData: any,
+  attr: any,
+  config: any,
+  processExpression: any,
+) => {
+  elemName = elemName.replace(/\[(.*?)\]/g, "");
+  var funcStr = getFunctioninString(
+    funcName.toLowerCase(),
+    config.varfncexpressionstring.toLowerCase(),
+  );
+  if (!isEmpty(funcStr)) {
+    var varfnc: any = expressionConvert(
+      "JSON.stringify(processExpression)",
+      funcStr,
+      "formDataInitData.",
+      "JSON.stringify(formDataInitData)",
+      "config.meta_process_param_attr_link_mobile",
+    );
+    var object = eval("formDataInitData." + elemName.toLowerCase());
+
+    if (
+      eval(varfnc + " typeof " + funcName.toLowerCase() + '=="function"') &&
+      !isEmpty(formDataInitData) &&
+      eval("!isEmpty(formDataInitData." + elemName.toLowerCase() + ")")
+    ) {
+      var functionString = eval(
+        varfnc + funcName.toLowerCase() + ".toString()",
+      );
+      var outSideVariable: any = [];
+      var object = eval("formDataInitData." + elemName.toLowerCase());
+
+      object.forEach(function (item: any, index: any) {
+        if (
+          !isObject(item) &&
+          typeof item != "function" &&
+          item != "hide" &&
+          item != "disable" &&
+          item != "enable" &&
+          item != "show" &&
+          item != "hideShow"
+        ) {
+          outSideVariable[index] = item;
+        }
+      });
+
+      Object.keys(object).forEach(function (key: any, index: any) {
+        var item = object[key];
+        if (!isNaN(key) && isObject(item)) {
+          var convertFn = functionString.replaceAll(
+            elemName.toLowerCase(),
+            elemName.toLowerCase() + "[" + index + "]",
+          );
+          // var convertFn = angular.copy(
+          //   functionString
+          //     .replaceAll(elemName + ".", "" + elemName + "[" + index + "].")
+          //     .replaceAll("checkedtype", "checkedType")
+          //     .replaceAll(
+          //       "detailrowremove(element",
+          //       "detailrowremove($rootScope.ItemDtlData." +
+          //         elemName +
+          //         "[" +
+          //         index +
+          //         "]," +
+          //         index +
+          //         ',"' +
+          //         elemName +
+          //         '"'
+          //     )
+          // );
+          item = mergeJsonObjs(...outSideVariable, item);
+          eval(
+            "formDataInitData." +
+              elemName.toLowerCase() +
+              "[" +
+              index +
+              "]=" +
+              JSON.stringify(item),
+          );
+          eval(convertFn + "; " + funcName.toLowerCase() + "();");
+        }
+      });
+    }
+  }
+  return;
+};

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { renderPositionType } from "util/helper";
 import { isEmpty } from "lodash";
@@ -7,6 +7,7 @@ import {
   AtomText,
   AtomIcon,
   AtomButton,
+  AtomModal,
 } from "@components/common/Atom";
 
 export default function FullWidthUserProfileCard() {
@@ -26,10 +27,130 @@ export default function FullWidthUserProfileCard() {
   // console.log("FullWidthUserProfileCard datasrc", datasrc);
   // console.log("FullWidthUserProfileCard otherattr", otherattr);
 
+  const editIcon = (
+    w: number,
+    background: string,
+    t: number,
+    r: number,
+    f: any
+  ) => {
+    return (
+      <div
+        className={`w-${w} h-${w} absolute top-${t} right-${r} rounded-3xl bg-${background} items-center flex justify-center cursor-pointer`}
+        onClick={f}
+      >
+        <AtomIcon
+          // item={item.icon}
+          item="far fa-pencil"
+          checked={false}
+          hoverSolid={true}
+          customClassName="text-lg"
+        />
+      </div>
+    );
+  };
+
+  const [editPro, setEditPro] = useState(false);
   const readyData = datasrc[0];
+
+  const body = () => {
+    return (
+      <div className="">
+        <div className="w-full h-full flex justify-center items-center">
+          <img
+            className="w-48 h-48 overflow-hidden object-cover rounded"
+            // src="https://image.freepwik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg"
+            src={renderPositionType(readyData, "position2", positionConfig)}
+          />
+        </div>
+        <div className="p-2 bg-gray-300 rounded-lg inline-flex justify-between items-center text-gray-500 cursor-pointer">
+          <AtomIcon
+            // item={item.icon}
+            item="far fa-eye"
+            checked={false}
+            hoverSolid={true}
+            customClassName="text-sm mr-2"
+          />
+          <span className="font-bold text-xs">Нийтийн</span>
+        </div>
+      </div>
+    );
+  };
+  const footer = () => {
+    return (
+      <div className="flex items-center justify-between">
+        <div className="flex">
+          <div className="pr-4 ml-1 items-center hover:text-green-500 cursor-pointer">
+            <div className="flex justify-center">
+              <AtomIcon
+                // item={item.icon}
+                item="far fa-pencil"
+                checked={false}
+                hoverSolid={true}
+                customClassName="text-lg"
+              />
+            </div>
+
+            <p>засах</p>
+          </div>
+          <div className="px-4 items-center hover:text-green-500 cursor-pointer">
+            <div className="flex justify-center">
+              <AtomIcon
+                // item={item.icon}
+                item="far fa-camera"
+                checked={false}
+                hoverSolid={true}
+                customClassName="text-lg"
+              />
+            </div>
+
+            <p>Зураг нэмэх</p>
+          </div>
+          <div className="pl-4 items-center hover:text-green-500 cursor-pointer">
+            <div className="flex justify-center">
+              <AtomIcon
+                // item={item.icon}
+                item="far fa-image"
+                checked={false}
+                hoverSolid={true}
+                customClassName="text-lg"
+              />
+            </div>
+
+            <p>Хүрээ</p>
+          </div>
+        </div>
+        <div>
+          <div className="items-center hover:text-green-500 cursor-pointer">
+            <div className="flex justify-center">
+              <AtomIcon
+                // item={item.icon}
+                item="far fa-trash"
+                checked={false}
+                hoverSolid={true}
+                customClassName="text-lg"
+              />
+            </div>
+
+            <p>Устгах</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
+      <AtomModal
+        display={editPro}
+        setDisplay={(edit: any) => {
+          setEditPro(edit);
+        }}
+        headerText="Профайл зураг"
+        headerClassName="font-bold text-xl"
+        body={body()}
+        footer={footer()}
+      />
       <div className="flex items-center justify-center w-full">
         {/* Card code block start */}
         <div className="bg-white rounded">
@@ -42,12 +163,14 @@ export default function FullWidthUserProfileCard() {
             <div className="inset-0 m-auto w-24 h-24 absolute bottom-0 -mb-12 xl:ml-10 rounded border-2 shadow border-white">
               <img
                 className="w-full h-full overflow-hidden object-cover rounded"
-                // src="https://image.freepik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg"
+                // src="https://image.freepwik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg"
                 src={renderPositionType(readyData, "position2", positionConfig)}
               />
             </div>
+            {editIcon(10, "white", 5, 5, () => {})}
           </div>
-          <div className="px-5 xl:px-10 pb-10">
+          <div className="px-4 xl:px-8 pb-8 relative">
+            {editIcon(10, "white", 5, 5, () => setEditPro(true))}
             <div className="pt-16 flex flex-col xl:flex-row items-start xl:items-center justify-between">
               <div className="xl:pr-16 w-full xl:w-2/3">
                 <div className="text-center xl:text-left mb-3 xl:mb-0 flex flex-col xl:flex-row items-center justify-between xl:justify-start">
@@ -75,18 +198,18 @@ export default function FullWidthUserProfileCard() {
               <div className="xl:px-10 xl:border-l xl:border-r w-full py-5 flex items-start justify-center xl:w-1/3">
                 <div className="mr-6 xl:mr-10">
                   <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
-                    82
+                    1000
                   </h2>
                   <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
-                    Reviews
+                    Миний оноо
                   </p>
                 </div>
                 <div className="mr-6 xl:mr-10">
                   <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
-                    28
+                    5
                   </h2>
                   <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
-                    Projects
+                    Салбар
                   </p>
                 </div>
                 <div>
@@ -94,21 +217,24 @@ export default function FullWidthUserProfileCard() {
                     42
                   </h2>
                   <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
-                    Approved
+                    Гишүүнчлэл
                   </p>
                 </div>
               </div>
               <div className="w-full xl:w-2/3 flex-col md:flex-row justify-center xl:justify-end flex md:pl-6">
-                <div className="flex items-center justify-center xl:justify-start mt-1 md:mt-0 mb-5 md:mb-0">
-                  <div className="rounded-full bg-gray-200 text-gray-600 dark:text-gray-400 text-sm px-6 py-2 flex justify-center items-center">
-                    Remote
+                <button className="focus:outline-none ml-0 md:ml-5 bg-green-400 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-3 md:px-6 py-2 text-sm">
+                  <div className=" items-center flex justify-center">
+                    <AtomIcon
+                      // item={item.icon}
+                      item="far fa-commenting"
+                      checked={false}
+                      hoverSolid={true}
+                      customClassName="text-lg mr-3"
+                    />
+                    <span className="text-xs items-center">
+                      Дансны үлдэгдэл шалгах
+                    </span>
                   </div>
-                  <div className="ml-5 rounded-full bg-green-200 text-green-500 text-sm px-6 py-2 flex justify-center items-center">
-                    Available
-                  </div>
-                </div>
-                <button className="focus:outline-none ml-0 md:ml-5 bg-indigo-700 dark:bg-indigo-600 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-3 md:px-6 py-2 text-sm">
-                  Message
                 </button>
               </div>
             </div>

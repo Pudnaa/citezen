@@ -1,37 +1,22 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import CloudBanner1 from "@cloud/Custom/Banner/CloudBanner1";
-import {
-  AtomTitle,
-  AtomText,
-  AtomNumber,
-  AtomIcon,
-  AtomButton,
-  AtomSlider4,
-} from "@components/common/Atom";
+import { AtomSlider4 } from "@components/common/Atom";
 
 export default function Carousel4() {
-  const {
-    config,
-    datasrc,
-    otherattr,
-    positionConfig,
-    metaConfig,
-    gridJsonConfig,
-    pathConfig,
-    Title,
-  } = useContext(WidgetWrapperContext);
-  // console.log("Carousel4 config", config);
-  // console.log("Carousel4 datasrc", datasrc);
-  // console.log("Carousel4 otherattr", otherattr);
+  const { readyDatasrc, widgetnemgoo } = useContext(WidgetWrapperContext);
+  // console.log("Carousel4 readyDatasrc", readyDatasrc);
+  // console.log("Carousel4 widgetnemgoo", widgetnemgoo);
 
   return (
     <AtomSlider4>
-      {datasrc.map((item: any, index: number) => (
+      {readyDatasrc.map((item: any, index: number) => (
         <div key={index}>
-          <div className="bg-yellow-200 w-screen h-96">
-            <CloudBanner1 item={item} fade={true} />
-          </div>
+          <CloudBanner1
+            item={item}
+            fade={true}
+            {...widgetnemgoo?.CloudBanner1}
+          />
         </div>
       ))}
     </AtomSlider4>

@@ -67,7 +67,7 @@ const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
         <DefaultWidget
           listConfig={listConfig}
           config={killerObj}
-          otherattr={killerObj.otherattr}
+          widgetnemgoo={killerObj.otherattr}
           datasrc={data}
         />
       ),
@@ -79,7 +79,7 @@ const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
       <DefaultWidget
         listConfig={listConfig}
         config={killerObj}
-        otherattr={killerObj.otherattr}
+        widgetnemgoo={killerObj.otherattr}
         datasrc={data}
       />
     );
@@ -87,7 +87,7 @@ const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
     return (
       <WidgetWrapperStore
         config={killerObj}
-        otherattr={killerObj.otherattr}
+        widgetnemgoo={killerObj.otherattr}
         datasrc={data}
       >
         <RenderComponent />

@@ -4,14 +4,19 @@ import FormMetaContext from "context/Meta/FormMetaContext";
 type PropsType = {
   handleSubmit?: any;
   children?: any;
+  dialog?: any;
   title?: string;
 };
 
-const FormWrapper: FC<PropsType> = ({ children, title }) => {
-  const { handleSubmitContext } = useContext(FormMetaContext);
+const FormWrapper: FC<PropsType> = ({ children, title, dialog }) => {
+  const { handleSubmitContext, processConfig } = useContext(FormMetaContext);
 
   return (
-    <div className="processRender shadow-citizen bg-white rounded-lg p-5 my-1.5">
+    <div
+      className={`processRender ${
+        dialog ? `px-3` : `shadow-citizen p-5 my-1.5`
+      } bg-white rounded-lg`}
+    >
       <form onSubmit={handleSubmitContext}>
         <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 pb-3">
           <div className="">
@@ -19,34 +24,44 @@ const FormWrapper: FC<PropsType> = ({ children, title }) => {
           </div>
         </div>
         <div className="mt-4 grid gap-4">{children}</div>
-        <div className="flex justify-end mt-4">
-          <button
-            type="submit"
-            className="focus:outline-none w-full sm:w-auto bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-8 py-3 text-sm"
-          >
-            Хадгалах
-          </button>
-        </div>
+        {processConfig?.actiontype !== "view" && (
+          <div className="flex justify-end mt-4">
+            <button
+              type="submit"
+              className="focus:outline-none w-full sm:w-auto bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-8 py-3 text-sm"
+            >
+              Хадгалах
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );
 };
 
 export const FormSectionWrapper: FC<PropsType> = ({ children }) => {
-  const { handleSubmitContext } = useContext(FormMetaContext);
+  const {
+    handleSubmitContext,
+    processConfig,
+    processExpression,
+    formDataInitData,
+    setFormDataData,
+  } = useContext(FormMetaContext);
 
   return (
     <div className="processRender">
       <form onSubmit={handleSubmitContext}>
         <div>{children}</div>
-        <div className="flex justify-end mb-3">
-          <button
-            type="submit"
-            className="focus:outline-none w-full sm:w-auto bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-8 py-3 text-sm mt-3"
-          >
-            Хадгалах
-          </button>
-        </div>
+        {processConfig?.actiontype !== "view" && (
+          <div className="flex justify-end mb-3">
+            <button
+              type="submit"
+              className="focus:outline-none w-full sm:w-auto bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-8 py-3 text-sm mt-3"
+            >
+              Хадгалах
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

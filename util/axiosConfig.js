@@ -1,6 +1,6 @@
 import axios from "axios";
 import pako from "pako";
-import { meta } from "@config/service";
+import { metaConfig } from "@config/metaConfig";
 
 export const ecomZ = (json) => {
   console.log("01", json);
@@ -40,7 +40,7 @@ export const decomZ = (b64Data) => {
 
 // axios.defaults.withCredentials = true;
 const instance = axios.create({
-  baseURL: meta.SERVERURL_DEV,
+  baseURL: metaConfig.SERVERURL_DEV,
 });
 
 export default instance;

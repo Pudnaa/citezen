@@ -22,7 +22,7 @@ const Rows: FC<PropsType> = ({ pathConfig, config }) => {
     _.filter(pathConfig, (item) => {
       return item.paramrealpath.split(".").length === 2;
     }) || [],
-    ["ordernumber"]
+    ["ordernumber"],
   );
 
   let dtlList: any = _.values(formDataInitData[config["paramrealpath"]]) || [];
@@ -34,12 +34,14 @@ const Rows: FC<PropsType> = ({ pathConfig, config }) => {
         map[item.paramname.toLowerCase()] = item.defaultvalue;
         return map;
       }, {}),
-    []
+    [],
   );
 
   const deleteRowClick = (e: any, index: any) => {
     e.preventDefault();
-    let prepareRow = [...dtlListState];
+    let prepareRow = [
+      ...(_.values(formDataInitData[config["paramrealpath"]]) || []),
+    ];
     prepareRow.splice(index, 1);
     setDtlListState(prepareRow);
     formDataInitData[config["paramrealpath"]] = prepareRow;
@@ -57,14 +59,14 @@ const Rows: FC<PropsType> = ({ pathConfig, config }) => {
   };
 
   return (
-    <div className="w-full overflow-y-auto scrollbar scrollbar-thumb-sso scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-sso-dark scrollbar-thumb-rounded-full">
+    <div className='w-full overflow-y-auto scrollbar scrollbar-thumb-citizen scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-citizen-dark scrollbar-thumb-rounded-full'>
       <div
         className={`xl:w-full border-b border-gray-300 dark:border-gray-700 mb-5 ${
           config.tabname ? "hidden" : ""
         }`}
       >
-        <div className="">
-          <p className="text-lg text-gray-800 dark:text-gray-100">
+        <div className=''>
+          <p className='text-lg text-gray-800 dark:text-gray-100'>
             {config.labelname}
           </p>
         </div>
@@ -73,16 +75,16 @@ const Rows: FC<PropsType> = ({ pathConfig, config }) => {
         <div>
           <button
             onClick={addRowClick}
-            className="mx-2 ml-0 bg-white transition duration-150 ease-in-out hover:border-indigo-600 hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-5 py-1 text-sm"
+            className='mx-2 ml-0 bg-white transition duration-150 ease-in-out hover:border-indigo-600 hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-5 py-1 text-sm'
           >
             Мөр нэмэх
           </button>
         </div>
       )}
-      <div className="mt-2 w-full overflow-y-auto overflow-x-auto scrollbar scrollbar-thumb-sso scrollbar-track-gray-200 scrollbar-thin">
-        <table className="w-full whitespace-nowrap border-collapse bg-white rounded border border-gray-300 mb-1.5">
+      <div className='mt-2 w-full overflow-y-auto overflow-x-auto scrollbar scrollbar-thumb-citizen scrollbar-track-gray-200 scrollbar-thin'>
+        <table className='w-full whitespace-nowrap border-collapse bg-white rounded border border-gray-300 mb-1.5'>
           <thead>
-            <tr className="w-full text-sm leading-none text-gray-500 h-12">
+            <tr className='w-full text-sm leading-none text-gray-500 h-12'>
               {readyColumn.map((item: any, index: number) => {
                 return (
                   <th
@@ -103,8 +105,8 @@ const Rows: FC<PropsType> = ({ pathConfig, config }) => {
               ></th>
             </tr>
           </thead>
-          <tbody className="w-full">
-            {dtlListState.map((item: any, index: number) => {
+          <tbody className='w-full'>
+            {dtlList.map((item: any, index: number) => {
               return (
                 <RowsItem
                   column={readyColumn}

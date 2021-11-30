@@ -29,7 +29,7 @@ export function checkDVCriteria(json) {
 
 export function isUrlPath(string) {
   var res = string.match(
-    /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+    /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
   );
   return res !== null;
 }
@@ -167,7 +167,7 @@ export function strtotime(str, now) {
   };
 
   match = strTmp.match(
-    /^(\d{2,4}-\d{2}-\d{2})(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/
+    /^(\d{2,4}-\d{2}-\d{2})(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/,
   );
 
   if (match != null) {
@@ -305,12 +305,12 @@ export function getDefaultValue(valueStr, userInfo) {
       var month = mat[0].replace("[", "").replace("]", "");
       var sysdate = strtotime(
         month,
-        formatDate(new Date().getFullYear() + "/" + thisMonth + "/" + "01")
+        formatDate(new Date().getFullYear() + "/" + thisMonth + "/" + "01"),
       );
       return formatDate(sysdate);
     } else {
       return formatDate(
-        new Date().getFullYear() + "/" + thisMonth + "/" + "01"
+        new Date().getFullYear() + "/" + thisMonth + "/" + "01",
       );
     }
   } else if (lowerValue === "sysmonthend") {
@@ -320,7 +320,7 @@ export function getDefaultValue(valueStr, userInfo) {
         "/" +
         thisMonth +
         "/" +
-        getDaysInMonth(new Date().getFullYear(), thisMonth)
+        getDaysInMonth(new Date().getFullYear(), thisMonth),
     );
   } else if (lowerValue === "sessionuserid") {
     return loginUserInfo.id;
@@ -359,12 +359,12 @@ export function getImageUrl(data, localImage, item) {
         image =
           "data:" +
           getToMimeType(
-            item["filethumbnail"].substr(0, data.lastIndexOf("♠"))
+            item["filethumbnail"].substr(0, data.lastIndexOf("♠")),
           ) +
           ";base64," +
           item["filethumbnail"].substr(
             item["filethumbnail"].lastIndexOf("♠") + 1,
-            item["filethumbnail"].length
+            item["filethumbnail"].length,
           );
         break;
       case "pdf":
@@ -431,7 +431,7 @@ export function getImageUrl(data, localImage, item) {
           if (!isEmpty(url.javaUrl)) {
             let sessionId;
             getLocalStorage("loginUser", "").then(
-              (res) => (sessionId = res.sessionid)
+              (res) => (sessionId = res.sessionid),
             );
             var dd = {
               sessionId: sessionId,
@@ -516,7 +516,7 @@ function createJson(
   getrow,
   ItemData,
   row,
-  json
+  json,
 ) {
   try {
     if (jsonRow) {
@@ -567,7 +567,7 @@ function createJson(
             eval(
               "typeof " +
                 itempath.substr(0, itempath.lastIndexOf(".")) +
-                '!= "undefined"'
+                '!= "undefined"',
             ) &&
             eval("typeof " + itempath + '!= "undefined"') &&
             eval("typeof " + itempath + '!= "object"')
@@ -588,12 +588,12 @@ function createJson(
                 jsonpath +
                 "=" +
                 itempath +
-                ".toString()}"
+                ".toString()}",
             );
           } else if (
             row.datatype != "group" &&
             eval(
-              itempath.substr(0, itempath.lastIndexOf(".")).replace("[0]", "")
+              itempath.substr(0, itempath.lastIndexOf(".")).replace("[0]", ""),
             ) != undefined &&
             eval(itempath.replace("[0]", "")) != undefined
           ) {
@@ -607,7 +607,7 @@ function createJson(
               eval(jsonpath.substr(0, jsonpath.lastIndexOf(".")) + "={}");
             }
             eval(
-              jsonpath.replace("[0]", "") + "=" + itempath.replace("[0]", "")
+              jsonpath.replace("[0]", "") + "=" + itempath.replace("[0]", ""),
             );
           } else if (
             row.datatype == "group" &&
@@ -699,7 +699,7 @@ export const htmlDecode = (str) => {
   let html = decode(str, { level: "html5" });
   html = html.replace(
     /(<img[^]+?src=")(?!http|https:\/\/)(.*?)"/gi,
-    "$1" + url.imageUrl + '$2"'
+    "$1" + url.imageUrl + '$2"',
   );
   return html;
 };
@@ -789,9 +789,9 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
   return this.replace(
     new RegExp(
       str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"),
-      ignore ? "gi" : "g"
+      ignore ? "gi" : "g",
     ),
-    typeof str2 === "string" ? str2.replace(/\$/g, "$$$$") : str2
+    typeof str2 === "string" ? str2.replace(/\$/g, "$$$$") : str2,
   );
 };
 
@@ -842,7 +842,7 @@ function checkKpiConfig(config, itemData) {
       if (pathArray.length > 1) {
         itemData = createKpiJson(
           path.substr(0, path.lastIndexOf(".")),
-          itemData
+          itemData,
         );
       } else {
         itemData = createKpiJson(null, itemData);
@@ -902,7 +902,7 @@ function checkSendJsonData(json, groupNames) {
             eval(
               "typeof json." +
                 group.paramrealpath.toLowerCase() +
-                "!= 'undefined'"
+                "!= 'undefined'",
             ) &&
             eval("!isEmpty(json." + group.paramrealpath.toLowerCase() + ")")
           ) {
@@ -982,7 +982,7 @@ export function createProcessInputJson(config, getrow, ItemData, groupNames) {
                 getrow,
                 ItemData,
                 row,
-                json
+                json,
               );
               if (json == "error") {
                 throw new Error('{"required":"' + row.labelname + '"}');
@@ -1001,7 +1001,7 @@ export function createProcessInputJson(config, getrow, ItemData, groupNames) {
               getrow,
               ItemData,
               row,
-              json
+              json,
             );
             if (json == "error") {
               throw new Error('{"required":"' + row.labelname + '"}');
@@ -1059,7 +1059,7 @@ export function otherAttrToObj(props, type) {
 
 export function renderPositionType(item, key, positionConfig) {
   try {
-    let posOttrAttr = jsonParse(positionConfig[key]["otherattr"] || {});
+    let posOttrAttr = jsonParse(positionConfig[key]?.["otherattr"] || {});
 
     if (posOttrAttr.url) {
       if (posOttrAttr.url.type === "link")
@@ -1077,12 +1077,20 @@ export function renderPositionType(item, key, positionConfig) {
   }
 }
 
+export function getItemObject(item, key, positionConfig) {
+  const value = item[_.toLower(positionConfig[key]?.["fieldpath"])] || "";
+  const positionnemgoo = jsonParse(
+    positionConfig[key]?.["positionnemgoo"] || {},
+  );
+  return { value, positionnemgoo };
+}
+
 //https://stackoverflow.com/questions/18017869/build-tree-array-from-flat-array-in-javascript
 // parentid array into children
 export function parentidToChildren(
   arr,
   idfield = "id",
-  parentidfield = "parentid"
+  parentidfield = "parentid",
 ) {
   let tree = [],
     mappedArr = {},
@@ -1163,7 +1171,7 @@ export function prepareIsOpen(readyDatasrc, selectedId, positionConfig) {
     const selected =
       selectedId === renderPositionType(item, "position0", positionConfig);
     if (selected) {
-      newDatasrc[index].isOpen = true;
+      newDatasrc[index].isOpen = false; //selected node нь default-оор онгойх эсэх
       found = true;
     } else {
       newDatasrc[index].isOpen = false;
@@ -1178,6 +1186,12 @@ export function prepareIsOpen(readyDatasrc, selectedId, positionConfig) {
   });
 
   return [newDatasrc, found];
+}
+
+export function Iframe(data) {
+  return (
+    <div dangerouslySetInnerHTML={{ __html: data.iframe ? data.iframe : "" }} />
+  );
 }
 
 export function validateForm(fdata, processConfig) {
@@ -1229,7 +1243,7 @@ export const getAtomValue = (
   config,
   formDataInitData,
   processConfig,
-  rowIndex
+  rowIndex,
 ) => {
   try {
     let atomValue = formDataInitData[config.paramrealpath];

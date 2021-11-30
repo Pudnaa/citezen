@@ -16,90 +16,106 @@ export default function HeaderSimple() {
     pathConfig,
     Title,
   } = useContext(WidgetWrapperContext);
-  
-  const [sideBar, setSideBar] = useState();
-  const [showMenu, setShowMenu] = useState(false);
-  const [showMenuSm, setShowMenuSm] = useState(false);
+
   const [search, setSearch] = useState(false);
   const userContext = useUser();
-  
-  if (isEmpty(datasrc)) return null;
+  const [show, setShow] = useState(null);
+  const [profile, setProfile] = useState(userContext.userData);
+  // if (isEmpty(datasrc)) return null;
+  console.log("profile", profile);
 
   return (
-    <div className="dark:bg-gray-900">
-      <div className=" mx-auto relative">
-        <div className="py-2">
-          <div className="flex items-center justify-between">
-            <AtomImage
-              item="https://cloud.veritech.mn/app/storage/uploads/process/logo.png"
-              customClassName=""
-              link="#"
-            />
-
-            <div className="text-left w-full">
-              <h2 className="text-gray-800 dark:text-gray-100 font-bold text-lg mt-4">
-                {config.sectionTitle}
-              </h2>
-            </div>
-
-            <div className="lg:w-3/12 flex items-center lg:justify-end space-x-6 lg:space-x-4 xl:space-x-6">
-              <div className="flex items-center pl-3 bg-white  rounded-lg border-gray-400 border">
-                <svg
-                  className="text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={20}
-                  height={20}
-                  viewBox="0 0 20 20"
-                  fill="none"
-                >
-                  <path
-                    d="M8.33333 13.1667C11.555 13.1667 14.1667 10.555 14.1667 7.33333C14.1667 4.11167 11.555 1.5 8.33333 1.5C5.11167 1.5 2.5 4.11167 2.5 7.33333C2.5 10.555 5.11167 13.1667 8.33333 13.1667Z"
-                    stroke="currentColor"
-                    strokeWidth="1.25"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M17.5 17.5L12.5 12.5"
-                    stroke="currentColor"
-                    strokeWidth="1.25"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <input
-                  type="text"
-                  className="py-2.5 pl-1 w-full focus:outline-none text-sm rounded text-gray-600 placeholder-gray-500 border-0"
-                  placeholder="Хайх "
+    <>
+      <div className="bg-gray-200 ">
+        {/* Code block starts */}
+        <nav className="w-full mx-auto hidden xl:block bg-white   border-t-4 border-yellow-500  shadow-xl">
+          <div className="container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
+            <div className="h-full flex items-center">
+              <div className="mr-10 flex items-center">
+                <AtomImage
+                  item="https://cloud.veritech.mn/app/storage/uploads/process/noledge.png"
+                  customClassName="w-60"
+                  link="/"
                 />
               </div>
-
-              <div className="hidden md:flex items-center space-x-2">
-                <div className="w-10 h-10 rounded-full border border-white text-center ">
-                  <i className="far fa-user mt-1" style={{ fontSize: 19 }}></i>{" "}
+              <ul className="pr-12 xl:flex items-center h-full hidden">
+                <li className="cursor-pointer h-full flex items-center hover:text-indigo-700 text-sm text-gray-800 tracking-normal border-b-2 border-white">
+                  FAQ
+                </li>
+                <li className="cursor-pointer h-full flex items-center hover:text-indigo-700 text-sm text-gray-800 mx-10 tracking-normal">
+                  DOCS
+                </li>
+              </ul>
+            </div>
+            <div className="h-full xl:flex items-center justify-end hidden">
+              <div className="w-full h-full flex items-center">
+                <div className="w-full pr-12 h-full flex items-center border-gray-300 border-r">
+                  <div className="relative w-full">
+                    <div className="text-gray-800 absolute ml-3 inset-0 m-auto w-4 h-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-search"
+                        width={16}
+                        height={16}
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <circle cx={10} cy={10} r={7} />
+                        <line x1={21} y1={21} x2={15} y2={15} />
+                      </svg>
+                    </div>
+                    <input
+                      className="border border-gray-300 focus:outline-none focus:border-indigo-700 w-80 rounded text-sm text-gray-200 bg-gray-100 pl-8 py-2"
+                      type="text"
+                      placeholder="Хайх ..."
+                    />
+                  </div>
                 </div>
-                <span>
-                  {" "}
-                  {userContext.userData ? userContext.userData.personname : ""}
-                </span>
+                <div className="w-full h-full flex">
+                  <div className="w-32 h-full flex items-center justify-center border-gray-300 border-r text-gray-400 cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-bell"
+                      width={28}
+                      height={28}
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                      <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+                    </svg>
+                  </div>
+                  <div className="w-full flex items-center justify-end relative cursor-pointer">
+                    <img
+                      className="rounded-full h-10 w-10 object-cover"
+                      src={userContext.userData.emppicture}
+                      alt="logo"
+                    />
+                    {/* <p className="text-gray-800 text-sm ml-2 ">
+                      {userContext.userData.username}
+                      <Link href="/logout">
+                        <a>
+                          <span className="ml-3">Гарах</span>
+                        </a>
+                      </Link>
+                    </p> */}
+                  </div>
+                </div>
               </div>
-
-              <div className="hidden md:flex items-center space-x-2">
-                <Link href="logout">
-                  <a>
-                    <i
-                      className="far fa-sign-out-alt text-black"
-                      title="Гарах"
-                      style={{ fontSize: 19 }}
-                    ></i>
-                  </a>
-                </Link>
-              </div>
-              {/* <Icons data={dataIcons1} /> */}
             </div>
           </div>
-        </div>
+        </nav>
       </div>
-    </div>
+    </>
   );
 }

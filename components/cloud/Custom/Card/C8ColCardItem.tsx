@@ -21,8 +21,8 @@ type PropsType = {
 
 const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
   if (isEmpty(item)) return null;
-  console.log("🚀 ~ item", item);
-  console.log("🚀 ~ positionConfig", positionConfig);
+  //console.log("🚀 ~ item", item);
+  //console.log("🚀 ~ positionConfig", positionConfig);
 
   // console.log("C8ColCardItem positionO", position);
   // console.log("C8ColCardItem iconStyle", iconStyle);
@@ -45,7 +45,7 @@ const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
   // }
 
   return (
-    <div className="w-full h-full bg-white rounded-lg p-4 mr-3 text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-sso hover:to-sso-gradientfinish flex flex-row items-center">
+    <div className="w-full h-full bg-white rounded-lg p-4 mr-3 text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-green-200 hover:to-green-200  flex flex-row items-center">
       <div className="inline mr-4">
         <MainImage
           item={renderPositionType(item, "position2", positionConfig)}
@@ -56,7 +56,7 @@ const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
         item={renderPositionType(item, "position1", positionConfig)}
         link=""
         customStyle={{}}
-        customClassName="text-sm font-bold inline"
+        customClassName="text-sm font-medium inline text-gray-600"
         truncateRow={0}
       />
     </div>

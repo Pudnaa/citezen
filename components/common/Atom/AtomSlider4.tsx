@@ -80,6 +80,7 @@ const AtomSlider4: FC<PropsType> = ({
         style={{
           position: "absolute",
           bottom: "15px",
+          color: "#44C889",
         }}
       >
         <ul> {dots} </ul>

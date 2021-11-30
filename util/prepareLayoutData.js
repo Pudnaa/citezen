@@ -1,12 +1,12 @@
 import { serverData } from "service/Service";
 // import * as Constants from "@constants/metaConstants";
-import { meta, devMeta, cloudMeta } from "config/service";
+import { metaConfig } from "config/metaConfig";
 import { jsonParse } from "util/helper";
 import _ from "lodash";
 
 //*jagaa
 //layout Data Prepare functions
-export const prepareWithBody = async (rawLayoutConfig) => {
+const prepareWithBody = async (rawLayoutConfig, ourMetaConstant) => {
   const thisLayoutNemgoo = jsonParse(rawLayoutConfig["layoutnemgoo"]);
   const thisLayout = thisLayoutNemgoo?.layout;
   // const { metaid, sectionCode: masterSectionCode } = thisLayoutNemgoo?.master;
@@ -15,9 +15,14 @@ export const prepareWithBody = async (rawLayoutConfig) => {
 
   const masterLayoutConfig =
     (
-      await serverData(devMeta.serverUrl, meta.COMMAND_LAYOUT, {
-        filtermetadataid: metaid,
-      })
+      await serverData(
+        ourMetaConstant.serverUrl,
+        metaConfig.COMMAND_LAYOUT,
+        {
+          filtermetadataid: metaid,
+        },
+        ourMetaConstant
+      )
     )?.result || {};
 
   const masterLayoutNemgoo = jsonParse(masterLayoutConfig["layoutnemgoo"]);
@@ -31,7 +36,7 @@ export const prepareWithBody = async (rawLayoutConfig) => {
   return [masterLayoutConfig, masterLayout];
 };
 
-const findBodyAndUpdate = (object, findObject, thisLayout) => {
+const findBodyAndUpdate = (object = [], findObject, thisLayout) => {
   let myObject;
 
   for (let item of object) {
@@ -54,23 +59,28 @@ const findBodyAndUpdate = (object, findObject, thisLayout) => {
   return myObject;
 };
 
-export const prepareSectionList = async (mergedLayoutConfig) => {
+const prepareSectionList = async (mergedLayoutConfig, ourMetaConstant) => {
   const sectionList =
     _.values(mergedLayoutConfig?.meta_bp_layout_section) || [];
 
   let readySectionList = [];
   for (let item of sectionList) {
     if (
-      item.metatypeid === meta.METATYPE_BUSINESSPROCESS &&
+      item.metatypeid === metaConfig.METATYPE_BUSINESSPROCESS &&
       item.islayout === "1"
     ) {
       // console.log("ЭНИЙГ ХАРААЧ", item.widgetcode);
 
       const layoutConfig =
         (
-          await serverData(devMeta.serverUrl, meta.COMMAND_LAYOUT, {
-            filtermetadataid: item.metadataid,
-          })
+          await serverData(
+            ourMetaConstant.serverUrl,
+            metaConfig.COMMAND_LAYOUT,
+            {
+              filtermetadataid: item.metadataid,
+            },
+            ourMetaConstant
+          )
         )?.result || {};
 
       const deepLayoutConfig = (await prepareSectionList(layoutConfig)) || {};
@@ -92,3 +102,48 @@ export const prepareSectionList = async (mergedLayoutConfig) => {
 
   return readyLayoutConfig;
 };
+
+export default async function prepareLayoutData(ourMetaConstant, layoutid) {
+  //ERP-аас тухайн Page Layout-ийн бүх тохиргоо ирнэ. Том JSON байгаа.
+  const pageLayoutConfig =
+    (
+      await serverData(ourMetaConstant.serverUrl, metaConfig.COMMAND_LAYOUT, {
+        filtermetadataid: layoutid,
+      })
+    )?.result || [];
+
+  //body Master пэйж байвал түүнтэй нэгтгэж нэг том Page Layout гаргаж авна.
+  const [mergedLayoutConfig, mergedLayout = []] = await prepareWithBody(
+    pageLayoutConfig,
+    ourMetaConstant
+  );
+
+  //Цаашид React даяар ашиглах боломжтой бэлэн Page Layout-ийн том JSON гаргаж авна.
+  const readyMergedLayoutConfig = await prepareSectionList(
+    mergedLayoutConfig,
+    ourMetaConstant
+  );
+
+  //Нэг Widget буюу адилхан байвал дахин нэмэх хэрэггүй.
+  let meta_bp_layout_section = [
+    ...readyMergedLayoutConfig.meta_bp_layout_section,
+  ];
+  const eded = _.values(pageLayoutConfig.meta_bp_layout_section);
+  if (readyMergedLayoutConfig.meta_bp_layout_section[0]?.id !== eded[0]?.id) {
+    meta_bp_layout_section = [...meta_bp_layout_section, ...eded];
+  }
+
+  //Page даяар ажиллах General Nemgoo-г Master Пэйжийн layoutNemgoo-оос олж авах ёстой.
+  const readyMergedLayoutNemgoo = jsonParse(
+    readyMergedLayoutConfig.layoutnemgoo
+  );
+  const generalConfig = readyMergedLayoutNemgoo?.config || {};
+
+  return {
+    mergedLayout,
+    readyMergedLayoutConfig,
+    meta_bp_layout_section,
+    generalConfig,
+    ourMetaConstant,
+  };
+}

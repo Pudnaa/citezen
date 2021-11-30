@@ -13,7 +13,6 @@ export const processTransform = (params: any) => {
       ]),
       paramsLength = paramsAttr.length,
       header = [],
-      __dataElement: any = [],
       __lookupParamConfig = {},
       __groupPath = {},
       details = [];
@@ -21,18 +20,25 @@ export const processTransform = (params: any) => {
     params["meta_process_param_attr_link_mobile"] = paramsAttr;
 
     __groupPath = _.groupBy(paramsAttr, function (n) {
-      return n.paramrealpath;
+      return n.paramrealpath.toLowerCase();
     });
+
+    let __dataElement: any = {};
 
     for (i; i < paramsLength; i++) {
       if (paramsAttr[i]["paramrealpath"].indexOf(".") < 0) {
         paramsAttr[i]["paramrealpath"] =
           paramsAttr[i]["paramrealpath"].toLowerCase();
         header.push(paramsAttr[i]);
-        __dataElement[paramsAttr[i]["paramrealpath"]] = getDefaultValue(
-          paramsAttr[i]["defaultvalue"],
-          {}
-        );
+
+        if (paramsAttr[i]["datatype"] == "group") {
+          __dataElement[paramsAttr[i]["paramrealpath"]] = [];
+        } else {
+          __dataElement[paramsAttr[i]["paramrealpath"]] = getDefaultValue(
+            paramsAttr[i]["defaultvalue"],
+            {}
+          );
+        }
       } else {
         paramsAttr[i]["paramrealpath"] =
           paramsAttr[i]["paramrealpath"].toLowerCase();

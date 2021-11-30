@@ -1,8 +1,11 @@
-import { serverData } from "../../service/Service";
+import { serverData } from "service/Service";
 import { jsonParse } from "util/helper";
-import { meta } from "../../config/service";
+import { metaConfig } from "config/metaConfig";
 
 export default async (req: any, res: any) => {
+  const metaName: string = req.query.metaName || "metaDev";
+  const ourMetaConstant = (metaConfig as any)[metaName];
+
   let param = {
     systemMetaGroupId: req.query.metaid || "",
     pagingWithoutAggregate: req.query.pagingwithoutaggregate || "0",
@@ -12,11 +15,16 @@ export default async (req: any, res: any) => {
     },
     paging: {
       offset: req.query.offset || "1",
-      pageSize: req.query.pagesize || "5000",
+      pageSize: req.query.pagesize || "200",
     },
   };
 
-  const { result } = await serverData(meta.serverUrl, meta.dataview, param);
+  const { result } = await serverData(
+    ourMetaConstant.serverUrl,
+    metaConfig.dataview,
+    param,
+    ourMetaConstant,
+  );
 
   res.status(200).json(result);
 };

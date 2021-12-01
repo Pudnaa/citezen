@@ -71,7 +71,7 @@ const AtomPaginate: FC<PropsType> = ({
   return (
     <>
       {Items(currentItems)}
-      <ReactPaginate
+      {/* <ReactPaginate
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={1}
@@ -89,7 +89,7 @@ const AtomPaginate: FC<PropsType> = ({
         containerClassName="pagination flex py-4"
         activeClassName="bg-blue-500 text-white "
         renderOnZeroPageCount={null}
-      />
+      /> */}
     </>
   );
 };

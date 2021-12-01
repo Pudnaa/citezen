@@ -34,7 +34,7 @@
     "html-entities": "^2.3.2",
     "html-react-parser": "^1.4.0",
     "i": "^0.3.6",
-    "iron-session": "^6.0.2",
+    "iron-session": "^6.0.3",
     "js-base64": "^3.6.1",
     "js-cookie": "^3.0.0",
     "json-to-css": "^0.1.0",

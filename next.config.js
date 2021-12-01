@@ -31,4 +31,39 @@ module.exports = {
 
     return config;
   },
+  async redirects() {
+    return [
+      // 307 temporary redirect
+      {
+        source: "/",
+        destination: "/under-construction",
+        permanent: false,
+      },
+      // 308 permanent redirect
+      {
+        source: "/posts",
+        destination: "/blog",
+        permanent: true, // permanent redirect
+      },
+      // With parameter and custom status code
+      {
+        source: "/photos/:id",
+        destination: "/photo/:id",
+        statusCode: 303, // see other
+      },
+    ];
+  },
+  async headers() {
+    return [
+      { source: "/user/:id", headers: [{ key: "x-path", value: "hi" }] },
+
+      {
+        source: "/:lang(en|es)?/about",
+        headers: [
+          { key: "x-path", value: "hi" },
+          { key: "x-another", value: "hi-again" },
+        ],
+      },
+    ];
+  },
 };

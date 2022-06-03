@@ -32,3 +32,40 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## docker new image
+
+docker build --pull --rm -f "Dockerfile" -t citizen:v1
+
+## server дээр шинэчлэлт авах дараалал
+
+## PORT=3002 NODE_PORT=3002 pm2 start npm --name "next" -- start
+
+## pm2
+
+- https://pm2.keymetrics.io/docs/usage/quick-start/
+- pm2 restart app_name
+- pm2 reload app_name
+- pm2 stop app_name
+- pm2 delete app_name
+- pm2 logs --lines 200
+- pm2 start npm --name "citizen" -- start
+
+- $ npm install pm2@latest -g
+
+## Update аваад Build хийгээд Server-ээ Restart хийх гол 3 команд
+
+- Эхлээд putty-аар сервер рүүгээ нэвтэрч орно.
+- Зохих folder руугаа орно.
+- Тэгээд зохих командуудаа өгч серверээ шинэчилнэ.
+
+Командууд:
+
+- svn update - project update (svn-ээс кодоо update авна.)
+- npm run build (NextJS-ээ шинээр build хийнэ)
+- pm2 restart customer [pm2 ps ашиглаж байгаа сервис] (серверээ restart хийнэ)
+
+customer.veritech.mn -г шинэчлэх
+
+- /home/frontend/customer
+- ./build.sh

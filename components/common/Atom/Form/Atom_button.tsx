@@ -3,7 +3,7 @@ import Atom_label from "./Atom_label";
 import NumberFormat from "react-number-format";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import { fieldHideShow, getAtomValue } from "util/helper";
-
+import { overrideTailwindClasses } from "tailwind-override";
 type PropsType = {
   config: any;
   className: any;
@@ -26,7 +26,6 @@ const Atom_button: FC<PropsType> = ({
     formDataInitData,
     handleChangeContext,
     handleClickContext,
-    processConfig,
     validData,
   } = useContext(FormMetaContext);
 
@@ -39,11 +38,14 @@ const Atom_button: FC<PropsType> = ({
     });
   };
 
+  if (config?.columnwidth)
+    style = { ...style, width: parseInt(config?.columnwidth, 10) };
+
   return (
     <>
       <div
         className={`${
-          sectionConfig?.otherattr?.labelPosition == "top"
+          sectionConfig?.widgetnemgooReady?.labelPosition == "top"
             ? `flex flex-col`
             : `grid grid-cols-2 gap-4`
         } ${
@@ -53,18 +55,24 @@ const Atom_button: FC<PropsType> = ({
         }`}
       >
         <Atom_label
-          labelName={config.labelname}
+          labelName={
+            processExpression[config.paramname + "_labelname"] !== undefined
+              ? processExpression[config.paramname]
+              : config.labelname
+          }
           className={`${labelClassName} block`}
           isrequired={config.isrequired}
-          styles=''
+          styles=""
           sectionConfig={sectionConfig}
         />
 
         <button
-          type='button'
+          type="button"
           name={config.paramrealpath}
-          style={{ ...style, width: parseInt(config.columnwidth, 10) }}
-          className={`${className} bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2.5 text-sm`}
+          style={{ ...style }}
+          className={overrideTailwindClasses(
+            `bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2.5 text-sm ${className}`
+          )}
           onClick={handlerClick}
         >
           {config.labelname}

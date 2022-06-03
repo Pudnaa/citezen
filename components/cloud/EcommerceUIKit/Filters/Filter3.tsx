@@ -21,19 +21,19 @@ import {
 export default function Filter3() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [show, setShow] = useState(false);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Filter3 config", config);
-  // console.log("Filter3 datasrc", datasrc);
-  // console.log("Filter3 otherattr", otherattr);
+  // console.log("Filter3 readyDatasrc", readyDatasrc);
+  // console.log("Filter3 widgetnemgooReady", widgetnemgooReady);
   // console.log("Filter3 positionConfig", positionConfig);
 
   return (

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { listToTree, prepareIsOpen } from "util/helper";
 import { Layout, Menu, Breadcrumb } from "antd";
+
 import _ from "lodash";
 import {
   AtomTitle,
@@ -17,107 +18,98 @@ import { useCloud } from "hooks/use-cloud";
 export default function SubMenu() {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    otherattr,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const router = useRouter();
   const cloudContext = useCloud();
   const [selectedId, setSelectedId] = useState<any>(
-    router.query?.[widgetnemgoo?.listconfig?.fieldid || "id"],
+    router.query?.[widgetnemgooReady?.listconfig?.fieldid || "id"]
   );
   const { SubMenu } = Menu;
 
   if (_.isEmpty(readyDatasrc)) return null;
 
   // console.log("SubMenu config", config);
-  console.log("SubMenu readyDatasrc", readyDatasrc);
+  // console.log("SubMenu readyDatasrc", readyDatasrc);
   // console.log("🚀 ~ SubMenu ~ readyDatasrc", readyDatasrc);
-  // console.log("SubMenu widgetnemgoo", widgetnemgoo);
+  // console.log("SubMenu widgetnemgooReady", widgetnemgooReady);
   // console.log("SubMenu positionConfig", positionConfig);
 
   const treeReadyDatasrc: any =
     prepareIsOpen(
       listToTree(readyDatasrc, {
-        idKey: widgetnemgoo?.listconfig?.fieldid || "id",
-        parentKey: widgetnemgoo?.listconfig?.fieldparentid || "parentid",
+        idKey: widgetnemgooReady?.listconfig?.fieldid || "id",
+        parentKey: widgetnemgooReady?.listconfig?.fieldparentid || "parentid",
         childrenKey: "children",
       }),
       selectedId,
-      positionConfig,
+      positionConfig
     )[0] || [];
 
+  // console.log("🚀 ~ SubMenu ~ widgetnemgooReady", widgetnemgooReady);
   // console.log("🚀 ~ SubMenu ~ treeReadyDatasrc", treeReadyDatasrc);
 
   const handleClick = (item: any) => {
-    // console.log("handleClick", item.item, widgetnemgoo.link, true);
-    cloudContext.buildCloudURL(item, widgetnemgoo.link, true);
+    // console.log("handleClick", item.item, widgetnemgooReady.link, true);
+    cloudContext.buildCloudURL(item, widgetnemgooReady.link, true);
   };
   return (
     <>
-      {/* <Title /> */}
-      <div className="w-full flex justify-start flex-col">
-        {/* <TreeMain
-          rawDatasrc={treeReadyDatasrc}
-          config={config}
-          color={widgetAllaround.color}
-          widgetnemgoo={widgetnemgoo}
-          customClassName=''
-          defaultSelectedId={selectedId}
-          indent={5}
-          onClickItem={(item: any) =>
-            cloudContext.buildCloudURL(item, widgetnemgoo.link, true)
-          }
-        /> */}
-        <Menu mode="inline">
-          {treeReadyDatasrc.map((item: any, index: number) => {
-            const withChildren: any = item?.children;
-            if (_.isEmpty(item?.children)) {
-              return (
-                // <Menu.Item key={index} onClick={(e: any) => handleClick(item)}>
-                <Menu.Item key={index}>
-                  {/* {item.itemcategoryname} */}
-                  <span className="flex flex-row justify-between">
-                    <RenderAtom item={item.position1} defaultAtom="text" />
-                    <RenderAtom item={item.position4} defaultAtom="text" />
-                  </span>
-                </Menu.Item>
-              );
-            } else {
-              return (
-                <SubMenu key={`sub-${index}`} title={item.itemcategoryname}>
-                  {withChildren.map((item: any, subindex: number) => {
-                    return (
-                      <Menu.Item
-                        // onClick={(e: any) => handleClick(item)}
-                        key={subindex}
-                      >
-                        {/* {item.itemcategoryname} */}
-                        <span className="flex flex-row justify-between">
-                          <RenderAtom
-                            item={item.position1}
-                            defaultAtom="text"
-                          />
-                          <RenderAtom
-                            item={item.position4}
-                            defaultAtom="text"
-                          />
-                        </span>
-                      </Menu.Item>
-                    );
-                  })}
-                </SubMenu>
-              );
-            }
-          })}
-        </Menu>
+      <div className="shadow-lg p-4 h-screen rounded overflow-x-auto scrollbar-thumb-gray-300  scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-gray-300 -dark scrollbar-thumb-rounded-full">
+        <p className="text-xl text-citizen-title ">Салбар</p>
+        <div className=" w-full flex justify-start flex-col ">
+          <TreeMain
+            rawDatasrc={treeReadyDatasrc}
+            color="citizen-blue"
+            customClassName="w-full "
+            defaultSelectedId={selectedId}
+            indent={5}
+          />
+          {/* <Menu mode="inline">
+						{treereadyDatasrc.map((item: any, index: number) => {
+							const withChildren: any = item?.children;
+							if (_.isEmpty(item?.children)) {
+							return (
+								<Menu.Item key={item?.id || index}>
+								<span className="flex flex-row justify-between">
+									<RenderAtom item={item.position1} defaultAtom="text" />
+									<RenderAtom item={item.position4} defaultAtom="text" />
+								</span>
+								</Menu.Item>
+							);
+							} else {
+							return (
+								<SubMenu key={`sub-${index}`} title={item.itemcategoryname}>
+								{withChildren.map((item: any, subindex: number) => {
+									return (
+									<Menu.Item
+										key={subindex}
+									>
+										<span className="flex flex-row justify-between">
+										<RenderAtom
+											item={item.position1}
+											defaultAtom="text"
+										/>
+										<RenderAtom
+											item={item.position4}
+											defaultAtom="text"
+										/>
+										</span>
+									</Menu.Item>
+									);
+								})}
+								</SubMenu>
+							);
+							}
+						})}
+					</Menu> */}
+        </div>
       </div>
     </>
   );

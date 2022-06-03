@@ -1,38 +1,23 @@
-import { FC, useContext } from "react";
-import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
+import { FC } from "react";
 import RenderAtom from "@components/common/Atom/RenderAtom";
+import ModalSkyResortProductReview from "@components/common/Modals/ModalSkyResortProductReview";
 
 type PropsType = {
   item?: any;
+  type?: string;
 };
 
-const SkyResortCard: FC<PropsType> = ({ item }) => {
-  const {
-    config,
-    datasrc,
-    readyDatasrc,
-    widgetnemgoo,
-    positionConfig,
-    metaConfig,
-    gridJsonConfig,
-    pathConfig,
-    Title,
-    widgetAllaround,
-  } = useContext(WidgetWrapperContext);
-
+const SkyResortCard: FC<PropsType> = ({ item, type = "default" }) => {
   // console.log("🚀 ~ item", item);
-  // console.log("🚀 ~ datasrc", datasrc);
-  // console.log("🚀 ~ positionConfig", positionConfig);
-  //console.log("🚀 ~ readyDatasrc", item);
-
+  // const isNemelt = type === "compact";
+  const isNemelt = false;
   return (
     <div className="relative flex flex-col w-full h-full overflow-hidden">
-      <div className="w-full h-60 bg-white flex-none relative">
-        {/* <img src={item.position2.value} alt="" className="w-full h-full" /> */}
+      <div className="w-full h-auto bg-white flex-none relative">
         <RenderAtom
           item={item?.position2}
           defaultAtom="image"
-          customClassName="w-full h-full rounded-t-xl"
+          customClassName="w-full h-auto rounded-t-xl"
         />
         <div className="absolute top-2 right-2">
           <RenderAtom
@@ -41,63 +26,51 @@ const SkyResortCard: FC<PropsType> = ({ item }) => {
             customProps={{ color: "green-300" }}
           />
         </div>
-        <div className="absolute bottom-2 left-4">
+      </div>
+
+      <div className="p-5 text-gray-600">
+        {!isNemelt && (
           <RenderAtom
             item={item?.position1}
             defaultAtom="title"
-            customClassName="font-bold text-2xl text-white uppercase"
-            customStyle={{ textShadow: "1px 1px 1px #454545" }}
             customProps={{
               truncateRow: 2,
             }}
+            customClassName={`hover:text-skyresort duration-300`}
+          />
+        )}
+        {isNemelt && <ModalSkyResortProductReview item={item} />}
+
+        <hr className="my-5" />
+
+        <RenderAtom
+          item={item?.position3}
+          defaultAtom="text"
+          customClassName=""
+          customProps={{
+            truncateRow: 4,
+          }}
+        />
+
+        <hr className="my-5" />
+
+        <div className="flex flex-row items-baseline space-x-4">
+          <RenderAtom item={item?.position4} defaultAtom="currency" />
+          <RenderAtom
+            item={item?.position92}
+            defaultAtom="text"
+            customClassName=""
           />
         </div>
       </div>
-      <div className="flex-grow w-full p-5 border-t h-full">
-        <div className="grid grid-cols-1 place-content-between h-full">
-          <div className="flex justify-between">
-            <div>
-              <RenderAtom
-                item={item?.position90}
-                defaultAtom="text"
-                customClassName="\"
-              />
-              <RenderAtom
-                item={item?.position4}
-                defaultAtom="currency"
-                customClassName=""
-              />
-            </div>
-            <div className="flex flex-col">
-              <RenderAtom
-                item={item?.position91}
-                defaultAtom="text"
-                customClassName=" float-right"
-              />
-              <RenderAtom
-                item={item?.position23}
-                defaultAtom="currency"
-                customClassName=""
-              />
-            </div>
-          </div>
+
+      {!isNemelt && (
+        <div className="grow w-full p-5 h-full">
           <div className="w-full">
-            <div className="flex justify-center mt-5">
-              <RenderAtom
-                item={{ value: "Сагс" }}
-                defaultAtom="button"
-                customClassName="rounded-full border-2 border-skyresort hover:bg-white bg-skyresort hover:text-black"
-                customProps={{
-                  type: "primary",
-                  icon: "fal fa-shopping-bag",
-                  color: "",
-                  customClassName: "text-black font-bold",
-                }}
-              />
-            </div>
+            <RenderAtom item={item?.position9} defaultAtom="text" />
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -24,18 +24,17 @@ const Banner5WeeklyLanding = () => {
   const {
     config,
     readyDatasrc,
-    datasrc,
-    otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(readyDatasrc)) return null;
+
   // console.log("Banner5WeeklyLanding config", config);
-  // console.log("Banner5WeeklyLanding readyDatasrc", datasrc);
-  // console.log("Banner5WeeklyLanding otherattr", otherattr);
+  // console.log("Banner5WeeklyLanding readyDatasrc", readyDatasrc);
+  // console.log("Banner5WeeklyLanding widgetnemgooReady", widgetnemgooReady);
   // console.log("Banner5WeeklyLanding positionConfig", positionConfig);
   return (
     <div className=" container mx-auto py-9 md:py-12 ">
@@ -45,11 +44,11 @@ const Banner5WeeklyLanding = () => {
             <div className="flex flex-col  md:flex-row justify-around  items-stretch  bg-black py-8 md:py-11 lg:py-3 px-4 md:px-8 lg:px-16">
               <div className="flex items-center ">
                 <div className="flex  items-center w-full">
-                <RenderAtom
-                 item={item?.position1}
-                  defaultAtom="title"
-                  customClassName="text-2xl leading-9 font-medium text-white"
-                   />
+                  <RenderAtom
+                    item={item?.position1}
+                    defaultAtom="title"
+                    customClassName="text-2xl leading-9 font-medium text-white"
+                  />
                   <AtomButton
                     item={item.button}
                     customClassName="w-full mb-10 m-10 sm:w-auto mt-12 md:mt-10 bg-blue-600 rounded uppercase py-2 px-6 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-white hover:text-gray-600"

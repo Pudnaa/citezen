@@ -17,8 +17,8 @@ import {
 
 type PropsType = {
   config: any;
-  datasrc: any;
-  otherattr: any;
+  readyDatasrc: any;
+  widgetnemgooReady: any;
   customClassName?: string;
   customStyle?: any;
   selectedId: number;
@@ -28,20 +28,20 @@ type PropsType = {
 
 const TreeMainCategory: FC<PropsType> = ({
   config,
-  datasrc,
-  otherattr,
+  readyDatasrc,
+  widgetnemgooReady,
   customClassName,
   customStyle,
   selectedId,
   setSelectedId,
   indent,
 }) => {
-  const [data, setData] = useState<any>(datasrc);
-  if (_.isEmpty(datasrc)) return null;
+  const [data, setData] = useState<any>(readyDatasrc);
+  if (_.isEmpty(readyDatasrc)) return null;
   const positionConfig = positionToPath(config.bpsectiondtl);
   // console.log("TreeMainCategory config", config);
-  // console.log("TreeMainCategory datasrc", datasrc);
-  // console.log("TreeMainCategory otherattr", otherattr);
+  // console.log("TreeMainCategory readyDatasrc", readyDatasrc);
+  // console.log("TreeMainCategory widgetnemgooReady", widgetnemgooReady);
 
   // const [selectedId, setSelectedId] = useState<number>(-1);
 
@@ -53,9 +53,9 @@ const TreeMainCategory: FC<PropsType> = ({
         const selected = selectedId === item.id;
 
         return (
-          <span key={index}>
+          <span key={item?.id || index}>
             <TreeItem
-              key={index}
+              key={item?.id || index}
               item={item}
               positionConfig={positionConfig}
               customClassName={`rounded-2xl bg-white py-3 px-5  mb-4 ${
@@ -79,8 +79,8 @@ const TreeMainCategory: FC<PropsType> = ({
               <>
                 <TreeMainCategory
                   config={config}
-                  datasrc={item?.children}
-                  otherattr={otherattr}
+                  readyDatasrc={item?.children}
+                  widgetnemgooReady={widgetnemgooReady}
                   customClassName={`ml-${indent}`}
                   selectedId={selectedId}
                   setSelectedId={setSelectedId}

@@ -4,19 +4,22 @@ import { isEmpty } from "lodash";
 import RenderAtom from "@components/common/Atom/RenderAtom";
 
 export default function SubscribeButtonWithOutlinedInput() {
-  const { config, readyDatasrc, otherattr, positionConfig, widgetAllaround } =
-    useContext(WidgetWrapperContext);
-
-  if (isEmpty(readyDatasrc)) return null;
+  const {
+    config,
+    readyDatasrc,
+    widgetnemgooReady,
+    positionConfig,
+    widgetAllaround,
+  } = useContext(WidgetWrapperContext);
 
   // console.log("SubscribeButtonWithOutlinedInput config", config);
-  // console.log("SubscribeButtonWithOutlinedInput datasrc", datasrc);
-  // console.log("SubscribeButtonWithOutlinedInput otherattr", otherattr);
+  // console.log("SubscribeButtonWithOutlinedInput readyDatasrc", readyDatasrc);
+  // console.log("SubscribeButtonWithOutlinedInput widgetnemgooReady", widgetnemgooReady);
 
   return readyDatasrc.map((item: any, index: number) => {
     return (
       <div
-        key={index}
+        key={item?.id || index}
         className="w-full flex flex-col items-center justify-center"
       >
         <div>

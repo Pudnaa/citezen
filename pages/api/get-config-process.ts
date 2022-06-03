@@ -1,26 +1,31 @@
-import { serverData } from "../../service/Service";
+import { serverData } from "../../service/callERPServices";
 import { metaConfig } from "../../config/metaConfig";
 
 import { jsonParse } from "util/jsonParse";
 
 export default async (req: any, res: any) => {
+  const metaName: string = req?.query?.metaName || "metaDev";
+  const ourMetaConstant = metaConfig?.[metaName];
+
   const processcode = req.query.processcode || "";
   const parameters = jsonParse(req.query.parameters || "{}");
+  const getparameters = jsonParse(req.query.getparameters || "{}");
 
   const { result } = await serverData(
-    metaConfig.serverUrl,
+    ourMetaConstant.serverUrl,
     processcode,
-    parameters
+    parameters,
+    ourMetaConstant,
   );
 
   let getData: any = null;
   if (result.getdataprocesscode) {
     getData = await serverData(
-      metaConfig.serverUrl,
+      ourMetaConstant.serverUrl,
       result.getdataprocesscode,
-      {
-        id: "16340320450671",
-      }
+      getparameters,
+      ourMetaConstant,
+      { returnByStandartJson: 1 },
     );
     getData = getData.result;
   }

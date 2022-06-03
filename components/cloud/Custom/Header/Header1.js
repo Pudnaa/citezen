@@ -66,7 +66,10 @@ const Icons = ({ data, defaultClassName }) => {
     <div className={`h-full flex items-center ${defaultClassName}`}>
       {data.map((item, index) => {
         return (
-          <div key={index} className="h-full flex items-center mr-4">
+          <div
+            key={item?.id || index}
+            className="h-full flex items-center mr-4"
+          >
             <button
               aria-label="show notifications"
               className="relative h-full flex items-center justify-center cursor-pointer"
@@ -132,7 +135,7 @@ const MainNav = () => {
       <ul className="md:flex items-center h-full hidden">
         {dataNav.map((item, index) => {
           return (
-            <li key={index}>
+            <li key={item?.id || index}>
               <a
                 href="javascript:void(0)"
                 className="focus:outline-none font-medium cursor-pointer h-full flex items-center text-sm mr-6 tracking-normal"
@@ -232,7 +235,7 @@ const MobileVersion = ({ sideBar, setsideBar }) => {
                   </div>
                   {dataNav.map((item, index) => {
                     return (
-                      <li key={index}>
+                      <li key={item?.id || index}>
                         <a className="cursor-pointer">
                           <div className=" pt-5">
                             <div className="flex items-center">
@@ -363,7 +366,7 @@ function CustomCardInfo2({
           <i className={`fal fa-${item.icon} text-xl`}></i>
         </button>
 
-        <div className="flex-grow my-3 pl-16 pr-5 h-full rounded-full bg-gray-100 flex items-center">
+        <div className="grow my-3 pl-16 pr-5 h-full rounded-full bg-gray-100 flex items-center">
           <p className="text-black font-semibold text-sm truncate">
             {item.title}
           </p>

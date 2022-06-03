@@ -1,30 +1,23 @@
 import React, { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import _ from "lodash";
-import {
-  AtomTitle,
-  AtomText,
-  AtomNumber,
-  AtomIcon,
-  AtomButton,
-} from "@components/common/Atom";
+import { AtomButton } from "@components/common/Atom";
 import DataviewJ1InsideWidget from "./DataviewJ1InsideWidget";
 
 function DataviewJ1() {
   const {
     config,
-    datasrc,
-    widgetnemgoo,
+    readyDatasrc,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
   } = useContext(WidgetWrapperContext);
 
   // console.log("DataviewJ1 config", config);
-  // console.log("DataviewJ1 datasrc", datasrc);
-  // console.log("DataviewJ1 widgetnemgoo", widgetnemgoo);
+  // console.log("DataviewJ1 readyDatasrc", readyDatasrc);
+  // console.log("DataviewJ1 widgetnemgooReady", widgetnemgooReady);
   // console.log("DataviewJ1 positionConfig", positionConfig);
   console.log("DataviewJ1 metaConfig", metaConfig);
 
@@ -39,7 +32,7 @@ function DataviewJ1() {
       <div className="flex flex-row space-x-4 my-5">
         {dataviewProcessList.map((item: any, index: number) => (
           <AtomButton
-            key={index}
+            key={item?.id || index}
             item={item.processname}
             type="primary-border"
             icon={`far ${item.iconname}`}
@@ -48,7 +41,10 @@ function DataviewJ1() {
         ))}
       </div>
 
-      <DataviewJ1InsideWidget config={config} widgetnemgoo={widgetnemgoo} />
+      <DataviewJ1InsideWidget
+        config={config}
+        widgetnemgooReady={widgetnemgooReady}
+      />
     </>
   );
 }

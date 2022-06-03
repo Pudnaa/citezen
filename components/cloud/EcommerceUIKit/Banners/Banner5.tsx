@@ -22,23 +22,23 @@ import {
 const Banner5 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Banner5 config", config);
-  // console.log("Banner5 datasrc", datasrc);
-  // console.log("Banner5 otherattr", otherattr);
+  // console.log("Banner5 readyDatasrc", readyDatasrc);
+  // console.log("Banner5 widgetnemgooReady", widgetnemgooReady);
   // console.log("Banner5 positionConfig", positionConfig);
   return (
     <div className="container mx-auto py-9 md:py-12 px-4 md:px-6">
-      {datasrc &&
-        datasrc.map((item: any, index: number) => {
+      {readyDatasrc &&
+        readyDatasrc.map((item: any, index: number) => {
           return (
             <div className="flex flex-col md:flex-row justify-between items-strech bg-gray-50 py-8 md:py-11 lg:py-10 px-4 md:px-8 lg:px-16">
               <div className="flex items-center">

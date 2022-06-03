@@ -1,179 +1,214 @@
 import { values } from "lodash";
 // import {BottomModal} from "../components/popUp/BottomModal";
-// import { getFunctionMetaDataId } from "../service/ServerFn";
 import fetchJson from "lib/fetchJson";
 import {
-  searchJsonValueGet,
-  getRowItems,
-  isObject,
-  mergeJsonObjs,
-  isEmpty,
-  functionNameReplace,
+	searchJsonValueGet,
+	getRowItems,
+	isObject,
+	mergeJsonObjs,
+	isEmpty,
 } from "./helper";
-import { expressionConvert } from "./expression";
+import { jsonParse } from "util/jsonParse";
+import axios from "axios";
+import { BreadcrumbJsonLd } from "next-seo";
+import { notification } from "antd";
+import parseHtml from "html-react-parser";
+import { decode } from "html-entities";
 
 //======================================== Expressions Functions  ===========================
 // export const callprocess = async (metacode: any, parameter: any) => {
 //   parameter = parameter.split("|");
 //   var json = "";
-//   // for (var a in parameter) {
-//   //   var q = parameter[a].split('@');
-//   //   var long = q[0].split(".");
-//   //   if (long.length == 1) {
-//   //     if ($rootScope.ItemDtlData[q[0]] != undefined) {
-//   //       json = json + '"' + q[1] + '":"' + $rootScope.ItemDtlData[q[0]].toString() + '",';
-//   //     }
-//   //   } else {
-//   //     if ($rootScope.selectDataViewItemValue[long[1]] != undefined) {
-//   //       json = json + '"' + q[1] + '":"' + $rootScope.selectDataViewItemValue[long[1]].toString() + '",';
-//   //     }
-//   //   }
-//   // }
-//   // if (!isEmpty(json)) {
-//   //   var jsonp = JSON.parse("{" + json.substr(0, json.length - 1) + "}");
-//   //   $stateParams.item = { defualtgetValue: jsonp };
-//   // }
-//   // else {
-//   //   $stateParams.item = "";
-//   // }
-//   // var metaID = await getFunctionMetaDataId(metacode);
-//   var value = { actionmetatypeid: "200101010000011", actionmetadataid: metaID };
-//   // nextState(value);
+//   for (var a in parameter) {
+//     var q = parameter[a].split("@");
+//     var long = q[0].split(".");
+//     if (long.length == 1) {
+//       if (bigDatas[q[0]] != undefined) {
+//         json = json + '"' + q[1] + '":"' + bigDatas[q[0]].toString() + '",';
+//       }
+//     } else {
+//       if (selectDataViewItemValue[long[1]] != undefined) {
+//         json = json + '"' + q[1] + '":"' + selectDataViewItemValue[long[1]].toString() + '",';
+//       }
+//     }
+//   }
+//   var criteria = {};
+//   if (!isEmpty(json)) {
+//     var jsonp = JSON.parse("{" + json.substr(0, json.length - 1) + "}");
+//     criteria = {defualtgetValue: jsonp};
+//   } else {
+//     criteria = "";
+//   }
+//   var metaID = await getFunctionMetaDataId(metacode);
+//   var value = {actionmetatypeid: "200101010000011", actionmetadataid: metaID};
+//   nextState(value, criteria);
 // };
 
-export function hidebutton(type: any) {
-  return;
+export function changeLabelName(
+	path: any,
+	pathText: any,
+	processExpression: any,
+) {
+	processExpression[path + "_labelname"] = pathText;
+}
+
+export function hideButton(type: any, processExpression: any) {
+	processExpression.saveBtn = "hide";
 }
 
 export const runprocessvalue = async (
-  command: any,
-  parameter: any,
-  get: any,
-  item: any,
-  label: any
+	command: any,
+	parameter: any,
+	get: any,
+	item: any,
+	label: any,
 ) => {
-  parameter = parameter.split("|");
-  var json = "";
-  var isEmptyJson = true;
-  for (var a in parameter) {
-    var q = parameter[a].split("@");
-    var itemType = searchJsonValueGet(label, "paramrealpath", q[1]);
-    if (!isEmpty(itemType) && itemType[0].lookuptype == "combo") {
-      item[q[1]] = item[q[1] + "combo"].id;
-      isEmptyJson = false;
-    }
-    if (!isNaN(parseFloat(q[0]))) {
-      json = json + '"' + q[1] + '":"' + q[0] + '",';
-      isEmptyJson = false;
-    } else {
-      var asd = eval("item." + q[0].toLowerCase());
-      if (asd != undefined) {
-        json = json + '"' + q[1] + '":"' + asd + '",';
-        isEmptyJson = false;
-      } else if (!isEmpty(parseFloat(q[0]))) {
-        json = json + '"' + q[1] + '":"' + q[0] + '",';
-        isEmptyJson = false;
-      }
-    }
-  }
-  if (!isEmptyJson) {
-    let returnValue = "";
-    var jsonp = "{" + json.substr(0, json.length - 1) + "}";
-    const result: any = await fetchJson(
-      `/api/get-process?processcode=${command}&parameters=${jsonp}`
-    );
-    if (result && get) {
-      returnValue = result[get] ? result[get] : "";
-    } else {
-      returnValue = "";
-    }
-    return returnValue;
-  } else {
-    return "";
-  }
-};
-
-export const getprocessparam = async (
-  command: any,
-  parameter: any,
-  item: any,
-  label: any
-) => {
-  parameter = parameter.split("|");
-  var json = "";
-  for (var a in parameter) {
-    var q = parameter[a].split("@");
-    if (!isNaN(parseFloat(q[0]))) {
-      json = json + '"' + q[1] + '":"' + q[0] + '",';
-    } else {
-      try {
-        var asd = eval("item." + q[0].toLowerCase());
-      } catch (error) {}
-      if (asd != undefined) {
-        json = json + '"' + q[1] + '":"' + asd + '",';
-      } else if (!isEmpty(q[0])) {
-        json = json + '"' + q[1] + '":"' + q[0] + '",';
-      }
-    }
-  }
-  let returnValue = "";
-  var jsonp = encodeURIComponent("{" + json.substr(0, json.length - 1) + "}");
-  const result: any = await fetchJson(
-    `/api/get-process?processcode=${command}&parameters=${jsonp}`
-  );
-  if (result) {
-    returnValue = result;
-  } else {
-    returnValue = "";
-  }
-  return returnValue;
+	parameter = parameter.split("|");
+	var json = "";
+	var isEmptyJson = true;
+	for (var a in parameter) {
+		var q = parameter[a].split("@");
+		var itemType = searchJsonValueGet(label, "paramrealpath", q[1]);
+		if (!isEmpty(itemType) && itemType[0].lookuptype == "combo") {
+			item[q[1]] = item[q[1] + "combo"].id;
+			isEmptyJson = false;
+		}
+		if (!isNaN(parseFloat(q[0]))) {
+			json = json + '"' + q[1] + '":"' + q[0] + '",';
+			isEmptyJson = false;
+		} else {
+			var asd = eval("item." + q[0]);
+			if (asd != undefined) {
+				json = json + '"' + q[1] + '":"' + asd + '",';
+				isEmptyJson = false;
+			} else if (!isEmpty(parseFloat(q[0]))) {
+				json = json + '"' + q[1] + '":"' + q[0] + '",';
+				isEmptyJson = false;
+			}
+		}
+	}
+	if (!isEmptyJson) {
+		let returnValue = "";
+		var jsonp = "{" + json.substr(0, json.length - 1) + "}";
+		const result: any = await fetchJson(
+			`/api/get-process?processcode=${command}&parameters=${jsonp}`,
+		);
+		if (result && get) {
+			returnValue = result[get] ? result[get] : "";
+		} else {
+			returnValue = "";
+		}
+		return returnValue;
+	} else {
+		return "";
+	}
 };
 
 export const fillgroupbydata = async (
-  data: any,
-  grouppath: any,
-  parameter: any,
-  type: any,
-  item: any,
-  attr: any,
-  setFormDataInitData: any
+	data: any,
+	grouppath: any,
+	parameter: any,
+	type: any,
+	item: any,
+	attr: any,
+	setFormDataInitData?: any,
 ) => {
-  let field: any = [];
-  field.paramrealpath = grouppath.toLowerCase();
-  const listConfig = getRowItems(field, attr);
+	let field: any = [];
+	field.paramrealpath = grouppath;
+	const listConfig = getRowItems(field, attr);
 
-  let __dataElement = listConfig.reduce(function (map: any, item: any) {
-    map[item.paramname.toLowerCase()] = item.defaultvalue;
-    return map;
-  }, {});
+	let __dataElement = listConfig.reduce(function (map: any, item: any) {
+		map[item.paramname] = item.defaultvalue;
+		return map;
+	}, {});
 
-  parameter = parameter.split("|");
-  values(data).forEach((row: any) => {
-    let __dataElement2 = { ...__dataElement };
-    for (var a in parameter) {
-      var q = parameter[a].split("@");
-      let q2 = q[1].split(".");
+	parameter = parameter.split("|");
+	values(data).forEach((row: any) => {
+		let __dataElement2 = { ...__dataElement };
+		for (var a in parameter) {
+			var q = parameter[a].split("@");
+			let q2 = q[1].split(".");
 
-      if (!isNaN(parseFloat(q[0]))) {
-        __dataElement2[q2[1]] = q[0];
-      } else {
-        try {
-          var asd = eval("item." + q[0].toLowerCase());
-        } catch (error) {}
-        if (asd != undefined) {
-          __dataElement2[q2[1]] = asd;
-        } else if (!isEmpty(q[0])) {
-          __dataElement2[q2[1]] = row[q[0]];
-        }
-      }
-    }
+			if (!isNaN(parseFloat(q[0]))) {
+				__dataElement2[q2[1]] = q[0];
+			} else {
+				try {
+					var asd = eval("item." + q[0]);
+				} catch (error) {}
+				if (asd != undefined) {
+					__dataElement2[q2[1]] = asd;
+				} else if (!isEmpty(q[0])) {
+					__dataElement2[q2[1]] = row[q[0]];
+				}
+			}
+		}
 
-    item[field.paramrealpath] = [
-      ...(values(item[field.paramrealpath]) || []),
-      __dataElement2,
-    ];
-  });
-  setFormDataInitData(item);
+		item[field.paramrealpath] = [
+			...(values(item[field.paramrealpath]) || []),
+			__dataElement2,
+		];
+	});
+	if (setFormDataInitData) {
+		setFormDataInitData(item);
+	}
+};
+
+export const getprocessparam = async (
+	command: any,
+	parameter: any,
+	item: any,
+	label: any,
+) => {
+	parameter = parameter.split("|");
+	var json = "";
+	for (var a in parameter) {
+		if (parameter[a].toLowerCase() == "allpath") {
+			json = item;
+			break;
+		} else {
+			var q = parameter[a].split("@");
+			if (!isNaN(parseFloat(q[0]))) {
+				json = json + '"' + q[1] + '":"' + q[0] + '",';
+			} else {
+				try {
+					var asd = eval("item." + q[0]);
+				} catch (error) {}
+				if (asd != undefined) {
+					json = json + '"' + q[1] + '":"' + asd + '",';
+				} else if (!isEmpty(q[0])) {
+					json = json + '"' + q[1] + '":"' + q[0] + '",';
+				}
+			}
+		}
+	}
+
+	let returnValue = "",
+		jsonp = "";
+
+	if (!isObject(json)) {
+		jsonp = "{" + json.substr(0, json.length - 1) + "}";
+	} else {
+		jsonp = json;
+	}
+
+	const { data } = await axios.post(`/api/post-process`, {
+		processcode: command,
+		parameters: isObject(jsonp) ? jsonp : jsonParse(jsonp),
+	});
+	// console.log("expression main", data);
+	// console.log("expression main", command);
+	// console.log("expression main", data);
+	if (data.status === "success") {
+		returnValue = data.result;
+	} else {
+		notification.warning({
+			message: "Амжилтгүй боллоо",
+			description: parseHtml(decode(data.text)),
+			duration: 5,
+		});
+		returnValue = "";
+	}
+	return returnValue;
 };
 
 // $scope.fillGroupByDv = function (metaDataCode, processRowsPath, criteria, map, type) {
@@ -410,64 +445,141 @@ export const fillgroupbydata = async (
 // }
 
 export const getauthlogin = async (
-  str: any,
-  path: any,
-  process: any,
-  parameter: any,
-  item: any,
-  attr: any,
-  setFormDataInitData: any
+	str: any,
+	path: any,
+	process: any,
+	parameter: any,
+	item: any,
+	attr: any,
+	setFormDataInitData: any,
 ) => {
-  const authWindow = window.open(str, "myWindow", "width=500,height=450");
-  if (authWindow) {
-    parameter = parameter.split("|");
-    var json = "";
-    for (var a in parameter) {
-      var q = parameter[a].split("@");
-      if (!isNaN(parseFloat(q[0]))) {
-        json = json + '"' + q[1] + '":"' + q[0] + '",';
-      } else {
-        try {
-          var asd = eval("item." + q[0].toLowerCase());
-        } catch (error) {}
-        if (asd != undefined) {
-          json = json + '"' + q[1] + '":"' + asd + '",';
-        } else if (!isEmpty(q[0])) {
-          json = json + '"' + q[1] + '":"' + q[0] + '",';
-        }
-      }
-    }
+	const authWindow = window.open(str, "myWindow", "width=550,height=550");
+	if (authWindow) {
+		parameter = parameter.split("|");
+		var json = "";
+		for (var a in parameter) {
+			var q = parameter[a].split("@");
+			if (!isNaN(parseFloat(q[0]))) {
+				json = json + '"' + q[1] + '":"' + q[0] + '",';
+			} else {
+				try {
+					var asd = eval("item." + q[0]);
+				} catch (error) {}
+				if (asd != undefined) {
+					json = json + '"' + q[1] + '":"' + asd + '",';
+				} else if (!isEmpty(q[0])) {
+					json = json + '"' + q[1] + '":"' + q[0] + '",';
+				}
+			}
+		}
 
-    var popupTick = setInterval(async function () {
-      if (authWindow.closed) {
-        clearInterval(popupTick);
-        if (localStorage) {
-          const checkPage: any = localStorage.getItem("authcallbacklink");
-          const code: any = /\?state=(.+)\&scope=(.+)$/.exec(checkPage);
-          const scope: any = /\&scope=(.+)$/.exec(checkPage);
-          if (code && scope) {
-            // const response = { state: code[1], scope: scope[1] };
-            json = json.replace(':"scope"', ":" + '"' + scope[1] + '"');
-            json = json.replace(':"state"', ":" + '"' + code[1] + '"');
-            var jsonp = encodeURIComponent(
-              "{" + json.substr(0, json.length - 1) + "}"
-            );
-            const getResult = await fetchJson(
-              `/api/get-process?processcode=${process}&parameters=${jsonp}`
-            );
-            // .then((e) => {
-            //   item[path] = e.balancell[0].amount.value;
-            // setFormDataInitData(item);
-            // console.log(`item`, item);
-            // eval("setFormDataInitData(item)");
-            // });
-            item[path] = getResult.balancell[0].amount.value;
-            setFormDataInitData(item);
-          } else {
-            console.log("no auth");
-          }
-        }
-      }
-    }, 1000);
-  }
+		var popupTick = setInterval(async function () {
+			if (authWindow.closed) {
+				clearInterval(popupTick);
+				// item["loanconfirm_glmt"] = { 21211: 332 };
+				// setFormDataInitData(item);
+
+				if (localStorage) {
+					const checkPage: any = localStorage.getItem("authcallbacklink");
+					const code: any = /\?state=(.+)\&scope=(.+)$/.exec(checkPage);
+					const scope: any = /\&scope=(.+)$/.exec(checkPage);
+
+					if (code && scope) {
+						json = json.replace(':"scope"', ":" + '"' + scope[1] + '"');
+						json = json.replace(':"state"', ":" + '"' + code[1] + '"');
+						var jsonp = "{" + json.substr(0, json.length - 1) + "}";
+						console.log(" second requist in munkherdene", json);
+						if (path === "loanconfirm") {
+							item["loanconfirm_glmt"] = true;
+							item["scope"] = scope[1];
+							item["state"] = code[1];
+						} else {
+							const { data } = await axios.post(`/api/post-process`, {
+								processcode: process,
+								parameters: { ...item, ...jsonParse(jsonp) },
+							});
+							console.log(" second requist in", data);
+							item["loanrequest_res"] = data.status;
+							if (data.status === "success") {
+								if (path.indexOf("$") != -1) {
+									fillgroupbydata(
+										values(data.statements),
+										path.split("$")[0],
+										path.split("$")[1],
+										"empty",
+										item,
+										attr,
+										setFormDataInitData,
+									);
+								} else if (path === "loanrequest") {
+									item["loanrequest_glmt"] = data.status;
+								} else if (data.balancell) {
+									item[path] = data.balancell[0].amount.value;
+								}
+								localStorage.removeItem("authcallbacklink");
+							} else {
+								notification.warning({
+									message: "Амжилтгүй боллоо",
+									description: parseHtml(decode(data.text)),
+									duration: 5,
+								});
+							}
+						}
+						setFormDataInitData(item);
+					} else {
+						console.log("no auth");
+					}
+				}
+			}
+		}, 1000);
+	}
+};
+
+export const getKpiTemplate = async (templateId: any) => {
+	const parameters = `&parameters=${JSON.stringify({
+		id: templateId,
+	})}`;
+
+	const data: any = await fetchJson(
+		`/api/get-process?processcode=mobKpiTemplateGetDV_004${parameters}`,
+	);
+
+	for (let i = 0; i < Object.keys(data.kpitemplate).length; i++) {
+		let template = data.kpitemplate[i];
+		if (!isEmpty(template.kpitemplateindicator)) {
+			for (
+				let ik = 0;
+				ik < Object.keys(template.kpitemplateindicator).length;
+				ik++
+			) {
+				let indicator = template.kpitemplateindicator[ik];
+				if (!isEmpty(indicator?.kpitemplatedtlfact)) {
+					for (
+						let iks = 0;
+						iks < Object.keys(indicator.kpitemplatedtlfact).length;
+						iks++
+					) {
+						let fact = indicator.kpitemplatedtlfact[iks];
+						if (
+							(fact.showtype == "radio" || fact.showtype == "combo") &&
+							!isEmpty(fact.lookupmetadataid)
+						) {
+							let getJson: any = {};
+							if (!isEmpty(fact.lookupcriteria)) {
+								let criteria = fact.lookupcriteria.split("=");
+								getJson[criteria[0].toLowerCase()] = {
+									0: { operator: "=", operand: criteria[1] },
+								};
+							}
+							// fact.data = await getLookUpData(fact.lookupmetadataid, getJson);
+							delete fact.data.aggregatecolumns;
+							delete fact.data.paging;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return "data";
 };

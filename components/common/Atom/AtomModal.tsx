@@ -3,8 +3,8 @@ import { isEmpty, replace } from "lodash";
 import AtomLink from "./AtomLink";
 
 type PropsType = {
-  display: boolean;
-  setDisplay: any;
+  display?: boolean;
+  setDisplay?: any;
   headerText?: string;
   headerClassName?: string;
   body?: any;
@@ -126,14 +126,16 @@ const AtomModal: FC<PropsType> = ({
     <>
       <div
         id="popup"
-        className={`z-50 fixed w-full flex justify-center inset-0 ${
+        className={`z-50 fixed w-full max-h-full flex justify-center inset-0 ${
           display ? "flex" : "hidden"
         }`}
       >
         <div className="w-full h-full bg-gray-900 bg-opacity-50 z-0 absolute inset-0" />
         <div className="mx-auto container">
           <div className="flex items-center justify-center h-full w-full">
-            <div className="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-10/12 md:w-8/12 lg:w-1/2 2xl:w-2/5">
+            <div
+              className={`bg-white rounded-md shadow h-auto fixed ${customClassName}`}
+            >
               <div className=" rounded-tl-md rounded-tr-md px-2 md:px-5 md:py-4 py-7 flex items-center justify-between border-b">
                 <p className={`font-bold text-xl ${headerClassName}`}>
                   {headerText}
@@ -183,7 +185,7 @@ export default AtomModal;
         setDisplay={(edit: any) => {
           setShow(edit);
         }}
-        headerText={otherattr.title.title}
+        headerText={widgetnemgooReady.title.title}
         headerClassName="font-bold text-xl"
         body={body()}
         footer={footer()}

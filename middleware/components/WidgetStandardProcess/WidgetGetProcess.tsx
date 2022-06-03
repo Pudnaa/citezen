@@ -1,15 +1,13 @@
 import { FC } from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import _ from "lodash";
-
 import { jsonParse, toBoolean } from "util/helper";
 import { WidgetWrapperStore } from "@cloud/Custom/Wrapper/WidgetWrapper";
-import DefaultWidget from "@components/cloud/Custom/Default/DefaultWidget";
+import DebugWidget from "@components/cloud/Custom/Default/DebugWidget";
 import Skeleton from "@components/common/Skeleton/Skeleton";
-import { prepareRawUrlQueryToCriteria } from "lib/urlFunctions";
 import { useCloud } from "hooks/use-cloud";
+import { replaceTemplate, prepareC009GetProcessData } from "util/helper";
 
 type PropsType = {
   listConfig: any;
@@ -19,32 +17,47 @@ const WidgetGetProcess: FC<PropsType> = ({ listConfig }) => {
   const cloudContext = useCloud();
 
   if (_.isEmpty(listConfig)) return null;
-  // console.log("🚀 ~ listConfig", listConfig);
+
   const metaName = cloudContext.metaConstant.ourMetaConstant.metaName;
-  const widgetnemgoo = jsonParse(listConfig.widgetnemgoo);
-  const ghost = toBoolean(widgetnemgoo?.ghost || "0");
-  // console.log("🚀 ~ ghost", ghost);
-  // console.log("🚀 ~ widgetnemgoo", widgetnemgoo);
+  const widgetnemgooReady = listConfig.widgetnemgooReady;
+  const ghost = toBoolean(widgetnemgooReady?.ghost || "0");
+  // const death = toBoolean(widgetnemgooReady?.death || "0");
 
   const { metadataid, metadatacode } = listConfig;
   const router = useRouter();
-  // const cloudContext = useCloud();
-  // console.log("cloudContext.cloudURL", cloudContext.cloudURL);
+
   let rawCriteria = "";
   let metaConfig = {};
+  const criteria = widgetnemgooReady?.criteria;
 
-  const { criteria } = widgetnemgoo;
-
-  // console.log("XXXXXXXX", router.query);
-  const queryFromUrl = { ..._.omit(router.query, ["detect"]) }; //detect гэсэн буруу parameter орж ирээд metaData-г ERP-аас алдаа буцааж байна.
-
+  let queryFromUrl = {};
   if (!toBoolean(criteria?.ignoreUrlQuery || false)) {
-    rawCriteria = `&parameters=${JSON.stringify({
-      ...queryFromUrl,
-    })}`;
+    // rawCriteria = prepareRawUrlQueryToCriteria(router.query);
+    queryFromUrl = { ...cloudContext.cloudURL.query };
   }
 
-  let { data, error } = useSWR(
+  if (criteria?.fromurl) {
+    queryFromUrl = {
+      ...queryFromUrl,
+      ...replaceTemplate(criteria?.fromurl || {}, cloudContext.cloudURL.query),
+    };
+  }
+
+  rawCriteria = `&parameters=${JSON.stringify(
+    replaceTemplate(
+      {
+        ...(criteria?.defaultQuery || {}),
+        ...queryFromUrl,
+      },
+      cloudContext.cloudURL.query
+    )
+  )}`;
+
+  let {
+    data,
+    error,
+    mutate: dataMutate,
+  } = useSWR(
     `/api/get-process?processcode=${metadatacode}${rawCriteria}&metaName=${metaName}`
   );
 
@@ -55,8 +68,22 @@ const WidgetGetProcess: FC<PropsType> = ({ listConfig }) => {
     `/api/get-process?processcode=META_DATA_MOBILE_004${parameters}&metaName=${metaName}`
   );
 
+  // console.log("listConfig", listConfig);
+
   if (error) return <div>Meta дата дуудаж чадсангүй. Алдаа өгч байна.</div>;
-  if (!data) return <>{!ghost && <Skeleton type="loading" />}</>;
+  if (!data)
+    return (
+      <>
+        {!ghost && (
+          <>
+            <Skeleton type="loading" />
+            {listConfig.widgetcode}
+            <br />
+            {listConfig.metadatacode}
+          </>
+        )}
+      </>
+    );
   if (metaConfigError)
     return (
       <div>Get процессийн Meta тохиргоо дуудаж чадсангүй. Алдаа өгч байна.</div>
@@ -65,6 +92,8 @@ const WidgetGetProcess: FC<PropsType> = ({ listConfig }) => {
     return <div>Get процессийн Meta тохиргоо дуудаж байна...</div>;
 
   data = [data]; //array болгох хэрэгтэй. Бүх widget-үүд Array авах бүтэцтэй.
+
+  data = prepareC009GetProcessData(metadatacode, data);
 
   metaConfig = {
     ...metaConfigAll,
@@ -81,39 +110,29 @@ const WidgetGetProcess: FC<PropsType> = ({ listConfig }) => {
   const killerObj = {
     ...listConfig,
     metaConfig,
-    widgetnemgoo: widgetnemgoo,
+    widgetnemgooReady: widgetnemgooReady,
     bpsectiondtl: _.values(listConfig.bpsectiondtl),
   };
 
   //jagaa - url-д layout=raw гэсэн байвал бүх widget-ийг хэвлэхгүй
   if (router?.query?.layout === "raw") {
     return (
-      <DefaultWidget
+      <DebugWidget
         listConfig={listConfig}
         config={killerObj}
-        widgetnemgoo={killerObj.widgetnemgoo}
+        widgetnemgooReady={killerObj.widgetnemgooReady}
         datasrc={data}
       />
     );
   }
 
-  const RenderComponent = dynamic(
-    () =>
-      import(
-        `@components/cloud/${listConfig.componentpath}/${listConfig.widgetcode}`
-      ),
-    {
-      loading: () => <Skeleton type="loading" />,
-    }
-  );
   return (
     <WidgetWrapperStore
       config={killerObj}
-      widgetnemgoo={killerObj.widgetnemgoo}
+      widgetnemgooReady={killerObj.widgetnemgooReady}
       datasrc={data}
-    >
-      <RenderComponent />
-    </WidgetWrapperStore>
+      dataMutate={dataMutate}
+    />
   );
 };
 

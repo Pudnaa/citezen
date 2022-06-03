@@ -1,6 +1,6 @@
 import { FC, useState, useContext } from "react";
 import { isEmpty } from "lodash";
-import AtomLinkV2 from "./AtomLinkV2";
+import AtomLinkV2 from "./V2/AtomLinkV2";
 import { Modal } from "antd";
 import _ from "lodash";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
@@ -39,15 +39,12 @@ const AtomSearch: FC<PropsType> = ({
   };
   const {
     config,
-    datasrc,
     readyDatasrc,
-    otherattr,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
@@ -63,11 +60,11 @@ const AtomSearch: FC<PropsType> = ({
         value: item.id,
       },
     };
-    console.log(item);
+    // console.log(item);
     return (
       <AtomLinkV2 item={url}>
         <li
-          key={index}
+          key={item?.id || index}
           className="p-2 bg-gray-100 my-2 cursor-pointer rounded hover:bg-gray-200 w-11/12"
         >
           {item.category && item.category} <br /> {item.name}
@@ -85,26 +82,30 @@ const AtomSearch: FC<PropsType> = ({
 
   return (
     <>
-      <button
-        type="button"
-        className="group leading-6 font-medium space-x-3 sm:space-x-4 hover:text-gray-600 transition-colors duration-200 w-full py-2"
-        onClick={showModal}
-      >
-        <svg
-          width="30"
-          height="30"
-          fill="none"
-          className="text-gray-400 group-hover:text-gray-500 transition-colors duration-200 pt-1 "
+      <div className="w-full border bg-white border-gray-300 rounded-lg my-4 ">
+        <button
+          type="button"
+          className="flex justify-between text-gray-600 items-center pl-4 hover:text-gray-600 transition-colors duration-200 w-full py-1 cursor-pointer"
+          onClick={showModal}
         >
-          <path
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-      </button>
+          Мэдлэг хайх...
+          <svg
+            width="30"
+            height="30"
+            fill="none"
+            className="text-gray-700 group-hover:text-gray-500 transition-colors duration-200 pt-1 "
+          >
+            <path
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
       <Modal
         visible={visible}
         width={650}
@@ -117,8 +118,8 @@ const AtomSearch: FC<PropsType> = ({
           <div className="flex items-center justify-center">
             <div className="relative w-full dark:bg-gray-800 bg-white">
               <div className="flex flex-col items-center justify-center">
-                <div className="border-b border-gray-300 flex items-center w-full dark:bg-gray-900 ">
-                  <button className="focus:outline-none">
+                <div className=" border-b border-gray-300 flex items-center w-full dark:bg-gray-900 ">
+                  <button className="focus:outline-none cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={26}

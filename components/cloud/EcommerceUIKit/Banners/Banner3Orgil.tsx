@@ -22,32 +22,31 @@ import {
 export default function Banner3Orgil() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Banner3 config", config);
-  //console.log("Banner3 datasrc", datasrc);
-  // console.log("Banner3 otherattr", otherattr);
+  //console.log("Banner3 readyDatasrc", readyDatasrc);
+  // console.log("Banner3 widgetnemgooReady", widgetnemgooReady);
   //console.log("Banner3 positionConfig", positionConfig);
 
   return (
     <>
-      {datasrc &&
-        datasrc.map((item: any, index: number) => {
+      {readyDatasrc &&
+        readyDatasrc.map((item: any, index: number) => {
           return (
-            <div key={index} className="relative mt-20">
-               <AtomImage
-                    item={renderPositionType(item, "position2", positionConfig)}
-                    customClassName="hidden md:block object-center object-fill w-full h-48 md:h-full"
-                  />
-                     {/* <AtomImage
+            <div key={item?.id || index} className="relative mt-20">
+              <AtomImage
+                item={renderPositionType(item, "position2", positionConfig)}
+                customClassName="hidden md:block object-center object-fill w-full h-48 md:h-full"
+              />
+              {/* <AtomImage
                     item={renderPositionType(item, "position52", positionConfig)}
                     customClassName="md:hidden object-center object-fill w-full h-48 md:h-full"
                   />

@@ -32,18 +32,18 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 export default function Carousel3() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Carousel3 config", config);
-  // console.log("Carousel3 datasrc", datasrc);
-  // console.log("Carousel3 otherattr", otherattr);
+  // console.log("Carousel3 readyDatasrc", readyDatasrc);
+  // console.log("Carousel3 widgetnemgooReady", widgetnemgooReady);
   // console.log("Carousel3 positionConfig", positionConfig);
   return (
     <div className="2xl:mx-auto 2xl:container flex justify-center">
@@ -83,10 +83,10 @@ export default function Carousel3() {
               </svg>
             </ButtonBack>
             <Slider>
-              {datasrc &&
-                datasrc.map((item: any, index: number) => {
+              {readyDatasrc &&
+                readyDatasrc.map((item: any, index: number) => {
                   return (
-                    <Slide index={index} key={index}>
+                    <Slide index={index} key={item?.id || index}>
                       <div className="gallery-cell lg:mr-7 mr-6 lg:w-1/2 sm:w-96 w-full h-full">
                         <div className="relative w-full h-full">
                           <AtomImage
@@ -179,11 +179,11 @@ export default function Carousel3() {
               </svg>
             </ButtonBack>
             <Slider className="carousel__sliderLarge">
-              {datasrc &&
-                datasrc.map((item: any, index: number) => {
+              {readyDatasrc &&
+                readyDatasrc.map((item: any, index: number) => {
                   return (
                     <Slide
-                      key={index}
+                      key={item?.id || index}
                       index={index}
                       className="carousel__inner-slideLarge"
                     >

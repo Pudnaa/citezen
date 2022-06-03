@@ -28,15 +28,10 @@ const CloudBanner1: FC<PropsType> = ({
   height,
 }) => {
   const myWidth = width || "w-screen";
-  const myHeight = height || "h-60 md:h-96 xl:h-144";
+  const myHeight = height || "h-72 md:h-96 xl:h-144";
 
   return (
     <div className={`relative ${myWidth} ${myHeight}`}>
-      {/* <AtomImage
-        item={renderPositionType(item, "position2", positionConfig)}
-        customClassName={`object-center object-cover w-full h-full ${backgroundImageClassName}`}
-        alt={renderPositionType(item, "position1", positionConfig)}
-      /> */}
       <RenderAtom
         item={item?.position2}
         defaultAtom="image"

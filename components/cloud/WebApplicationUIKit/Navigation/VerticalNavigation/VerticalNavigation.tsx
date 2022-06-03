@@ -13,19 +13,19 @@ import TreeMainCategory from "@cloud/Custom/Tree/TreeMainCategory";
 export default function VerticalNavigation() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   // console.log("VerticalNavigation config", config);
-  // console.log("VerticalNavigation datasrc", datasrc);
-  // console.log("VerticalNavigation otherattr", otherattr);
+  // console.log("VerticalNavigation readyDatasrc", readyDatasrc);
+  // console.log("VerticalNavigation widgetnemgooReady", widgetnemgooReady);
 
-  let treeData = [...datasrc];
+  let treeData = [...readyDatasrc];
   treeData.map((item, index) => {
     treeData[index].title = item.title;
     treeData[index].key = item.id;
@@ -34,7 +34,7 @@ export default function VerticalNavigation() {
     treeData[index].isSelected = false;
   });
 
-  const readyDatasrc = parentidToChildren(treeData);
+  const readyDatasrc1 = parentidToChildren(treeData);
   // console.log("readyDatasrc", readyDatasrc);
 
   const [selectedId, setSelectedId] = useState(-1);
@@ -44,9 +44,9 @@ export default function VerticalNavigation() {
       <div className="w-full flex flex-col justify-between">
         <div className="overflow-y-auto">
           <TreeMainCategory
-            datasrc={readyDatasrc}
+            readyDatasrc={readyDatasrc1}
             config={config}
-            otherattr={otherattr}
+            widgetnemgooReady={widgetnemgooReady}
             customClassName="citizen-tree"
             selectedId={selectedId}
             setSelectedId={setSelectedId}

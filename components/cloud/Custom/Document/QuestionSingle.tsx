@@ -14,13 +14,12 @@ import { useCloud } from "hooks/use-cloud";
 export default function QuestionSingle() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
@@ -31,28 +30,40 @@ export default function QuestionSingle() {
           <div className="sm:flex justify-between w-full items-center text-gray-600 text-sm">
             <div className="flex items-center">
               <span className="focus:outline-none pl-2">
-                {renderPositionType(datasrc[0], "position5", positionConfig)}
+                {renderPositionType(
+                  readyDatasrc[0],
+                  "position5",
+                  positionConfig
+                )}
               </span>
             </div>
             <div className="sm:pt-0 pt-3 flex items-center">
               <span className="border border-green-600 px-4 py-2  rounded-lg ">
-                {renderPositionType(datasrc[0], "position42", positionConfig)}
+                {renderPositionType(
+                  readyDatasrc[0],
+                  "position42",
+                  positionConfig
+                )}
               </span>
             </div>
           </div>
         </div>
         <div className=" p-2 w-full">
           <h2 className=" w-full font-bold text-gray-600 lg:text-3xl text-3xl lg:leading-10 leading-9 mt-2">
-            {renderPositionType(datasrc[0], "position1", positionConfig)}
+            {renderPositionType(readyDatasrc[0], "position1", positionConfig)}
           </h2>
           <p className="font-normal text-base leading-6 text-gray-600 mt-6">
-            {renderPositionType(datasrc[0], "position3", positionConfig)}
+            {renderPositionType(readyDatasrc[0], "position3", positionConfig)}
           </p>
           <div className="content-wrap">
             {parseHtml(
               decode(
-                renderPositionType(datasrc[0], "position22", positionConfig),
-              ),
+                renderPositionType(
+                  readyDatasrc[0],
+                  "position22",
+                  positionConfig
+                )
+              )
             )}
           </div>
         </div>

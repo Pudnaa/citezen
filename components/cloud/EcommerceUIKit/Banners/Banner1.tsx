@@ -21,25 +21,28 @@ import {
 const Banner1 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
     renderPositionType,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   //console.log("Banner1 config", config);
-  //console.log("Banner1 datasrc", datasrc);
-  //console.log("Banner1 otherattr", otherattr);
+  //console.log("Banner1 readyDatasrc", readyDatasrc);
+  //console.log("Banner1 widgetnemgooReady", widgetnemgooReady);
   //console.log("Banner1 positionConfig", positionConfig);
   return (
     <div className="container mx-auto py-9 md:py-12 px-4 md:px-6">
-      {datasrc.map((item: any, index: number) => {
+      {readyDatasrc.map((item: any, index: number) => {
         return (
-          <div key={index} className="bg-gray-800 py-8 md:py-20 px-5 md:px-24">
+          <div
+            key={item?.id || index}
+            className="bg-gray-800 py-8 md:py-20 px-5 md:px-24"
+          >
             <div className="w-full md:border-8 md:border-white md:pt-11 lg:pt-12 md:pl-7 lg:pl-12">
               <AtomTitle
                 item={renderPositionType(item, "position1", positionConfig)}

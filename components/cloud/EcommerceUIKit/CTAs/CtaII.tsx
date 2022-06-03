@@ -21,21 +21,21 @@ import {
 const CtaII = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Cta2 config", config);
-  // console.log("Cta2 datasrc", datasrc);
-  // console.log("Cta2 otherattr", otherattr);
+  // console.log("Cta2 readyDatasrc", readyDatasrc);
+  // console.log("Cta2 widgetnemgooReady", widgetnemgooReady);
   // console.log("Cta2 positionConfig", positionConfig);
-  const isMoto = otherattr.type === "moto";
-  const item = datasrc[0];
+  const isMoto = widgetnemgooReady.type === "moto";
+  const item = readyDatasrc[0];
   return (
     <div className="2xl:mx-auto 2xl:container lg:px-20 md:px-6 px-4 md:py-12 py-8 flex justify-center items-center">
       <div className="w-full flex flex-col justify-center items-center">

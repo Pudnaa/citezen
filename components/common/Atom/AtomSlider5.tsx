@@ -28,13 +28,13 @@ const AtomSlider5: FC<PropsType> = ({
 }) => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   const arrowClass = `cursor-pointer absolute my-auto inset-y-1/2 z-5 flex items-center justify-center rounded-full bg-white border border-gray-50 shadow-md hover:bg-gray-100 w-10 h-10 text-black ${customArrowClass}`;
@@ -47,7 +47,7 @@ const AtomSlider5: FC<PropsType> = ({
         onClick={onClick}
         style={{ ...customArrowStyle }}
       >
-        <i className='far fa-chevron-left text-xl'></i>
+        <i className="far fa-chevron-left text-xl"></i>
       </div>
     );
   };
@@ -60,7 +60,7 @@ const AtomSlider5: FC<PropsType> = ({
         onClick={onClick}
         style={{ ...customArrowStyle }}
       >
-        <i className='far fa-chevron-right text-xl'></i>
+        <i className="far fa-chevron-right text-xl"></i>
       </div>
     );
   };

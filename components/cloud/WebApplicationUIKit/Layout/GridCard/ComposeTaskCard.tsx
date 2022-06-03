@@ -13,31 +13,27 @@ import IndigoBlockGrayBg from "@cloud/WebApplicationUIKit/Navigation/Tab/IndigoB
 const ComposeTaskCard = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  const readyDatasrc = listToTree(datasrc);
-  // console.log("🚀 ~ ComposeTaskCard ~ datasrc", datasrc);
+  const readyDatasrc1 = listToTree(readyDatasrc);
   // console.log("🚀 ~ ComposeTaskCard ~ readyDatasrc", readyDatasrc);
-  // const readyDatasrc = parentidToChildren(datasrc);
+  // console.log("🚀 ~ ComposeTaskCard ~ readyDatasrc", readyDatasrc);
+  // const readyDatasrc = parentidToChildren(readyDatasrc);
   const [pageNum, setPageNum] = useState(1);
 
   return (
     <>
-      <Title />
-
-      {readyDatasrc.map((itemPage: any, indexPage: any) => {
-        // console.log("DDDDDDDDDDDDD", itemPage);
+      {readyDatasrc1.map((itemPage: any, indexPage: any) => {
         return (
           <div key={indexPage} className="p-1">
             <div className="flex justify-between">
-              <h1 className="font-bold text-xl">Санал асуулга</h1>
+              <h1 className="text-xl text-citizen-title">Санал асуулга</h1>
               <div>
                 <AtomIcon
                   // item={item.icon}
@@ -62,9 +58,9 @@ const ComposeTaskCard = () => {
             </div>
 
             <IndigoBlockGrayBg
-              items={["Борлуулалт", "Маркетинг", "Хүний нөөц", "Санхүү"]}
+              items={["Борлуулалт", "Маркетинг"]}
               styling="border"
-              active="border-green-600 text-green-600"
+              active="border-blue-600 text-blue-600"
             />
             <br />
             <AtomText
@@ -79,11 +75,11 @@ const ComposeTaskCard = () => {
                 itemPage.children.map((item: any, index: any) => {
                   return (
                     <div
-                      key={index}
+                      key={item?.id || index}
                       className="checkbox mb-4 items-center cursor-pointer flex"
                     >
                       <input
-                        className="mr-4 rounded-lg text-green-600"
+                        className="mr-4 rounded-lg text-blue-600"
                         type="checkbox"
                         id={`checkbox-${index}`}
                       />
@@ -108,12 +104,15 @@ const ComposeTaskCard = () => {
       <div className="w-full flex pl-1 pb-6">
         <div className="flex flex-wrap mx-auto">
           <div>
-            <AtomButton
-              item="Санал өгөх"
-              type="primary"
-              color="gray-700"
-              customClassName="rounded-md mt-5 px-7 shadow-lg"
-            />
+            {/* <AtomButton
+							item="Санал өгөх"
+							type="primary"
+							color="gray-700"
+							customClassName="rounded-md mt-5 px-7 shadow-lg"
+						/> */}
+            <p className="rounded-lg py-2  mt-5 px-7 shadow-lg bg-citizen-title text-white cursor-pointer">
+              Санал өгөх
+            </p>
           </div>
           <div>
             <AtomButton

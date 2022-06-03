@@ -23,22 +23,22 @@ import { Descriptions } from "antd";
 const Banner8 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Banner8 config", config);
-  //console.log("Banner8 datasrc", datasrc);
-  // console.log("Banner8 otherattr", otherattr);
+  //console.log("Banner8 readyDatasrc", readyDatasrc);
+  // console.log("Banner8 widgetnemgooReady", widgetnemgooReady);
   // console.log("Banner8 positionConfig", positionConfig);
   return (
-    datasrc &&
-    datasrc.map((item: any, index: number) => {
+    readyDatasrc &&
+    readyDatasrc.map((item: any, index: number) => {
       return (
         <div className="mx-auto container py-12 px-6 xl:px-0 flex justify-center items-center flex-col">
           <div className="flex justify-between bg-gray-50 items-stretch flex-row">
@@ -48,7 +48,7 @@ const Banner8 = () => {
                   renderPositionType(item, "position4", positionConfig) +
                   "% OFF"
                 }
-                customClassName="transform flex flex-shrink-0 -rotate-90 text-2xl font-semibold tracking-wide leading-normal text-white"
+                customClassName="transform flex shrink-0 -rotate-90 text-2xl font-semibold tracking-wide leading-normal text-white"
               />
             </div>
             <div className="flex justify-center items-start flex-col xl:w-2/5 md:w-5/12 xl:px-7 px-6 md:px-0 md:py-0 py-5">

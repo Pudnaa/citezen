@@ -7,22 +7,21 @@ export default function Carousel5() {
   const {
     config,
     readyDatasrc,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
   } = useContext(WidgetWrapperContext);
   // console.log("Carousel5 config", config);
-  // console.log("Carousel5 datasrc", datasrc);
-  // console.log("Carousel5 widgetnemgoo", widgetnemgoo);
+  // console.log("Carousel5 readyDatasrc", readyDatasrc);
+  // console.log("Carousel5 widgetnemgooReady", widgetnemgooReady);
 
   return (
     <>
       <AtomSlider6>
         {readyDatasrc.map((item: any, index: number) => (
-          <div key={index}>
+          <div key={item?.id || index}>
             <div
               className={`h-32 w-full md:h-44 lg:h-64 pl-${
                 index === 0 ? "0" : "7"

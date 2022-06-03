@@ -17,21 +17,18 @@ import { useCloud } from "hooks/use-cloud";
 export default function WeeklySubMenu1() {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    otherattr,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const router = useRouter();
   const cloudContext = useCloud();
   const [selectedId, setSelectedId] = useState<any>(
-    router.query?.[widgetnemgoo?.listconfig?.fieldid || "id"]
+    router.query?.[widgetnemgooReady?.listconfig?.fieldid || "id"]
   );
   const { SubMenu } = Menu;
 
@@ -40,14 +37,14 @@ export default function WeeklySubMenu1() {
   // console.log("WeeklySubMenu config", config);
   console.log("WeeklySubMenu readyDatasrc", readyDatasrc);
   // console.log("🚀 ~ WeeklySubMenu ~ readyDatasrc", readyDatasrc);
-  // console.log("WeeklySubMenu widgetnemgoo", widgetnemgoo);
+  // console.log("WeeklySubMenu widgetnemgooReady", widgetnemgooReady);
   // console.log("WeeklySubMenu positionConfig", positionConfig);
 
   const treeReadyDatasrc: any =
     prepareIsOpen(
       listToTree(readyDatasrc, {
-        idKey: widgetnemgoo?.listconfig?.fieldid || "id",
-        parentKey: widgetnemgoo?.listconfig?.fieldparentid || "parentid",
+        idKey: widgetnemgooReady?.listconfig?.fieldid || "id",
+        parentKey: widgetnemgooReady?.listconfig?.fieldparentid || "parentid",
         childrenKey: "children",
       }),
       selectedId,
@@ -57,23 +54,22 @@ export default function WeeklySubMenu1() {
   // console.log("🚀 ~ SubMenu ~ treeReadyDatasrc", treeReadyDatasrc);
 
   const handleClick = (item: any) => {
-    // console.log("handleClick", item.item, widgetnemgoo.link, true);
-    cloudContext.buildCloudURL(item, widgetnemgoo.link, true);
+    // console.log("handleClick", item.item, widgetnemgooReady.link, true);
+    cloudContext.buildCloudURL(item, widgetnemgooReady.link, true);
   };
   return (
     <>
-      {/* <Title /> */}
       <div className="w-full flex justify-start flex-col">
         {/* <TreeMain
           rawDatasrc={treeReadyDatasrc}
           config={config}
           color={widgetAllaround.color}
-          widgetnemgoo={widgetnemgoo}
+          widgetnemgooReady={widgetnemgooReady}
           customClassName=''
           defaultSelectedId={selectedId}
           indent={5}
           onClickItem={(item: any) =>
-            cloudContext.buildCloudURL(item, widgetnemgoo.link, true)
+            cloudContext.buildCloudURL(item, widgetnemgooReady.link, true)
           }
         /> */}
         <Menu mode="inline">
@@ -81,12 +77,20 @@ export default function WeeklySubMenu1() {
             const withChildren: any = item?.children;
             if (_.isEmpty(item?.children)) {
               return (
-                // <Menu.Item key={index} onClick={(e: any) => handleClick(item)}>
-                <Menu.Item key={index}>
+                // <Menu.Item key={item?.id || index} onClick={(e: any) => handleClick(item)}>
+                <Menu.Item key={item?.id || index}>
                   {/* {item.itemcategoryname} */}
                   <span className="flex flex-row justify-between">
-                    <RenderAtom item={item.position1} defaultAtom="text" customClassName="text-gray-500" />
-                    <RenderAtom item={item.position4} defaultAtom="icon"   customClassName=""/>
+                    <RenderAtom
+                      item={item.position1}
+                      defaultAtom="text"
+                      customClassName="text-gray-500"
+                    />
+                    <RenderAtom
+                      item={item.position4}
+                      defaultAtom="icon"
+                      customClassName=""
+                    />
                   </span>
                 </Menu.Item>
               );

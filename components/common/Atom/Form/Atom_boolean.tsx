@@ -4,7 +4,7 @@ import _ from "lodash";
 import Atom_label from "./Atom_label";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import { getAtomValue, fieldHideShow } from "util/helper";
-
+import { overrideTailwindClasses } from "tailwind-override";
 type PropsType = {
   config: any;
   className: any;
@@ -40,10 +40,13 @@ const Atom_boolean: FC<PropsType> = ({
     });
   };
 
+  if (config?.columnwidth)
+    style = { ...style, width: parseInt(config?.columnwidth, 10) };
+
   return (
     <div
       className={`${
-        sectionConfig?.otherattr?.labelPosition == "top"
+        sectionConfig?.widgetnemgooReady?.labelPosition == "top"
           ? `flex flex-col`
           : `grid grid-cols-2 gap-4`
       } ${
@@ -71,10 +74,12 @@ const Atom_boolean: FC<PropsType> = ({
           type="checkbox"
           id={config.paramrealpath}
           name={config.paramrealpath}
-          className={`${className} ${`self-center focus:ring-0`} ${
-            validData[config.paramrealpath] ? `border-red-500` : ``
-          }`}
-          style={{ ...style, width: parseInt(config?.columnwidth, 10) }}
+          className={overrideTailwindClasses(
+            `self-center focus:ring-0${className}   ${
+              validData[config.paramrealpath] ? `border-red-500` : ``
+            }`
+          )}
+          style={{ ...style }}
           placeholder={config?.placeholdername}
           defaultChecked={checkedValue}
           onChange={handlerChange}

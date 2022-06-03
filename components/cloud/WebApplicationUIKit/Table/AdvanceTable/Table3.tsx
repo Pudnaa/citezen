@@ -6,19 +6,18 @@ import { isEmpty } from "lodash";
 const Table3 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
 
   // console.log("Table3 config", config);
-  // console.log("Table3 datasrc", datasrc);
-  // console.log("Table3 otherattr", otherattr);
+  // console.log("Table3 readyDatasrc", readyDatasrc);
+  // console.log("Table3 widgetnemgooReady", widgetnemgooReady);
   // console.log("Table3 pathConfig", pathConfig);
 
   return <TableMain />;

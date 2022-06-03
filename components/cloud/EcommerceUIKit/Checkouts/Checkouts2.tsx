@@ -21,20 +21,20 @@ import {
 const Checkouts2 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Checkouts2 config", config);
-  // console.log("Checkouts2 datasrc", datasrc);
-  // console.log("Checkouts2 otherattr", otherattr);
+  // console.log("Checkouts2 readyDatasrc", readyDatasrc);
+  // console.log("Checkouts2 widgetnemgooReady", widgetnemgooReady);
   // console.log("Checkouts2 positionConfig", positionConfig);
-  const item = datasrc[0];
+  const item = readyDatasrc[0];
   return (
     <div className="py-16 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container">
       <div className="flex flex-col justify-start items-start space-y-9">
@@ -112,7 +112,7 @@ const Checkouts2 = () => {
           </p>
           <div className="flex justify-start items-start flex-col mt-9 space-y-4 md:space-y-6">
             <div className="flex items-center space-x-4">
-              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative">
                 <input
                   aria-labelledby="label2"
                   type="radio"
@@ -130,7 +130,7 @@ const Checkouts2 = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative">
                 <input
                   aria-labelledby="label2"
                   type="radio"
@@ -148,7 +148,7 @@ const Checkouts2 = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative">
                 <input
                   aria-labelledby="label2"
                   type="radio"

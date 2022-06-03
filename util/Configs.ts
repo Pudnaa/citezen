@@ -1,6 +1,5 @@
 // import { getWidgetDV, getWidgets } from "../renderComponent/GetWidgets";
-import { getLookUpData } from "../service/ServerFn";
-import { serverData } from "../service/Service";
+import { serverData } from "../service/callERPServices";
 // import {Page} from "../views/Home";
 // import {loginUserInfo} from "../views/Login";
 import {
@@ -283,10 +282,10 @@ export const processConfigTransform = async (conf: any) => {
     } else if (item.lookuptype == "label" || item.lookuptype == "radio") {
       var getJson: any = {};
       getJson.systemmetagroupid = item.lookupmetadataid;
-      var result = await getLookUpData("PL_MDVIEW_004", getJson);
-      if (!isEmpty(result[1])) {
-        item.labelData = removeAggregate(result[1]);
-      }
+      // var result = await getLookUpData("PL_MDVIEW_004", getJson);
+      // if (!isEmpty(result[1])) {
+      //   item.labelData = removeAggregate(result[1]);
+      // }
     } else if (item.datatype == "button") {
       processLabelButton.push(item);
     } else if (item.datatype == "barcode" || item.datatype == "qrcode") {
@@ -417,22 +416,22 @@ const setDefualtValueLookUp = async (item: any, rowIndex: any, value: any) => {
       0: { operator: "=", operand: defualValue },
     };
 
-    var result = await getLookUpData("PL_MDVIEW_004", getJson);
-    if (!isEmpty(result[1])) {
-      var value = result[1];
-      var lookupVal = value[0];
-      if (!isEmpty(rowIndex)) {
-        lookupVal = value[rowIndex];
-      }
-      if (!isEmpty(lookupVal)) {
-        var path = item.paramrealpath.toLowerCase().split(".");
-        if (path.length < 1) {
-          lookupVal[path[0]] = defualValue;
-          lookupVal["rowdata"] = lookupVal;
-          lookupVal.name = lookupVal[item.displayfield.toLowerCase()];
-          value[item.paramrealpath.toLowerCase()] = lookupVal;
-        }
-      }
-    }
+    // var result = await getLookUpData("PL_MDVIEW_004", getJson);
+    // if (!isEmpty(result[1])) {
+    //   var value = result[1];
+    //   var lookupVal = value[0];
+    //   if (!isEmpty(rowIndex)) {
+    //     lookupVal = value[rowIndex];
+    //   }
+    //   if (!isEmpty(lookupVal)) {
+    //     var path = item.paramrealpath.toLowerCase().split(".");
+    //     if (path.length < 1) {
+    //       lookupVal[path[0]] = defualValue;
+    //       lookupVal["rowdata"] = lookupVal;
+    //       lookupVal.name = lookupVal[item.displayfield.toLowerCase()];
+    //       value[item.paramrealpath.toLowerCase()] = lookupVal;
+    //     }
+    //   }
+    // }
   }
 };

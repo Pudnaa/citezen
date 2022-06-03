@@ -5,44 +5,32 @@ import { DownOutlined } from "@ant-design/icons";
 // import styles from "./TreeMain.css";
 // import cn from 'classnames'
 // import styles from "./TreeMain.module.scss";
-import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-  toBoolean,
-} from "util/helper";
+import { positionToPath } from "util/helper";
 import _ from "lodash";
-import {
-  AtomTitle,
-  AtomText,
-  AtomNumber,
-  AtomIcon,
-} from "@components/common/Atom";
 const { DirectoryTree } = Tree;
 
 type PropsType = {
-  datasrc: any;
+  readyDatasrc: any;
   config: any;
-  otherattr?: any;
+  widgetnemgooReady?: any;
   customClassName?: string;
   customStyle?: any;
   type?: "classic" | "modern";
 };
 
 const TreeMain: FC<PropsType> = ({
-  datasrc,
+  readyDatasrc,
   config,
-  otherattr,
+  widgetnemgooReady,
   customClassName,
   customStyle,
   type = "classic",
 }) => {
-  if (_.isEmpty(datasrc)) return null;
+  if (_.isEmpty(readyDatasrc)) return null;
   const positionConfig = positionToPath(config.bpsectiondtl);
   console.log("TreeMain config", config);
-  console.log("TreeMain datasrc", datasrc);
-  console.log("TreeMain otherattr", otherattr);
+  console.log("TreeMain readyDatasrc", readyDatasrc);
+  console.log("TreeMain widgetnemgooReady", widgetnemgooReady);
 
   const onSelect = (selectedKeys: any, info: any) => {
     console.log("selected", selectedKeys, info);
@@ -65,7 +53,7 @@ const TreeMain: FC<PropsType> = ({
         </span>
       }
       onSelect={onSelect}
-      treeData={datasrc}
+      treeData={readyDatasrc}
     />
   );
 };

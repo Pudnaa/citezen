@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverDataFileUpload } from "../../service/Service";
+import { serverDataFileUpload } from "../../service/callERPServices";
 import { metaConfig } from "../../config/metaConfig";
 
 import { jsonParse } from "util/jsonParse";

@@ -21,20 +21,20 @@ import {
 const Checkout5Part1 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Checkout5Part1 config", config);
-  // console.log("Checkout5Part1 datasrc", datasrc);
-  // console.log("Checkout5Part1 otherattr", otherattr);
+  // console.log("Checkout5Part1 readyDatasrc", readyDatasrc);
+  // console.log("Checkout5Part1 widgetnemgooReady", widgetnemgooReady);
   // console.log("Checkout5Part1 positionConfig", positionConfig);
-  const item = datasrc[0];
+  const item = readyDatasrc[0];
   return (
     <div
       className="

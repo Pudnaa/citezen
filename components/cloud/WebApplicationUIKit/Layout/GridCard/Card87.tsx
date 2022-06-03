@@ -6,19 +6,16 @@ import { isEmpty } from "lodash";
 export default function Card87() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   const userContext = useUser();
-
-  if (isEmpty(datasrc)) return null;
-
 
   return (
     <div>

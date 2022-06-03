@@ -4,6 +4,7 @@ import Atom_label from "./Atom_label";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import Select from "react-select";
 import fetchJson from "lib/fetchJson";
+import { overrideTailwindClasses } from "tailwind-override";
 import {
   isEmpty,
   fieldDisableEnable,
@@ -52,7 +53,7 @@ const Atom_combo_multi: FC<PropsType> = ({
       let data = await fetchJson(
         `/api/get-data?metaid=${
           config.lookupmetadataid
-        }&pagingwithoutaggregate=1&criteria=${JSON.stringify(criteria)}`,
+        }&pagingwithoutaggregate=1&criteria=${JSON.stringify(criteria)}`
       );
       delete data.aggregatecolumns;
       delete data.paging;
@@ -139,7 +140,7 @@ const Atom_combo_multi: FC<PropsType> = ({
   return (
     <div
       className={`${
-        sectionConfig?.otherattr?.labelPosition == "top"
+        sectionConfig?.widgetnemgooReady?.labelPosition == "top"
           ? `flex flex-col`
           : `grid grid-cols-2 gap-4`
       } ${
@@ -167,8 +168,8 @@ const Atom_combo_multi: FC<PropsType> = ({
                     config,
                     formDataInitData,
                     processConfig,
-                    rowIndex,
-                  ),
+                    rowIndex
+                  )
               )?.[0]?.["label"]
             }
           </>
@@ -178,7 +179,7 @@ const Atom_combo_multi: FC<PropsType> = ({
             onChange={handlerChange}
             onFocus={handlerFocus}
             isLoading={laoding}
-            className={`${className}`}
+            className={overrideTailwindClasses(`${className}`)}
             isMulti
             name={config.paramrealpath}
             placeholder=" - Сонгох - "

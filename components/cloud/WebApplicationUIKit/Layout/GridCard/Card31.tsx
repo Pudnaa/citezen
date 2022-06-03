@@ -20,22 +20,21 @@ import JSONPretty from "react-json-pretty";
 const Card31 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
   //console.log("Card31 config", config);
-  // console.log("Card31 datasrc", datasrc);
-  //console.log("Card31 otherattr", otherattr);
+  // console.log("Card31 readyDatasrc", readyDatasrc);
+  //console.log("Card31 widgetnemgooReady", widgetnemgooReady);
   // console.log("Card31 positionConfig", positionConfig);
 
-  const { column } = otherattr;
+  const { column } = widgetnemgooReady;
 
   //   "column": [
   //     {
@@ -74,7 +73,7 @@ const Card31 = () => {
           <tr className="border-b border-gray-200">
             {column.map((item: any, index: number) => {
               return (
-                <th key={index} className="pb-7">
+                <th key={item?.id || index} className="pb-7">
                   <AtomText
                     item={item.name}
                     customClassName="text-gray-500 text-base leading-4 font-semibold opacity-50"
@@ -85,9 +84,9 @@ const Card31 = () => {
           </tr>
         </thead>
         <tbody>
-          {datasrc.map((item: any, index: number) => {
+          {readyDatasrc.map((item: any, index: number) => {
             return (
-              <tr className="border-b border-gray-200" key={index}>
+              <tr className="border-b border-gray-200" key={item?.id || index}>
                 <td className="min-w-max">
                   <div className="flex items-center py-3">
                     <img

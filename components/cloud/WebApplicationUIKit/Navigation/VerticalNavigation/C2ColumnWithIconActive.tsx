@@ -3,21 +3,21 @@ import { useState } from "react";
 export default function C2ColumnWithIconActive() {
   const [show, setShow] = useState(true);
   return (
-    <div className='bg-gray-50 bg-opacity-40 h-full z-20 p-4'>
-      <div className='w-full flex justify-center flex-col '>
-        <div className='cursor-pointer h-8' onClick={() => setShow(!show)}>
-          <i className='fal fa-bars' />
+    <div className="bg-gray-50 bg-opacity-40 h-full z-20 p-4">
+      <div className="w-full flex justify-center flex-col ">
+        <div className="cursor-pointer h-8" onClick={() => setShow(!show)}>
+          <i className="fal fa-bars" />
         </div>
-        <ul aria-orientation='vertical' className='rounded pt-3'>
-          {data.map((item, index) => {
+        <ul aria-orientation="vertical" className="rounded pt-3">
+          {data.map((item: any, index: number) => {
             return (
               <li
-                key={index}
-                className='cursor-pointer text-gray-700 text-sm leading-3 tracking-normal h-8 flex items-center hover:text-citizen focus:text-citizen focus:outline-none'
+                key={item?.id || index}
+                className="cursor-pointer text-gray-700 text-sm leading-3 tracking-normal h-8 flex items-center hover:text-citizen focus:text-citizen focus:outline-none"
               >
                 <i className={`${item.icon} w-7`} />
                 {show && (
-                  <span className='ml-2 w-48 font-base'>{item.title}</span>
+                  <span className="ml-2 w-48 font-base">{item.title}</span>
                 )}
               </li>
             );

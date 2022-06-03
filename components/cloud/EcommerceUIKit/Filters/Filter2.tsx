@@ -21,13 +21,13 @@ import {
 const Filter2 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [sort, setSort] = useState("Recommended");
   const [size, setSize] = useState("L");
@@ -43,10 +43,9 @@ const Filter2 = () => {
   });
   const { black, blue, green, pink, yellow } = colors;
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Filter2 config", config);
-  // console.log("Filter2 datasrc", datasrc);
-  // console.log("Filter2 otherattr", otherattr);
+  // console.log("Filter2 readyDatasrc", readyDatasrc);
+  // console.log("Filter2 widgetnemgooReady", widgetnemgooReady);
   // console.log("Filter2 positionConfig", positionConfig);
 
   const inputChangleHandler = (e: any) => {
@@ -118,13 +117,13 @@ const Filter2 = () => {
 
         <hr className=" bg-gray-200 w-full my-10" />
 
-        {datasrc &&
-          datasrc.map((item: any, index: number) => {
+        {readyDatasrc &&
+          readyDatasrc.map((item: any, index: number) => {
             const t = renderPositionType(item, "position1", positionConfig);
             const list = renderPositionType(item, "position31", positionConfig);
             if (t === "Sort") {
               return (
-                <div key={index}>
+                <div key={item?.id || index}>
                   <div className=" lg:pl-10 lg:pr-20 md:p-6 p-4">
                     <div className=" flex justify-between">
                       <AtomTitle
@@ -168,7 +167,7 @@ const Filter2 = () => {
                               key={index1}
                               className="flex items-center space-x-4 "
                             >
-                              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+                              <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative">
                                 <input
                                   aria-labelledby={renderPositionType(
                                     item1,

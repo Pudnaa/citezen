@@ -20,19 +20,18 @@ import {
 export default function Table4() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
   //console.log("Table4 config", config);
-  //console.log("Table4 datasrc", datasrc);
-  //console.log("Table4 otherattr", otherattr);
+  //console.log("Table4 readyDatasrc", readyDatasrc);
+  //console.log("Table4 widgetnemgooReady", widgetnemgooReady);
   //console.log("Table4 positionConfig", positionConfig);
 
   return (
@@ -59,9 +58,9 @@ export default function Table4() {
                 </th>
               </tr>
             </thead>
-            {datasrc.map((item: any, index: number) => {
+            {readyDatasrc.map((item: any, index: number) => {
               return (
-                <tbody key={index} className="w-full ">
+                <tbody key={item?.id || index} className="w-full ">
                   <tr className=" text-sm leading-none text-gray-700">
                     <td className="pl-1">
                       <AtomText

@@ -24,61 +24,61 @@ type PropsType = {
 const IndigoBlockGrayBg: FC<PropsType> = ({ items, styling, active }) => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [activeStatus, setActiveStatus] = useState(1);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("IndigoBlockGrayBg config", config);
-  // console.log("IndigoBlockGrayBg datasrc", datasrc);
-  // console.log("IndigoBlockGrayBg otherattr", otherattr);
+  // console.log("IndigoBlockGrayBg readyDatasrc", readyDatasrc);
+  // console.log("IndigoBlockGrayBg widgetnemgooReady", widgetnemgooReady);
   // console.log("IndigoBlockGrayBg positionConfig", positionConfig);
   return (
     <div>
-      <div className='sm:hidden relative w-11/12 mx-auto rounded'>
-        <div className='absolute inset-0 m-auto mr-4 z-0 w-6 h-6'>
+      <div className="sm:hidden relative w-11/12 mx-auto rounded">
+        <div className="absolute inset-0 m-auto mr-4 z-0 w-6 h-6">
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='icon icon-tabler icon-tabler-selector'
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-selector"
             width={24}
             height={24}
-            viewBox='0 0 24 24'
-            strokeWidth='1.5'
-            stroke='#A0AEC0'
-            fill='none'
-            strokeLinecap='round'
-            strokeLinejoin='round'
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#A0AEC0"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path stroke='none' d='M0 0h24v24H0z' />
-            <polyline points='8 9 12 5 16 9' />
-            <polyline points='16 15 12 19 8 15' />
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <polyline points="8 9 12 5 16 9" />
+            <polyline points="16 15 12 19 8 15" />
           </svg>
         </div>
         <select
-          aria-label='Selected tab'
-          className='form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10'
+          aria-label="Selected tab"
+          className="form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10"
         >
           {items &&
             items.map((item: any, index: number) => {
               return (
-                <option key={index} className=''>
+                <option key={item?.id || index} className="">
                   {item}{" "}
                 </option>
               );
             })}
         </select>
       </div>
-      <div className='justify-start flex-wrap hidden sm:flex'>
+      <div className="justify-start flex-wrap hidden sm:flex">
         {items &&
           items.map((item: any, index: number) => {
             return (
               <div
-                key={index}
+                key={item?.id || index}
                 className={`py-2 px-2 ${styling} rounded-lg mr-2.5 font-normal cursor-pointer mt-2.5 ${
                   activeStatus === index ? active : ""
                 }`}

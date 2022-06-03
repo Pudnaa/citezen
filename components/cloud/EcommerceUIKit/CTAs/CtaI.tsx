@@ -21,25 +21,24 @@ import {
 const CtaI = () => {
   const {
     config,
-    datasrc,
-    otherattr,
     readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Cta1 config", config);
-  // console.log("Cta1 datasrc", datasrc);
-  // console.log("Cta1 otherattr", otherattr);
+  // console.log("Cta1 readyDatasrc", readyDatasrc);
+  // console.log("Cta1 widgetnemgooReady", widgetnemgooReady);
   // console.log("Cta1 positionConfig", positionConfig);
-  //const item = datasrc[0];
-  const isSkyResortHome = otherattr.type === "skyresort_home";
+  //const item = readyDatasrc[0];
+  const isSkyResortHome = widgetnemgooReady.type === "skyresort_home";
 
   const item = readyDatasrc[0];
-  console.log(item);
+  // console.log(item);
   return isSkyResortHome ? (
     <div className="w-full relative h-60">
       <RenderAtom

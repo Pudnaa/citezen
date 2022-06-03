@@ -1,109 +1,166 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { isEmpty } from "lodash";
-import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-} from "util/helper";
-import {
-  AtomList,
-  AtomTitle,
-  AtomText,
-  AtomCurrency,
-  AtomIcon,
-  AtomButton,
-  AtomTag,
-  AtomImage,
-} from "@components/common/Atom";
+import RenderAtom from "@components/common/Atom/RenderAtom";
+import Router, { useRouter } from "next/router";
+import _ from "lodash";
+import useSWR from "swr";
+import fetchJson from "lib/fetchJson";
+import { isUrlPath } from "util/helper";
+import { useUser } from "hooks/use-user";
+import ModalView from "@components/cloud/Custom/Modal/ModalView";
+import RenderWidgetProcess from "middleware/components/WidgetForm/RenderWidgetProcess";
+import QRCode from "react-qr-code";
 
 const Checkouts2Orgil1 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  const [show, setshow] = useState(false);
-  const [show2, setshow2] = useState(false);
-  if (isEmpty(datasrc)) return null;
-  // console.log("Checkouts2 config", config);
-  // console.log("Checkouts2 datasrc", datasrc);
-  // console.log("Checkouts2 otherattr", otherattr);
-  // console.log("Checkouts2 positionConfig", positionConfig);
-  const item = datasrc[0];
-  return (
-    <div className="py-0 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container">
-      <div className="flex flex-col justify-start items-start space-y-9">
-        <div className="flex p-4 md:p-6 xl:p-10 bg-white w-full  flex-col justify-start items-start shadow-xl">
-        <div className="flex gap-3">
-        <p className="text-lg bg-red-500 text-white rounded-full h-7 w-7 flex items-center justify-center ">2</p>
-        <AtomTitle
-            item={renderPositionType(item, "position1", positionConfig)}
-            customClassName="text-lg md:text-xl font-normal  leading-normal text-gray-900 tracking-tighter"
-        />
-        </div>
-        <hr className=" w-full mt-3" />
-          <div className="w-full  flex flex-col justify-start items-start mt-12 space-y-6 md:space-y-9">
-            <div className="grid grid-cols-1 md:grid-cols-3 w-full  gap-3">
-            {datasrc &&
-                  datasrc.map((item: any, index: number) => {
-                    return (
-                        <div className="flex flex-col justify-start items-start w-full">
-                        <AtomText
-                          item={
-                            renderPositionType(
-                              item,
-                              "position2",
-                              positionConfig
-                            )
-                          }
-                          customClassName="text-base leading-4 text-gray-600 tracking-tighter "
-                        />
-                        <div className="flex items-start mt-4 relative">
-    <button className="bg-white text-gray-700 flex items-center justify-center border border-gray-400 rounded text-xs focus:outline-none">
-        <span className="p-3 ml-3">-Сонгох-</span>
-        <span className="py-3 rounded-r px-2" onClick={() => setshow2(!show2)}>
-            <svg xmlns="http://www.w3.org/2000/svg" width={50} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <polyline points="6 9 12 15 18 9" />
-            </svg>
-        </span>
-    </button>
-    {show2 && (
-        <ul className="bg-white shadow rounded mt-10 py-1 absolute right-0 left-0 top-0  dropdown-content">
-            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-300 hover:text-white px-3 font-normal">-Сонгох-</li>
-            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-300 hover:text-white px-3 font-normal">Баянгол</li>
-            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-300 hover:text-white px-3 font-normal">Баянзүрх</li>
-            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-300 hover:text-white px-3 font-normal">Хан-Уул</li>
-        </ul>
-    )}
-</div>
-                      </div>
-                    )
-                  })}
-                  <div className="flex flex-col justify-start items-start w-full">
-                  <div className= "text-base leading-4 text-gray-600 tracking-tighter">
-                    <p>Дэлгэрэнгүй хаяг *</p>
-                    </div>
-                  <textarea className="mt-2 bg-white border rounded border-gray-400 w-full p-1 placeholder-gray-600 text-base leading-4 text-gray-600"></textarea>
-                  </div>
-               </div>
-          </div>
-        </div>
+  const userContext = useUser();
+  const [session, setSession] = useState(userContext?.userData);
+  const userId = session?.id || "";
+  const [statusPay, setStatusPayment] = useState<any>();
+  const [qrcode, setQrcode] = useState<any>();
+  const { asPath, pathname } = useRouter();
+  const urlIdValue3 = asPath.split("=")[1] || "";
+  const urlIdValue4 = urlIdValue3.split("?")[0] || "";
+  const urlIdValue = asPath.split("?")[2] || "";
+  const ordernumber = urlIdValue.split("=")[1] || "";
+
+  const paramsCheck = {
+    clientId: "SKY_RESORT",
+    clientSecret: "ArijcRG7",
+    object_id: urlIdValue4,
+  };
+
+  const { data: statusPayment } = useSWR(
+    `/api/get-process?processcode=qpay_v2_checkPayment&parameters=${JSON.stringify(
+      paramsCheck,
+    )}`,
+    {
+      refreshInterval: 2000,
+      revalidateOnFocus: false,
+    },
+  );
+
+  const parameters = `&parameters=${JSON.stringify({
+    systemMetaGroupId: "1641437844680112",
+    customerId: userId,
+  })}`;
+
+  const { data: dataa, error } = useSWR(
+    `/api/get-process?processcode=PL_MDVIEW_004${parameters}`,
+  );
+  
+  const list = _.values(dataa);
+  if (list[list.length - 1] === "") list.pop();
+
+  list.sort((x, y) => +new Date(y.orderdate) - +new Date(x.orderdate));
+
+  useEffect(() => {
+    if (!qrcode) {
+      setQrcode(list);
+    }
+  }, [qrcode]);
+  const myorder = _.filter(list, ["ordernumber", ordernumber]);
+  const qrCode = myorder[0]?.qrcode || "null";
+
+  const qpayResponse = () =>{
+    return(
+    <>
+      <div className="border-b border-solid border-gray-200  font-semibold pb-2 text-lg text-center">
+        <i className="fa-solid fa-circle-check text-green-500 pr-1"></i>
+        Таны гүйлгээ амжилттай боллоо
       </div>
-      <style>
-        {`
-            .checkbox:checked + .check-icon {
-                display: flex;
-            }`}
-      </style>
+      <div className="py-3 flex justify-center">
+        <ul>
+          {/* <li className=" justify-center ">
+            <span className="w-48 inline-block  text-right text-sm font-semibold pr-2">
+              Төлбөр төлсөн хэлбэр :
+            </span>
+            {statusPayment?.rows?.length&&statusPayment?.rows[0].payment_wallet}
+          </li> */}
+          <li className=" justify-center ">
+            <span className="w-48 inline-block  text-right text-sm font-semibold pr-2">
+              Нийт дүн :
+            </span>{" "}
+            {statusPayment?.paid_amount}₮
+          </li>
+          <li className="text-center text-lg font-semibold   mt-4"></li>
+        </ul>
+      </div>
+      <div className="py-3 flex justify-center mb-6">
+        <QRCode value={qrCode} />
+      </div>
+    </>);
+  }
+
+  const paymentStatus = async (status:any, order:any) => {
+    const processParameters = {
+      id: order,
+      wfmStatusId: status,
+    };
+    const response: any = await fetchJson(
+      `/api/get-process?processcode=cl_sdmOrderBookRowDv_002&parameters=${JSON.stringify(
+        processParameters,
+      )}`,
+    ); 
+    console.log("processParameters",processParameters);
+    console.log("responseresponse",response);
+    // if(response){
+    // }
+  };
+
+  const socialPayResponse =  () => {
+    const golomtbankCallback = asPath.split("?")[1] || "";
+    const gpath = golomtbankCallback.split("=") || "";
+    const invoice = gpath[1].split("&")[0] || "";
+    const status_code = gpath[2]?.split("&")[0] || "";
+    let statusCode = "1644377343561328";
+    let statusStr = "";
+
+    switch (status_code) {
+      case "000":
+        statusCode = "1642050656042307";
+        statusStr = "Aмжилттай төлөгдөлөө";
+        break;
+      case "306":
+        statusCode = "1644377343561328";
+        statusStr = "Захиалга цуцлагдалаа";
+      case "022":
+        statusCode = "1644377343561328";
+        statusStr = "Захиалга цуцлагдалаа";
+        break;
+      default:
+        statusCode = "";
+    }
+    const selectOrder = _.filter(list, ["ordernumber", invoice]);
+    console.log("status_codestatus_code",selectOrder);
+    console.log("status_codestatus_code list",list);
+    paymentStatus(statusCode,selectOrder[0]?.salesorderid);
+
+    return (<>
+        <div className="border-b border-solid border-gray-200  font-semibold pb-2 text-lg text-center">
+            Төлбөрийн мэдээлэл
+        </div>
+        <div className="py-3 flex justify-center">
+            {statusStr}
+        </div>
+      </>);
+  }
+
+  return (
+    <>  
+    <div className="md:w-2/5 sm:w-full xs:w-full  rounded-lg mx-auto bg-white my-12  p-4 mb-8 justify-items-center">
+     {statusPayment?.rows && qpayResponse() || socialPayResponse()}
     </div>
+    </>
   );
 };
 

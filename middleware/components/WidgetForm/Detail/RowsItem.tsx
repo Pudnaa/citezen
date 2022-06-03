@@ -20,7 +20,7 @@ const RowsItem: FC<PropsType> = ({
       {column.map((item: any, index: number) => {
         return (
           <td
-            key={index}
+            key={item?.id || index}
             className={`border overflow-hidden border-gray-300 ${
               item["datatype"] == "group" ? "text-center" : ""
             } ${
@@ -34,7 +34,9 @@ const RowsItem: FC<PropsType> = ({
               labelClassName="hidden"
               className="border-none"
               style={{ borderRadius: 0, border: "none" }}
+              key={item?.id || index}
               rowIndex={rowIndex}
+              sectionConfig={{ otherattr: { labelPosition: "top" } }}
             />
           </td>
         );

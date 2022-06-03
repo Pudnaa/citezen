@@ -5,6 +5,7 @@ import {
   jsonParse,
   renderPositionType,
 } from "util/helper";
+import RenderAtom from "@components/common/Atom/RenderAtom";
 import { isEmpty } from "lodash";
 import {
   AtomTitle,
@@ -20,9 +21,10 @@ type PropsType = {
 };
 
 const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
+  // console.log(item);
   if (isEmpty(item)) return null;
   //console.log("🚀 ~ item", item);
-  //console.log("🚀 ~ positionConfig", positionConfig);
+  // console.log("🚀 ~ positionConfig", positionConfig);
 
   // console.log("C8ColCardItem positionO", position);
   // console.log("C8ColCardItem iconStyle", iconStyle);
@@ -33,14 +35,14 @@ const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
   //         "sectionid": "16312444179581",
   //         "positionname": "position2",
   //         "fieldpath": "icon",
-  //         "otherattr": ""
+  //         "widgetnemgooReady": ""
   //     },
   //     "position1": {
   //         "id": "16312468985411",
   //         "sectionid": "16312444179581",
   //         "positionname": "position1",
   //         "fieldpath": "title",
-  //         "otherattr": ""
+  //         "widgetnemgooReady": ""
   //     }
   // }
 
@@ -49,16 +51,25 @@ const C8ColCardItem: FC<PropsType> = ({ item, positionConfig }) => {
       <div className="inline mr-4">
         <MainImage
           item={renderPositionType(item, "position2", positionConfig)}
-          otherAttr={jsonParse(positionConfig["position2"]["otherattr"])}
+          positionnemgooReady={positionConfig["position2"]["widgetnemgooReady"]}
         />
       </div>
-      <AtomTitle
+
+      <RenderAtom
+        item={item?.position1}
+        defaultAtom="text"
+        customClassName="text-sm font-medium inline text-gray-600"
+        customProps={{
+          truncateRow: 2,
+        }}
+      />
+      {/* <AtomTitle
         item={renderPositionType(item, "position1", positionConfig)}
         link=""
         customStyle={{}}
         customClassName="text-sm font-medium inline text-gray-600"
         truncateRow={0}
-      />
+      /> */}
     </div>
   );
 };

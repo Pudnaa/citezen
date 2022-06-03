@@ -13,13 +13,13 @@ import Footer1 from "@cloud/Custom/Footer/Footer1";
 export default function WeeklyFooter() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   return (

@@ -23,18 +23,17 @@ const BannerWeekly = () => {
   const {
     config,
     readyDatasrc,
-    datasrc,
-    otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(readyDatasrc)) return null;
+
   // console.log("BannerWeekly config", config);
   // console.log("BannerWeekly readyDatasrc", readyDatasrc);
-  // console.log("BannerWeekly otherattr", otherattr);
+  // console.log("BannerWeekly widgetnemgooReady", widgetnemgooReady);
   // console.log("BannerWeekly positionConfig", positionConfig);
   return (
     <div className="container mx-auto ">
@@ -42,10 +41,10 @@ const BannerWeekly = () => {
         readyDatasrc.map((item: any, index: number) => {
           return (
             <div className="w-full">
-                <RenderAtom
-               item={item?.position2}
-               defaultAtom="image"
-               customClassName="w-full h-16 rounded-b-lg"
+              <RenderAtom
+                item={item?.position2}
+                defaultAtom="image"
+                customClassName="w-full h-16 rounded-b-lg"
               />
             </div>
           );

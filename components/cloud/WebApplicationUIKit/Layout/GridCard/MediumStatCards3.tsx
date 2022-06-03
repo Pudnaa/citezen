@@ -21,28 +21,27 @@ import {
 export default function MediumStatCards3() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
   // console.log("MediumStatCards3 config", config);
-  // console.log("MediumStatCards3 datasrc", datasrc);
-  // console.log("MediumStatCards3 otherattr", otherattr);
+  // console.log("MediumStatCards3 readyDatasrc", readyDatasrc);
+  // console.log("MediumStatCards3 widgetnemgooReady", widgetnemgooReady);
   //console.log("MediumStatCards3 positionConfig", positionConfig);
 
   return (
     <>
       <div className="grid grid-cols-2 lg:grid-cols-4 w-full divide-x gap-y-14 lg:gap-y-0">
-        {datasrc.map((item: any, index: number) => {
+        {readyDatasrc.map((item: any, index: number) => {
           return (
             <div
-              key={index}
+              key={item?.id || index}
               className="w-full px-7 py-0 flex flex-col lg:flex-row gap-x-7 gap-y-3"
             >
               <div>

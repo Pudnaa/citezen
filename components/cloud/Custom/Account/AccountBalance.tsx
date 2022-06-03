@@ -39,13 +39,13 @@ const AccountBalance: FC<PropsType> = ({
 }) => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [visibleModal, setVisible] = useState(false);
   const [shouldFetch, setShouldFetch] = useState();
@@ -56,14 +56,14 @@ const AccountBalance: FC<PropsType> = ({
   })}`;
 
   const { data } = useSWR(
-    `/api/get-process?processcode=citizenErpProcessBalance${parameters}`,
+    `/api/get-process?processcode=citizenErpProcessBalance${parameters}`
   );
   //   console.log(data);
   function handlerClick() {
     const authWindow = window.open(
       data.url,
       "myWindow",
-      "width=600,height=400",
+      "width=600,height=400"
     );
 
     if (authWindow) {
@@ -119,7 +119,7 @@ const AccountBalance: FC<PropsType> = ({
   }
 
   return (
-    <div className='relative w-full h-full'>
+    <div className="relative w-full h-full">
       <button
         // disabled={shouldFetch}
         className={`flex items-center justify-center transition-colors duration-300 focus:shadow-outline`}

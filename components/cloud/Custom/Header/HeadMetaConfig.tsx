@@ -1,27 +1,21 @@
 import { useContext } from "react";
-import Head from "next/head";
 import { NextSeo } from "next-seo";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { isEmpty } from "lodash";
 
 const HeadMetaConfig = () => {
   const {
     config,
-    datasrc,
-    otherattr,
-    widgetnemgoo,
+    readyDatasrc,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  const meta = widgetnemgoo?.meta || {};
-  // console.log("🚀 ~ HeadMetaConfig ~ widgetnemgoo", widgetnemgoo);
-  // console.log("🚀 ~ HeadMetaConfig ~ meta", meta);
-
+  const meta = widgetnemgooReady?.meta || {};
+  // const meta = {};
   return (
     <>
       <NextSeo {...meta} />

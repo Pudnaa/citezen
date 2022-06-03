@@ -53,7 +53,10 @@ const SubPopover = ({ data = [], setShow }) => {
         <div className="p-3" style={{ columnCount: "3" }}>
           {data.map((item, index) => {
             return (
-              <div key={index} className="cursor-pointer hover:text-weekly p-1">
+              <div
+                key={item?.id || index}
+                className="cursor-pointer hover:text-weekly p-1"
+              >
                 {/* <i className={`fal fa-${item.icon} mr-2`} /> */}
                 {item.title}
               </div>

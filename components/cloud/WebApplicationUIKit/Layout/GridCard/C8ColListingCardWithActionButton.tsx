@@ -5,53 +5,54 @@ import MainImage from "@cloud/Custom/Image/MainImage";
 import { AtomTitle } from "@components/common/Atom";
 type PropsType = {
   config: any;
-  datasrc: any;
-  otherattr: any;
+  readyDatasrc: any;
+  widgetnemgooReady: any;
 };
 
 const C8ColListingCardWithActionButton: FC<PropsType> = ({
   config,
-  datasrc,
-  otherattr,
+  readyDatasrc,
+  widgetnemgooReady,
 }) => {
   // console.log("C8ColListingCardWithActionButton config", config);
-  // console.log("C8ColListingCardWithActionButton datasrc", datasrc);
-  // console.log("C8ColListingCardWithActionButton otherattr", otherattr);
+  // console.log("C8ColListingCardWithActionButton readyDatasrc", readyDatasrc);
+  // console.log("C8ColListingCardWithActionButton widgetnemgooReady", widgetnemgooReady);
 
   const positionConfig = positionToPath(config.bpsectiondtl);
 
   return (
     <div
-      className={`shadow-lg bg-gray-200 rounded-xl w-full flex flex-col justify-center ${otherattr.classname}`}
-      style={{ ...otherattr.style }}
+      className={`shadow-lg bg-gray-200 rounded-xl w-full flex flex-col justify-center ${widgetnemgooReady.classname}`}
+      style={{ ...widgetnemgooReady.style }}
     >
       <AtomTitle
-        item={otherattr.name || "Title "}
-        link=''
-        customStyle={otherattr.style}
-        customClassName={otherattr.className}
-        truncateRow={35}
+        item={widgetnemgooReady.name || "Title "}
+        link=""
+        customStyle={widgetnemgooReady.style}
+        customClassName={widgetnemgooReady.className}
+        truncateRow={3}
       />
-      <div className='flex flex-row flex-nowrap items-stretch mt-1'>
-        {datasrc &&
-          datasrc.map((item: any, index: any) => {
-            return otherattr.url && otherattr.url.type == "link" ? (
-              <Link key={index} href={otherattr.url.action}>
-                <a className='text-black'>
+      <div className="flex flex-row flex-nowrap items-stretch mt-1">
+        {readyDatasrc &&
+          readyDatasrc.map((item: any, index: any) => {
+            return widgetnemgooReady.url &&
+              widgetnemgooReady.url.type == "link" ? (
+              <Link key={item?.id || index} href={widgetnemgooReady.url.action}>
+                <a className="text-black">
                   <ItemBlock
-                    key={index}
+                    key={item?.id || index}
                     item={item}
-                    otherattr={otherattr}
+                    widgetnemgooReady={widgetnemgooReady}
                     positionConfig={positionConfig}
                   />
                 </a>
               </Link>
             ) : (
               <ItemBlock
-                key={index}
+                key={item?.id || index}
                 item={item}
                 positionConfig={positionConfig}
-                otherattr={otherattr}
+                widgetnemgooReady={widgetnemgooReady}
               />
             );
           })}
@@ -63,21 +64,27 @@ const C8ColListingCardWithActionButton: FC<PropsType> = ({
 type PropsTypeItem = {
   item: any;
   positionConfig: any;
-  otherattr: any;
+  widgetnemgooReady: any;
 };
 
-const ItemBlock: FC<PropsTypeItem> = ({ item, positionConfig, otherattr }) => {
-  const link = otherattr?.url?.action || "";
+const ItemBlock: FC<PropsTypeItem> = ({
+  item,
+  positionConfig,
+  widgetnemgooReady,
+}) => {
+  const link = widgetnemgooReady?.url?.action || "";
 
   return (
-    <div className='bg-white rounded-lg px-1 py-5 mr-3 w-24 h-auto flex flex-col items-center justify-baseline text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-citizen hover:to-citizen-gradientfinish'>
-      <div className='mb-3'>
+    <div className="bg-white rounded-lg px-1 py-5 mr-3 w-24 h-auto flex flex-col items-center justify-baseline text-xs hover:text-white group cursor-pointer bg-gradient-to-br from-white to-white hover:from-citizen hover:to-citizen-gradientfinish">
+      <div className="mb-3">
         <MainImage
           item={renderPositionType(item, "position2", positionConfig)}
-          otherAttr={jsonParse(positionConfig["position2"]["otherattr"])}
+          positionnemgooReady={jsonParse(
+            positionConfig["position2"]["widgetnemgooReady"]
+          )}
         />
       </div>
-      <div className='font-semibold text-center'>
+      <div className="font-semibold text-center">
         {renderPositionType(item, "position1", positionConfig)}
       </div>
     </div>

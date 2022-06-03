@@ -14,22 +14,22 @@ import {
 
 type PropsType = {
   item: any;
-  otherAttr: any;
+  positionnemgooReady?: any;
 };
 
-const MainImage: FC<PropsType> = ({ item, otherAttr }) => {
+const MainImage: FC<PropsType> = ({ item, positionnemgooReady }) => {
   //Шууд зураг орж ирнэ.
   //эсвэл fal fa-database гэх мэт icon орж ирнэ.
-
+  // console.log(item);
   if ((item || "fa").startsWith("fa")) {
-    return <AtomIcon item={item} customClassName={otherAttr.className} />;
+    return (
+      <AtomIcon item={item} customClassName={positionnemgooReady?.className} />
+    );
   } else {
     return (
-      // <MotoImageCloudinary
-      //   defaultClassName={otherAttr.className}
-      //   image={item}
-      // />
-      <></>
+      <>
+        <img src={item} className="w-10 h-10" alt="dd" />
+      </>
     );
   }
   // return "Dd";

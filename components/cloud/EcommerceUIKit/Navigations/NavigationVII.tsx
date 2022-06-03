@@ -22,22 +22,22 @@ import {
 export default function NavigationVII() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [desktopInput, setDesktopInput] = useState(false);
   const [tabView, setTabView] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [list, setList] = useState(false);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("NavigationVII config", config);
-  // console.log("NavigationVII datasrc", datasrc);
-  // console.log("NavigationVII otherattr", otherattr);
+  // console.log("NavigationVII readyDatasrc", readyDatasrc);
+  // console.log("NavigationVII widgetnemgooReady", widgetnemgooReady);
   // console.log("NavigationVII positionConfig", positionConfig);
 
   const changeText = (t: any) => {
@@ -110,7 +110,7 @@ export default function NavigationVII() {
             </p>
             <button
               onClick={() => setList(!list)}
-              className="w-38 flex-shrink-0 relative flex items-center cursor-pointer"
+              className="w-38 shrink-0 relative flex items-center cursor-pointer"
             >
               <p
                 id="text"

@@ -1,27 +1,36 @@
 import { useState, useContext } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { useUser } from "hooks/use-user";
-import { AtomIcon, AtomImage, AtomInput } from "@components/common/Atom";
+import {
+  positionToPath,
+  otherAttrToObj,
+  jsonParse,
+  renderPositionType,
+} from "util/helper";
+import {
+  AtomIcon,
+  AtomImage,
+  AtomInput,
+  AtomLink,
+  AtomLinkV2,
+} from "@components/common/Atom";
 import RenderAtom from "@components/common/Atom/RenderAtom";
 import AtomAvatar from "@components/common/Atom/AtomAvatar";
 
 export default function NavigationI() {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   // console.log("NavigationI config", config);
-  // console.log("NavigationI datasrc", datasrc);
-  // console.log("NavigationI otherattr", otherattr);
+  // console.log("NavigationI readyDatasrc", readyDatasrc);
+  // console.log("NavigationI widgetnemgooReady", widgetnemgooReady);
   // console.log("NavigationI positionConfig", positionConfig);
   //console.log("Navigation1 readysata - ", readyDatasrc);
 
@@ -35,18 +44,24 @@ export default function NavigationI() {
   const img1 =
     "https://www.skiresort.info/uploads/tx_mgskiresort/variationen1_01.jpg";
   //border-bottom-left-radius:3.5rem;border-bottom-right-radius:3.5rem
+  const data = readyDatasrc[0];
+  const titles = "data.position31.value";
+  //console.log("titles ", titles);
   return (
-    <div className="dark:bg-gray-900">
+    <div className="dark:bg-gray-900 z-50 ">
       <div className="">
-        <div className="relative  h-36 bg-transparent">
+        <div className="relative  h-36 bg-blue-600 rounded-b-3xl">
           {/*top one search wallet, cart*/}
-          <RenderAtom
+
+          {/*
+          background зураг
+           <RenderAtom
             item={{
               value: img1,
             }}
             defaultAtom="image"
             customClassName="absolute w-full h-full object-cover z-0 rounded-b-3xl"
-          />
+          /> */}
           <div className="absolute w-full h-full rounded-xl">
             <div id="md-searchbar" className="w-full h-24">
               <div className="py-2  px-5 lg:px-20 items-center flex justify-between w-full h-full border-b border-gray-300">
@@ -65,6 +80,14 @@ export default function NavigationI() {
                     placeholder="Хайх үйлчилгээний нэрээ оруулна уу..."
                     type="text"
                     customClassName="w-96 hidden lg:flex"
+                    inputContainer={{
+                      customClassName:
+                        "text-sm bg-gray-100 rounded-full text-gray-600 border-0 focus:outline-none focus:ring-2 focus:ring-gray-200  focus:bg-white font-normal",
+                    }}
+                    iconContainer={{
+                      customClassName:
+                        "absolute text-gray-500 flex items-center pl-4",
+                    }}
                   />
                 </div>
                 <div className="flex flex-row z-10">
@@ -86,34 +109,18 @@ export default function NavigationI() {
                         <i className="far fa-shopping-bag text-2xl mx-auto"></i>
                         <div className="absolute w-5 h-5 rounded-full bg-green-500 top-1 right-4 text-center">
                           <RenderAtom
-                            item={{
-                              value: "10",
-                            }}
+                            item={data.position23}
                             defaultAtom="text"
                             customClassName=" text-white font-bold text-xs"
                           />
                         </div>
-                        <RenderAtom
-                          item={{
-                            value: "Сагс",
-                          }}
-                          defaultAtom="text"
-                          customClassName=" text-xs font-semibold"
-                        />
+                        <p className="text-xs font-semibold">Сагс</p>
                       </div>
                       <div className="bg-white text-center rounded-r-lg  pt-2 pb-1 px-3">
+                        <p className="text-xs text-gray-500">Нийт дүн</p>
                         <RenderAtom
-                          item={{
-                            value: "Нийт дүн",
-                          }}
-                          defaultAtom="text"
-                          customClassName=" text-xs text-gray-500"
-                        />
-                        <RenderAtom
-                          item={{
-                            value: "10,500,000₮",
-                          }}
-                          defaultAtom="text"
+                          item={data.position4}
+                          defaultAtom="currency"
                           customClassName=" font-bold text-lg text-gray-800 pt-1"
                         />
                       </div>
@@ -144,22 +151,40 @@ export default function NavigationI() {
                     <i className="cursor-pointer text-2xl fa">&#xf0c9;</i>
                   </div>
                   <ul className="hidden lg:flex items-center justify-center space-x-7">
-                    {menuList.map((item, index) => {
+                    {/* {titles.map((item1: any, index1: number) => {
                       return (
-                        <li key={index} className="">
-                          <RenderAtom
+                        <li key={index1} className="">
+                          <AtomLinkV2
                             item={{
-                              value: item.title,
+                              path:
+                                "/page/" +
+                                renderPositionType(
+                                  item1,
+                                  "position45",
+                                  positionConfig,
+                                ),
                             }}
-                            defaultAtom="text"
-                            customProps={{
-                              color: widgetAllaround.color,
-                            }}
-                            customClassName=" uppercase text-xs sm:text-sm font-normal"
+                            children={
+                              <RenderAtom
+                                item={{
+                                  value: renderPositionType(
+                                    item1,
+                                    "position1",
+                                    positionConfig,
+                                  ),
+                                }}
+                                defaultAtom="text"
+                                customProps={{
+                                  color: widgetAllaround.color,
+                                }}
+                                customClassName=" uppercase text-xs sm:text-sm font-normal"
+                              />
+                            }
+                            customClassName="cursor-pointer"
                           />
                         </li>
                       );
-                    })}
+                    })} */}
                   </ul>
                 </div>
                 <div className="h-full sm:hidden">
@@ -297,9 +322,9 @@ export default function NavigationI() {
             </div>
             <div className="mt-6 p-4">
               <ul className="flex flex-col space-y-6">
-                {menuList.map((item, index) => {
+                {/* {titles.map((item: any, index: number) => {
                   return (
-                    <li key={index} className="flex flex-row justify-between">
+                    <li key={item?.id || index} className="flex flex-row justify-between">
                       <RenderAtom
                         item={{
                           value: item.title,
@@ -322,7 +347,7 @@ export default function NavigationI() {
                       />
                     </li>
                   );
-                })}
+                })} */}
               </ul>
             </div>
             <div className="h-full flex items-end">
@@ -375,7 +400,6 @@ export default function NavigationI() {
 }
 
 const menuList = [
-  { title: "Yйлчилгээ" },
   { title: "Сургалт" },
   { title: "Хөнгөлөлт" },
   { title: "Цагийн хуваарь" },

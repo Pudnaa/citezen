@@ -8,35 +8,32 @@ import { isEmpty } from "lodash";
 const Card101 = () => {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
   } = useContext(WidgetWrapperContext);
-  // console.log("Dd", datasrc);
+  // console.log("Dd", readyDatasrc);
   return (
     <>
       <AtomTitle
         item="Шинэ мэдээ"
         link=""
         customStyle={{}}
-        customClassName="text-xl 2xl:w-80 text-gray-600"
+        customClassName="text-xl text-citizen-title font-semibold"
         truncateRow={0}
       />
 
       <IndigoBlockGrayBg
         items={["Борлуулалт", "Маркетинг", "Хүний нөөц", "Санхүү"]}
         styling="border"
-        active="border-green-600 text-green-600"
+        active="border-blue-600 text-blue-600"
       />
-      <div className="grid grid-cols-3 gap-4 pt-4">
+      <div className="grid grid-cols-3 gap-4 pt-8">
         {readyDatasrc.map((item: any, index: any) => (
           <CartItem
-            key={index}
+            key={item?.id || index}
             item={item}
             position={positionConfig}
             type={4}

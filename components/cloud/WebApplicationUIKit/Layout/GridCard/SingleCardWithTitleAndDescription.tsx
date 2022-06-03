@@ -11,30 +11,41 @@ import { isEmpty } from "lodash";
 import { jsonParse } from "util/helper";
 import { decode } from "html-entities";
 import JSONPretty from "react-json-pretty";
+import RenderWidgetProcess from "middleware/components/WidgetForm/RenderWidgetProcess";
+import ModalView from "@components/cloud/Custom/Modal/ModalView";
 // import "react-json-pretty/themes/monikai.css";
 
 const SingleCardWithTitleAndDescription = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
-
   // console.log("SingleCardWithTitleAndDescription config", config);
-  //console.log("SingleCardWithTitleAndDescription datasrc", datasrc);
-  //console.log("SingleCardWithTitleAndDescription otherattr", otherattr);
+  // console.log("SingleCardWithTitleAndDescription readyDatasrc", readyDatasrc);
+  // console.log("SingleCardWithTitleAndDescription widgetnemgooReady", widgetnemgooReady);
 
-  let readyData = { ...datasrc[0] };
-  readyData.speclist1 = jsonParse(decode(datasrc[0].speclist1));
-  readyData.speclist2 = jsonParse(decode(datasrc[0].speclist2));
+  let readyData = { ...readyDatasrc[0] };
+  readyData.speclist1 = jsonParse(decode(readyDatasrc[0].speclist1));
+  readyData.speclist2 = jsonParse(decode(readyDatasrc[0].speclist2));
   const [show, setShow] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [content, setContent] = useState<any>();
+
+  const handlerCloseClick = (e: any) => {
+    setVisibleModal(false);
+  };
+  const handlerClick = (e: any) => {
+    const param = { ...e, metadataid: "1450927491361" };
+    setContent(<RenderWidgetProcess dialog={true} listConfig={param} />);
+    setVisibleModal(true);
+  };
 
   const body = () => {
     return (
@@ -43,7 +54,7 @@ const SingleCardWithTitleAndDescription = () => {
           readyData.speclist1.map((item: any, index: number) => {
             return (
               <div
-                key={index}
+                key={item?.id || index}
                 className={`w-1/2 mb-5 ${index % 2 == 0 ? "pr-3" : "pl-3"}`}
               >
                 <label
@@ -77,19 +88,17 @@ const SingleCardWithTitleAndDescription = () => {
 
   return (
     <div className="relative">
-      <AtomModal
-        display={show}
-        setDisplay={(edit: any) => {
-          setShow(edit);
+      <ModalView
+        visible={visibleModal}
+        modalOptions={{
+          width: 800,
         }}
-        headerText={otherattr.title.title}
-        headerClassName="font-bold text-xl"
-        body={body()}
-        footer={footer()}
+        onClose={handlerCloseClick}
+        modelContent={content}
       />
       <div
         className={`w-7 h-7 absolute -top-12 -right-1 rounded-3xl bg-white items-center flex justify-center cursor-pointer`}
-        onClick={() => setShow(true)}
+        onClick={(e) => handlerClick(e)}
       >
         <AtomIcon
           // item={item.icon}

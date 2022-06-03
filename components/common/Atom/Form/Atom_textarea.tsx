@@ -4,7 +4,7 @@ import _ from "lodash";
 import Atom_label from "./Atom_label";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "util/helper";
-
+import { overrideTailwindClasses } from "tailwind-override";
 type PropsType = {
   config: any;
   className: any;
@@ -41,7 +41,7 @@ const Atom_textarea: FC<PropsType> = ({
   return (
     <div
       className={`${
-        sectionConfig?.otherattr?.labelPosition == "top"
+        sectionConfig?.widgetnemgooReady?.labelPosition == "top"
           ? `flex flex-col`
           : `grid grid-cols-2 gap-4`
       } ${
@@ -66,9 +66,11 @@ const Atom_textarea: FC<PropsType> = ({
         <textarea
           id={config.paramrealpath}
           name={config.paramrealpath}
-          className={`${className} rounded border-gray-400 focus:ring-0 focus:border-black${
-            validData[config.paramrealpath] ? ` border-red-500` : ``
-          }`}
+          className={overrideTailwindClasses(
+            ` rounded border-gray-400 focus:ring-0 focus:border-black ${className} ${
+              validData[config.paramrealpath] ? ` border-red-500` : ``
+            }`
+          )}
           style={{
             ...style,
             height: 42,

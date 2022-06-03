@@ -6,12 +6,7 @@ import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 // import MotoButton3 from "components/Moto/MotoSmalls/MotoButton3";
 // import MotoTag from "components/Moto/MotoSmalls/MotoTag";
 // import MotoPrice2 from "components/Moto/MotoSmalls/MotoPrice2";
-import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-} from "util/helper";
+import { renderPositionType } from "util/helper";
 import {
   AtomTitle,
   AtomImage,
@@ -30,13 +25,12 @@ type PropsType = {
 const WeeklyCard0: FC<PropsType> = ({ item }) => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
@@ -49,7 +43,7 @@ const WeeklyCard0: FC<PropsType> = ({ item }) => {
           customClassName="w-full h-full object-contain"
         />
       </div>
-      <div className="flex-grow w-full p-5 border-t h-full">
+      <div className="grow w-full p-5 border-t h-full">
         <div className="grid grid-cols-1 place-content-between h-full">
           <div className="w-full">
             <AtomTitle

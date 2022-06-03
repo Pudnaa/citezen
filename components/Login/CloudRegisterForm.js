@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loadProcess } from "lib/api-data";
 import { notification } from "antd";
+import RenderWidgetProcess from "@middleware/components/WidgetForm/RenderWidgetProcess";
 import {
   AtomTitle,
   AtomText,
@@ -117,27 +118,40 @@ export default function CloudRegisterForm() {
 
   return (
     <>
-      {data.rows.map((item, index) => {
-        return (
-          <AtomInput
-            key={index}
-            item={item.title}
-            icon={item.icon}
-            value={item.value}
-            placeholder={item.placeholder}
-            type='text'
-            customClassName='mt-4 w-full'
-            onChange={(e) => onChange(e, index)}
-          />
-        );
-      })}
-      <AtomButton
-        item='Бүртгүүлэх'
-        type='primary'
-        color='sso'
-        customClassName='rounded-full mt-7 w-full h-12 bg-citizen text-white font-semibold hover:bg-citizen-dark'
-        onClick={(e) => onSubmit(e)}
-      />
+      {/* {data.rows.map((item, index) => {
+			return (
+			<AtomInput
+				key={item?.id || index}
+				item={item.title}
+				icon={item.icon}
+				value={item.value}
+				placeholder={item.placeholder}
+				type="text"
+				customClassName="mt-4 w-full"
+				inputContainer={{
+				customClassName:
+					"text-sm bg-gray-100 rounded-full text-gray-600 border-0 focus:outline-none focus:ring-2 focus:ring-gray-200  focus:bg-white font-normal",
+				}}
+				iconContainer={{
+				customClassName: "absolute text-gray-500 flex items-center pl-4",
+				}}
+				onChange={(e) => onChange(e, index)}
+			/>
+			);
+		})}
+		<AtomButton
+			item="Бүртгүүлэх"
+			type="primary"
+			color="sso"
+			customClassName="rounded-full mt-7 w-full h-12 bg-citizen text-white font-semibold hover:bg-citizen-dark"
+			onClick={(e) => onSubmit(e)}
+		/> */}
+      {
+        <RenderWidgetProcess
+          // dialog={true}
+          listConfig={{ metadataid: "1650443355719672" }} //1650443355719672
+        />
+      }
     </>
   );
 }

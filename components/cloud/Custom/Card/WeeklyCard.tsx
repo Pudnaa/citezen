@@ -9,19 +9,17 @@ type PropsType = {
 const WeeklyCard: FC<PropsType> = ({ item }) => {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   // console.log("🚀 ~ item", item);
-  // console.log("🚀 ~ datasrc", datasrc);
+  // console.log("🚀 ~ readyDatasrc", readyDatasrc);
   // console.log("🚀 ~ positionConfig", positionConfig);
   // console.log("🚀 ~ readyDatasrc", readyDatasrc);
 
@@ -29,7 +27,7 @@ const WeeklyCard: FC<PropsType> = ({ item }) => {
     <div className="relative flex flex-col w-full h-full overflow-hidden">
       <div className="w-full h-48 p-5 bg-white rounded-t-xl flex-none relative">
         <RenderAtom
-          item={item?.position2}  
+          item={item?.position2}
           defaultAtom="image"
           customClassName=""
         />
@@ -41,7 +39,7 @@ const WeeklyCard: FC<PropsType> = ({ item }) => {
           />
         </div>
       </div>
-      <div className="flex-grow w-full p-5 border-t h-full">
+      <div className="grow w-full p-5 border-t h-full">
         <div className="grid grid-cols-1 place-content-between h-full">
           <div className="w-full">
             <RenderAtom
@@ -61,8 +59,17 @@ const WeeklyCard: FC<PropsType> = ({ item }) => {
           <div className="w-full">
             <div className="flex justify-between items-center mt-5">
               <div className=" w-full">
-                <RenderAtom item={item?.position4} defaultAtom="currency"  customStyle={{ color: "#00A793" }}   customClassName="font-semibold" />
-                <RenderAtom item={item?.position47} defaultAtom="currency" customClassName="text-xs leading-6 text-gray-400"/>
+                <RenderAtom
+                  item={item?.position4}
+                  defaultAtom="currency"
+                  customStyle={{ color: "#00A793" }}
+                  customClassName="font-semibold"
+                />
+                <RenderAtom
+                  item={item?.position47}
+                  defaultAtom="currency"
+                  customClassName="text-xs leading-6 text-gray-400"
+                />
               </div>
               <RenderAtom
                 item={{ value: "Сагс" }}

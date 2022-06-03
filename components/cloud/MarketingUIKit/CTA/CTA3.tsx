@@ -17,24 +17,24 @@ import {
 type ItemPropsType = {
   item?: any;
   config?: any;
-  otherattr?: any;
+  widgetnemgooReady?: any;
   positionConfig?: any;
 };
 const CTA3: FC<ItemPropsType> = ({ item }) => {
-  const { config, datasrc, otherattr, positionConfig } =
+  const { config, readyDatasrc, widgetnemgooReady, positionConfig } =
     useContext(WidgetWrapperContext);
 
   return (
     <>
       {item
         ? item
-        : datasrc &&
-          datasrc.map((item: any, index: any) => (
+        : readyDatasrc &&
+          readyDatasrc.map((item: any, index: any) => (
             <CTA3Item
-              key={index}
+              key={item?.id || index}
               item={item}
               config={config}
-              otherattr={otherattr}
+              widgetnemgooReady={widgetnemgooReady}
               positionConfig={positionConfig}
             />
           ))}
@@ -46,12 +46,12 @@ export default CTA3;
 const CTA3Item: FC<ItemPropsType> = ({
   item,
   config,
-  otherattr,
+  widgetnemgooReady,
   positionConfig,
 }) => {
   if (isEmpty(item)) return null;
 
-  const isMoto = otherattr.type === "moto";
+  const isMoto = widgetnemgooReady.type === "moto";
   return (
     <div className="">
       <div className="relative rounded-xl">

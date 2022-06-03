@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { isEmpty, replace } from "lodash";
-import AtomLink from "./AtomLink";
+import BlockDiv from "@components/common/Block/BlockDiv";
 
 type PropsType = {
   color?: string;
   opacityClass?: string;
   customClassName?: string;
   customStyle?: any;
+  customDivNumber?: string;
+  divNamePrefix?: string;
 };
 
 const AtomFade: FC<PropsType> = ({
@@ -14,14 +15,16 @@ const AtomFade: FC<PropsType> = ({
   opacityClass = "bg-opacity-30",
   customClassName = "",
   customStyle,
+  customDivNumber = "DivFade",
+  divNamePrefix = "",
+  ...props
 }) => {
   return (
-    <>
-      <div
-        className={`absolute w-full h-full inset-0 ${customClassName} bg-${color} ${opacityClass}`}
-        style={{ ...customStyle }}
-      ></div>
-    </>
+    <BlockDiv
+      customClassName={`absolute w-full h-full inset-0 ${customClassName} bg-${color} ${opacityClass}`}
+      customStyle={customStyle}
+      divNumber={`${divNamePrefix}${customDivNumber}`}
+    />
   );
 };
 

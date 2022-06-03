@@ -1,22 +1,27 @@
-const { https } = require("firebase-functions");
-const { default: next } = require("next");
+const { createServer } = require("http");
+const { parse } = require("url");
+const next = require("next");
 
-const isDev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-const server = next({
-  dev: isDev,
-  //location of .next generated after running -> yarn build
-  conf: { distDir: ".next" },
-});
+app.prepare().then(() => {
+  createServer((req, res) => {
+    // Be sure to pass `true` as the second argument to `url.parse`.
+    // This tells it to parse the query portion of the URL.
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
 
-const nextjsHandle = server.getRequestHandler();
-exports.nextServer = https.onRequest((req, res) => {
-  return server.prepare().then(() => {
-    return nextjsHandle(req, res);
+    if (pathname === "/a") {
+      app.render(req, res, "/a", query);
+    } else if (pathname === "/b") {
+      app.render(req, res, "/b", query);
+    } else {
+      handle(req, res, parsedUrl);
+    }
+  }).listen(3000, (err) => {
+    if (err) throw err;
+    console.log("> Ready on http://localhost:3000");
   });
 });
-
-/*
-firebase-admin,firebase-functions
-require these plugins,install them
-*/

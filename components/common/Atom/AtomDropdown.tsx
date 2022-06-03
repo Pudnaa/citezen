@@ -1,41 +1,32 @@
 import { FC, useState, useRef, useEffect } from "react";
-import Select from "react-select";
-import { isEmpty } from "lodash";
-import AtomIcon from "./AtomIcon";
+import _ from "lodash";
+import { toBoolean } from "util/helper";
 import RenderAtom from "@components/common/Atom/RenderAtom";
 import { overrideTailwindClasses } from "tailwind-override";
 
 type PropsType = {
-  item: string;
-  icon?: string;
-  button?: any;
-  value?: any;
   options?: any;
-  placeholder: string;
+  placeholder?: any;
   color?: string;
   type?: "default" | "compact";
-  checked?: boolean;
+  showArrow?: any;
   onChange?: any;
-  customStyle?: object;
   customClassName?: string;
+  customStyle?: object;
   arrowContainer?: any;
   optionContainer?: any;
   sample?: boolean;
 };
 
 const AtomDropdown: FC<PropsType> = ({
-  item,
-  icon = "",
-  button = "",
-  value,
   options = [],
-  placeholder = "",
+  placeholder = { value: "Сонгоно уу", className: "" },
   color = "sso",
-  type = "text",
-  checked = false,
+  type = "default",
+  showArrow = "1",
   onChange = null,
-  customStyle = {},
   customClassName = "",
+  customStyle = {},
   arrowContainer = {
     customClassName: "",
     upArrow: { value: "fal fa-chevron-up", customClassName: "" },
@@ -44,13 +35,7 @@ const AtomDropdown: FC<PropsType> = ({
   optionContainer,
   sample = false,
 }) => {
-  const bg = `bg-${color}`;
-  const border = `border-0`;
-  const hover = ``;
-  const text = ``;
-
-  const [isList, setIsList] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   //Гадуур хулгана дарсныг илрүүлэх зорилготой. Dropdown хураагдана.
   const componentRef = useRef();
@@ -75,32 +60,20 @@ const AtomDropdown: FC<PropsType> = ({
         ref={componentRef as any}
       >
         <div
-          className="bg-white dark:bg-gray-800 flex justify-between border rounded w-full cursor-pointer"
+          className="bg-white flex items-center justify-between border rounded w-full cursor-pointer h-10"
           onClick={() => setShow(!show)}
         >
-          <span className="px-3 py-3 text-gray-400 text-sm leading-3 tracking-normal font-normal">
-            {placeholder}
-          </span>
-          <div
-            className={overrideTailwindClasses(
-              `flex items-center justify-center rounded-r border-l border-gray-300 w-12 ${arrowContainer?.customClassName}`
-            )}
-          >
-            {show ? (
-              <RenderAtom
-                item={{ value: arrowContainer?.upArrow?.value }}
-                defaultAtom="icon"
-                customClassName={arrowContainer?.upArrow?.customClassName}
-              />
-            ) : (
-              <RenderAtom
-                item={{ value: arrowContainer?.downArrow?.value }}
-                defaultAtom="icon"
-                customClassName={arrowContainer?.downArrow?.customClassName}
-              />
-            )}
-          </div>
+          <RenderAtom
+            item={{ value: placeholder?.value }}
+            defaultAtom="text"
+            customClassName={`px-3 text-gray-400 text-sm leading-3 tracking-normal font-normal ${placeholder?.className}`}
+          />
+
+          {toBoolean(showArrow) && (
+            <Arrow arrowContainer={arrowContainer} show={show} />
+          )}
         </div>
+
         {show && (
           <DropdownOptions
             options={options}
@@ -113,6 +86,39 @@ const AtomDropdown: FC<PropsType> = ({
   );
 };
 
+//#############################
+//Arrow
+type ArrowPropsType = {
+  arrowContainer: any;
+  show: boolean;
+};
+
+const Arrow: FC<ArrowPropsType> = ({ arrowContainer, show }) => {
+  return (
+    <div
+      className={overrideTailwindClasses(
+        `flex items-center justify-center rounded-r border-l border-gray-300 w-12 ${arrowContainer?.customClassName}`
+      )}
+    >
+      {show ? (
+        <RenderAtom
+          item={{ value: arrowContainer?.upArrow?.value }}
+          defaultAtom="icon"
+          customClassName={arrowContainer?.upArrow?.customClassName}
+        />
+      ) : (
+        <RenderAtom
+          item={{ value: arrowContainer?.downArrow?.value }}
+          defaultAtom="icon"
+          customClassName={arrowContainer?.downArrow?.customClassName}
+        />
+      )}
+    </div>
+  );
+};
+
+//#############################
+//Options
 type OptionPropsType = {
   options: any;
   optionContainer?: any;
@@ -127,30 +133,27 @@ const DropdownOptions: FC<OptionPropsType> = ({
     // <ul className="visible transition duration-300 opacity-100 bg-white dark:bg-gray-800 z-50 shadow rounded mt-2 py-1 w-full absolute">
     <ul
       className={overrideTailwindClasses(
-        `transition duration-300 opacity-100 bg-white z-50 shadow-xl rounded mt-2 py-1 w-full absolute ${optionContainer?.customClassName}`
+        `transition duration-300 opacity-100 bg-white z-50 shadow-xl rounded mt-2 py-1 w-auto absolute ${optionContainer?.customClassName}`
       )}
     >
       {options.map((item: any, index: number) => {
         return (
           <li
-            key={index}
+            key={item?.id || index}
             className={overrideTailwindClasses(
-              `cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 flex flex-row items-center ${optionContainer?.item?.customClassName}`
+              `cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 pl-3 pr-6 flex flex-row items-center ${optionContainer?.item?.customClassName}`
             )}
             onClick={() => {
               setShow(false);
             }}
           >
             <RenderAtom
-              item={{ value: item.profilephoto }}
+              item={item.position2}
               defaultAtom="image"
-              // customClassName={overrideTailwindClasses(
-              //   `object-center object-cover w-7 h-7 rounded-lg ${optionContainer?.item?.mainimage?.customClassName}`
-              // )}
               customClassName={`object-center object-cover w-7 h-7 rounded-lg ${optionContainer?.item?.mainimage?.customClassName}`}
             />
             <RenderAtom
-              item={{ value: item.itemname }}
+              item={item.position1}
               defaultAtom="text"
               customClassName={`ml-3 font-normal ${optionContainer?.item?.title?.customClassName}`}
             />

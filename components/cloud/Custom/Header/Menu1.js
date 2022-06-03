@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link";
 // import MotoInputButton2 from "components/Moto/MotoSmalls/MotoInputButton2";
 // import MotoCardInfo2 from "components/Moto/MotoSmalls/MotoCardInfo2";
 
@@ -26,13 +25,10 @@ export default function Menu1({
       <ul className="md:flex items-center h-full hidden">
         {data.map((item, index) => {
           return (
-            <li key={index}>
-              <a
-                href="javascript:void(0)"
-                className="focus:outline-none font-medium cursor-pointer h-full flex items-center text-sm mr-6 tracking-normal"
-              >
+            <li key={item?.id || index}>
+              <span className="focus:outline-none font-medium cursor-pointer h-full flex items-center text-sm mr-6 tracking-normal">
                 {item.title}
-              </a>
+              </span>
             </li>
           );
         })}

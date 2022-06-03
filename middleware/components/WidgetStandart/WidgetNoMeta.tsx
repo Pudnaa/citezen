@@ -1,14 +1,13 @@
 import { FC } from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import _ from "lodash";
 
-import { jsonParse, toBoolean } from "util/helper";
+import { toBoolean } from "util/helper";
 import { WidgetWrapperStore } from "@cloud/Custom/Wrapper/WidgetWrapper";
-import DefaultWidget from "@components/cloud/Custom/Default/DefaultWidget";
+import DebugWidget from "@components/cloud/Custom/Default/DebugWidget";
 import Skeleton from "@components/common/Skeleton/Skeleton";
 import { prepareRawUrlQueryToCriteria } from "lib/urlFunctions";
+import Jaak from "@components//cloud/Project/Cozy/jaak";
 
 type PropsType = {
   listConfig: any;
@@ -17,62 +16,58 @@ type PropsType = {
 const WidgetNoMeta: FC<PropsType> = ({ listConfig }) => {
   if (_.isEmpty(listConfig)) return null;
 
-  const widgetnemgoo = jsonParse(listConfig.widgetnemgoo);
-  // console.log("🚀 ~ listConfig", listConfig);
-  // console.log("🚀 ~ widgetnemgoo", widgetnemgoo);
-  const { metadataid } = listConfig;
-  // console.log("🚀 ~ metadataid", metadataid);
+  const widgetnemgooReady = listConfig.widgetnemgooReady;
+  const ghost = toBoolean(widgetnemgooReady?.ghost || "0");
+  const isLoading = widgetnemgooReady?.isLoading || null;
   const router = useRouter();
 
   let rawCriteria = "";
-  if (!toBoolean(widgetnemgoo?.ignorecriteria || false)) {
+  if (!toBoolean(widgetnemgooReady?.ignorecriteria || false)) {
     rawCriteria = prepareRawUrlQueryToCriteria(router.query);
   }
 
-  const data = widgetnemgoo?.data || [];
+  const data = widgetnemgooReady?.data || [];
 
   const metaConfig = {
     gridJsonConfig: {},
     pathConfig: [],
   };
 
-  const killerObj = {
+  const configReady = {
     ...listConfig,
     metaConfig,
-    widgetnemgoo: widgetnemgoo,
+    widgetnemgooReady: widgetnemgooReady,
     bpsectiondtl: _.values(listConfig.bpsectiondtl),
   };
-  // console.log("🚀 ~ killerObj", killerObj);
+  // console.log("🚀 ~ configReady", configReady);
 
   //jagaa - url-д layout=raw гэсэн байвал бүх widget-ийг хэвлэхгүй
   if (router?.query?.layout === "raw") {
     return (
-      <DefaultWidget
+      <DebugWidget
         listConfig={listConfig}
-        config={killerObj}
-        widgetnemgoo={killerObj.widgetnemgoo}
+        config={configReady}
+        widgetnemgooReady={widgetnemgooReady}
         datasrc={data}
       />
     );
   }
 
-  const RenderComponent = dynamic(
-    () =>
-      import(
-        `@components/cloud/${listConfig.componentpath}/${listConfig.widgetcode}`
-      ),
-    {
-      loading: () => <Skeleton type="loading" />,
-    }
-  );
+  // console.log("dddd", data);
+  // return (
+  //   <>
+  //     WidgetNoMeta
+  //     <Jaak />
+  //     ddd
+  //   </>
+  // );
+
   return (
     <WidgetWrapperStore
-      config={killerObj}
-      widgetnemgoo={killerObj.widgetnemgoo}
+      config={configReady}
+      widgetnemgooReady={widgetnemgooReady}
       datasrc={data}
-    >
-      <RenderComponent />
-    </WidgetWrapperStore>
+    />
   );
 };
 

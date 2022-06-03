@@ -6,8 +6,8 @@ import useSWR from "swr";
 import { jsonParse } from "util/helper";
 import { decode } from "html-entities";
 import { WidgetWrapperStore } from "@cloud/Custom/Wrapper/WidgetWrapper";
-import DefaultWidget from "@components/cloud/Custom/Default/DefaultWidget";
-
+import DebugWidget from "@components/cloud/Custom/Default/DebugWidget";
+import { useCloud } from "hooks/use-cloud";
 type PropsType = {
   listConfig: any;
   sectionTitle: string;
@@ -15,9 +15,10 @@ type PropsType = {
 
 const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
   if (_.isEmpty(listConfig)) return null;
-
+  const cloudContext = useCloud();
   let { data, error } = useSWR(`/api/get-data?metaid=${listConfig.metadataid}`);
-
+  // const metaName = "metaDoc";
+  const metaName = cloudContext.metaConstant.ourMetaConstant.metaName;
   const parameters = `&parameters=${JSON.stringify({
     id: listConfig.metadataid,
   })}`;
@@ -57,29 +58,12 @@ const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
   const router = useRouter();
   const layoutRaw = router?.query?.layout || "";
 
-  const RenderComponent = dynamic(
-    () =>
-      import(
-        `@components/cloud/${listConfig.componentpath}/${listConfig.widgetcode}`
-      ),
-    {
-      loading: () => (
-        <DefaultWidget
-          listConfig={listConfig}
-          config={killerObj}
-          widgetnemgoo={killerObj.otherattr}
-          datasrc={data}
-        />
-      ),
-    }
-  );
-
   if (layoutRaw === "raw") {
     return (
-      <DefaultWidget
+      <DebugWidget
         listConfig={listConfig}
         config={killerObj}
-        widgetnemgoo={killerObj.otherattr}
+        widgetnemgooReady={killerObj.otherattr}
         datasrc={data}
       />
     );
@@ -87,11 +71,9 @@ const RenderWidgetDataView: FC<PropsType> = ({ listConfig, sectionTitle }) => {
     return (
       <WidgetWrapperStore
         config={killerObj}
-        widgetnemgoo={killerObj.otherattr}
+        widgetnemgooReady={killerObj.otherattr}
         datasrc={data}
-      >
-        <RenderComponent />
-      </WidgetWrapperStore>
+      />
     );
   }
 };

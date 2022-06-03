@@ -3,7 +3,7 @@ import { isEmpty } from "lodash";
 import AtomLink from "./AtomLink";
 
 type PropsType = {
-  item: string;
+  item: any;
   link?: string;
   color?: string;
   customStyle?: any;

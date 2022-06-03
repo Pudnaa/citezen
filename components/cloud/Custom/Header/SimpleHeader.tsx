@@ -4,26 +4,39 @@ import Link from "next/link";
 import { useUser } from "hooks/use-user";
 import { AtomImage } from "@components/common/Atom";
 import { isEmpty } from "lodash";
-
+import ModalView from "@components/cloud/Custom/Modal/ModalView";
+import ModalLogin from "@components/Login/ModalLogin";
 export default function HeaderSimple() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-
+  // console.log("readyDatasrc", readyDatasrc);
+  // console.log("config", config);
+  const [visibleModal, setVisibleModal] = useState(false);
   const [search, setSearch] = useState(false);
+  const [content, setContent] = useState<any>();
+  const [title, setTitle] = useState("");
   const userContext = useUser();
-  const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(userContext.userData);
-  // if (isEmpty(datasrc)) return null;
-  console.log("profile", profile);
+  //
+  // console.log("profile", userContext);
 
+  const handlerCloseClick = (e: any) => {
+    setVisibleModal(false);
+  };
+  const handlerClick = (e?: any) => {
+    // const param = { ...e, metadataid: e.processmetadataid };
+    // console.log("param", param);
+    setContent(<ModalLogin />);
+    setVisibleModal(true);
+  };
   return (
     <>
       <div className="bg-gray-200 ">
@@ -70,9 +83,9 @@ export default function HeaderSimple() {
                       </svg>
                     </div>
                     <input
-                      className="border border-gray-300 focus:outline-none focus:border-indigo-700 w-80 rounded text-sm text-gray-200 bg-gray-100 pl-8 py-2"
+                      className="border border-gray-300 focus:outline-none focus:border-indigo-700 w-96 rounded-xl text-sm text-gray-600 bg-gray-100 pl-8 py-2"
                       type="text"
-                      placeholder="Хайх ..."
+                      placeholder="Хайх ... "
                     />
                   </div>
                 </div>
@@ -96,11 +109,39 @@ export default function HeaderSimple() {
                     </svg>
                   </div>
                   <div className="w-full flex items-center justify-end relative cursor-pointer">
-                    <img
-                      className="rounded-full h-10 w-10 object-cover"
-                      src={userContext.userData.emppicture}
-                      alt="logo"
-                    />
+                    {(profile && (
+                      <>
+                        <div></div>
+                        <img
+                          className="rounded-full h-10 w-10 object-cover"
+                          src={
+                            profile.emppicture
+                              ? "https://dev.veritech.mn/" + profile.emppicture
+                              : ""
+                          }
+                          alt="logo"
+                          // onClick={() => setProfile(!profile)}
+                        />
+                        <p className="capitalize text-xl px-2">
+                          {profile.username}
+                        </p>
+                        <Link href="/logout">
+                          <a>
+                            {" "}
+                            <i
+                              className="far fa-sign-out-alt text-gray-600 pl-1"
+                              style={{ fontSize: 14 }}
+                            ></i>
+                          </a>
+                        </Link>
+                      </>
+                    )) || (
+                      <span
+                        className="far fa-user h-10 w-10 pr- border text-center rounded-full border-2 text-lg border-gray-800 pt-1"
+                        onClick={() => handlerClick()}
+                      ></span>
+                    )}
+
                     {/* <p className="text-gray-800 text-sm ml-2 ">
                       {userContext.userData.username}
                       <Link href="/logout">
@@ -116,6 +157,16 @@ export default function HeaderSimple() {
           </div>
         </nav>
       </div>
+
+      <ModalView
+        visible={visibleModal}
+        modalOptions={{
+          width: 800,
+          title: "Нэвтрэх",
+        }}
+        onClose={handlerCloseClick}
+        modelContent={content}
+      />
     </>
   );
 }

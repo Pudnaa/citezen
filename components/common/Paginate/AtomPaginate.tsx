@@ -20,15 +20,12 @@ const AtomPaginate: FC<PropsType> = ({
   const [itemOffset, setItemOffset] = useState(0);
   const {
     config,
-    datasrc,
-    otherattr,
-    widgetnemgoo,
-    positionConfig,
     readyDatasrc,
+    widgetnemgooReady,
+    positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const router = useRouter();
@@ -39,7 +36,7 @@ const AtomPaginate: FC<PropsType> = ({
         {currentItems.map((item: any, index: string) => (
           <div>
             <CartItemList
-              key={index}
+              key={item?.id || index}
               item={item}
               position={positionConfig}
               type={4}
@@ -61,7 +58,7 @@ const AtomPaginate: FC<PropsType> = ({
     const newOffset = (event.selected * itemsPerPage) % items.length;
     const currentPage = router.asPath;
     console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`,
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
     console.log(router.query);
     // router.push(`${router.query.layoutid}?item=${event.selected}`);
@@ -71,7 +68,7 @@ const AtomPaginate: FC<PropsType> = ({
   return (
     <>
       {Items(currentItems)}
-      {/* <ReactPaginate
+      <ReactPaginate
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={1}
@@ -88,8 +85,12 @@ const AtomPaginate: FC<PropsType> = ({
         breakLinkClassName="page-link"
         containerClassName="pagination flex py-4"
         activeClassName="bg-blue-500 text-white "
-        renderOnZeroPageCount={null}
-      /> */}
+        hrefBuilder={(pageIndex: number) => null}
+        ariaLabelBuilder={(page, selected) =>
+          selected ? "Current page" : "Goto page " + page
+        }
+        // renderOnZeroPageCount={null}
+      />
     </>
   );
 };

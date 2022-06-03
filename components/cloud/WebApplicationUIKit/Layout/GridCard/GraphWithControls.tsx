@@ -7,22 +7,22 @@ import JSONPretty from "react-json-pretty";
 const GraphWithControls = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("GraphWithControls config", config);
-  // console.log("GraphWithControls datasrc", datasrc);
-  // console.log("GraphWithControls otherattr", otherattr);
+  // console.log("GraphWithControls readyDatasrc", readyDatasrc);
+  // console.log("GraphWithControls widgetnemgooReady", widgetnemgooReady);
 
   return (
     <>
-      <JSONPretty data={datasrc} />
+      <JSONPretty data={readyDatasrc} />
     </>
   );
 };

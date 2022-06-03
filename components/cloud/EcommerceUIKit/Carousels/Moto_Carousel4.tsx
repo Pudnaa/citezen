@@ -16,26 +16,26 @@ import {
 export default function Carousel4() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   // console.log("Carousel4 config", config);
-  //console.log("Carousel4 datasrc", datasrc);
-  // console.log("Carousel4 otherattr", otherattr);
+  //console.log("Carousel4 readyDatasrc", readyDatasrc);
+  // console.log("Carousel4 widgetnemgooReady", widgetnemgooReady);
   //https://dev.veritech.mn/storage/uploads/process/202111/file_1636690538811738_160870170544911.png moto land 200
   //https://dev.veritech.mn/storage/uploads/process/202111/file_1636690689452470_160870170544911.jpg jpg 1900px covers
   // https://dev.veritech.mn/storage/uploads/process/202111/file_1636946380156510_160870170544911.png 1300 px cover
   return (
     <div className="relative h-full">
       <AtomSlider4 arrowClass="hover:bg-moto" customClassName="w-full h-full">
-        {datasrc &&
-          datasrc.map((item: any, index: number) => (
-            <div key={index} className="h-full">
+        {readyDatasrc &&
+          readyDatasrc.map((item: any, index: number) => (
+            <div key={item?.id || index} className="h-full">
               <div
                 className="relative w-screen text-black"
                 style={{ height: "533px" }}
@@ -83,7 +83,7 @@ export default function Carousel4() {
             </div>
           ))}
       </AtomSlider4>
-      {otherattr.type === "home" && (
+      {widgetnemgooReady.type === "home" && (
         <div className="absolute w-full -bottom-12">
           <div className="mx-auto py-6 bg-black text-white max-w-screen-xl grid grid-cols-4 rounded-lg">
             <div className="border-r border-gray-600 flex justify-center">

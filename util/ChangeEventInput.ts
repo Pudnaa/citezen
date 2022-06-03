@@ -1,10 +1,15 @@
 import { isEmpty, functionNameReplace, isObject } from "@util/helper";
 import * as ExpressionFuntions from "util/ExpressionFunctions";
 import * as Expression from "util/expression";
-import { expressionConvert } from "util/expression";
+import {
+  expressionConvert,
+  removeCommentsExpression,
+  convertFunctionToExpression,
+} from "util/expression";
+import { notification } from "antd";
 
 const {
-  hidebutton,
+  hideButton,
   runprocessvalue,
   getprocessparam,
   getauthlogin,
@@ -14,8 +19,6 @@ const { repeatfunction } = Expression;
 
 const ChangeEventInput = (
   item: any, // field config
-  screenKey: any,
-  selectedItem: any, // selected row data dataview
   formDataInitData: any, // formDataInitData
   config: any, // bp config
   processExpression: any,
@@ -26,27 +29,22 @@ const ChangeEventInput = (
     var pathArr = item.split(".");
     if (
       pathArr.length > 1 &&
-      !isObject(eval("processExpression." + pathArr[0].toLowerCase()))
+      !isObject(eval("processExpression." + pathArr[0]))
     ) {
-      eval("processExpression." + pathArr[0].toLowerCase() + "={}");
+      eval("processExpression." + pathArr[0] + "={}");
     }
     if (
       pathArr.length > 1 &&
-      eval(
-        "typeof processExpression." +
-          item.toLowerCase() +
-          "function != undefined"
-      ) &&
-      eval(
-        "typeof processExpression." +
-          item.toLowerCase() +
-          'function != "undefined"'
-      )
+      eval("typeof processExpression." + item + "function != undefined") &&
+      eval("typeof processExpression." + item + 'function != "undefined"')
     ) {
       var paramrealpathArray = item.split(".");
       var functionString = eval(
-        "processExpression." + item.toLowerCase() + "function.toString()"
+        "processExpression." + item + "function.toString()"
       );
+      // var functionString2 = eval("processExpression.getSalePrice.toString()");
+      // debugger;
+      functionString = removeCommentsExpression(functionString);
       functionString = functionNameReplace(functionString);
       functionString = functionString
         .replace("function(){", "function DrillDownFunction(){")
@@ -57,23 +55,21 @@ const ChangeEventInput = (
       functionString =
         functionString.substr(0, functionString.lastIndexOf("}")) +
         "mainContext(processExpression);} ";
-      eval(functionString + ";DrillDownFunction()");
+
+      functionString = convertFunctionToExpression(
+        functionString,
+        config.varfncexpressionstring
+      );
+      eval(functionString + "; DrillDownFunction();");
     } else if (
-      eval(
-        "typeof processExpression." +
-          item.toLowerCase() +
-          "function != undefined"
-      ) &&
-      eval(
-        "typeof processExpression." +
-          item.toLowerCase() +
-          'function != "undefined"'
-      )
+      eval("typeof processExpression." + item + "function != undefined") &&
+      eval("typeof processExpression." + item + 'function != "undefined"')
     ) {
       var paramrealpathArray = item.split(".");
       var functionString = eval(
-        "processExpression." + item.toLowerCase() + "function.toString()"
+        "processExpression." + item + "function.toString()"
       );
+      functionString = removeCommentsExpression(functionString);
       functionString = functionNameReplace(functionString);
       functionString =
         functionString.substr(0, functionString.lastIndexOf("}")) +
@@ -83,7 +79,7 @@ const ChangeEventInput = (
           "function(){",
           "async function DrillDownFunction(){"
         );
-        functionString = functionString.replace(
+        functionString = functionString.replaceAll(
           "runprocessvalue",
           "await runprocessvalue"
         );
@@ -93,7 +89,7 @@ const ChangeEventInput = (
           "function(){",
           "async function DrillDownFunction(){"
         );
-        functionString = functionString.replace(
+        functionString = functionString.replaceAll(
           "getprocessparam",
           "await getprocessparam"
         );

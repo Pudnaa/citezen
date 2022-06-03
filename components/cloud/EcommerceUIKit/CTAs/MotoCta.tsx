@@ -22,26 +22,26 @@ import {
 const MotoCta = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("MotoCta config", config);
-  // console.log("MotoCta datasrc", datasrc);
-  // console.log("MotoCta otherattr", otherattr);
+  // console.log("MotoCta readyDatasrc", readyDatasrc);
+  // console.log("MotoCta widgetnemgooReady", widgetnemgooReady);
   // console.log("MotoCta positionConfig", positionConfig);
 
   return (
     <div className="px-20">
-      {datasrc &&
-        datasrc.map((item: any, index: number) => {
+      {readyDatasrc &&
+        readyDatasrc.map((item: any, index: number) => {
           return index % 2 === 0 ? (
-            <div key={index} className="flex">
+            <div key={item?.id || index} className="flex">
               <div className="w-1/2">
                 <div className="w-full">
                   <img
@@ -88,7 +88,7 @@ const MotoCta = () => {
               </div>
             </div>
           ) : (
-            <div key={index} className="flex">
+            <div key={item?.id || index} className="flex">
               <div className="w-1/2 text-center py-10 px-14">
                 <AtomLink
                   item="/page/1636710737778832"

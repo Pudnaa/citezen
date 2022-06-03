@@ -30,7 +30,7 @@ const AtomList: FC<PropsType> = ({
       {list.map((item: any, index: number) => {
         return (
           <div
-            key={index}
+            key={item?.id || index}
             className={`w-full my-1 flex flex-row items-center mb-3 ${rowClassName}`}
           >
             <div className={`w-5/12 text-gray-500 ${labelClassName}`}>

@@ -1,38 +1,46 @@
-import { useState, useContext, useEffect } from "react";
-import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { renderPositionType } from "util/helper";
-import { isEmpty } from "lodash";
+import { useState, useContext, useEffect } from 'react'
+import WidgetWrapperContext from '@cloud/Custom/Wrapper/WidgetWrapper'
+import { renderPositionType } from 'util/helper'
+import _ from 'lodash'
+import { signIn, useSession, signOut } from 'next-auth/react'
+import { Tabs } from 'antd'
+import Link from 'next/link'
 import {
   AtomTitle,
   AtomText,
   AtomIcon,
   AtomButton,
   AtomModal,
-} from "@components/common/Atom";
-
+} from '@components/common/Atom'
+import WidgetWithId from 'middleware/components/WidgetStandart/WidgetWithId'
+import RenderAtom from '@components/common/Atom/RenderAtom'
 export default function FullWidthUserProfileCard() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
-  } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
-
+    widgetnemgooReady,
+    widgetAllaround,
+  } = useContext(WidgetWrapperContext)
+  const { TabPane } = Tabs
+  const { data: session, status }: any = useSession()
   // console.log("FullWidthUserProfileCard config", config);
-  // console.log("FullWidthUserProfileCard datasrc", datasrc);
-  // console.log("FullWidthUserProfileCard otherattr", otherattr);
+  // console.log("FullWidthUserProfileCard readyDatasrc", readyDatasrc);
+  // console.log("FullWidthUserProfileCard widgetnemgooReady", widgetnemgooReady);
 
+  const tabItems = widgetnemgooReady?.tab || []
+  const linkList = widgetnemgooReady?.link || []
+
+  // console.log("Dddddddddddddffffffffffffffffffffffffffffffffff", linkList);
   const editIcon = (
     w: number,
     background: string,
     t: number,
     r: number,
-    f: any
+    f: any,
   ) => {
     return (
       <div
@@ -47,11 +55,11 @@ export default function FullWidthUserProfileCard() {
           customClassName="text-lg"
         />
       </div>
-    );
-  };
+    )
+  }
 
-  const [editPro, setEditPro] = useState(false);
-  const readyData = datasrc[0];
+  const [editPro, setEditPro] = useState(false)
+  const readyData = readyDatasrc[0]
 
   const body = () => {
     return (
@@ -60,7 +68,7 @@ export default function FullWidthUserProfileCard() {
           <img
             className="w-48 h-48 overflow-hidden object-cover rounded"
             // src="https://image.freepwik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg"
-            src={renderPositionType(readyData, "position2", positionConfig)}
+            src={renderPositionType(readyData, 'position2', positionConfig)}
           />
         </div>
         <div className="p-2 bg-gray-300 rounded-lg inline-flex justify-between items-center text-gray-500 cursor-pointer">
@@ -74,8 +82,8 @@ export default function FullWidthUserProfileCard() {
           <span className="font-bold text-xs">Нийтийн</span>
         </div>
       </div>
-    );
-  };
+    )
+  }
   const footer = () => {
     return (
       <div className="flex items-center justify-between">
@@ -136,112 +144,128 @@ export default function FullWidthUserProfileCard() {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <>
-      <AtomModal
-        display={editPro}
-        setDisplay={(edit: any) => {
-          setEditPro(edit);
-        }}
-        headerText="Профайл зураг"
-        headerClassName="font-bold text-xl"
-        body={body()}
-        footer={footer()}
-      />
-      <div className="flex items-center justify-center w-full">
-        {/* Card code block start */}
-        <div className="bg-white rounded">
-          <div className="relative">
+      <div className=" w-full mt-2">
+        <div className="bg-white rounded ">
+          <div className="relative  ">
             <img
-              className="h-56 shadow rounded-t w-full object-cover object-center"
-              //   src="https://tuk-cdn.s3.amazonaws.com/assets/components/grid_cards/gc_29.png"
-              src={renderPositionType(readyData, "position52", positionConfig)}
+              className="h-72  rounded-lg w-full object-cover object-center"
+              src={renderPositionType(readyData, 'position52', positionConfig)}
             />
-            <div className="inset-0 m-auto w-24 h-24 absolute bottom-0 -mb-12 xl:ml-10 rounded border-2 shadow border-white">
-              <img
-                className="w-full h-full overflow-hidden object-cover rounded"
-                // src="https://image.freepwik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg"
-                src={renderPositionType(readyData, "position2", positionConfig)}
-              />
-            </div>
-            {editIcon(10, "white", 5, 5, () => {})}
+            {/* {editIcon(10, "white", 5, 5, () => {})} */}
           </div>
-          <div className="px-4 xl:px-8 pb-8 relative">
-            {editIcon(10, "white", 5, 5, () => setEditPro(true))}
-            <div className="pt-16 flex flex-col xl:flex-row items-start xl:items-center justify-between">
-              <div className="xl:pr-16 w-full xl:w-2/3">
-                <div className="text-center xl:text-left mb-3 xl:mb-0 flex flex-col xl:flex-row items-center justify-between xl:justify-start">
-                  <AtomTitle
-                    item={renderPositionType(
-                      readyData,
-                      "position1",
-                      positionConfig
-                    )}
-                    customClassName="mb-3 xl:mb-0 xl:mr-4 text-2xl text-gray-800 dark:text-gray-100 font-medium tracking-normal"
+          <div className="pb-0 relative ">
+            {/* {editIcon(10, "white", 5, 5, () => setEditPro(true))} */}
+            <div className=" flex flex-col xl:flex-row items-start xl:items-center ">
+              <div className=" w-full xl:w-1/3 ">
+                <div className="text-center  flex xl:flex-row items-center gap-8">
+                  <div className=" w-28 h-28  relative -top-10 left-4  border-white ">
+                    <img
+                      className="w-full h-full overflow-hidden object-cover rounded "
+                      src={renderPositionType(
+                        readyData,
+                        'position2',
+                        positionConfig,
+                      )}
+                    />
+                  </div>
+                  <RenderAtom
+                    item={{ value: session?.user?.name }}
+                    defaultAtom="title"
+                    customClassName="text-2xl text-citizen-title dark:text-gray-100 capitalize  "
+                    customProps={{
+                      truncateRow: 2,
+                    }}
                   />
-                  {/* <div className="text-sm bg-indigo-700 dark:bg-indigo-600 text-white px-5 py-1 font-normal rounded-full">
-                    Pro
-                  </div> */}
+                  {/* <span className="text-2xl font-bol text-citizen-title dark:text-gray-100  ">
+										{session?.user?.name}
+									</span> */}
                 </div>
-                <AtomText
-                  item={renderPositionType(
-                    readyData,
-                    "position3",
-                    positionConfig
-                  )}
-                  customClassName="text-center xl:text-left mt-2 text-sm tracking-normal text-gray-600 dark:text-gray-400 leading-5"
-                />
               </div>
-              <div className="xl:px-10 xl:border-l xl:border-r w-full py-5 flex items-start justify-center xl:w-1/3">
+              <div className="xl:px-10 w-full py-1 flex items-center justify-between xl:w-1/3">
                 <div className="mr-6 xl:mr-10">
-                  <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
+                  <h2 className="text-citizen-title dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
                     1000
                   </h2>
-                  <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
+                  <p className="text-gray-600 dark:text-gray-100 text-sm xl leading-5">
                     Миний оноо
                   </p>
                 </div>
                 <div className="mr-6 xl:mr-10">
-                  <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
-                    5
+                  <h2 className="text-citizen-title dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
+                    1000
                   </h2>
-                  <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
+                  <p className="text-gray-600 dark:text-gray-100 text-sm xl leading-5">
                     Салбар
                   </p>
                 </div>
-                <div>
-                  <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
-                    42
+                <div className="mr-6 xl:mr-10">
+                  <h2 className="text-citizen-title dark:text-gray-400 font-bold text-xl xl:text-2xl leading-6 mb-2 text-center">
+                    12
                   </h2>
-                  <p className="text-gray-800 dark:text-gray-100 text-sm xl:text-xl leading-5">
+                  <p className="text-gray-600 dark:text-gray-100 text-sm xl leading-5">
                     Гишүүнчлэл
                   </p>
                 </div>
               </div>
-              <div className="w-full xl:w-2/3 flex-col md:flex-row justify-center xl:justify-end flex md:pl-6">
-                <button className="focus:outline-none ml-0 md:ml-5 bg-green-400 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-3 md:px-6 py-2 text-sm">
+              <div className=" xl:justify-end flex xl:w-1/3 ">
+                <button className="focus:outline-none ml-0 md:ml-5 bg-blue-400 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-lg text-white px-3 md:px-6 py-2 text-sm">
                   <div className=" items-center flex justify-center">
                     <AtomIcon
                       // item={item.icon}
-                      item="far fa-commenting"
+                      item="far fa-user"
                       checked={false}
                       hoverSolid={true}
                       customClassName="text-lg mr-3"
                     />
                     <span className="text-xs items-center">
-                      Дансны үлдэгдэл шалгах
+                      Хувийн мэдээлэл
                     </span>
                   </div>
                 </button>
               </div>
             </div>
           </div>
+          {/* {linkList && ( */}
+          <div className="border-t px-4 min-h-fit">
+            <ul className="flex gap-6 items-center text-citizen-title text-base font-medium xs:overflow-x-scroll lg:overflow-auto">
+              {linkList.map((item: any, index: number) => {
+                return (
+                  <li
+                    className=" py-4  border-b-2 border-transparent  hover:border-blue-400"
+                    key={item?.id || index}
+                  >
+                    <Link href={item?.url}>
+                      <a className="px-3  ">{item?.name}</a>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          {/* ) */}
+          {/* {tabItems && (
+						<div className="border-t px-4 min-h-fit">
+							<Tabs defaultActiveKey="1" type="line">
+								{tabItems.map((item: any, index: number) => {
+									if (item.tabname) {
+										return (
+											<TabPane tab={item.tabname} key={item?.id || index}>
+												<WidgetWithId widgetId={item.widgetId} />
+											</TabPane>
+										);
+									}
+								})}
+							</Tabs>
+						</div>
+					)} */}
         </div>
         {/* Card code block end */}
       </div>
     </>
-  );
+  )
 }

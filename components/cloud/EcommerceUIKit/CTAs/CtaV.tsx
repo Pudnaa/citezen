@@ -21,20 +21,20 @@ import {
 const CtaV = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Cta5 config", config);
-  // console.log("Cta5 datasrc", datasrc);
-  // console.log("Cta5 otherattr", otherattr);
+  // console.log("Cta5 readyDatasrc", readyDatasrc);
+  // console.log("Cta5 widgetnemgooReady", widgetnemgooReady);
   // console.log("Cta5 positionConfig", positionConfig);
-  const item = datasrc[0];
+  const item = readyDatasrc[0];
   return (
     <div className="2xl:mx-auto 2xl:container md:py-12 lg:px-44 md:px-6 py-9 px-4 w-full flex justify-center items-center">
       <div

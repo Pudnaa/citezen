@@ -21,22 +21,24 @@ import {
 export default function Newsletter6() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-
-  if (isEmpty(datasrc)) return null;
 
   return (
     <div>
-      {datasrc.map((item: any, index: number) => {
+      {readyDatasrc.map((item: any, index: number) => {
         return (
-          <div key={index} id="modal" className="flex items-center justify-center py-12">
+          <div
+            key={item?.id || index}
+            id="modal"
+            className="flex items-center justify-center py-12"
+          >
             <div className="w-10/12 items-center justify-center relative ">
               <img
                 className="hidden md:block w-full h-full absolute rounded-md"

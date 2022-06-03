@@ -23,18 +23,18 @@ import {
 export default function Carousel1() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Carousel1 config", config);
-  // console.log("Carousel1 datasrc", datasrc);
-  // console.log("Carousel1 otherattr", otherattr);
+  // console.log("Carousel1 readyDatasrc", readyDatasrc);
+  // console.log("Carousel1 widgetnemgooReady", widgetnemgooReady);
   // console.log("Carousel1 positionConfig", positionConfig);
   return (
     <div className="container mx-auto py-12 bg-gray-800 w-full md:pl-6 md:px-6 px-4">
@@ -53,8 +53,8 @@ export default function Carousel1() {
         </div>
         <div className="lg:w-9/12 lg:pl-10">
           <AtomSlider5 customClassName="flex items-center justify-center relative w-auto">
-            {datasrc &&
-              datasrc.map((item: any, index: number) => {
+            {readyDatasrc &&
+              readyDatasrc.map((item: any, index: number) => {
                 return (
                   <div key={1}>
                     <div className="carousel-cell w-full group ">

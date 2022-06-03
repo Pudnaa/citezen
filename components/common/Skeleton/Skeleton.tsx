@@ -1,10 +1,9 @@
 import { FC } from "react";
-import { isEmpty } from "lodash";
 import SkeletonItemDefault from "./SkeletonItemDefault";
 import SkeletonItemLoading from "./SkeletonItemLoading";
 
 type PropsType = {
-  type?: "default" | "loading" | "modern" | "card";
+  type?: "default" | "loading" | "modern" | "card" | "bigred";
   customClassName?: string;
   customStyle?: any;
 };
@@ -21,6 +20,12 @@ const Skeleton: FC<PropsType> = ({
       return <SkeletonItemDefault />;
     case "loading":
       return <SkeletonItemLoading />;
+    case "bigred":
+      return (
+        <>
+          <div className="bg-red-700 w-96 h-96">Анхаар</div>
+        </>
+      );
     default:
       return <SkeletonItemDefault />;
   }

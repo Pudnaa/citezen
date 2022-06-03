@@ -21,20 +21,20 @@ import {
 const CtaIII = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Cta3 config", config);
-  // console.log("Cta3 datasrc", datasrc);
-  // console.log("Cta3 otherattr", otherattr);
+  // console.log("Cta3 readyDatasrc", readyDatasrc);
+  // console.log("Cta3 widgetnemgooReady", widgetnemgooReady);
   // console.log("Cta3 positionConfig", positionConfig);
-  const item = datasrc[0]; //eswel datasrc[0]
+  const item = readyDatasrc[0]; //eswel readyDatasrc[0]
   return (
     <div className="mx-auto container flex justify-center items-center py-12 px-4 sm:px-6 2xl:px-0">
       <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0">

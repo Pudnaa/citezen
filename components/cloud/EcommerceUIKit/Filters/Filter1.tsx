@@ -21,13 +21,13 @@ import {
 const Filter1 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [showFilters, setShowfilters] = useState(true);
   const [check, setCheck] = useState({
@@ -58,10 +58,9 @@ const Filter1 = () => {
     luxelondon,
   } = check;
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Filter1 config", config);
-  // console.log("Filter1 datasrc", datasrc);
-  // console.log("Filter1 otherattr", otherattr);
+  // console.log("Filter1 readyDatasrc", readyDatasrc);
+  // console.log("Filter1 widgetnemgooReady", widgetnemgooReady);
   // console.log("Filter1 positionConfig", positionConfig);
 
   const changeHandler = (e: any) => {
@@ -87,7 +86,7 @@ const Filter1 = () => {
       luxelondon: false,
     });
   };
-  const colors = datasrc[0];
+  const colors = readyDatasrc[0];
   const colorsList = renderPositionType(colors, "position31", positionConfig);
 
   return (
@@ -123,8 +122,8 @@ const Filter1 = () => {
 
         {/* Colors Section */}
 
-        {datasrc &&
-          datasrc.map((item: any, index: number) => {
+        {readyDatasrc &&
+          readyDatasrc.map((item: any, index: number) => {
             const list = renderPositionType(item, "position31", positionConfig);
             const t = renderPositionType(item, "position1", positionConfig);
             return t === "Өнгө" || t === "Colors" ? (
@@ -158,7 +157,7 @@ const Filter1 = () => {
                       colorsList.map((item: any, index: number) => {
                         return (
                           <div
-                            key={index}
+                            key={item?.id || index}
                             className=" flex space-x-2 md:justify-center md:items-center items-center justify-start "
                           >
                             <div
@@ -186,7 +185,7 @@ const Filter1 = () => {
               </>
             ) : (
               <>
-                <div key={index}>
+                <div key={item?.id || index}>
                   <div className=" flex space-x-2">
                     <AtomImage
                       item={renderPositionType(
@@ -215,7 +214,7 @@ const Filter1 = () => {
                       list.map((item: any, index: number) => {
                         return (
                           <div
-                            key={index}
+                            key={item?.id || index}
                             className=" flex space-x-2 md:justify-center md:items-center items-center justify-start"
                           >
                             <input

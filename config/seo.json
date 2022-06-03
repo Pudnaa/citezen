@@ -1,26 +1,21 @@
 {
-  "title": "Citizen ERP",
+  "title": "Cloud ERP",
   "titleTemplate": "%s - Cloud ",
-  "description": "veritech.mn",
+  "description": "Cloud ERP-д тавтай морил",
   "openGraph": {
-    "title": "Citizen ERP | Powered by Cloud Team",
-    "description": "veritech.mn",
+    "title": "Cloud ERP | Powered by Veritech ERP",
+    "description": "www.veritech.mn",
     "type": "website",
     "locale": "en_IE",
     "url": ".",
-    "site_name": "Citizen ERP",
+    "site_name": "Cloud ERP",
     "images": [
       {
         "url": "/card.png",
         "width": 800,
         "height": 600,
-        "alt": "Citizen ERP"
+        "alt": "Cloud ERP"
       }
     ]
-  },
-  "twitter": {
-    "handle": "@nextjs",
-    "site": "@nextjs",
-    "cardType": "summary_large_image"
   }
 }

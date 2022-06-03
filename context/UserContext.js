@@ -3,15 +3,14 @@ import React, { useState } from "react";
 const UserContext = React.createContext();
 
 export const UserStore = (props) => {
-  const userInit = {
-    emppicture:
-      "https://res.cloudinary.com/dzih5nqhg/image/upload/v1637746847/cloud/icons/QMpejaITONnxnRBZKksI_mhmyc4.gif",
-  };
+  // console.log("props", props);
+  const userInit = {};
 
   const [userData, setUserData] = useState(userInit);
 
   const setUData = (data) => {
-    setUserData(data || userInit);
+    // setUserData(data || userInit);
+    setUserData(data);
   };
 
   return (

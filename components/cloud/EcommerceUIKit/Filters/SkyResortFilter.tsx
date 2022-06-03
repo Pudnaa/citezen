@@ -7,27 +7,16 @@ import {
   jsonParse,
   renderPositionType,
 } from "util/helper";
-import {
-  AtomList,
-  AtomTitle,
-  AtomText,
-  AtomCurrency,
-  AtomIcon,
-  AtomButton,
-  AtomTag,
-  AtomFade,
-  AtomImage,
-} from "@components/common/Atom";
 const SkyResortFilter = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [showFilters, setShowfilters] = useState(true);
   const [check, setCheck] = useState({
@@ -58,10 +47,9 @@ const SkyResortFilter = () => {
     luxelondon,
   } = check;
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Filter1 config", config);
-  //console.log("skyresortFilter datasrc", datasrc);
-  // console.log("Filter1 otherattr", otherattr);
+  //console.log("skyresortFilter readyDatasrc", readyDatasrc);
+  // console.log("Filter1 widgetnemgooReady", widgetnemgooReady);
   // console.log("Filter1 positionConfig", positionConfig);
 
   const changeHandler = (e: any) => {
@@ -87,7 +75,7 @@ const SkyResortFilter = () => {
       luxelondon: false,
     });
   };
-  const colors = datasrc[0];
+  const colors = readyDatasrc[0];
   const colorsList = renderPositionType(colors, "position31", positionConfig);
 
   return (

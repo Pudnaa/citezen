@@ -13,23 +13,22 @@ import {
 export default function Carousel2() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   // console.log("Carousel2 config", config);
-  // console.log("Carousel2 datasrc", datasrc);
-  // console.log("Carousel2 otherattr", otherattr);
+  // console.log("Carousel2 readyDatasrc", readyDatasrc);
+  // console.log("Carousel2 widgetnemgooReady", widgetnemgooReady);
 
   return (
     <AtomSlider5 customClassName="container mx-auto">
-      {datasrc.map((item: any, index: number) => (
-        <div key={index}>
+      {readyDatasrc.map((item: any, index: number) => (
+        <div key={item?.id || index}>
           <div className="flex flex-col items-center justify-center mr-5">
             <div className="w-32 h-32 rounded-full border border-gray-100 overflow-hidden shadow-md flex items-center justify-center bg-white">
               <i

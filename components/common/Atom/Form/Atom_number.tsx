@@ -3,6 +3,7 @@ import Atom_label from "./Atom_label";
 import NumberFormat from "react-number-format";
 import FormMetaContext from "context/Meta/FormMetaContext";
 import { fieldHideShow, getAtomValue, fieldDisableEnable } from "util/helper";
+import { overrideTailwindClasses } from "tailwind-override";
 
 type PropsType = {
   config: any;
@@ -36,10 +37,13 @@ const Atom_number: FC<PropsType> = ({
     });
   };
 
+  if (config?.columnwidth)
+    style = { ...style, width: parseInt(config?.columnwidth, 10) };
+
   return (
     <div
       className={`${
-        sectionConfig?.otherattr?.labelPosition == "top"
+        sectionConfig?.widgetnemgooReady?.labelPosition == "top"
           ? `flex flex-col`
           : `grid grid-cols-2 gap-4`
       } ${
@@ -57,7 +61,7 @@ const Atom_number: FC<PropsType> = ({
         sectionConfig={sectionConfig}
       />
 
-      <div className="self-center">
+      <div>
         <NumberFormat
           thousandsGroupStyle="thousand"
           value={getAtomValue(
@@ -75,8 +79,10 @@ const Atom_number: FC<PropsType> = ({
           name={config.paramrealpath}
           id={config.paramrealpath}
           placeholder={config?.placeholdername}
-          style={{ ...style, width: parseInt(config.columnwidth, 10) }}
-          className={`${className} rounded border-gray-400 focus:ring-0 focus:border-black text-right`}
+          style={{ ...style }}
+          className={overrideTailwindClasses(
+            `rounded border-gray-400 focus:ring-0 focus:border-black text-right ${className}`
+          )}
           onValueChange={handlerChange}
           fixedDecimalScale={false}
           disabled={fieldDisableEnable(config, processExpression)}

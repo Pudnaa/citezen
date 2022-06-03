@@ -9,19 +9,17 @@ type PropsType = {
 const WeeklyCard1: FC<PropsType> = ({ item }) => {
   const {
     config,
-    datasrc,
     readyDatasrc,
-    widgetnemgoo,
+    widgetnemgooReady,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
   // console.log("🚀 ~ item", item);
-  // console.log("🚀 ~ datasrc", datasrc);
+  // console.log("🚀 ~ readyDatasrc", readyDatasrc);
   // console.log("🚀 ~ positionConfig", positionConfig);
   // console.log("🚀 ~ readyDatasrc", readyDatasrc);
 
@@ -41,7 +39,7 @@ const WeeklyCard1: FC<PropsType> = ({ item }) => {
           />
         </div>
       </div>
-      <div className="flex-grow w-full p-5 border-t h-full">
+      <div className="grow w-full p-5 border-t h-full">
         <div className="grid grid-cols-1 place-content-between h-full">
           <div className="w-full">
             <RenderAtom

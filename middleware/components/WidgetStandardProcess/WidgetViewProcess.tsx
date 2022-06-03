@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import { jsonParse, toBoolean } from "util/helper";
 import { WidgetWrapperStore } from "@cloud/Custom/Wrapper/WidgetWrapper";
-import DefaultWidget from "@components/cloud/Custom/Default/DefaultWidget";
+import DebugWidget from "@components/cloud/Custom/Default/DebugWidget";
 import Skeleton from "@components/common/Skeleton/Skeleton";
 import { prepareRawUrlQueryToCriteria } from "lib/urlFunctions";
 import { useCloud } from "hooks/use-cloud";
@@ -22,10 +22,10 @@ const WidgetViewProcess: FC<PropsType> = ({ listConfig, dataProcess }) => {
   if (_.isEmpty(listConfig)) return null;
   // console.log("🚀 ~ listConfig", listConfig);
   const metaName = cloudContext.metaConstant.ourMetaConstant.metaName;
-  const widgetNemgoo = jsonParse(listConfig.widgetnemgoo);
-  const ghost = toBoolean(widgetNemgoo?.ghost || "0");
+  const widgetnemgooReady = listConfig.widgetnemgooReady;
+  const ghost = toBoolean(widgetnemgooReady?.ghost || "0");
   // console.log("🚀 ~ ghost", ghost);
-  // console.log("🚀 ~ widgetNemgoo", widgetNemgoo);
+  // console.log("🚀 ~ widgetnemgooReady", widgetnemgooReady);
 
   const otherattr = jsonParse(listConfig.otherattr);
   const { metadataid } = listConfig;
@@ -57,7 +57,16 @@ const WidgetViewProcess: FC<PropsType> = ({ listConfig, dataProcess }) => {
     );
 
     if (error) return <div>Meta дата дуудаж чадсангүй. Алдаа өгч байна.</div>;
-    if (!data) return <>{!ghost && <Skeleton type="loading" />}</>;
+    if (!data)
+      return (
+        <>
+          {!ghost && (
+            <>
+              <Skeleton type="loading" />
+            </>
+          )}
+        </>
+      );
     if (metaConfigError)
       return <div>Meta тохиргоо дуудаж чадсангүй. Алдаа өгч байна.</div>;
     if (!metaConfigAll) return <div>Meta тохиргоо дуудаж байна...</div>;
@@ -89,32 +98,21 @@ const WidgetViewProcess: FC<PropsType> = ({ listConfig, dataProcess }) => {
   //jagaa - url-д layout=raw гэсэн байвал бүх widget-ийг хэвлэхгүй
   if (router?.query?.layout === "raw") {
     return (
-      <DefaultWidget
+      <DebugWidget
         listConfig={listConfig}
         config={killerObj}
-        widgetnemgoo={killerObj.otherattr}
+        widgetnemgooReady={killerObj.widgetnemgooReady}
         datasrc={data}
       />
     );
   }
 
-  const RenderComponent = dynamic(
-    () =>
-      import(
-        `@components/cloud/${listConfig.componentpath}/${listConfig.widgetcode}`
-      ),
-    {
-      loading: () => <Skeleton type="loading" />,
-    }
-  );
   return (
     <WidgetWrapperStore
       config={killerObj}
-      widgetnemgoo={killerObj.otherattr}
+      widgetnemgooReady={killerObj.widgetnemgooReady}
       datasrc={data}
-    >
-      <RenderComponent />
-    </WidgetWrapperStore>
+    />
   );
 };
 

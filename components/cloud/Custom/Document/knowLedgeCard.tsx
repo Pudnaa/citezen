@@ -21,27 +21,24 @@ import { useCloud } from "hooks/use-cloud";
 export default function knowLedgeCard() {
   const {
     config,
-    datasrc,
-    otherattr,
-    widgetnemgoo,
-    positionConfig,
     readyDatasrc,
+    widgetnemgooReady,
+    positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const router = useRouter();
   const cloudContext = useCloud();
   const [selectedId, setSelectedId] = useState<any>(router.query?.layoutid);
-  //   if (isEmpty(datasrc)) return null;
+  //
   const [show, setShow] = useState(null);
   const [length, setlength] = useState(readyDatasrc.length);
-  console.log(
-    "readyDatasrc",
-    config.metaConfig.meta_group_grid_options_mobile.pagesize,
-  );
+  // console.log(
+  //   "readyDatasrc",
+  //   config.metaConfig.meta_group_grid_options_mobile.pagesize,
+  // );
   return (
     <>
       <div className="xl:w-2/4 2xl:w-3/5 w-full mx-auto bg-white p-4 rounded-lg ">
@@ -53,7 +50,7 @@ export default function knowLedgeCard() {
             <div>
               <Link href="/ask">
                 <a
-                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none hover:text-gray-300 focus:text-gray-50 uppercase px-4 py-2 dark:focus:bg-brand dark:hover:bg-brand text-white focus:bg-brand hover:bg-brand border bg-blue-700 rounded-lg border-gray-200  flex justify-center items-center `}
+                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none  uppercase px-4 py-2 text-white  border bg-blue-700 rounded-lg border-gray-200  flex justify-center items-center `}
                 >
                   Асуулт нэмэх
                 </a>
@@ -65,13 +62,13 @@ export default function knowLedgeCard() {
             <div>
               <div className="hidden lg:flex items-center w-full 2xl:w-2/3 lg:justify-center 2xl:justify-start">
                 <button
-                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none hover:text-gray-800 focus:text-gray-50 uppercase px-4 py-2 dark:focus:bg-brand dark:hover:bg-brand  focus:bg-brand hover:bg-brand border border-gray-200  flex justify-center items-center `}
+                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none  px-4 py-2  border border-gray-200  flex justify-center items-center `}
                 >
                   Шинэ
                 </button>
 
                 <button
-                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none hover:text-gray-800 focus:text-gray-50 uppercase px-4 py-2 dark:focus:bg-brand dark:hover:bg-brand  focus:bg-brand hover:bg-brand border border-gray-200 flex justify-center items-center `}
+                  className={`focus:outline-none md:text-xs lg:text-sm 2xl:text-base leading-none hover:text-black-800 focus:text-gray-50  px-4 py-2 dark:focus:bg-brand dark:hover:bg-brand   border border-gray-200 flex justify-center items-center `}
                 >
                   Хариулагдаагүй
                 </button>
@@ -81,8 +78,7 @@ export default function knowLedgeCard() {
         </div>
         <div className="md:px-2 pb-5 ">
           <div>
-            {" "}
-            {/* <div className="h-screen overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full"> */}
+            {/* <div className="h-screen overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-200  hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full"> */}
             <AtomPaginate
               items={readyDatasrc}
               itemsPerPage={

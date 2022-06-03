@@ -15,23 +15,21 @@ import {
 } from "@components/common/Atom";
 
 const RigthAlignedImageWithMultipleCta = () => {
-  const { config, datasrc, otherattr, positionConfig } =
+  const { config, readyDatasrc, widgetnemgooReady, positionConfig } =
     useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
-
   // console.log("RigthAlignedImageWithMultipleCta config", config);
-  // console.log("RigthAlignedImageWithMultipleCta datasrc", datasrc);
-  // console.log("RigthAlignedImageWithMultipleCta otherattr", otherattr);
+  // console.log("RigthAlignedImageWithMultipleCta readyDatasrc", readyDatasrc);
+  // console.log("RigthAlignedImageWithMultipleCta widgetnemgooReady", widgetnemgooReady);
 
   return (
     <>
-      {datasrc.map((item: any, index: any) => (
+      {readyDatasrc.map((item: any, index: any) => (
         <RigthAlignedImageWithMultipleCtaItem
-          key={index}
+          key={item?.id || index}
           item={item}
           config={config}
-          otherattr={otherattr}
+          widgetnemgooReady={widgetnemgooReady}
           positionConfig={positionConfig}
         />
       ))}
@@ -43,14 +41,14 @@ export default RigthAlignedImageWithMultipleCta;
 type ItemPropsType = {
   item: any;
   config: any;
-  otherattr: any;
+  widgetnemgooReady: any;
   positionConfig: any;
 };
 
 const RigthAlignedImageWithMultipleCtaItem: FC<ItemPropsType> = ({
   item,
   config,
-  otherattr,
+  widgetnemgooReady,
   positionConfig,
 }) => {
   if (isEmpty(item)) return null;

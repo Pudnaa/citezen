@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { jsonParse, renderPositionType } from "util/helper";
+import { renderPositionType } from "util/helper";
 import { isEmpty } from "lodash";
 import {
   AtomList,
@@ -20,13 +20,12 @@ type PropsType = {
 const Grid3Item: FC<PropsType> = ({ item }) => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 

@@ -23,18 +23,17 @@ const WeeklyBanner = () => {
   const {
     config,
     readyDatasrc,
-    datasrc,
-    otherattr,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("WeeklyBanner config", config);
-  //console.log("WeeklyBanner datasrc", datasrc);
-  // console.log("WeeklyBanner otherattr", otherattr);
+  //console.log("WeeklyBanner readyDatasrc", readyDatasrc);
+  // console.log("WeeklyBanner widgetnemgooReady", widgetnemgooReady);
   // console.log("WeeklyBanner positionConfig", positionConfig);
   return (
     <>
@@ -44,7 +43,7 @@ const WeeklyBanner = () => {
             <div className="flex flex-col md:flex-row justify-between items-strech bg-gradient-to-r from-gray-50 to-gray-200 py-8 lg:py-1 px-4 md:px-10 lg:px-16">
               <div className="flex items-center">
                 <div className="w-full">
-                   <RenderAtom
+                  <RenderAtom
                     item={item?.position3}
                     defaultAtom="text"
                     customClassName="md:mt-2 text-xl leading-5 text-gray-900"
@@ -57,11 +56,11 @@ const WeeklyBanner = () => {
                 </div>
               </div>
               <div className="mt-6 md:mt-0 mx-auto md:mx-0">
-              <RenderAtom
-                    item={item?.position2}
-                    defaultAtom="image"
-                    customClassName="w-full h-16"
-                  />
+                <RenderAtom
+                  item={item?.position2}
+                  defaultAtom="image"
+                  customClassName="w-full h-16"
+                />
               </div>
             </div>
           );

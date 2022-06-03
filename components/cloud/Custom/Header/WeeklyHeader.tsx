@@ -13,13 +13,12 @@ import CloudHeader1 from "@cloud/Custom/Header/Header1";
 export default function WeeklyHeader() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
 

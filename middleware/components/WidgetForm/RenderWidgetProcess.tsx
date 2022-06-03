@@ -5,145 +5,189 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { processTransform } from "util/processTransform";
-import { getProcessConfig } from "service/ServerFn";
 import FormWrapper, { FormSectionWrapper } from "./FormWrapper";
 import RenderField from "./RenderField";
 import RenderWidgetProcessField from "./RenderWidgetProcessField";
+import WidgetCustomRenderProcess from "../WidgetStandardProcess/WidgetCustomRenderProcess";
 import { FormMetaContextProvider as MetaStore } from "context/Meta/FormMetaContext";
 import { runExpression } from "@util/expression";
 import Skeleton from "@components/common/Skeleton/Skeleton";
-import { toBoolean, jsonParse } from "util/helper";
+import { toBoolean, jsonParse, decrypt } from "util/helper";
 import { prepareRawUrlQueryToCriteria } from "lib/urlFunctions";
 import Header from "./Header/Header";
-
+import axios from "axios";
+import { useUser } from "hooks/use-user";
+import { useSession } from "next-auth/react";
 type PropsType = {
-  listConfig: any;
-  dialog?: any;
+	listConfig: any;
+	dialog?: any;
+	headerType?: string;
 };
 
 const { TabPane } = Tabs;
 
-const RenderWidgetProcess: FC<PropsType> = ({ listConfig, dialog }) => {
-  // console.log("🚀 ~ listConfig", listConfig);
+const RenderWidgetProcess: FC<PropsType> = ({
+	listConfig,
+	dialog,
+	headerType,
+}) => {
+	const router = useRouter();
+	// const { userData } = useUser();
+	const { data: session } = useSession();
+	const userData = session;
+	// console.log("dddddddddddddf dffsdfsfdsf userdata", userdata);
+	const widgetnemgooReady = listConfig.widgetnemgooReady;
+	const [formDataInitDataState, setFormDataInitDataState] = useState<any>({});
+	const [processExpression, setProcessExpression] = useState<any>({});
+	const [processConfigState, setProcessConfigState] = useState<any>();
+	const [processParams, setProcessParams] = useState<any>({ header: [] });
 
-  const router = useRouter();
-  const widgetnemgoo = jsonParse(listConfig.widgetnemgoo);
-  let rawCriteria = "";
-  if (!toBoolean(widgetnemgoo?.ignorecriteria || false)) {
-    rawCriteria = prepareRawUrlQueryToCriteria(router.query);
-  }
+	delete router.query.detect;
+	const parameters = `&parameters=${JSON.stringify({
+		id: listConfig.metadataid,
+	})}&getparameters=${JSON.stringify({
+		...router.query,
+	})}`;
 
-  const parameters = `&parameters=${JSON.stringify({
-    id: listConfig.metadataid,
-  })}`;
-  const listConfigParse = {
-    ...listConfig,
-    otherattr: jsonParse(listConfig?.otherattr),
-  };
+	const listConfigParse = {
+		...listConfig,
+		otherattr: jsonParse(listConfig?.otherattr),
+	};
+	const runExpressionAsync = async (userData: any) => {
+		let processParamsvar: any = {},
+			formDataInitDatavar: any = {};
 
-  const { data: processConfig, error } = useSWR(
-    `/api/get-config-process?processcode=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`,
-  );
-  if (error)
-    return (
-      <div>META_BUSINESS_PROCESS_LINK_BP_GET_004 дуудахад алдаа гарлаа!</div>
-    );
-  if (!processConfig) return <Skeleton type="loading" />;
+		const { data } = await axios.get(
+			`/api/get-config-process?processcode=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`,
+		);
 
-  let processParams: any = {},
-    processExpression: any = {},
-    formDataInitData: any = {};
+		console.log("process config ", data);
 
-  processParams = processTransform(processConfig.result);
-  formDataInitData = processParams.__dataElement;
-  if (processConfig.getData) {
-    formDataInitData = processConfig.getData;
-  }
+		processParamsvar = await processTransform(data.result, userData);
 
-  runExpression("all", processExpression, processParams, formDataInitData); // from Ganbii
+		formDataInitDatavar = data.getData
+			? await _.merge(processParamsvar.__dataElement, data.getData)
+			: await _.merge(processParamsvar.__dataElement, router.query);
 
-  if (processConfig.result.iswithlayout == "1") {
-    return (
-      <MetaStore
-        formInitData={formDataInitData}
-        formExpression={processExpression}
-        processConfig={processParams}
-      >
-        <FormSectionWrapper>
-          <RenderWidgetProcessField processSection={processConfig.result} />
-        </FormSectionWrapper>
-      </MetaStore>
-    );
-  } else {
-    const { header } = processParams;
+		const expResult: any = await runExpression(
+			"all",
+			processExpression,
+			processParamsvar,
+			formDataInitDatavar,
+		);
 
-    const groupByTabname = _.groupBy(header, function (n) {
-      return n.tabname;
-    });
+		setProcessParams(processParamsvar);
+		setFormDataInitDataState(expResult?.data);
+		setProcessExpression(expResult?.expression);
+		setProcessConfigState(data);
+	};
 
-    return (
-      <MetaStore
-        formInitData={formDataInitData}
-        formExpression={processExpression}
-        processConfig={processParams}
-      >
-        <FormWrapper
-          dialog={dialog}
-          title={`${processConfig.result.metadataname}`}
-        >
-          <Header
-            header={header}
-            processParams={processParams}
-            listConfigParse={listConfigParse}
-            processConfig={processConfig}
-          />
+	useEffect(() => {
+		if (!_.isEmpty(userData) || _.isNull(userData))
+			runExpressionAsync(userData);
+	}, [userData]);
+	// console.log("type Нямкааааа", processParams);
+	if (processConfigState && processConfigState.result.iswithlayout == "1") {
+		return (
+			<MetaStore
+				formInitData={formDataInitDataState}
+				formExpression={processExpression}
+				processConfig={processParams}
+			>
+				<FormSectionWrapper>
+					<RenderWidgetProcessField
+						processSection={processConfigState.result}
+					/>
+				</FormSectionWrapper>
+			</MetaStore>
+		);
+	} else if (processConfigState) {
+		const { header } = processParams;
 
-          {header.map((item: any, index: number) => {
-            if (!item.tabname && item.datatype === "group") {
-              return (
-                <RenderField
-                  key={index}
-                  field={item}
-                  attr={processParams.details}
-                  sectionConfig={listConfigParse}
-                  formDataInitData={formDataInitData}
-                  className=""
-                  style=""
-                  rowIndex=""
-                  labelClassName=""
-                />
-              );
-            }
-          })}
+		const groupByTabname = _.groupBy(header, function (n) {
+			return n.tabname;
+		});
+		const renderTypeView = () => {
+			if (listConfig.widgetcode) {
+				return (
+					<WidgetCustomRenderProcess
+						listConfig={listConfig}
+						processData={processParams}
+						formDataInit={formDataInitDataState}
+						formConfig={processConfigState}
+					/>
+				);
+			} else {
+				return (
+					<FormWrapper
+						dialog={dialog}
+						title={`${processConfigState?.result?.metadataname || ""}`}
+					>
+						<Header
+							header={header}
+							processParams={processParams}
+							listConfigParse={listConfigParse}
+							processConfig={processConfigState}
+						/>
+						{header.map((item: any, index: number) => {
+							if (!item.tabname && item.datatype === "group") {
+								return (
+									<RenderField
+										key={item?.id || index}
+										field={item}
+										attr={processParams.details}
+										sectionConfig={listConfigParse}
+										className=""
+										style=""
+										rowIndex=""
+										labelClassName=""
+									/>
+								);
+							}
+						})}
+						<Tabs>
+							{header.map((item: any, index: number) => {
+								if (item.tabname) {
+									let isContent = _.filter(
+										groupByTabname[item.tabname],
+										(item2) => {
+											return item2.isshow === "1";
+										},
+									);
+									if (isContent.length)
+										return (
+											<TabPane tab={item.tabname} key={item?.id || index}>
+												<RenderField
+													field={item}
+													attr={processParams.details}
+													sectionConfig={listConfigParse}
+												/>
+											</TabPane>
+										);
+								}
+							})}
+						</Tabs>
+					</FormWrapper>
+				);
+			}
+		};
 
-          <Tabs>
-            {header.map((item: any, index: number) => {
-              if (item.tabname) {
-                let isContent = _.filter(
-                  groupByTabname[item.tabname],
-                  (item2) => {
-                    return item2.isshow === "1";
-                  },
-                );
-
-                if (isContent.length)
-                  return (
-                    <TabPane tab={item.tabname} key={index}>
-                      <RenderField
-                        field={item}
-                        attr={processParams.details}
-                        formDataInitData={formDataInitData}
-                        sectionConfig={listConfigParse}
-                      />
-                    </TabPane>
-                  );
-              }
-            })}
-          </Tabs>
-        </FormWrapper>
-      </MetaStore>
-    );
-  }
+		return (
+			<MetaStore
+				formInitData={formDataInitDataState}
+				formExpression={processExpression}
+				processConfig={processParams}
+			>
+				{renderTypeView()}
+			</MetaStore>
+		);
+	} else {
+		return (
+			<>
+				<Skeleton type="loading" />
+			</>
+		);
+	}
 };
 
 export default RenderWidgetProcess;

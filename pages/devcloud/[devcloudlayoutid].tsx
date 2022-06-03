@@ -1,12 +1,9 @@
 import { FC, useEffect } from "react";
-import type { GetServerSideProps } from "next";
-// import { withIronSession } from "next-iron-session";
-import { serverData } from "service/Service";
 import { useUser } from "hooks/use-user";
 import { metaConfig } from "config/metaConfig";
-import LayoutWrapper from "middleware/components/Layout/LayoutWrapper";
+import LayoutWrapper from "@middleware/components/Layout/PageWrapper";
 import { jsonParse } from "util/helper";
-// import { prepareWithBody, prepareSectionList } from "util/prepareLayoutData";
+// import { prepareWithBody, prepareSectionList } from "util/preparePageListData";
 import _ from "lodash";
 import { useCloud } from "hooks/use-cloud";
 
@@ -57,8 +54,8 @@ const Home: FC<PropsType> = ({
       style={{ ...bodyDefault?.style }}
     >
       <LayoutWrapper
-        readyMergedLayoutConfig={readyMergedLayoutConfig}
-        meta_bp_layout_section={meta_bp_layout_section}
+        readyMergedPageConfig={readyMergedLayoutConfig}
+        rawWidgetList={meta_bp_layout_section}
         mergedLayout={mergedLayout}
       />
     </div>
@@ -84,7 +81,7 @@ async function handler(context: any) {
     (
       await serverData(
         ourMetaConstant.serverUrl,
-        metaConfig.COMMAND_LAYOUT,
+        metaConfig.COMMAND_PAGECONFIG,
         {
           filtermetadataid: devcloudlayoutid,
         },

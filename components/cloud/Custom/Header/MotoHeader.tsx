@@ -17,13 +17,12 @@ import CloudHeader1 from "@cloud/Custom/Header/Header1";
 export default function WeeklyHeader() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
     widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const { asPath, pathname } = useRouter();
@@ -64,7 +63,7 @@ export default function WeeklyHeader() {
                 pageId === "1636961914742568" ? "border-b-4" : ""
               } border-moto h-full flex items-center px-4 font-semibold cursor-pointer`}
             >
-              <AtomLink item="/page/1636961914742568" children={"Каталог"} />
+              <AtomLink item="/page/1639716777130484" children={"Каталог"} />
             </div>
             <div
               className={`${
@@ -89,7 +88,7 @@ export default function WeeklyHeader() {
               </div>
               <div className="font-normal text-xs">Вальютийн ханш</div>
             </div>
-            <div className="rounded-3xl border border-moto text-moto px-5 py-2 cursor-pointer hover:bg-white text-black">
+            <div className="rounded-3xl border border-moto text-moto px-5 py-2 cursor-pointer hover:bg-white ">
               Нэвтрэх
             </div>
           </div>

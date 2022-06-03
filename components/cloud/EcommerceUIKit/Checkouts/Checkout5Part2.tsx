@@ -20,30 +20,29 @@ import {
 export default function Checkout5Part2() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [dropdown1, setDropdown1] = useState(false);
   const [dropdown2, setDropdown2] = useState(false);
   const [dropdown3, setDropdown3] = useState(false);
   const [changeText1, setChangeText1] = useState("City");
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Checkout5Part2 config", config);
-  // console.log("Checkout5Part2 datasrc", datasrc);
-  // console.log("Checkout5Part2 otherattr", otherattr);
+  // console.log("Checkout5Part2 readyDatasrc", readyDatasrc);
+  // console.log("Checkout5Part2 widgetnemgooReady", widgetnemgooReady);
   // console.log("Checkout5Part2 positionConfig", positionConfig);
 
   const HandleText1 = (e: any) => {
     setChangeText1(e);
     setDropdown1(false);
   };
-  const item = datasrc[0];
+  const item = readyDatasrc[0];
   return (
     <div className="overflow-y-hidden">
       <div className="flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44 ">

@@ -1,9 +1,9 @@
 import React, {
-  createContext,
-  useReducer,
-  FC,
-  useState,
-  useEffect,
+	createContext,
+	useReducer,
+	FC,
+	useState,
+	useEffect,
 } from "react";
 // import { MetaReducer } from './MetaReducer';
 // import ACTIONS from './MetaActions';
@@ -14,196 +14,228 @@ import _ from "lodash";
 import axios from "axios";
 import fetchJson from "lib/fetchJson";
 import ChangeEventInput from "util/ChangeEventInput";
+import { runExpressionEndAfter } from "util/expression";
+import parseHtml from "html-react-parser";
+import { decode } from "html-entities";
+import Router from "next/router";
 
 type PropsContextType = {
-  formDataInitData?: any;
-  setFormDataData?: any;
-  setFormExternalData?: any;
-  processConfig?: any;
-  handleChangeContext?: any;
-  handleClickContext?: any;
-  handleSubmitContext?: any;
-  validData?: any;
-  lookUpData?: any;
-  handleLookUpData?: any;
-  processExpression?: any;
-  handleChangeContextTest?: any;
+	formDataInitData?: any;
+	setFormDataData?: any;
+	setFormExternalData?: any;
+	processConfig?: any;
+	handleChangeContext?: any;
+	handleClickContext?: any;
+	handleSubmitContext?: any;
+	validData?: any;
+	lookUpData?: any;
+	handleLookUpData?: any;
+	processExpression?: any;
+	loadingForm?: any;
+	setLoadingForm?: any;
 };
 
 const FormMetaContext = createContext<PropsContextType>({});
 
 type PropsType = {
-  children?: any;
-  formInitData?: any;
-  formExpression?: any;
-  processConfig?: any;
+	children?: any;
+	formInitData?: any;
+	formExpression?: any;
+	processConfig?: any;
 };
 
 export const FormMetaContextProvider: FC<PropsType> = ({
-  children,
-  formInitData,
-  formExpression,
-  processConfig,
+	children,
+	formInitData,
+	formExpression,
+	processConfig,
 }) => {
-  const [formDataInitData, setFormDataInitData] = useState(formInitData);
-  const [processExpression, setProcessExpression] = useState(formExpression);
-  const [validData, setValidData] = useState({});
-  const [lookUpData, setLookUpData] = useState({});
-  const [checkContext, setCheckContext] = useState(false);
+	// console.log("ccccdd formExpression", formExpression);
+	const [formDataInitData, setFormDataInitData] = useState(formInitData);
+	const [processExpression, setProcessExpression] = useState(formExpression);
+	const [validData, setValidData] = useState({});
+	const [lookUpData, setLookUpData] = useState({});
+	const [loadingForm, setLoadingForm] = useState(false);
+	const [checkContext, setCheckContext] = useState(false);
 
-  // console.log(
-  //   `processExpression`,
-  //   processExpression.seelistfunction.toString()
-  // );
+	useEffect(() => {
+		if (formInitData) setFormDataInitData(formInitData);
+		if (checkContext) setFormDataInitData(checkContext);
+	}, [formInitData, checkContext]);
 
-  useEffect(() => {
-    if (checkContext) setFormDataInitData(checkContext);
-  }, [checkContext]);
+	/**
+	 * Expression events
+	 * @param payload
+	 */
 
-  /**
-   * Expression events
-   * @param payload
-   */
+	const handleChangeContext = (payload: any) => {
+		const { name, value, rowIndex } = payload;
+		let formDataInitDataClone = { ...formDataInitData };
+		let processExpressionClone = { ...processExpression };
 
-  const handleChangeContext = (payload: any) => {
-    const { name, value, rowIndex } = payload;
-    let formDataInitDataClone = { ...formDataInitData };
-    let processExpressionClone = { ...processExpression };
+		if (name.split(".").length == 2) {
+			let nameArr = name.split(".");
 
-    if (name.split(".").length == 2) {
-      let nameArr = name.split(".");
+			if (processConfig["__groupPath"][nameArr[0]][0]["recordtype"] === "row") {
+				formDataInitDataClone[nameArr[0]] = {
+					...formDataInitDataClone[nameArr[0]],
+					[nameArr[1]]: value,
+				};
+			} else {
+				formDataInitDataClone[nameArr[0]][rowIndex] = {
+					...formDataInitDataClone[nameArr[0]][rowIndex],
+					[nameArr[1]]: value,
+				};
+			}
+		} else {
+			formDataInitDataClone[name] = value;
+		}
 
-      if (processConfig["__groupPath"][nameArr[0]][0]["recordtype"] === "row") {
-        formDataInitDataClone[nameArr[0]] = {
-          ...formDataInitDataClone[nameArr[0]],
-          [nameArr[1]]: value,
-        };
-      } else {
-        formDataInitDataClone[nameArr[0]][rowIndex] = {
-          ...formDataInitDataClone[nameArr[0]][rowIndex],
-          [nameArr[1]]: value,
-        };
-      }
-    } else {
-      formDataInitDataClone[name] = value;
-    }
+		ChangeEventInput(
+			name,
+			formDataInitDataClone,
+			processConfig,
+			processExpressionClone,
+			setProcessExpression,
+			setFormExternalData,
+		);
 
-    ChangeEventInput(
-      name,
-      {},
-      {},
-      formDataInitDataClone,
-      processConfig,
-      processExpressionClone,
-      setProcessExpression,
-      setFormExternalData,
-    );
+		setFormDataInitData(formDataInitDataClone);
 
-    setFormDataInitData(formDataInitDataClone);
+		// if (value) {
+		//   setValidData((prevState) => ({
+		//     ...prevState,
+		//     [name]: false,
+		//   }));
+		// }
+	};
 
-    // if (value) {
-    //   setValidData((prevState) => ({
-    //     ...prevState,
-    //     [name]: false,
-    //   }));
-    // }
-  };
+	const handleClickContext = (payload: any) => {
+		const { name, value, rowIndex } = payload;
+		/**
+		 * State clone to variables
+		 */
+		let formDataInitDataClone = { ...formDataInitData },
+			processExpressionClone = { ...processExpression };
 
-  const handleClickContext = (payload: any) => {
-    const { name, value, rowIndex } = payload;
-    /**
-     * State clone to variables
-     */
-    let formDataInitDataClone = { ...formDataInitData },
-      processExpressionClone = { ...processExpression };
+		// console.log(setFormDataInitData.toString());
+		ChangeEventInput(
+			name,
+			formDataInitDataClone,
+			processConfig,
+			processExpressionClone,
+			setProcessExpression,
+			setFormExternalData,
+		);
 
-    // console.log(setFormDataInitData.toString());
-    ChangeEventInput(
-      name,
-      {},
-      {},
-      formDataInitDataClone,
-      processConfig,
-      processExpressionClone,
-      setProcessExpression,
-      setFormExternalData,
-    );
+		setFormDataInitData(formDataInitDataClone);
+	};
 
-    setFormDataInitData(formDataInitDataClone);
-  };
+	const handleSubmitContext = async (
+		e: any,
+		isCustomMsg: any,
+		mergedFormData?: any,
+	) => {
+		e.preventDefault();
+		setLoadingForm(true);
 
-  const handleSubmitContext = async (e: any) => {
-    e.preventDefault();
-    const valid = validateForm(formDataInitData, processConfig);
-    console.log(`formSubmitData`, formDataInitData);
+		const formdata = mergedFormData ? mergedFormData : formDataInitData;
+		const valid = validateForm(formdata, processConfig);
 
-    if (valid) {
-      setValidData(valid);
-    }
+		if (valid) {
+			setValidData(valid);
+		}
 
-    if (!Object.keys(valid).length) {
-      const { data } = await axios.post(`/api/post-process`, {
-        processcode: processConfig.metadatacode,
-        parameters: formDataInitData,
-      });
+		if (!Object.keys(valid).length) {
+			// console.log(`formDataInitData save:: `, formdata)
+			let resExp = await runExpressionEndAfter(
+				processConfig,
+				"endAfterSave",
+				formdata,
+				processExpression,
+				setFormExternalData,
+			);
 
-      if (data.status === "success") {
-        notification.success({ message: "Амжилттай хадгалагдлаа" });
-        setFormDataInitData({});
-      } else {
-        notification.error({ message: data.text });
-      }
-    }
-  };
+			if (resExp) {
+				const { data } = await axios.post(`/api/post-process`, {
+					processcode: processConfig.metadatacode,
+					parameters: formdata,
+				});
 
-  const handleChangeContextTest = async (e: any) => {
-    e.preventDefault();
-    console.log(`formSubmitData`, e);
-  };
-  const handleLookUpData = async (payload: any) => {
-    let data = await fetchJson(
-      `/api/get-data?metaid=${
-        payload.lookupmetadataid
-      }&pagingwithoutaggregate=1&criteria=${JSON.stringify(payload.criteria)}`,
-    );
-    delete data.aggregatecolumns;
-    delete data.paging;
-    data = _.values(data);
-    setLookUpData((prevState) => ({
-      ...prevState,
-      [payload.paramrealpath]: data,
-    }));
-    return data;
-  };
+				if (data.status === "success") {
+					if (processConfig.metadatacode.toLowerCase() === "clcreateuser_001") {
+						notification.success({ message: "Амжилттай бүртгэгдлээ" });
+						Router.push("/");
+					} else if (!isCustomMsg) {
+						notification.success({ message: "Амжилттай хадгалагдлаа" });
+					}
+					setLoadingForm(false);
+				} else {
+					notification.warning({
+						message: "Алдаа гарлаа!",
+						description: parseHtml(decode(data.text)),
+					});
+					setLoadingForm(false);
+				}
+				return data;
+			} else {
+				setLoadingForm(false);
+			}
+		} else {
+			notification.warning({
+				message: "Заавал бөглөх талбаруудыг бөглөн үү!",
+				description: Object.keys(valid).join(", "),
+			});
+			setLoadingForm(false);
+		}
+		return false;
+	};
 
-  const setFormDataData = async (payload: any) => {
-    setFormDataInitData(payload);
-  };
+	const handleLookUpData = async (payload: any) => {
+		let data = await fetchJson(
+			`/api/get-data?metaid=${
+				payload.lookupmetadataid
+			}&pagingwithoutaggregate=1&criteria=${JSON.stringify(payload.criteria)}`,
+		);
+		delete data.aggregatecolumns;
+		delete data.paging;
+		data = _.values(data);
+		setLookUpData((prevState) => ({
+			...prevState,
+			[payload.paramrealpath]: data,
+		}));
+		return data;
+	};
 
-  const setFormExternalData = async (payload: any) => {
-    setCheckContext(payload);
-  };
+	const setFormDataData = async (payload: any) => {
+		setFormDataInitData(payload);
+	};
 
-  const contextValues = {
-    formDataInitData,
-    setFormDataData,
-    setFormExternalData,
-    processConfig,
-    handleChangeContext,
-    handleClickContext,
-    handleSubmitContext,
-    validData,
-    lookUpData,
-    handleLookUpData,
-    processExpression,
-    handleChangeContextTest,
-  };
+	const setFormExternalData = async (payload: any) => {
+		setCheckContext(payload);
+	};
 
-  return (
-    <FormMetaContext.Provider value={contextValues}>
-      {children}
-    </FormMetaContext.Provider>
-  );
+	const contextValues = {
+		formDataInitData,
+		setFormDataData,
+		setFormExternalData,
+		processConfig,
+		handleChangeContext,
+		handleClickContext,
+		handleSubmitContext,
+		validData,
+		lookUpData,
+		handleLookUpData,
+		processExpression,
+		loadingForm,
+		setLoadingForm,
+	};
+
+	return (
+		<FormMetaContext.Provider value={contextValues}>
+			{children}
+		</FormMetaContext.Provider>
+	);
 };
 
 export default FormMetaContext;

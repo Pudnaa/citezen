@@ -2,12 +2,6 @@ import { useContext } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
 import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-} from "util/helper";
-import {
   AtomList,
   AtomTitle,
   AtomText,
@@ -21,23 +15,23 @@ import {
 const Banner4 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Banner4 config", config);
-  //console.log("Banner4 datasrc", datasrc);
-  // console.log("Banner4 otherattr", otherattr);
+  //console.log("Banner4 readyDatasrc", readyDatasrc);
+  // console.log("Banner4 widgetnemgooReady", widgetnemgooReady);
   // console.log("Banner4 positionConfig", positionConfig);
   return (
     <>
-      {datasrc &&
-        datasrc.map((item: any, index: number) => {
+      {readyDatasrc &&
+        readyDatasrc.map((item: any, index: number) => {
           return (
             <div className="flex flex-col md:flex-row justify-between items-strech bg-gradient-to-r from-gray-50 to-gray-200 py-8 lg:py-12 px-4 md:px-10 lg:px-16">
               <div className="flex items-center">

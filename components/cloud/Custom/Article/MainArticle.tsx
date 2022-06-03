@@ -1,90 +1,90 @@
-import { useContext, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { decode } from "html-entities";
-import parseHtml from "html-react-parser";
-import { CopyBlock, dracula } from "react-code-blocks";
-import { Modal } from "antd";
-import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
-import { metaConfig } from "config/metaConfig";
-import { jsonParse, listToTree, prepareIsOpen } from "util/helper";
-import Tree from "@naisutech/react-tree";
+import { useContext, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import { decode } from 'html-entities'
+import parseHtml from 'html-react-parser'
+import { CopyBlock, dracula } from 'react-code-blocks'
+import { Modal } from 'antd'
+import WidgetWrapperContext from '@cloud/Custom/Wrapper/WidgetWrapper'
 
-import _ from "lodash";
+import _ from 'lodash'
 import {
   AtomTitle,
   AtomText,
   AtomNumber,
   AtomIcon,
-} from "@components/common/Atom";
-import TreeMain from "@components/cloud/Custom/Tree/TreeMain";
-import { useCloud } from "hooks/use-cloud";
+} from '@components/common/Atom'
+import TreeMain from '@components/cloud/Custom/Tree/TreeMain'
+import { useCloud } from 'hooks/use-cloud'
 
 export default function MainArticle() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
+    widgetnemgooReady,
     gridJsonConfig,
     pathConfig,
-    Title,
     widgetAllaround,
-  } = useContext(WidgetWrapperContext);
-  const router = useRouter();
-  const cloudContext = useCloud();
+  } = useContext(WidgetWrapperContext)
+  const router = useRouter()
+  const cloudContext = useCloud()
+  // const metaName = "metaDo";
+  const metaName = cloudContext.metaConstant.ourMetaConstant.metaName
   const [selectedId, setSelectedId] = useState<any>(
-    router.query?.[otherattr?.listconfig?.fieldid || "id"],
-  );
-  const [copySuccess, setCopySuccess] = useState("");
-  const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("");
-  const textAreaRef: any = useRef(null);
+    router.query?.[widgetnemgooReady?.listconfig?.fieldid || 'id'],
+  )
+  const [copySuccess, setCopySuccess] = useState('')
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [modalText, setModalText] = useState('')
+  const textAreaRef: any = useRef(null)
+  // console.log("  config,", config);
+  // console.log("  readyDatasrc,", readyDatasrc);
+  const data = readyDatasrc
+  // const parameters = `&parameters=${JSON.stringify({
+  //   id: selectedId,
+  // })}`;
 
-  const parameters = `&parameters=${JSON.stringify({
-    id: selectedId,
-  })}`;
-
-  const { data } = useSWR(
-    `/api/get-process?processcode=portalKnowledge_004${parameters}`,
-  );
+  // const { data } = useSWR(
+  //   `/api/get-process?processcode=portalKnowledge_004${parameters}&metaName=${metaName}`,
+  // );
   const showModal = () => {
-    setVisible(true);
-  };
+    setVisible(true)
+  }
   const handleOk = () => {
-    setConfirmLoading(true);
+    setConfirmLoading(true)
     setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
+      setVisible(false)
+      setConfirmLoading(false)
+    }, 2000)
+  }
 
   const handleCancel = () => {
     // console.log('Clicked cancel button');
-    setVisible(false);
-  };
+    setVisible(false)
+  }
 
-  if (data) {
-    const kmdtl = _.values(data.kmdtl);
-    const kmdtlnav = _.values(data.kmdtl);
+  if (readyDatasrc) {
+    const kmdtl = _.values(readyDatasrc[0].kmdtl)
+    const kmdtlnav = _.values(readyDatasrc[0].kmdtl)
     // console.log("detakmdtlnavil", kmdtlnav);
     // const parser = new DOMParser();
     if (kmdtlnav) {
     }
     function copyToClipboard(e: any) {
-      textAreaRef.current.select();
-      document.execCommand("copy");
-      e.target.focus();
-      setCopySuccess("хуулагдав!");
+      textAreaRef.current.select()
+      document.execCommand('copy')
+      e.target.focus()
+      setCopySuccess('хуулагдав!')
     }
 
     return (
       <div className="px-10 pb-8 min-h-screen  relative">
         <div className="grid grid-cols-12 gap-6 w-full ">
           <div className="col-span-9  pb-8">
-            {/* <div className='max-h-screen mt-6 overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full'> */}
+            {/* <div className='max-h-screen mt-6 overflow-y-auto  scrollbar-thumb-gray-500 scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full'> */}
             <div className=" ">
               <div className="border-b  w-full border-gray-300 bg-gray-100   py-2">
                 <h1 className="text-gray-800 font-semibold  text-4xl pb-2">
@@ -93,7 +93,7 @@ export default function MainArticle() {
               </div>
               {kmdtl.map((item: any, index: number) => {
                 switch (item.typeid) {
-                  case "2":
+                  case '2':
                     return (
                       <div className="pt-4 text-base">
                         {item.name && (
@@ -106,8 +106,8 @@ export default function MainArticle() {
                         )}
                         {parseHtml(decode(item.description))}
                       </div>
-                    );
-                  case "3":
+                    )
+                  case '3':
                     return (
                       <div className="pt-4 text-base">
                         {item.name && (
@@ -120,8 +120,8 @@ export default function MainArticle() {
                         )}
                         {parseHtml(decode(item.description))}
                       </div>
-                    );
-                  case "4":
+                    )
+                  case '4':
                     return (
                       <div>
                         {item.name && (
@@ -163,17 +163,17 @@ export default function MainArticle() {
                         </div>
                         <style>
                           {`
-                                  .translate-show{
-                                      transform : translateY(0%);
-                                  }
-                                  .translate-hide{
-                                      transform : translateY(18vh);
-                                  }
-                                  `}
+                              .translate-show{
+                                  transform : translateY(0%);
+                              }
+                              .translate-hide{
+                                  transform : translateY(18vh);
+                              }
+                              `}
                         </style>
                       </div>
-                    );
-                  case "5":
+                    )
+                  case '5':
                     return (
                       <div>
                         {item.name && (
@@ -226,8 +226,8 @@ export default function MainArticle() {
                               `}
                         </style>
                       </div>
-                    );
-                  case "6":
+                    )
+                  case '6':
                     return (
                       <div className="pt-4 text-base">
                         {item.name && (
@@ -240,8 +240,8 @@ export default function MainArticle() {
                         )}
                         {parseHtml(decode(item.description))}
                       </div>
-                    );
-                  case "7":
+                    )
+                  case '7':
                     return (
                       <div className="py-8">
                         {item.name && (
@@ -252,10 +252,10 @@ export default function MainArticle() {
                             {decode(item.name)}
                           </h2>
                         )}
-                        <img src={"https://dev.veritech.mn/" + item.picture} />
+                        <img src={'https://dev.veritech.mn/' + item.picture} />
                       </div>
-                    );
-                  case "8":
+                    )
+                  case '8':
                     return (
                       <div>
                         {item.name && (
@@ -306,8 +306,8 @@ export default function MainArticle() {
                               `}
                         </style>
                       </div>
-                    );
-                  case "9":
+                    )
+                  case '9':
                     // console.log("dddddddddd",html)
                     return (
                       <div className="language  my-4">
@@ -328,8 +328,8 @@ export default function MainArticle() {
                           codeBlock
                         />
                       </div>
-                    );
-                  case "15":
+                    )
+                  case '15':
                     return (
                       <div className="py-6">
                         {item.name && (
@@ -341,12 +341,12 @@ export default function MainArticle() {
                           </h2>
                         )}
                         <p className="mx-4 text-lg  text-center sm:text-left">
-                          {" "}
+                          {' '}
                           {parseHtml(decode(item.description))}
                         </p>
                       </div>
-                    );
-                  case "16":
+                    )
+                  case '16':
                     return (
                       <div className="py-6">
                         {item.name && (
@@ -358,12 +358,12 @@ export default function MainArticle() {
                           </h2>
                         )}
                         <p className="mx-4 text-lg  text-center sm:text-left">
-                          {" "}
+                          {' '}
                           {parseHtml(decode(item.description))}
                         </p>
                       </div>
-                    );
-                  case "17":
+                    )
+                  case '17':
                     return (
                       <div>
                         {item.name && (
@@ -378,8 +378,8 @@ export default function MainArticle() {
                           {parseHtml(decode(item.description))}
                         </p>
                       </div>
-                    );
-                  case "18":
+                    )
+                  case '18':
                     return (
                       <div>
                         {item.name && (
@@ -399,14 +399,14 @@ export default function MainArticle() {
                           codeBlock
                         />
                       </div>
-                    );
+                    )
                   default:
                     return (
                       <p className="pt-4">
                         {parseHtml(decode(item.description))} <br />
                       </p>
-                    );
-                    break;
+                    )
+                    break
                 }
               })}
             </div>
@@ -421,19 +421,19 @@ export default function MainArticle() {
               />
               <ul className="mt-8 border-t-2  border-gray-300 pt-4">
                 {kmdtl.map((e: any, index: number) => {
-                  if (e.parentid != "") {
+                  if (e.parentid != '') {
                     return (
                       <>
                         {e.name && (
                           <li
-                            key={index}
+                            key={e?.id || index}
                             className="flex w-full justify-between text-gray-600 hover:text-gray-300  cursor-pointer items-center py-2 "
                           >
                             <a href={`#${e.name}`}> {decode(e.name)}</a>
                           </li>
                         )}
                       </>
-                    );
+                    )
                   }
                 })}
               </ul>
@@ -441,8 +441,8 @@ export default function MainArticle() {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
-  return <></>;
+  return <></>
 }

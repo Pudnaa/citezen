@@ -10,8 +10,7 @@ type PropsType = {
 
 const TableCriteria: FC<PropsType> = ({ filterItem, dataid }) => {
   if (!filterItem) return <></>;
-  const { handleChangeContextTest, formDataInitData } =
-    useContext(FormMetaContext);
+  const { formDataInitData } = useContext(FormMetaContext);
 
   const handlerChangeEvent = (e: any, i: any) => {
     // console.log(i.paramname, e.target.value);
@@ -35,8 +34,8 @@ const TableCriteria: FC<PropsType> = ({ filterItem, dataid }) => {
   const handleFilterData = async (payload: any) => {
     let data = await fetchJson(
       `/api/get-data?metaid=${dataid}&pagingwithoutaggregate=1&criteria=${JSON.stringify(
-        payload,
-      )}`,
+        payload
+      )}`
     );
     delete data.aggregatecolumns;
     delete data.paging;
@@ -61,25 +60,25 @@ const TableCriteria: FC<PropsType> = ({ filterItem, dataid }) => {
             <div className="w-full mx-auto">
               <div className="mx-auto xl:w-full p-6 xl:mx-0">
                 <div className="xl:flex lg:flex md:flex justify-between gap-6">
-                  {filterItem.map((i: any, key: any) => (
-                    <div className="flex-auto" key={key}>
+                  {filterItem.map((item: any, index: any) => (
+                    <div className="flex-auto" key={item?.id || index}>
                       <label
-                        htmlFor={i.id}
+                        htmlFor={item.id}
                         className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
                       >
-                        {i.labelname}
+                        {item.labelname}
                       </label>
                       <div className="flex ">
                         <input
                           type="text"
-                          id={i.id}
-                          name={i.paramname}
+                          id={item.id}
+                          name={item.paramname}
                           className={` rounded border-gray-400 focus:ring-0 self-center focus:border-black`}
                           // onChange={handlerChangeEvent}
-                          onChange={(e) => handlerChangeEvent(e, i)}
+                          onChange={(e) => handlerChangeEvent(e, item)}
                         />
                         <select
-                          id={i.id}
+                          id={item.id}
                           className="border  border-gray-300 dark:border-gray-700  shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100"
                         >
                           <option value="=">Тэнцүү</option>

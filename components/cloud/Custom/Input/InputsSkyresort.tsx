@@ -1,40 +1,24 @@
 import { useContext, useState } from "react";
 import WidgetWrapperContext from "@cloud/Custom/Wrapper/WidgetWrapper";
 import { isEmpty } from "lodash";
-import {
-  positionToPath,
-  otherAttrToObj,
-  jsonParse,
-  renderPositionType,
-} from "util/helper";
-import {
-  AtomList,
-  AtomTitle,
-  AtomText,
-  AtomCurrency,
-  AtomIcon,
-  AtomButton,
-  AtomTag,
-} from "@components/common/Atom";
 export default function InputsSkyresort() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const [show, setShow] = useState(0);
 
-  if (isEmpty(datasrc)) return null;
   // console.log("InputsSkyresort config", config);
-  // console.log("InputsSkyresort datasrc", datasrc);
-  // console.log("InputsSkyresort otherattr", otherattr);
+  // console.log("InputsSkyresort readyDatasrc", readyDatasrc);
+  // console.log("InputsSkyresort widgetnemgooReady", widgetnemgooReady);
   // console.log("InputsSkyresort positionConfig", positionConfig);
-  const skyresorthome = otherattr.type === "skyresort_home";
+  const skyresorthome = widgetnemgooReady.type === "skyresort_home";
   return skyresorthome ? (
     <div className="bg-white mx-auto w-full" style={{ maxWidth: "1132px" }}>
       <div className="w-full grid grid-cols-12">

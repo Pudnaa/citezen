@@ -50,7 +50,7 @@ const MegaMenuSub = ({ setShow }) => {
       <div className="visible transition duration-700 opacity-100 bg-white  shadow-lg rounded mt-2 py-1 absolute z-40">
         <ul className="relative">
           {data.map((item, index) => {
-            return <MegaMenu1Popover key={index} data={item} />;
+            return <MegaMenu1Popover key={item?.id || index} data={item} />;
           })}
         </ul>
       </div>

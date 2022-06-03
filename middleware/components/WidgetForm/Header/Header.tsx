@@ -15,7 +15,7 @@ const Header: FC<PropsType> = ({
   listConfigParse,
   processParams,
 }) => {
-  return (
+  return processConfig ? (
     <div
       className={`grid gap-4 grid-cols-${
         processConfig.result.columncount || 2
@@ -25,7 +25,7 @@ const Header: FC<PropsType> = ({
         if (!item.tabname && item.datatype !== "group") {
           return (
             <RenderField
-              key={index}
+              key={item?.id || index}
               field={item}
               attr={processParams.details}
               sectionConfig={listConfigParse}
@@ -34,6 +34,8 @@ const Header: FC<PropsType> = ({
         }
       })}
     </div>
+  ) : (
+    <></>
   );
 };
 

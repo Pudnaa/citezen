@@ -1,0 +1,1404 @@
+{
+	"mergedLayout": [
+		{ "sectionCode": "section100", "className": "col-span-12 mb-0" },
+		{
+			"sectionCode": "section101",
+			"className": "col-span-12 z-20 sticky top-0 w-full h-20 mb-0"
+		},
+		{
+			"sectionCode": "body",
+			"className": "col-span-12",
+			"children": [
+				{ "sectionCode": "section1", "className": "col-span-12" },
+				{ "sectionCode": "section2", "className": "col-span-12" },
+				{ "sectionCode": "section3", "className": "col-span-12" },
+				{ "sectionCode": "section4", "className": "col-span-12" }
+			]
+		},
+		{ "sectionCode": "section104", "className": "col-span-12 mb-0" }
+	],
+	"readyMergedLayoutConfig": {
+		"id": "16419621692471",
+		"metadataid": "1642138368802626",
+		"hdrmetadataid": "",
+		"layoutcode": "012",
+		"description": "SkyResort - Master пэйж Version 3",
+		"layoutnemgoo": "{\r\n    \"className\": \"\",\r\n    \"config\": {\r\n        \"needLogin\": \"0\",\r\n        \"bodyDefault\": {\r\n            \"className\": \"bg-ssoBackground min-h-screen min-w-screen font-robotoslab\",\r\n            \"style\": {}\r\n        },\r\n        \"sectionDefault\": {\r\n            \"className\": \"container w-3/4 mx-auto text-center mb-10\",\r\n            \"style\": {}\r\n        },\r\n        \"widgetAllaround\": {\r\n            \"color\": \"skyresort\",\r\n            \"className\": \"w-full h-full bg-white p-4 shadow-sm overflow-hidden rounded-lg \",\r\n            \"style\": {},\r\n            \"title\": {\r\n                \"className\": \"lg:text-3xl xl:text-5xl text-2xl text-center font-bold pt-6 text-gray-800 mb-3\",\r\n                \"style\": {}\r\n            },\r\n            \"subtitle\": {\r\n                \"className\": \"container mx-auto text-center mb-10\",\r\n                \"style\": {}\r\n            }\r\n        }\r\n    },\r\n    \"layout\": [{\r\n            \"sectionCode\": \"section100\",\r\n            \"className\": \"col-span-12 mb-0\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"section101\",\r\n            \"className\": \"col-span-12 z-20 sticky top-0 w-full h-20 mb-0\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"body\",\r\n            \"className\": \"col-span-12\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"section104\",\r\n            \"className\": \"col-span-12 mb-0\"\r\n        }\r\n    ]\r\n}",
+		"otherattr": "{\r\n    \"className\": \"\",\r\n    \"config\": {\r\n        \"needLogin\": \"0\",\r\n        \"bodyDefault\": {\r\n            \"className\": \"bg-ssoBackground min-h-screen min-w-screen font-robotoslab\",\r\n            \"style\": {}\r\n        },\r\n        \"sectionDefault\": {\r\n            \"className\": \"container w-3/4 mx-auto text-center mb-10\",\r\n            \"style\": {}\r\n        },\r\n        \"widgetAllaround\": {\r\n            \"color\": \"skyresort\",\r\n            \"className\": \"w-full h-full bg-white p-4 shadow-sm overflow-hidden rounded-lg \",\r\n            \"style\": {},\r\n            \"title\": {\r\n                \"className\": \"lg:text-3xl xl:text-5xl text-2xl text-center font-bold pt-6 text-gray-800 mb-3\",\r\n                \"style\": {}\r\n            },\r\n            \"subtitle\": {\r\n                \"className\": \"container mx-auto text-center mb-10\",\r\n                \"style\": {}\r\n            }\r\n        }\r\n    },\r\n    \"layout\": [{\r\n            \"sectionCode\": \"section100\",\r\n            \"className\": \"col-span-12 mb-0\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"section101\",\r\n            \"className\": \"col-span-12 z-20 sticky top-0 w-full h-20 mb-0\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"body\",\r\n            \"className\": \"col-span-12\"\r\n        },\r\n        {\r\n            \"sectionCode\": \"section104\",\r\n            \"className\": \"col-span-12 mb-0\"\r\n        }\r\n    ]\r\n}",
+		"meta_bp_layout_param_size": "0",
+		"meta_bp_layout_param": "",
+		"meta_bp_layout_section_size": "4",
+		"meta_bp_layout_section": [
+			{
+				"id": "16419621802401",
+				"headerid": "16419621692471",
+				"metadataid": "1641194757169149",
+				"metadatacode": "clSdmSalesOrderItemDtl",
+				"actiontype": "",
+				"metatypeid": "200101010000016",
+				"metatypename": "MetaGroup",
+				"islayout": "0",
+				"widgetid": "16395508358911",
+				"widgetcode": "SkyresortShoppingCart",
+				"componentpath": "EcommerceUIKit/ShoppingCarts",
+				"code": "1",
+				"title": "Сагс",
+				"columncount": "",
+				"borderstyle": "",
+				"backgroundstyle": "",
+				"labelposition": "",
+				"widgetnemgoo": "{\r\n    \"death\": \"1\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"false\"\r\n    },\r\n    \"debug\": {\r\n        \"console\": {\r\n            \"data\": \"1\",\r\n            \"config\": \"1\",\r\n            \"nemgoo\": \"1\"\r\n        }\r\n    }\r\n}",
+				"otherattr": "{\r\n    \"death\": \"1\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"false\"\r\n    },\r\n    \"debug\": {\r\n        \"console\": {\r\n            \"data\": \"1\",\r\n            \"config\": \"1\",\r\n            \"nemgoo\": \"1\"\r\n        }\r\n    }\r\n}",
+				"width": "",
+				"ordernumber": "1",
+				"bpsectiondtl_size": "10",
+				"bpsectiondtl": {
+					"0": {
+						"id": "16419621802411",
+						"sectionid": "16419621802401",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"1": {
+						"id": "16419621802421",
+						"sectionid": "16419621802401",
+						"positionname": "position1",
+						"fieldpath": "itemname",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"2": {
+						"id": "16419621802431",
+						"sectionid": "16419621802401",
+						"positionname": "position2",
+						"fieldpath": "profilephoto",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"3": {
+						"id": "16419621802441",
+						"sectionid": "16419621802401",
+						"positionname": "position3",
+						"fieldpath": "description",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"4": {
+						"id": "16419621802451",
+						"sectionid": "16419621802401",
+						"positionname": "position4",
+						"fieldpath": "unitprice",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"5": {
+						"id": "16419621802461",
+						"sectionid": "16419621802401",
+						"positionname": "position90",
+						"fieldpath": "salesorderid",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"6": {
+						"id": "16419621802471",
+						"sectionid": "16419621802401",
+						"positionname": "position91",
+						"fieldpath": "sizecode",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"7": {
+						"id": "16419621802481",
+						"sectionid": "16419621802401",
+						"positionname": "position92",
+						"fieldpath": "timeplancode",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"8": {
+						"id": "16419621802491",
+						"sectionid": "16419621802401",
+						"positionname": "position93",
+						"fieldpath": "persontype",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"9": {
+						"id": "16419621802501",
+						"sectionid": "16419621802401",
+						"positionname": "position83",
+						"fieldpath": "orderqty",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				},
+				"thisislayout": false,
+				"widgetnemgooReady": {
+					"death": "1",
+					"raw": "1",
+					"className": "",
+					"criteria": { "ignoreUrlQuery": "false" },
+					"debug": { "console": { "data": "1", "config": "1", "nemgoo": "1" } }
+				},
+				"rawPositionList": [
+					{
+						"id": "16419621802411",
+						"sectionid": "16419621802401",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802421",
+						"sectionid": "16419621802401",
+						"positionname": "position1",
+						"fieldpath": "itemname",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802431",
+						"sectionid": "16419621802401",
+						"positionname": "position2",
+						"fieldpath": "profilephoto",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802441",
+						"sectionid": "16419621802401",
+						"positionname": "position3",
+						"fieldpath": "description",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802451",
+						"sectionid": "16419621802401",
+						"positionname": "position4",
+						"fieldpath": "unitprice",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802461",
+						"sectionid": "16419621802401",
+						"positionname": "position90",
+						"fieldpath": "salesorderid",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802471",
+						"sectionid": "16419621802401",
+						"positionname": "position91",
+						"fieldpath": "sizecode",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802481",
+						"sectionid": "16419621802401",
+						"positionname": "position92",
+						"fieldpath": "timeplancode",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802491",
+						"sectionid": "16419621802401",
+						"positionname": "position93",
+						"fieldpath": "persontype",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621802501",
+						"sectionid": "16419621802401",
+						"positionname": "position83",
+						"fieldpath": "orderqty",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				]
+			},
+			{
+				"id": "16419621692481",
+				"headerid": "16419621692471",
+				"metadataid": "16341939447331",
+				"metadatacode": "wkHeadMetaConfig",
+				"actiontype": "",
+				"metatypeid": "200101010000016",
+				"metatypename": "MetaGroup",
+				"islayout": "0",
+				"widgetid": "16341939999591",
+				"widgetcode": "HeadMetaConfig",
+				"componentpath": "Custom/Header",
+				"code": "100",
+				"title": "Сайтын Meta Config",
+				"columncount": "",
+				"borderstyle": "",
+				"backgroundstyle": "",
+				"labelposition": "",
+				"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"meta\": {\r\n        \"title\": \"SKYRESORT V.3\",\r\n        \"titleTemplate\": \"%s - SKYRESORT\",\r\n        \"description\": \"Sky resort-д тавтай морил\",\r\n        \"openGraph\": {\r\n            \"url\": \"https://www.url.ie/a\",\r\n            \"title\": \"Open Graph Title\",\r\n            \"description\": \"Open Graph Description\",\r\n            \"images\": [{\r\n                    \"url\": \"https://www.example.ie/og-image-01.jpg\",\r\n                    \"width\": 800,\r\n                    \"height\": 600,\r\n                    \"alt\": \"Og Image Alt\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-03.jpg\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-04.jpg\"\r\n                }\r\n            ],\r\n            \"site_name\": \"SiteName\"\r\n\r\n        },\r\n        \"twitter\": {\r\n            \"handle\": \"@handle\",\r\n            \"site\": \"@site\",\r\n            \"cardType\": \"summary_large_image\"\r\n        }\r\n    }\r\n}",
+				"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"meta\": {\r\n        \"title\": \"SKYRESORT V.3\",\r\n        \"titleTemplate\": \"%s - SKYRESORT\",\r\n        \"description\": \"Sky resort-д тавтай морил\",\r\n        \"openGraph\": {\r\n            \"url\": \"https://www.url.ie/a\",\r\n            \"title\": \"Open Graph Title\",\r\n            \"description\": \"Open Graph Description\",\r\n            \"images\": [{\r\n                    \"url\": \"https://www.example.ie/og-image-01.jpg\",\r\n                    \"width\": 800,\r\n                    \"height\": 600,\r\n                    \"alt\": \"Og Image Alt\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-03.jpg\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-04.jpg\"\r\n                }\r\n            ],\r\n            \"site_name\": \"SiteName\"\r\n\r\n        },\r\n        \"twitter\": {\r\n            \"handle\": \"@handle\",\r\n            \"site\": \"@site\",\r\n            \"cardType\": \"summary_large_image\"\r\n        }\r\n    }\r\n}",
+				"width": "",
+				"ordernumber": "1",
+				"bpsectiondtl_size": "0",
+				"bpsectiondtl": "",
+				"thisislayout": false,
+				"widgetnemgooReady": {
+					"raw": "1",
+					"meta": {
+						"title": "SKYRESORT V.3",
+						"titleTemplate": "%s - SKYRESORT",
+						"description": "Sky resort-д тавтай морил",
+						"openGraph": {
+							"url": "https://www.url.ie/a",
+							"title": "Open Graph Title",
+							"description": "Open Graph Description",
+							"images": [
+								{
+									"url": "https://www.example.ie/og-image-01.jpg",
+									"width": 800,
+									"height": 600,
+									"alt": "Og Image Alt"
+								},
+								{ "url": "https://www.example.ie/og-image-03.jpg" },
+								{ "url": "https://www.example.ie/og-image-04.jpg" }
+							],
+							"site_name": "SiteName"
+						},
+						"twitter": {
+							"handle": "@handle",
+							"site": "@site",
+							"cardType": "summary_large_image"
+						}
+					}
+				},
+				"rawPositionList": []
+			},
+			{
+				"id": "16419621692491",
+				"headerid": "16419621692471",
+				"metadataid": "",
+				"metadatacode": "",
+				"actiontype": "",
+				"metatypeid": "",
+				"metatypename": "",
+				"islayout": "0",
+				"widgetid": "16419621758701",
+				"widgetcode": "NavigationSkyresortV3",
+				"componentpath": "EcommerceUIKit/Navigations",
+				"code": "101",
+				"title": "Дээд цэс",
+				"columncount": "",
+				"borderstyle": "",
+				"backgroundstyle": "",
+				"labelposition": "",
+				"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"1\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"link1\": \"/\"\r\n    }],\r\n\r\n    \"logoutUrl\": \"register\"\r\n}",
+				"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"1\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"link1\": \"/\"\r\n    }],\r\n\r\n    \"logoutUrl\": \"register\"\r\n}",
+				"width": "",
+				"ordernumber": "1",
+				"bpsectiondtl_size": "2",
+				"bpsectiondtl": {
+					"0": {
+						"id": "16419621824541",
+						"sectionid": "16419621692491",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"1": {
+						"id": "16419621824551",
+						"sectionid": "16419621692491",
+						"positionname": "position45",
+						"fieldpath": "link1",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				},
+				"thisislayout": false,
+				"widgetnemgooReady": {
+					"raw": "1",
+					"criteria": { "ignoreUrlQuery": "1" },
+					"data": [{ "id": "0", "link1": "/" }],
+					"logoutUrl": "register"
+				},
+				"rawPositionList": [
+					{
+						"id": "16419621824541",
+						"sectionid": "16419621692491",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621824551",
+						"sectionid": "16419621692491",
+						"positionname": "position45",
+						"fieldpath": "link1",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				]
+			},
+			{
+				"id": "16419621692501",
+				"headerid": "16419621692471",
+				"metadataid": "",
+				"metadatacode": "",
+				"actiontype": "",
+				"metatypeid": "",
+				"metatypename": "",
+				"islayout": "0",
+				"widgetid": "16384393510851",
+				"widgetcode": "CenterAlignedWithBackgroundSkyResort",
+				"componentpath": "MarketingUIKit/Footer",
+				"code": "104",
+				"title": "Доод цэс",
+				"columncount": "",
+				"borderstyle": "",
+				"backgroundstyle": "",
+				"labelposition": "",
+				"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"className\": \"h-full text-white rounded-t-3xl\",\r\n    \"style\": {\r\n        \"background\": \"#004b8d\",\r\n        \"position\":\"relative\",\r\n        \"z-index\":\"10\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"title\": \"Скай Резорт\",\r\n        \"mainimage\": \"https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png\",\r\n        \"social\": [{\r\n                \"title\": \"facebook\",\r\n                \"icon\": \"fab fa-facebook\",\r\n                \"link\": \"hfasfasf\"\r\n            },\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-twitter\",\r\n                \"link\": \"https://twitter.com/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"instagram\",\r\n                \"icon\": \"fab fa-instagram\",\r\n                \"link\": \"https://www.instagram.com/sky.resort/\"\r\n            }\r\n                   ,\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-youtube\",\r\n                \"link\": \"https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ\"\r\n            }\r\n        ],\r\n        \"menu\": [{\r\n                \"title\": \"Нүүр хуудас\",\r\n                \"link\": \"/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"Бидний тухай\",\r\n                \"link\": \"/skyresort/about\"\r\n            }, {\r\n                \"title\": \"Холбогдох\",\r\n                \"link\": \"/skyresort/contact\"\r\n            }\r\n        ],\r\n        \"footertext\": \"2021, Бүх эрх хуулиар хамгаалагдсан.\"\r\n    }]\r\n}",
+				"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"className\": \"h-full text-white rounded-t-3xl\",\r\n    \"style\": {\r\n        \"background\": \"#004b8d\",\r\n        \"position\":\"relative\",\r\n        \"z-index\":\"10\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"title\": \"Скай Резорт\",\r\n        \"mainimage\": \"https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png\",\r\n        \"social\": [{\r\n                \"title\": \"facebook\",\r\n                \"icon\": \"fab fa-facebook\",\r\n                \"link\": \"hfasfasf\"\r\n            },\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-twitter\",\r\n                \"link\": \"https://twitter.com/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"instagram\",\r\n                \"icon\": \"fab fa-instagram\",\r\n                \"link\": \"https://www.instagram.com/sky.resort/\"\r\n            }\r\n                   ,\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-youtube\",\r\n                \"link\": \"https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ\"\r\n            }\r\n        ],\r\n        \"menu\": [{\r\n                \"title\": \"Нүүр хуудас\",\r\n                \"link\": \"/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"Бидний тухай\",\r\n                \"link\": \"/skyresort/about\"\r\n            }, {\r\n                \"title\": \"Холбогдох\",\r\n                \"link\": \"/skyresort/contact\"\r\n            }\r\n        ],\r\n        \"footertext\": \"2021, Бүх эрх хуулиар хамгаалагдсан.\"\r\n    }]\r\n}",
+				"width": "",
+				"ordernumber": "1",
+				"bpsectiondtl_size": "4",
+				"bpsectiondtl": {
+					"0": {
+						"id": "16419621692511",
+						"sectionid": "16419621692501",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"1": {
+						"id": "16419621692521",
+						"sectionid": "16419621692501",
+						"positionname": "position1",
+						"fieldpath": "title",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"2": {
+						"id": "16419621692531",
+						"sectionid": "16419621692501",
+						"positionname": "position2",
+						"fieldpath": "mainimage",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					"3": {
+						"id": "16419621692541",
+						"sectionid": "16419621692501",
+						"positionname": "position3",
+						"fieldpath": "footerText",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				},
+				"thisislayout": false,
+				"widgetnemgooReady": {
+					"raw": "1",
+					"className": "h-full text-white rounded-t-3xl",
+					"style": {
+						"background": "#004b8d",
+						"position": "relative",
+						"z-index": "10"
+					},
+					"data": [
+						{
+							"id": "0",
+							"title": "Скай Резорт",
+							"mainimage": "https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png",
+							"social": [
+								{
+									"title": "facebook",
+									"icon": "fab fa-facebook",
+									"link": "hfasfasf"
+								},
+								{
+									"title": "youtube",
+									"icon": "fab fa-twitter",
+									"link": "https://twitter.com/skyresort"
+								},
+								{
+									"title": "instagram",
+									"icon": "fab fa-instagram",
+									"link": "https://www.instagram.com/sky.resort/"
+								},
+								{
+									"title": "youtube",
+									"icon": "fab fa-youtube",
+									"link": "https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ"
+								}
+							],
+							"menu": [
+								{ "title": "Нүүр хуудас", "link": "/skyresort" },
+								{ "title": "Бидний тухай", "link": "/skyresort/about" },
+								{ "title": "Холбогдох", "link": "/skyresort/contact" }
+							],
+							"footertext": "2021, Бүх эрх хуулиар хамгаалагдсан."
+						}
+					]
+				},
+				"rawPositionList": [
+					{
+						"id": "16419621692511",
+						"sectionid": "16419621692501",
+						"positionname": "position0",
+						"fieldpath": "id",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621692521",
+						"sectionid": "16419621692501",
+						"positionname": "position1",
+						"fieldpath": "title",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621692531",
+						"sectionid": "16419621692501",
+						"positionname": "position2",
+						"fieldpath": "mainimage",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					},
+					{
+						"id": "16419621692541",
+						"sectionid": "16419621692501",
+						"positionname": "position3",
+						"fieldpath": "footerText",
+						"positionnemgoo": "",
+						"otherattr": "",
+						"positionnemgooReady": {}
+					}
+				]
+			}
+		],
+		"thisislayout": true
+	},
+	"meta_bp_layout_section": [
+		{
+			"id": "16419621802401",
+			"headerid": "16419621692471",
+			"metadataid": "1641194757169149",
+			"metadatacode": "clSdmSalesOrderItemDtl",
+			"actiontype": "",
+			"metatypeid": "200101010000016",
+			"metatypename": "MetaGroup",
+			"islayout": "0",
+			"widgetid": "16395508358911",
+			"widgetcode": "SkyresortShoppingCart",
+			"componentpath": "EcommerceUIKit/ShoppingCarts",
+			"code": "1",
+			"title": "Сагс",
+			"columncount": "",
+			"borderstyle": "",
+			"backgroundstyle": "",
+			"labelposition": "",
+			"widgetnemgoo": "{\r\n    \"death\": \"1\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"false\"\r\n    },\r\n    \"debug\": {\r\n        \"console\": {\r\n            \"data\": \"1\",\r\n            \"config\": \"1\",\r\n            \"nemgoo\": \"1\"\r\n        }\r\n    }\r\n}",
+			"otherattr": "{\r\n    \"death\": \"1\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"false\"\r\n    },\r\n    \"debug\": {\r\n        \"console\": {\r\n            \"data\": \"1\",\r\n            \"config\": \"1\",\r\n            \"nemgoo\": \"1\"\r\n        }\r\n    }\r\n}",
+			"width": "",
+			"ordernumber": "1",
+			"bpsectiondtl_size": "10",
+			"bpsectiondtl": {
+				"0": {
+					"id": "16419621802411",
+					"sectionid": "16419621802401",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"1": {
+					"id": "16419621802421",
+					"sectionid": "16419621802401",
+					"positionname": "position1",
+					"fieldpath": "itemname",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"2": {
+					"id": "16419621802431",
+					"sectionid": "16419621802401",
+					"positionname": "position2",
+					"fieldpath": "profilephoto",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"3": {
+					"id": "16419621802441",
+					"sectionid": "16419621802401",
+					"positionname": "position3",
+					"fieldpath": "description",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"4": {
+					"id": "16419621802451",
+					"sectionid": "16419621802401",
+					"positionname": "position4",
+					"fieldpath": "unitprice",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"5": {
+					"id": "16419621802461",
+					"sectionid": "16419621802401",
+					"positionname": "position90",
+					"fieldpath": "salesorderid",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"6": {
+					"id": "16419621802471",
+					"sectionid": "16419621802401",
+					"positionname": "position91",
+					"fieldpath": "sizecode",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"7": {
+					"id": "16419621802481",
+					"sectionid": "16419621802401",
+					"positionname": "position92",
+					"fieldpath": "timeplancode",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"8": {
+					"id": "16419621802491",
+					"sectionid": "16419621802401",
+					"positionname": "position93",
+					"fieldpath": "persontype",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"9": {
+					"id": "16419621802501",
+					"sectionid": "16419621802401",
+					"positionname": "position83",
+					"fieldpath": "orderqty",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			},
+			"thisislayout": false,
+			"widgetnemgooReady": {
+				"death": "1",
+				"raw": "1",
+				"className": "",
+				"criteria": { "ignoreUrlQuery": "false" },
+				"debug": { "console": { "data": "1", "config": "1", "nemgoo": "1" } }
+			},
+			"rawPositionList": [
+				{
+					"id": "16419621802411",
+					"sectionid": "16419621802401",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802421",
+					"sectionid": "16419621802401",
+					"positionname": "position1",
+					"fieldpath": "itemname",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802431",
+					"sectionid": "16419621802401",
+					"positionname": "position2",
+					"fieldpath": "profilephoto",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802441",
+					"sectionid": "16419621802401",
+					"positionname": "position3",
+					"fieldpath": "description",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802451",
+					"sectionid": "16419621802401",
+					"positionname": "position4",
+					"fieldpath": "unitprice",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802461",
+					"sectionid": "16419621802401",
+					"positionname": "position90",
+					"fieldpath": "salesorderid",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802471",
+					"sectionid": "16419621802401",
+					"positionname": "position91",
+					"fieldpath": "sizecode",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802481",
+					"sectionid": "16419621802401",
+					"positionname": "position92",
+					"fieldpath": "timeplancode",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802491",
+					"sectionid": "16419621802401",
+					"positionname": "position93",
+					"fieldpath": "persontype",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621802501",
+					"sectionid": "16419621802401",
+					"positionname": "position83",
+					"fieldpath": "orderqty",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			]
+		},
+		{
+			"id": "16419621692481",
+			"headerid": "16419621692471",
+			"metadataid": "16341939447331",
+			"metadatacode": "wkHeadMetaConfig",
+			"actiontype": "",
+			"metatypeid": "200101010000016",
+			"metatypename": "MetaGroup",
+			"islayout": "0",
+			"widgetid": "16341939999591",
+			"widgetcode": "HeadMetaConfig",
+			"componentpath": "Custom/Header",
+			"code": "100",
+			"title": "Сайтын Meta Config",
+			"columncount": "",
+			"borderstyle": "",
+			"backgroundstyle": "",
+			"labelposition": "",
+			"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"meta\": {\r\n        \"title\": \"SKYRESORT V.3\",\r\n        \"titleTemplate\": \"%s - SKYRESORT\",\r\n        \"description\": \"Sky resort-д тавтай морил\",\r\n        \"openGraph\": {\r\n            \"url\": \"https://www.url.ie/a\",\r\n            \"title\": \"Open Graph Title\",\r\n            \"description\": \"Open Graph Description\",\r\n            \"images\": [{\r\n                    \"url\": \"https://www.example.ie/og-image-01.jpg\",\r\n                    \"width\": 800,\r\n                    \"height\": 600,\r\n                    \"alt\": \"Og Image Alt\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-03.jpg\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-04.jpg\"\r\n                }\r\n            ],\r\n            \"site_name\": \"SiteName\"\r\n\r\n        },\r\n        \"twitter\": {\r\n            \"handle\": \"@handle\",\r\n            \"site\": \"@site\",\r\n            \"cardType\": \"summary_large_image\"\r\n        }\r\n    }\r\n}",
+			"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"meta\": {\r\n        \"title\": \"SKYRESORT V.3\",\r\n        \"titleTemplate\": \"%s - SKYRESORT\",\r\n        \"description\": \"Sky resort-д тавтай морил\",\r\n        \"openGraph\": {\r\n            \"url\": \"https://www.url.ie/a\",\r\n            \"title\": \"Open Graph Title\",\r\n            \"description\": \"Open Graph Description\",\r\n            \"images\": [{\r\n                    \"url\": \"https://www.example.ie/og-image-01.jpg\",\r\n                    \"width\": 800,\r\n                    \"height\": 600,\r\n                    \"alt\": \"Og Image Alt\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-03.jpg\"\r\n                },\r\n                {\r\n                    \"url\": \"https://www.example.ie/og-image-04.jpg\"\r\n                }\r\n            ],\r\n            \"site_name\": \"SiteName\"\r\n\r\n        },\r\n        \"twitter\": {\r\n            \"handle\": \"@handle\",\r\n            \"site\": \"@site\",\r\n            \"cardType\": \"summary_large_image\"\r\n        }\r\n    }\r\n}",
+			"width": "",
+			"ordernumber": "1",
+			"bpsectiondtl_size": "0",
+			"bpsectiondtl": "",
+			"thisislayout": false,
+			"widgetnemgooReady": {
+				"raw": "1",
+				"meta": {
+					"title": "SKYRESORT V.3",
+					"titleTemplate": "%s - SKYRESORT",
+					"description": "Sky resort-д тавтай морил",
+					"openGraph": {
+						"url": "https://www.url.ie/a",
+						"title": "Open Graph Title",
+						"description": "Open Graph Description",
+						"images": [
+							{
+								"url": "https://www.example.ie/og-image-01.jpg",
+								"width": 800,
+								"height": 600,
+								"alt": "Og Image Alt"
+							},
+							{ "url": "https://www.example.ie/og-image-03.jpg" },
+							{ "url": "https://www.example.ie/og-image-04.jpg" }
+						],
+						"site_name": "SiteName"
+					},
+					"twitter": {
+						"handle": "@handle",
+						"site": "@site",
+						"cardType": "summary_large_image"
+					}
+				}
+			},
+			"rawPositionList": []
+		},
+		{
+			"id": "16419621692491",
+			"headerid": "16419621692471",
+			"metadataid": "",
+			"metadatacode": "",
+			"actiontype": "",
+			"metatypeid": "",
+			"metatypename": "",
+			"islayout": "0",
+			"widgetid": "16419621758701",
+			"widgetcode": "NavigationSkyresortV3",
+			"componentpath": "EcommerceUIKit/Navigations",
+			"code": "101",
+			"title": "Дээд цэс",
+			"columncount": "",
+			"borderstyle": "",
+			"backgroundstyle": "",
+			"labelposition": "",
+			"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"1\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"link1\": \"/\"\r\n    }],\r\n\r\n    \"logoutUrl\": \"register\"\r\n}",
+			"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"1\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"link1\": \"/\"\r\n    }],\r\n\r\n    \"logoutUrl\": \"register\"\r\n}",
+			"width": "",
+			"ordernumber": "1",
+			"bpsectiondtl_size": "2",
+			"bpsectiondtl": {
+				"0": {
+					"id": "16419621824541",
+					"sectionid": "16419621692491",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"1": {
+					"id": "16419621824551",
+					"sectionid": "16419621692491",
+					"positionname": "position45",
+					"fieldpath": "link1",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			},
+			"thisislayout": false,
+			"widgetnemgooReady": {
+				"raw": "1",
+				"criteria": { "ignoreUrlQuery": "1" },
+				"data": [{ "id": "0", "link1": "/" }],
+				"logoutUrl": "register"
+			},
+			"rawPositionList": [
+				{
+					"id": "16419621824541",
+					"sectionid": "16419621692491",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621824551",
+					"sectionid": "16419621692491",
+					"positionname": "position45",
+					"fieldpath": "link1",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			]
+		},
+		{
+			"id": "16419621692501",
+			"headerid": "16419621692471",
+			"metadataid": "",
+			"metadatacode": "",
+			"actiontype": "",
+			"metatypeid": "",
+			"metatypename": "",
+			"islayout": "0",
+			"widgetid": "16384393510851",
+			"widgetcode": "CenterAlignedWithBackgroundSkyResort",
+			"componentpath": "MarketingUIKit/Footer",
+			"code": "104",
+			"title": "Доод цэс",
+			"columncount": "",
+			"borderstyle": "",
+			"backgroundstyle": "",
+			"labelposition": "",
+			"widgetnemgoo": "{\r\n    \"raw\": \"1\",\r\n    \"className\": \"h-full text-white rounded-t-3xl\",\r\n    \"style\": {\r\n        \"background\": \"#004b8d\",\r\n        \"position\":\"relative\",\r\n        \"z-index\":\"10\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"title\": \"Скай Резорт\",\r\n        \"mainimage\": \"https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png\",\r\n        \"social\": [{\r\n                \"title\": \"facebook\",\r\n                \"icon\": \"fab fa-facebook\",\r\n                \"link\": \"hfasfasf\"\r\n            },\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-twitter\",\r\n                \"link\": \"https://twitter.com/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"instagram\",\r\n                \"icon\": \"fab fa-instagram\",\r\n                \"link\": \"https://www.instagram.com/sky.resort/\"\r\n            }\r\n                   ,\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-youtube\",\r\n                \"link\": \"https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ\"\r\n            }\r\n        ],\r\n        \"menu\": [{\r\n                \"title\": \"Нүүр хуудас\",\r\n                \"link\": \"/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"Бидний тухай\",\r\n                \"link\": \"/skyresort/about\"\r\n            }, {\r\n                \"title\": \"Холбогдох\",\r\n                \"link\": \"/skyresort/contact\"\r\n            }\r\n        ],\r\n        \"footertext\": \"2021, Бүх эрх хуулиар хамгаалагдсан.\"\r\n    }]\r\n}",
+			"otherattr": "{\r\n    \"raw\": \"1\",\r\n    \"className\": \"h-full text-white rounded-t-3xl\",\r\n    \"style\": {\r\n        \"background\": \"#004b8d\",\r\n        \"position\":\"relative\",\r\n        \"z-index\":\"10\"\r\n    },\r\n    \"data\": [{\r\n        \"id\": \"0\",\r\n        \"title\": \"Скай Резорт\",\r\n        \"mainimage\": \"https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png\",\r\n        \"social\": [{\r\n                \"title\": \"facebook\",\r\n                \"icon\": \"fab fa-facebook\",\r\n                \"link\": \"hfasfasf\"\r\n            },\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-twitter\",\r\n                \"link\": \"https://twitter.com/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"instagram\",\r\n                \"icon\": \"fab fa-instagram\",\r\n                \"link\": \"https://www.instagram.com/sky.resort/\"\r\n            }\r\n                   ,\r\n            {\r\n                \"title\": \"youtube\",\r\n                \"icon\": \"fab fa-youtube\",\r\n                \"link\": \"https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ\"\r\n            }\r\n        ],\r\n        \"menu\": [{\r\n                \"title\": \"Нүүр хуудас\",\r\n                \"link\": \"/skyresort\"\r\n            },\r\n            {\r\n                \"title\": \"Бидний тухай\",\r\n                \"link\": \"/skyresort/about\"\r\n            }, {\r\n                \"title\": \"Холбогдох\",\r\n                \"link\": \"/skyresort/contact\"\r\n            }\r\n        ],\r\n        \"footertext\": \"2021, Бүх эрх хуулиар хамгаалагдсан.\"\r\n    }]\r\n}",
+			"width": "",
+			"ordernumber": "1",
+			"bpsectiondtl_size": "4",
+			"bpsectiondtl": {
+				"0": {
+					"id": "16419621692511",
+					"sectionid": "16419621692501",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"1": {
+					"id": "16419621692521",
+					"sectionid": "16419621692501",
+					"positionname": "position1",
+					"fieldpath": "title",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"2": {
+					"id": "16419621692531",
+					"sectionid": "16419621692501",
+					"positionname": "position2",
+					"fieldpath": "mainimage",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"3": {
+					"id": "16419621692541",
+					"sectionid": "16419621692501",
+					"positionname": "position3",
+					"fieldpath": "footerText",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			},
+			"thisislayout": false,
+			"widgetnemgooReady": {
+				"raw": "1",
+				"className": "h-full text-white rounded-t-3xl",
+				"style": {
+					"background": "#004b8d",
+					"position": "relative",
+					"z-index": "10"
+				},
+				"data": [
+					{
+						"id": "0",
+						"title": "Скай Резорт",
+						"mainimage": "https://res.cloudinary.com/dzih5nqhg/image/upload/v1634289839/sky/sky_logo_small_re0daf.png",
+						"social": [
+							{
+								"title": "facebook",
+								"icon": "fab fa-facebook",
+								"link": "hfasfasf"
+							},
+							{
+								"title": "youtube",
+								"icon": "fab fa-twitter",
+								"link": "https://twitter.com/skyresort"
+							},
+							{
+								"title": "instagram",
+								"icon": "fab fa-instagram",
+								"link": "https://www.instagram.com/sky.resort/"
+							},
+							{
+								"title": "youtube",
+								"icon": "fab fa-youtube",
+								"link": "https://www.youtube.com/channel/UCr2Y5dw8Dzbe-bCnNOrHHPQ"
+							}
+						],
+						"menu": [
+							{ "title": "Нүүр хуудас", "link": "/skyresort" },
+							{ "title": "Бидний тухай", "link": "/skyresort/about" },
+							{ "title": "Холбогдох", "link": "/skyresort/contact" }
+						],
+						"footertext": "2021, Бүх эрх хуулиар хамгаалагдсан."
+					}
+				]
+			},
+			"rawPositionList": [
+				{
+					"id": "16419621692511",
+					"sectionid": "16419621692501",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621692521",
+					"sectionid": "16419621692501",
+					"positionname": "position1",
+					"fieldpath": "title",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621692531",
+					"sectionid": "16419621692501",
+					"positionname": "position2",
+					"fieldpath": "mainimage",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621692541",
+					"sectionid": "16419621692501",
+					"positionname": "position3",
+					"fieldpath": "footerText",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				}
+			]
+		},
+		{
+			"id": "16419621695611",
+			"headerid": "16419621695601",
+			"metadataid": "1638103925637845",
+			"metadatacode": "ceImItemList",
+			"actiontype": "",
+			"metatypeid": "200101010000016",
+			"metatypename": "MetaGroup",
+			"islayout": "0",
+			"widgetid": "16419621929611",
+			"widgetcode": "SkyResortGridV3",
+			"componentpath": "EcommerceUIKit/ProductGrids",
+			"code": "1",
+			"title": "Үндсэн үйлчилгээнүүд",
+			"columncount": "",
+			"borderstyle": "",
+			"backgroundstyle": "",
+			"labelposition": "",
+			"widgetnemgoo": "{\r\n    \"death\": \"0\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"container mx-auto mx-auto col-span-12\",\r\n    \"type\": \"skyresort_home\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"0\",\r\n        \"defaultQuery\": {\r\n            \"filterSrcItemId\": null,\r\n            \"filterItemTypeId\": 16387951554891,\r\n            \"filterCompanyDepartmentId\": \"16372242308021\"\r\n        }\r\n    },\r\n    \"title\": {\r\n        \"title\": \"Үндсэн үйлчилгээнүүд\",\r\n        \"className\": \"pt-10 text-gray-700 font-medium\"\r\n    },\r\n    \"subtitle\": {\r\n        \"title\": \"Хайртай хүмүүстэйгээ хамт...\",\r\n        \"className\": \"mb-16\"\r\n    }\r\n}",
+			"otherattr": "{\r\n    \"death\": \"0\",\r\n    \"raw\": \"1\",\r\n    \"className\": \"container mx-auto mx-auto col-span-12\",\r\n    \"type\": \"skyresort_home\",\r\n    \"criteria\": {\r\n        \"ignoreUrlQuery\": \"0\",\r\n        \"defaultQuery\": {\r\n            \"filterSrcItemId\": null,\r\n            \"filterItemTypeId\": 16387951554891,\r\n            \"filterCompanyDepartmentId\": \"16372242308021\"\r\n        }\r\n    },\r\n    \"title\": {\r\n        \"title\": \"Үндсэн үйлчилгээнүүд\",\r\n        \"className\": \"pt-10 text-gray-700 font-medium\"\r\n    },\r\n    \"subtitle\": {\r\n        \"title\": \"Хайртай хүмүүстэйгээ хамт...\",\r\n        \"className\": \"mb-16\"\r\n    }\r\n}",
+			"width": "",
+			"ordernumber": "1",
+			"bpsectiondtl_size": "11",
+			"bpsectiondtl": {
+				"0": {
+					"id": "16419621915751",
+					"sectionid": "16419621695611",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" }
+					}
+				},
+				"1": {
+					"id": "16419621915761",
+					"sectionid": "16419621695611",
+					"positionname": "position1",
+					"fieldpath": "itemname",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"type\": \"title\",\r\n        \"className\": \"font-bold text-xl uppercase\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"type\": \"title\",\r\n        \"className\": \"font-bold text-xl uppercase\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" },
+						"atom": {
+							"type": "title",
+							"className": "font-bold text-xl uppercase",
+							"style": {}
+						}
+					}
+				},
+				"2": {
+					"id": "16419621915771",
+					"sectionid": "16419621695611",
+					"positionname": "position2",
+					"fieldpath": "profilephoto",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"image\",\r\n        \"className\": \"w-full h-52 object-cover\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"image\",\r\n        \"className\": \"w-full h-52 object-cover\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "image",
+							"className": "w-full h-52 object-cover",
+							"style": {}
+						}
+					}
+				},
+				"3": {
+					"id": "16419621915781",
+					"sectionid": "16419621695611",
+					"positionname": "position3",
+					"fieldpath": "description",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				"4": {
+					"id": "16419621915791",
+					"sectionid": "16419621695611",
+					"positionname": "position4",
+					"fieldpath": "saleprice",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-2xl font-bold\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-2xl font-bold\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-2xl font-bold",
+							"props": { "type": "mnt" }
+						}
+					}
+				},
+				"5": {
+					"id": "16419621915801",
+					"sectionid": "16419621695611",
+					"positionname": "position9",
+					"fieldpath": "itemname",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"value\": \"Дэлгэрэнгүй\",\r\n        \"type\": \"text\",\r\n        \"className\": \"w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"value\": \"Дэлгэрэнгүй\",\r\n        \"type\": \"text\",\r\n        \"className\": \"w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" },
+						"atom": {
+							"value": "Дэлгэрэнгүй",
+							"type": "text",
+							"className": "w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white",
+							"style": {}
+						}
+					}
+				},
+				"6": {
+					"id": "16419621915811",
+					"sectionid": "16419621695611",
+					"positionname": "position23",
+					"fieldpath": "unitprice2",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-lg font-bold leading-normal\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-lg font-bold leading-normal\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-lg font-bold leading-normal",
+							"props": { "type": "mnt" }
+						}
+					}
+				},
+				"7": {
+					"id": "16419621915821",
+					"sectionid": "16419621695611",
+					"positionname": "position47",
+					"fieldpath": "saleprice1",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-xs leading-normal text-gray-400 line-through ml-2\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-xs leading-normal text-gray-400 line-through ml-2\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-xs leading-normal text-gray-400 line-through ml-2",
+							"style": {}
+						}
+					}
+				},
+				"8": {
+					"id": "16419621915831",
+					"sectionid": "16419621695611",
+					"positionname": "position90",
+					"fieldpath": "label1",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "text",
+							"className": "text-xs text-gray-400",
+							"style": {}
+						}
+					}
+				},
+				"9": {
+					"id": "16419621915841",
+					"sectionid": "16419621695611",
+					"positionname": "position91",
+					"fieldpath": "label2",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "text",
+							"className": "text-xs text-gray-400",
+							"style": {}
+						}
+					}
+				},
+				"10": {
+					"id": "16419621915851",
+					"sectionid": "16419621695611",
+					"positionname": "position92",
+					"fieldpath": "label",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-base\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-base\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": { "type": "text", "className": "text-base", "style": {} }
+					}
+				}
+			},
+			"widgetnemgooReady": {
+				"death": "0",
+				"raw": "1",
+				"className": "container mx-auto mx-auto col-span-12",
+				"type": "skyresort_home",
+				"criteria": {
+					"ignoreUrlQuery": "0",
+					"defaultQuery": {
+						"filterSrcItemId": null,
+						"filterItemTypeId": 16387951554891,
+						"filterCompanyDepartmentId": "16372242308021"
+					}
+				},
+				"title": {
+					"title": "Үндсэн үйлчилгээнүүд",
+					"className": "pt-10 text-gray-700 font-medium"
+				},
+				"subtitle": {
+					"title": "Хайртай хүмүүстэйгээ хамт...",
+					"className": "mb-16"
+				}
+			},
+			"rawPositionList": [
+				{
+					"id": "16419621915751",
+					"sectionid": "16419621695611",
+					"positionname": "position0",
+					"fieldpath": "id",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" }
+					}
+				},
+				{
+					"id": "16419621915761",
+					"sectionid": "16419621695611",
+					"positionname": "position1",
+					"fieldpath": "itemname",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"type\": \"title\",\r\n        \"className\": \"font-bold text-xl uppercase\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"type\": \"title\",\r\n        \"className\": \"font-bold text-xl uppercase\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" },
+						"atom": {
+							"type": "title",
+							"className": "font-bold text-xl uppercase",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915771",
+					"sectionid": "16419621695611",
+					"positionname": "position2",
+					"fieldpath": "profilephoto",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"image\",\r\n        \"className\": \"w-full h-52 object-cover\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"image\",\r\n        \"className\": \"w-full h-52 object-cover\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "image",
+							"className": "w-full h-52 object-cover",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915781",
+					"sectionid": "16419621695611",
+					"positionname": "position3",
+					"fieldpath": "description",
+					"positionnemgoo": "",
+					"otherattr": "",
+					"positionnemgooReady": {}
+				},
+				{
+					"id": "16419621915791",
+					"sectionid": "16419621695611",
+					"positionname": "position4",
+					"fieldpath": "saleprice",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-2xl font-bold\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-2xl font-bold\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-2xl font-bold",
+							"props": { "type": "mnt" }
+						}
+					}
+				},
+				{
+					"id": "16419621915801",
+					"sectionid": "16419621695611",
+					"positionname": "position9",
+					"fieldpath": "itemname",
+					"positionnemgoo": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"value\": \"Дэлгэрэнгүй\",\r\n        \"type\": \"text\",\r\n        \"className\": \"w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"url\": {\r\n        \"path\": \"/skyresort/detail?itemid={id}\"\r\n    },\r\n    \"atom\": {\r\n        \"value\": \"Дэлгэрэнгүй\",\r\n        \"type\": \"text\",\r\n        \"className\": \"w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"url": { "path": "/skyresort/detail?itemid={id}" },
+						"atom": {
+							"value": "Дэлгэрэнгүй",
+							"type": "text",
+							"className": "w-full rounded-lg border-2 border-skyresort hover:bg-skyresort bg-white hover:text-black uppercase px-3 py-2 text-center hover:text-white",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915811",
+					"sectionid": "16419621695611",
+					"positionname": "position23",
+					"fieldpath": "unitprice2",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-lg font-bold leading-normal\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-lg font-bold leading-normal\",\r\n        \"props\": {\r\n            \"type\": \"mnt\"\r\n        }\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-lg font-bold leading-normal",
+							"props": { "type": "mnt" }
+						}
+					}
+				},
+				{
+					"id": "16419621915821",
+					"sectionid": "16419621695611",
+					"positionname": "position47",
+					"fieldpath": "saleprice1",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-xs leading-normal text-gray-400 line-through ml-2\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"currency\",\r\n        \"className\": \"text-xs leading-normal text-gray-400 line-through ml-2\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "currency",
+							"className": "text-xs leading-normal text-gray-400 line-through ml-2",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915831",
+					"sectionid": "16419621695611",
+					"positionname": "position90",
+					"fieldpath": "label1",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "text",
+							"className": "text-xs text-gray-400",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915841",
+					"sectionid": "16419621695611",
+					"positionname": "position91",
+					"fieldpath": "label2",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-xs text-gray-400\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": {
+							"type": "text",
+							"className": "text-xs text-gray-400",
+							"style": {}
+						}
+					}
+				},
+				{
+					"id": "16419621915851",
+					"sectionid": "16419621695611",
+					"positionname": "position92",
+					"fieldpath": "label",
+					"positionnemgoo": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-base\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"otherattr": "{\r\n    \"atom\": {\r\n        \"type\": \"text\",\r\n        \"className\": \"text-base\",\r\n        \"style\": {}\r\n    }\r\n}",
+					"positionnemgooReady": {
+						"atom": { "type": "text", "className": "text-base", "style": {} }
+					}
+				}
+			]
+		}
+	],
+	"generalConfig": {
+		"needLogin": "0",
+		"bodyDefault": {
+			"className": "bg-ssoBackground min-h-screen min-w-screen font-robotoslab",
+			"style": {}
+		},
+		"sectionDefault": {
+			"className": "container w-3/4 mx-auto text-center mb-10",
+			"style": {}
+		},
+		"widgetAllaround": {
+			"color": "skyresort",
+			"className": "w-full h-full bg-white p-4 shadow-sm overflow-hidden rounded-lg ",
+			"style": {},
+			"title": {
+				"className": "lg:text-3xl xl:text-5xl text-2xl text-center font-bold pt-6 text-gray-800 mb-3",
+				"style": {}
+			},
+			"subtitle": {
+				"className": "container mx-auto text-center mb-10",
+				"style": {}
+			}
+		}
+	},
+	"ourMetaConstant": {
+		"serverUrl": "http://dev.veritech.mn:8080/erp-services/RestWS/runJson",
+		"fileAttach": "http://dev.veritech.mn:8080/erp-services/FileServlet",
+		"thisis": "Энэ бол DEV юм шүү.",
+		"username": "ariunbuyan.t",
+		"password": "123",
+		"metaName": "metaDev",
+		"imageRootURL": "https://dev.veritech.mn/"
+	}
+}

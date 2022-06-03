@@ -21,24 +21,23 @@ import _ from "lodash";
 export default function Card110_2() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
-  //console.log("card110_2", datasrc);
+  // console.log("card110_2", readyDatasrc);
 
-  const datascrgroup: any = _.groupBy(datasrc, function (n) {
-    return n[config.otherattr?.groupPath];
+  const datascrgroup: any = _.groupBy(readyDatasrc, function (n) {
+    return n[config.widgetnemgooReady?.groupPath];
   });
   var titles = new Array();
-  datasrc &&
-    datasrc.map((item: any, index: number) => {
+  readyDatasrc &&
+    readyDatasrc.map((item: any, index: number) => {
       const title = renderPositionType(item, "position1", positionConfig);
       !titles?.includes(title) && titles.push(title);
     });
@@ -48,7 +47,7 @@ export default function Card110_2() {
       {titles &&
         titles.map((item: any, index: number) => {
           return (
-            <div key={index} className="py-3 w-full">
+            <div key={item?.id || index} className="py-3 w-full">
               <div className="sm:flex w-full justify-between mb-5">
                 <AtomTitle
                   item={item}

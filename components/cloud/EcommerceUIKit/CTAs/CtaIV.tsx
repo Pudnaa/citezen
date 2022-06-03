@@ -21,24 +21,24 @@ import {
 const CtaIV = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Cta4 config", config);
-  // console.log("Cta4 datasrc", datasrc);
-  // console.log("Cta4 otherattr", otherattr);
+  // console.log("Cta4 readyDatasrc", readyDatasrc);
+  // console.log("Cta4 widgetnemgooReady", widgetnemgooReady);
   // console.log("Cta4 positionConfig", positionConfig);
   return (
     <div className="mx-auto container py-12 px-4 md:px-6 2xl:px-0 flex justify-center items-center">
       <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-6 lg:space-y-0">
-        {datasrc &&
-          datasrc.map((item: any, index: number) => {
+        {readyDatasrc &&
+          readyDatasrc.map((item: any, index: number) => {
             return (
               <div className="relative">
                 <AtomImage

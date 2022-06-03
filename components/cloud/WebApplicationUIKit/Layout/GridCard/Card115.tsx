@@ -20,29 +20,28 @@ import {
 export default function Card115() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
-  //console.log("Card115 config", config);
-  // console.log("Card115 datasrc", datasrc);
-  //console.log("Card115 otherattr", otherattr);
+  // console.log("Card115 config", config);
+  // console.log("Card115 readyDatasrc", readyDatasrc);
+  //console.log("Card115 widgetnemgooReady", widgetnemgooReady);
   //console.log("Card115 positionConfig", positionConfig);
 
   return (
-    <div className="py-1">
+    <div className="p-6">
       <p className="text-base font-bold leading-5 text-gray-800 ">
         Ерөнхий мэдээлэл
       </p>
-      {datasrc.map((item: any, index: number) => {
+      {readyDatasrc.map((item: any, index: number) => {
         return (
-          <div key={index} className="mt-2 w-full">
+          <div key={item?.id || index} className="mt-2 w-full">
             <AtomText
               item={renderPositionType(item, "position40", positionConfig)}
               customClassName="text-sm font-medium py-4 text-gray-500"

@@ -21,22 +21,21 @@ import {
 const Checkouts4 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
   const countries = ["China", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
 
-  if (isEmpty(datasrc)) return null;
   // console.log("Checkouts4 config", config);
-  console.log("Checkouts4 datasrc", datasrc);
-  // console.log("Checkouts4 otherattr", otherattr);
+  console.log("Checkouts4 readyDatasrc", readyDatasrc);
+  // console.log("Checkouts4 widgetnemgooReady", widgetnemgooReady);
   console.log("Checkouts4 positionConfig", positionConfig);
 
   const changeText = (e: any) => {
@@ -180,7 +179,7 @@ const Checkouts4 = () => {
                 <div className="flex md:w-full lg:w-auto justify-start items-start flex-col md:mt-8 mt-6 md:space-y-4 space-y-8">
                   <div className="w-full flex md:flex-row flex-col lg:gap-x-16 md:justify-between">
                     <div className="flex md:items-center items-start space-x-4">
-                      <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative md:mt-0 mt-1">
+                      <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative md:mt-0 mt-1">
                         <input
                           aria-labelledby="label2"
                           type="radio"
@@ -203,7 +202,7 @@ const Checkouts4 = () => {
 
                   <div className="w-full flex md:flex-row flex-col lg:gap-x-16 md:justify-between">
                     <div className="flex md:items-center items-start space-x-4">
-                      <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative md:mt-0 mt-1">
+                      <div className="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex shrink-0 justify-center items-center relative md:mt-0 mt-1">
                         <input
                           aria-labelledby="label2"
                           type="radio"
@@ -245,8 +244,8 @@ const Checkouts4 = () => {
               </div>
 
               <div className="mt-2">
-                {datasrc &&
-                  datasrc.map((item: any, index: number) => {
+                {readyDatasrc &&
+                  readyDatasrc.map((item: any, index: number) => {
                     return (
                       <div className="mt-5 flex flex-1 text-gray-800 text-lg font-normal">
                         <AtomTitle

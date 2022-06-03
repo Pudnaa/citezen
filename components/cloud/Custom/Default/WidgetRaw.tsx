@@ -4,14 +4,14 @@ import { Modal } from "antd";
 type PropsType = {
   listConfig: any;
   config: any;
-  otherattr: any;
+  widgetnemgooReady?: any;
   datasrc: any;
 };
 
 const WidgetRaw: FC<PropsType> = ({
   listConfig,
   config,
-  otherattr,
+  widgetnemgooReady,
   datasrc,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);

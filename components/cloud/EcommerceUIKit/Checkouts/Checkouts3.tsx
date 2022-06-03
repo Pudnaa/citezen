@@ -21,18 +21,18 @@ import {
 const Checkouts3 = () => {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
-  if (isEmpty(datasrc)) return null;
+
   // console.log("Checkouts3 config", config);
-  // console.log("Checkouts3 datasrc", datasrc);
-  // console.log("Checkouts3 otherattr", otherattr);
+  // console.log("Checkouts3 readyDatasrc", readyDatasrc);
+  // console.log("Checkouts3 widgetnemgooReady", widgetnemgooReady);
   // console.log("Checkouts3 positionConfig", positionConfig);
   return (
     <div className="lg:container lg:mx-auto grid grid-cols-9 lg:grid-cols-12">
@@ -109,8 +109,8 @@ const Checkouts3 = () => {
           </h5>
         </div>
         <div className="mt-2">
-          {datasrc &&
-            datasrc.map((item: any, index: number) => {
+          {readyDatasrc &&
+            readyDatasrc.map((item: any, index: number) => {
               return (
                 <div className="mt-5 flex flex-1 text-gray-800 text-lg font-normal">
                   <h3>

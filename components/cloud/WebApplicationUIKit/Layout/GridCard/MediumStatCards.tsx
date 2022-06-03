@@ -21,58 +21,59 @@ import {
 export default function MediumStatCards() {
   const {
     config,
-    datasrc,
-    otherattr,
+    readyDatasrc,
     positionConfig,
     metaConfig,
     gridJsonConfig,
     pathConfig,
-    Title,
+    widgetnemgooReady,
+    widgetAllaround,
   } = useContext(WidgetWrapperContext);
 
-  if (isEmpty(datasrc)) return null;
   // console.log("MediumStatCards config", config);
-  // console.log("MediumStatCards datasrc", datasrc);
-  // console.log("MediumStatCards otherattr", otherattr);
-    //console.log("MediumStatCards positionConfig", positionConfig);
+  // console.log("MediumStatCards readyDatasrc", readyDatasrc);
+  // console.log("MediumStatCards widgetnemgooReady", widgetnemgooReady);
+  //console.log("MediumStatCards positionConfig", positionConfig);
 
-
-    return (
-        <>
-            {/* Card is full width. Use in 12 col grid for best view. */}
-            {/* Card code block start */}
-            <div className="w-full bg-gray-100 rounded-t-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                {datasrc.map((item:any,index:number)=>{
-                    return(
-                        <div key={index} className="pt-5 pl-6 pr-12 pb-3 flex items-start ">
-                    <div className="text-gray-500 dark:text-gray-400 mt-5">
-                      <AtomIcon
-                                item={renderPositionType(item, "position49", positionConfig)}
-                                link=""
-                                customStyle={{}}
-                                customClassName=""  
-                            />
-                    </div>
-                    <div className="pl-3 mt-1">
-                    <AtomTitle
-                                item={renderPositionType(item, "position1", positionConfig)}
-                                link=""
-                                customStyle={{}}
-                                customClassName="mb-3 leading-4 text-gray-700 dark:text-gray-900 text-sm"
-                                truncateRow={2}
-                            />
-                        <div className="flex items-center">
-                        <AtomText
-                            item={renderPositionType(item, "position3", positionConfig)}
-                          customClassName="text-gray-600 dark:text-gray-600 text-xs leading-normal font-medium"
-                     />
-                        </div>
-                    </div>
+  return (
+    <>
+      {/* Card is full width. Use in 12 col grid for best view. */}
+      {/* Card code block start */}
+      <div className="w-full bg-gray-100 rounded-t-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+        {readyDatasrc.map((item: any, index: number) => {
+          return (
+            <div
+              key={item?.id || index}
+              className="pt-5 pl-6 pr-12 pb-3 flex items-start "
+            >
+              <div className="text-gray-500 dark:text-gray-400 mt-5">
+                <AtomIcon
+                  item={renderPositionType(item, "position49", positionConfig)}
+                  link=""
+                  customStyle={{}}
+                  customClassName=""
+                />
+              </div>
+              <div className="pl-3 mt-1">
+                <AtomTitle
+                  item={renderPositionType(item, "position1", positionConfig)}
+                  link=""
+                  customStyle={{}}
+                  customClassName="mb-3 leading-4 text-gray-700 dark:text-gray-900 text-sm"
+                  truncateRow={2}
+                />
+                <div className="flex items-center">
+                  <AtomText
+                    item={renderPositionType(item, "position3", positionConfig)}
+                    customClassName="text-gray-600 dark:text-gray-600 text-xs leading-normal font-medium"
+                  />
                 </div>
-                    )
-                })}
-          </div>
-            {/* Card code block end */}
-        </>
-    );
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {/* Card code block end */}
+    </>
+  );
 }
